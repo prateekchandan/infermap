@@ -15,3 +15,7 @@ Route::get('/', function()
 {
 	return View::make('layout.main');
 });
+
+Route::get('/response', function(){
+	return View::make('response.view');
+});
