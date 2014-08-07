@@ -37,13 +37,13 @@
 	        		<span class="icon-bar"></span>
 	        		<span class="icon-bar"></span>
 	      		</button>
-	      		<a class="navbar-brand" href="http://www.infermap.com"><i class="fa fa-code"></i><span>INFERMAP</span>.</a>
+	      		<a class="navbar-brand" href="http://www.infermap.com"><img style="height:60px;margin-top:-5px;margin-right:4px" src="{{URL::asset('assets/img/icons/icon.png')}}"><span>INFERMAP</span></a>
 	    	</div>
 
 	    	<!-- Collect the nav links, forms, and other content for toggling -->
 	    	<div class="collapse navbar-collapse" id="main-navigation">
 	      		<ul class="nav navbar-right navbar-nav">
-					<li class="active dropdown">
+					<li class="dropdown">
             			<a href="index.html#" class="dropdown-toggle" data-toggle="dropdown">Home<b class="caret"></b></a>
             			<ul class="dropdown-menu">
 							<li><a href="index.html">Home standard</a></li>
@@ -77,9 +77,7 @@
             			</ul>
           			</li>									
 					<li ><a href="services.html">Services</a></li>
-					<li ><a href="pricing.html">Pricing</a></li>
-					<li ><a href="blog.html">Blog</a></li>
-          			<li ><a href="contact.html">Contact</a></li>
+					<li ><a href="http://blog.infermap.com">Blog</a></li>
         		</ul>
 	    	</div><!-- /.navbar-collapse -->		
 		</div>

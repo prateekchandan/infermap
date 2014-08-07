@@ -52,12 +52,12 @@ return array(
 			'prefix'   => '',
 		),
 
-		'mysql' => array(
+		'infermap' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'forge',
-			'username'  => 'forge',
-			'password'  => '',
+			'database'  => 'infermap',
+			'username'  => 'prateek',
+			'password'  => 'Prateek5545@gmail.com',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
