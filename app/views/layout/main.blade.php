@@ -4,10 +4,10 @@
 
 	@yield('meta')
     <!-- start: CSS -->
-    <link href="{{URL::asset(assets/css/bootstrap.min.css)}}" rel="stylesheet">
-	<link href="{{URL::asset(assets/css/style.min.css}}" rel="stylesheet">
+    <link href="{{URL::asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
+	<link href="{{URL::asset('assets/css/style.min.css')}}" rel="stylesheet">
 		
-	<link href="{{URL::asset(assets/css/parallax-slider.css}}" rel="stylesheet">
+	<link href="{{URL::asset('assets/css/parallax-slider.css')}}" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Sans:400,700">
 	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Serif">
 	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Boogaloo">
@@ -37,7 +37,7 @@
 	        		<span class="icon-bar"></span>
 	        		<span class="icon-bar"></span>
 	      		</button>
-	      		<a class="navbar-brand" href="index.html"><i class="fa fa-code"></i> Sma<span>rt</span>.</a>
+	      		<a class="navbar-brand" href="http://www.infermap.com"><i class="fa fa-code"></i><span>INFERMAP</span>.</a>
 	    	</div>
 
 	    	<!-- Collect the nav links, forms, and other content for toggling -->
@@ -110,23 +110,23 @@
 
 <!-- start: Java Script -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="{{URL::asset(assets/js/jquery-1.9.1.min.js}}"></script>
-<script src="{{URL::asset(assets/js/bootstrap.min.js}}"></script>
-<script src="{{URL::asset(assets/js/jquery.isotope.min.js}}"></script>
-<script src="{{URL::asset(assets/js/jquery.imagesloaded.js}}"></script>
-<script src="{{URL::asset(assets/js/flexslider.js}}"></script>
-<script src="{{URL::asset(assets/js/carousel.js}}"></script>
-<script src="{{URL::asset(assets/js/jquery.cslider.js}}"></script>
-<script src="{{URL::asset(assets/js/slider.js}}"></script>
-<script src="{{URL::asset(assets/js/jquery.fancybox.js}}"></script>
+<script src="{{URL::asset('assets/js/jquery-1.9.1.min.js')}}"></script>
+<script src="{{URL::asset('assets/js/bootstrap.min.js')}}"></script>
+<script src="{{URL::asset('assets/js/jquery.isotope.min.js')}}"></script>
+<script src="{{URL::asset('assets/js/jquery.imagesloaded.js')}}"></script>
+<script src="{{URL::asset('assets/js/flexslider.js')}}"></script>
+<script src="{{URL::asset('assets/js/carousel.js')}}"></script>
+<script src="{{URL::asset('assets/js/jquery.cslider.js')}}"></script>
+<script src="{{URL::asset('assets/js/slider.js')}}"></script>
+<script src="{{URL::asset('assets/js/jquery.fancybox.js')}}"></script>
 
-<script src="{{URL::asset(assets/js/excanvas.js}}"></script>
-<script src="{{URL::asset(assets/js/jquery.flot.js}}"></script>
-<script src="{{URL::asset(assets/js/jquery.flot.pie.min.js}}"></script>
-<script src="{{URL::asset(assets/js/jquery.flot.stack.js}}"></script>
-<script src="{{URL::asset(assets/js/jquery.flot.resize.min.js}}"></script>
+<script src="{{URL::asset('assets/js/excanvas.js')}}"></script>
+<script src="{{URL::asset('assets/js/jquery.flot.js')}}"></script>
+<script src="{{URL::asset('assets/js/jquery.flot.pie.min.js')}}"></script>
+<script src="{{URL::asset('assets/js/jquery.flot.stack.js')}}"></script>
+<script src="{{URL::asset('assets/js/jquery.flot.resize.min.js')}}"></script>
 
-<script src="{{URL::asset(assets/js/custom.js}}"></script>
+<script src="{{URL::asset('assets/js/custom.js')}}"></script>
 <!-- end: Java Script -->
 
 </body>
