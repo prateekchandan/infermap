@@ -20,6 +20,13 @@ Route::get('/response', function(){
 	return View::make('response.view');
 });
 
+Route::post('/response', function(){
+	$review = new CollegeReview;
+	$review->saveFromInput(Input::all());
+	$review->save();
+	return Redirect::to('/');
+});
+
 Route::get('/college','CollegeController@show_all');
 Route::get('/college/{link}/{page}','CollegeController@home');
 Route::get('/college/{link}','CollegeController@college');

@@ -15,9 +15,9 @@
       <div class="media">
         <div class="media-body">
 
-		<form action="response_submit" method="get" accept-charset="utf-8">
+		<form action="response" method="post" accept-charset="utf-8">
 			<label for="college-name">Enter college name</label>
-			<input class="form-control" id="college-name">
+			<input class="form-control" id="college-name" name="college-name" required>
 			<hr>
 
           <h3 class="media-heading">
@@ -26,28 +26,30 @@
           <br>
 			<div class="form-group">
 				<label>Faculty Qualification</label><br>
-				<input id="btech" name="facqual[]" type="checkbox"><label for="btech">B.Tech</label><br>
-				<input id="mtech" name="facqual[]" type="checkbox"><label for="mtech">M.Tech</label><br>
-				<input id="phd" name="facqual[]" type="checkbox"><label for="phd">Ph.D</label><br>
+				<input id="btech" name="facqual[]" value="btech" type="checkbox"><label for="btech">B.Tech</label><br>
+				<input id="mtech" name="facqual[]" value="mtech" type="checkbox"><label for="mtech">M.Tech</label><br>
+				<input id="phd" name="facqual[]" value="phd" type="checkbox"><label for="phd">Ph.D</label><br>
 			</div>
 			<div class="form-group">
 				<label for="clshrs">Avg. no. of class hrs/week</label>
 				<select name="clshrs" class="form-control" id="clshrs">
-					<option value="op1">10-15</option>
-					<option value="op2">15-20</option>
-					<option value="op3">20-25</option>
-					<option value="op4">25-30</option>
-					<option value="op5">30-40</option>
-					<option value="op6">40-50</option>
+					<option value="select">Select</option>
+					<option value="10-15">10-15</option>
+					<option value="15-20">15-20</option>
+					<option value="20-25">20-25</option>
+					<option value="25-30">25-30</option>
+					<option value="30-40">30-40</option>
+					<option value="40-50">40-50</option>
 				</select>
 			</div>
 			<div class="form-group">
 				<label for="att">% Attendance required</label>
 				<select name="att" class="form-control" id="att">
-					<option value="op1">50-60</option>
-					<option value="op2">60-70</option>
-					<option value="op3">70-80</option>
-					<option value="op4">80-100</option>
+					<option value="select">Select</option>
+					<option value="50-60">50-60</option>
+					<option value="60-70">60-70</option>
+					<option value="70-80">70-80</option>
+					<option value="80-100">80-100</option>
 				</select>
 			</div>
 			<hr>
@@ -59,31 +61,31 @@
 			<div class="form-group">
 				<label for="plac">% Placed</label>
 				<select name="plac" class="form-control" id="pack">
-					<option value="op1">Select</option>
-					<option value="op2">below 20</option>
-					<option value="op3">20-30</option>
-					<option value="op4">30-40</option>
-					<option value="op4">40-50</option>
-					<option value="op4">50-60</option>
-					<option value="op4">60-70</option>
-					<option value="op4">70-80</option>
-					<option value="op4">80-90</option>
-					<option value="op4">above 90</option>
+					<option value="select">Select</option>
+					<option value="below 20">below 20</option>
+					<option value="20-30">20-30</option>
+					<option value="30-40">30-40</option>
+					<option value="40-50">40-50</option>
+					<option value="50-60">50-60</option>
+					<option value="60-70">60-70</option>
+					<option value="70-80">70-80</option>
+					<option value="80-90">80-90</option>
+					<option value="above 90">above 90</option>
 				</select>
 			</div>
 			<div class="form-group">
 				<label for="pack">Avg. Package lpa</label>
 				<select name="pack" class="form-control" id="pack">
-					<option value="op1">Select</option>
-					<option value="op2">2</option>
-					<option value="op3">3</option>
-					<option value="op4">4</option>
-					<option value="op4">5</option>
-					<option value="op4">6</option>
-					<option value="op4">7</option>
-					<option value="op4">8</option>
-					<option value="op4">9</option>
-					<option value="op4">10+</option>
+					<option value="select">Select</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>
+					<option value="8">8</option>
+					<option value="9">9</option>
+					<option value="10+">10+</option>
 				</select>
 			</div>
 			<hr>
@@ -94,15 +96,17 @@
           <br>
 			<div class="form-group">
 				<label>Hostel and Mess facilities</label><br>
-				<input type="CHECKBOX" id="no-mshs"><label for="no-mshs">No Hostel/Mess</label><br>
-				<label for="hostel">Hostel</label>(1: shared cramped rooms, 5: single spacious rooms with AC and internet facility)
-				<input type="range" name="hostel" min="1" max="5" id="hostel">
+				<input type="checkbox" name="no-mshs" id="no-mshs"><label for="no-mshs">No Hostel/Mess</label><br>
+				<label for="hostel">Hostel</label><br>
+				<div class="rating container" data-id="hostel"  data-max="5"></div>
+				<strong>1</strong> for shared cramped rooms<br> <strong>5</strong> for single spacious rooms with AC and internet facility<br><br>
 				<label for="mess">Mess</label>
-				<input type="range" name="mess" min="1" max="5" id="mess">
+				<div class="rating container" data-id="mess", data-max="5"></div>
 			</div>
 			<div class="form-group">
-				<label for="sports">Sports</label>(1: no sports facilities, 5: sports teams participation in competitions with sports equipments available)
-				<input class="myrange" type="range" name="sports" min="1" max="5" id="sports">
+				<label for="sports">Sports</label><br>
+				<div class="rating container" data-id="sports" data-max="5"></div>
+				<strong>1</strong> for no sports facilities<br> <strong>5</strong> for sports teams participation in competitions with sports equipments available	
 			</div>
 			<hr>
 
@@ -112,25 +116,40 @@
           <br>
 			<div class="form-group">
 				<label>Tick facilities available</label><br>
-				<input id="canteen" name="facilities[]" type="checkbox"><label for="canteen">Canteen</label><br>
-				<input id="fests" name="facilities[]" type="checkbox"><label for="fests">Fests</label><br>
-				<input id="clubs" name="facilities[]" type="checkbox"><label for="clubs">Clubs</label><br>
-				<input id="gne" name="facilities[]" type="checkbox"><label for="gne">Groups and events held</label><br>
-				<input id="inout" name="facilities[]" type="checkbox"><label for="inout">In Out restrictions</label><br>
-				<input id="concity" name="facilities[]" type="checkbox"><label for="concity">Connectivity to the City</label><br>
+				<input id="canteen" name="facilities[]" value="canteen" type="checkbox"><label for="canteen">Canteen</label><br>
+				<input id="fests" name="facilities[]" value="fests" type="checkbox"><label for="fests">Fests</label><br>
+				<input id="clubs" name="facilities[]" value="clubs" type="checkbox"><label for="clubs">Clubs</label><br>
+				<input id="gne" name="facilities[]" value="gne" type="checkbox"><label for="gne">Groups and events held</label><br>
+				<input id="inout" name="facilities[]" value="inout" type="checkbox"><label for="inout">In Out restrictions</label><br>
+				<input id="concity" name="facilities[]" value="concity" type="checkbox"><label for="concity">Connectivity to the City</label><br>
 			</div>
 			<div class="form-group">
 				<label for="reco">Would you recommend college to friends over similar colleges</label>
-				<input class="myrange" type="range" name="reco" min="1" max="10" id="reco">
+				<div class="rating container" data-id="reco" data-max="10"></div>
 			</div>
 			<div class="form-group">
 				<label for="whycho">Why should someone choose your college? (50 words)</label>
-				<textarea id="whycho" class="form-control"></textarea>
+				<textarea name="whychoose" id="whychooose" class="form-control"></textarea>
 			</div>
 			<div class="form-group">
 				<label for="improve">Areas in which college can improve (50 words)</label>
-				<textarea id="improve" class="form-control"></textarea>
+				<textarea name="improve" id="improve" class="form-control"></textarea>
 			</div>
+			<hr>
+
+          <h3 class="media-heading">
+            Personal Information
+          </h3>
+          <br>
+		<div class="form-group">
+			<label for="personal-dept">What is your department?</label>
+			<input type="text" id="personal-dept" name="personal-dept" class="form-control" required>
+		</div>
+		<div class="form-group">
+			<label for="personal-year">Year of passing out</label>
+			<input type="text" id="personal-year" name="personal-year" class="form-control" required>
+		</div>
+		  
 			<button class="btn btn-primary">Submit</button>
 		</form></div></div></div></div></div></div>
 <style>
@@ -251,10 +270,69 @@ input[type='range']::-moz-range-thumb {
 	width: 20px;
 }
 
+.rating{
+	padding:0px;
+}
 
+.rating-sq{
+	width:25px;
+	height:25px;
+	background-color: #bbb;
+	border-radius:3px;
+	margin:0.5px;
+}
 
+.rating-sq:hover{
+	cursor:pointer;
+}
 
 </style>
+<script src="{{ URL::asset('assets/js/jquery-1.9.1.min.js') }}"></script>
+<script>
 
+
+var colors = ['#9f1923','#CB202D', '#DE1D0F', '#FF7800', '#FFBA00', '#EDD614', '#9ACD32', '#5BA829', '#3F7E00', '#305D02']
+$('.rating').each(function(index){
+	var max = $(this).attr('data-max');
+	$(this).attr('data-cur', -1);
+	$(this).append('<input type="hidden" id="'+$(this).attr('data-id')+'" name="'+$(this).attr('data-id')+'" >')
+	max = parseInt(max);
+	for(var i = 0; i < max; i++){
+		$(this).append('<div class="rating-sq pull-left" data-max="'+max+'" data-num="'+i+'" data-col="'+colors[Math.floor(i*9/(max-1))]+'"></div>')
+	}
+	$(this).append('<br>');
+});
+
+$('.rating-sq').mouseenter(function(){
+	var index = parseInt($(this).attr('data-num'));
+	var color = $(this).attr('data-col');
+	$(this).css('background-color', color);
+	$(this).siblings().each(function(){
+		var newind = parseInt($(this).attr('data-num'));
+		if(newind < index) $(this).css('background-color', $(this).attr('data-col'));
+		else $(this).css('background-color', '#bbb');
+	});
+});
+
+$('.rating-sq').mouseleave(function(){
+	var index = parseInt($(this).attr('data-num'));
+	if(index > parseInt($(this).parent().attr('data-cur'))) $(this).css('background-color', '#bbb');
+	$(this).siblings().each(function(){
+		var newind = parseInt($(this).attr('data-num'));
+		if(newind > parseInt($(this).parent().attr('data-cur'))) $(this).css('background-color', '#bbb');
+		else $(this).css('background-color', $(this).attr('data-col'));
+	});
+
+});
+
+$('.rating-sq').click(function(){
+	var index = parseInt($(this).attr('data-num'));
+	$(this).parent().attr('data-cur', index);
+	$(this).siblings('input').each(function(){
+		$(this).val(index+1);
+	});
+});
+
+</script>
 
 @stop
