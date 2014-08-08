@@ -24,7 +24,7 @@ Route::post('/review', function(){
 	$review = new CollegeReview;
 	$review->saveFromInput(Input::all());
 	$review->save();
-	return Redirect::to('/');
+	return Redirect::to('http://www.infermap.com');
 });
 
 Route::get('/college','CollegeController@show_all');
