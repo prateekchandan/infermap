@@ -40,6 +40,9 @@
 					@if($data['city']!='')
 						{{$data['city']}}
 					@endif
+					@if($data['state']!='')
+						{{$data['state']}}
+					@endif
 				</div>
 
 			</div>

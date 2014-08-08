@@ -15,7 +15,7 @@
       <div class="media">
         <div class="media-body">
 
-		<form action="response" method="post" accept-charset="utf-8">
+		<form action="review" method="post" accept-charset="utf-8">
 			<label for="college-name">Enter college name</label>
 			<input class="form-control" id="college-name" name="college-name" required>
 			<hr>

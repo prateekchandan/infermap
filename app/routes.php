@@ -16,11 +16,11 @@ Route::get('/', function()
 	return View::make('layout.main');
 });
 
-Route::get('/response', function(){
+Route::get('/review', function(){
 	return View::make('response.view');
 });
 
-Route::post('/response', function(){
+Route::post('/review', function(){
 	$review = new CollegeReview;
 	$review->saveFromInput(Input::all());
 	$review->save();
