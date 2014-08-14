@@ -1,0 +1,17 @@
+.head-locations{
+	color:white;
+	padding-left: 25px;
+	font-size: 15px;
+}
+
+.logo-img{
+	max-height: 120px;
+	width: auto;
+	max-width: 300px;
+	border-radius: 2px;
+}
+
+.main-college-content{
+	background: url(../img/bg-k10.png) repeat;
+	min-height: 400px;
+}
