@@ -64,4 +64,5 @@
 @endif
 @endif	
 
+{{public_path()}}
 @endsection
