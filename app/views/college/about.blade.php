@@ -1,9 +1,11 @@
 @extends('college.layout')
 
+
 @section('college-content')
 <div class="row">
 	@if(File::exists(public_path().'/data'.'/'.$data['cid'].'/about/about_college.txt'))
 	@if(trim(file_get_contents(public_path().'/data'.'/'.$data['cid'].'/about/about_college.txt'))!='')
+	<?php  $check=1;?>
 	<div class="col-sm-8">	
 		<div class="title"><h3>About Us</h3></div>
 		<?php echo file_get_contents(public_path().'/data'.'/'.$data['cid'].'/about/about_college.txt'); ?>
@@ -35,6 +37,7 @@
 </div>
 
 @if($data['images']!='0')
+<?php  $check=1;?>
 <div class="row">
 	<div class="col-md-12">
 		<div class="title"><h3>IMAGE GALLERY</h3></div>
@@ -65,6 +68,7 @@
 
 @if(File::exists(public_path().'/data'.'/'.$data['cid'].'/about/dean_intro.txt'))
 @if(trim(file_get_contents(public_path().'/data'.'/'.$data['cid'].'/about/dean_intro.txt'))!='')
+<?php  $check=1;?>
 <div class="row">
 	<div class="col-sm-12">	
 		<div class="title"><h3>Dean Introduction</h3></div>
@@ -78,6 +82,7 @@
 
 @if(File::exists(public_path().'/data'.'/'.$data['cid'].'/about/rules.txt'))
 @if(trim(file_get_contents(public_path().'/data'.'/'.$data['cid'].'/about/rules.txt'))!='')
+<?php  $check=1;?>
 <div class="row">
 	<div class="col-sm-12">	
 		<div class="title"><h3>Rules</h3></div>

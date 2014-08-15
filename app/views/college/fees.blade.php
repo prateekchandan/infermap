@@ -6,7 +6,16 @@
 @if($fees_table!=0)
 <?php  $check=1;?>
 <div class="row col-md-12" style="overflow-x:auto">
-<div class="title"><h3>FEE </h3></div>
+<div class="title">
+	<h3>
+		Fee Structure Per
+		@if($data['fee_type']==0)
+		Semester
+		@else
+		Annum
+		@endif
+	</h3>
+</div>
 
 	<table class="table table-bordered">
 		<thead>
@@ -28,29 +37,54 @@
 </div>
 @endif
 
-@if(File::exists(public_path().'/data'.'/'.$data['cid'].'/admissions/eligibility.txt'))
-@if(trim(file_get_contents(public_path().'/data'.'/'.$data['cid'].'/admissions/eligibility.txt'))!='')
+@if(File::exists(public_path().'/data'.'/'.$data['cid'].'/fees/scholarships.txt'))
+@if(trim(file_get_contents(public_path().'/data'.'/'.$data['cid'].'/fees/scholarships.txt'))!='')
 <div class="row">
 	<?php  $check=1;?>
 	<div class="col-sm-12">	
-		<div class="title"><h3>Eligibility Criteria</h3></div>
-		<?php echo file_get_contents(public_path().'/data'.'/'.$data['cid'].'/admissions/eligibility.txt'); ?>
+		<div class="title"><h3>Scholarships</h3></div>
+		<?php echo file_get_contents(public_path().'/data'.'/'.$data['cid'].'/fees/scholarships.txt'); ?>
 	</div>
 </div>
 @endif
 @endif
 
-@if(File::exists(public_path().'/data'.'/'.$data['cid'].'/admissions/admission_info.txt'))
-@if(trim(file_get_contents(public_path().'/data'.'/'.$data['cid'].'/admissions/admission_info.txt'))!='')
+@if(File::exists(public_path().'/data'.'/'.$data['cid'].'/fees/benefits.txt'))
+@if(trim(file_get_contents(public_path().'/data'.'/'.$data['cid'].'/fees/benefits.txt'))!='')
 <div class="row">
 	<?php  $check=1;?>
 	<div class="col-sm-12">	
-		<div class="title"><h3>Admission Info</h3></div>
-		<?php echo file_get_contents(public_path().'/data'.'/'.$data['cid'].'/admissions/admission_info.txt'); ?>
+		<div class="title"><h3>Benefits</h3></div>
+		<?php echo file_get_contents(public_path().'/data'.'/'.$data['cid'].'/fees/benefits.txt'); ?>
 	</div>
 </div>
 @endif
 @endif
+
+@if(File::exists(public_path().'/data'.'/'.$data['cid'].'/fees/caution.txt'))
+@if(trim(file_get_contents(public_path().'/data'.'/'.$data['cid'].'/fees/caution.txt'))!='')
+<div class="row">
+	<?php  $check=1;?>
+	<div class="col-sm-12">	
+		<div class="title"><h3>Caution Deposits</h3></div>
+		<?php echo file_get_contents(public_path().'/data'.'/'.$data['cid'].'/fees/caution.txt'); ?>
+	</div>
+</div>
+@endif
+@endif
+
+@if(File::exists(public_path().'/data'.'/'.$data['cid'].'/fees/misc.txt'))
+@if(trim(file_get_contents(public_path().'/data'.'/'.$data['cid'].'/fees/misc.txt'))!='')
+<div class="row">
+	<?php  $check=1;?>
+	<div class="col-sm-12">	
+		<div class="title"><h3>Miscellanous info</h3></div>
+		<?php echo file_get_contents(public_path().'/data'.'/'.$data['cid'].'/fees/misc.txt'); ?>
+	</div>
+</div>
+@endif
+@endif
+
 	
 
 @endsection

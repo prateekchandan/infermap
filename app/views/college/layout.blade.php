@@ -1,5 +1,9 @@
 @extends('layout.main')
 
+@section('meta')
+<title>{{{$data['name']}}}</title>
+@endsection
+
 @section('body')
 <style type="text/css">
 	/* make sidebar nav vertical */ 
@@ -79,7 +83,7 @@
 				            <li><a href="{{URL::to('college')}}/{{$data['link']}}">About</a></li>
 				            <li><a href="{{URL::to('college')}}/{{$data['link']}}/admission">Admission</a></li>
 				            <li><a href="{{URL::to('college')}}/{{$data['link']}}/fees">Fees</a></li>
-				            <li><a href="{{URL::to('college')}}/{{$data['link']}}/placement">Placement</a></li>
+				            <li><a href="{{URL::to('college')}}/{{$data['link']}}/placements">Placement</a></li>
 				            <li><a href="{{URL::to('college')}}/{{$data['link']}}/facilities">Facilities</a></li>
 				            
 				          </ul>
@@ -93,7 +97,11 @@
 			</div>
 	
 			<div class="col-sm-8   main-college-content">
+				<?php  $check=0; ?>
 				@yield('college-content')
+				@if($check==0)
+				No data
+				@endif
 			</div>	
 			
 			<div class="col-sm-2">
