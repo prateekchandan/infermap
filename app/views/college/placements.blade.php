@@ -3,29 +3,31 @@
 @section('college-content')
 <?php  $check=0; ?>
 
-@if($fees_table!=0)
+@if($placement_table!=0)
 <?php  $check=1;?>
+@foreach($placement_table as $course => $table)
 <div class="row col-md-12" style="overflow-x:auto">
-<div class="title"><h3>FEE </h3></div>
+<div class="title"><h3>Placements data for {{{$course}}} </h3></div>
 
 	<table class="table table-bordered">
 		<thead>
 			<tr>
-			@foreach($fees_table[0] as $element)
+			@foreach($table[0] as $element)
 				<th>{{{$element}}}</th>
 			@endforeach
 			</tr>
 		</thead>
-		@for($i=1;$i < sizeof($fees_table);$i++)
+		@for($i=1;$i < sizeof($table);$i++)
 		<tr>
-		@foreach($fees_table[$i] as $element)
+		@foreach($table[$i] as $element)
 		<td>{{{$element}}}</td>
 		@endforeach
 		</tr>
 		@endfor
 	</table>
-	
+
 </div>
+@endforeach
 @endif
 
 @if(File::exists(public_path().'/data'.'/'.$data['cid'].'/placements/placement_info.txt'))
