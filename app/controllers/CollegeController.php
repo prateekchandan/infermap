@@ -76,6 +76,11 @@ class CollegeController extends BaseController {
 					View::share('fees_table',$this->get_fees_table($data['cid']));
 					return View::make('college.fees');
 					break;
+				case 'placements':
+					View::share('placement_table',$this->get_placement_table($data['cid']));
+					return;
+					return View::make('college.placements');
+					break;
 				case 'facilities':
 					return View::make('college.facilities');
 					break;
@@ -193,6 +198,32 @@ class CollegeController extends BaseController {
 			$return=0;
 		return $return;
 	}
+
+	private function get_placement_table($cid){
+		$return=array();
+		$types = DB::connection('infermap')->select('select distinct type from college_entrance_test where cid = ?',array($cid));
+		$category = DB::table('category')->get();
+		foreach ($types as $types_key => $type) {
+			$type=$type->type;
+			$table=array();
+
+			$type=DB::table('allcourses')->where('name', $type)->first();
+			$type=$type->value;
+
+			$placements=DB::connection('college_data')->select("select department,total_intake,placed,min_package,max_package,avg_package from t".$cid." where (placed != 0 || min_package!=0 || max_package!=0 || avg_package!=0) && program=?",array($type));
+
+			print_r($placements);
+			if(sizeof($table)>0)
+			$return[$type]=$table;
+		}
+		
+		if(sizeof($return)==0)
+			$return=0;
+
+		#return $return;
+		print_r($return);
+	}
+
 	public function show_all()
 	{
 		$all =  DB::connection('infermap')->select('select * from college_id where disabled = 1');
