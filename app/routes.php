@@ -23,4 +23,12 @@ Route::get('/college/{link}','CollegeController@college');
 
 
 
+Route::get('/register', array('as'=>'user.create', 'uses'=>'UsersController@create'));
+Route::post('/register', array('as'=>'user.store', 'uses'=>'UsersController@store'));
+
+Route::get('/test',function(){
+	return View::make('user.test');
+});
+
+Route::post('/storefb', array('as'=>'user.storefb', 'uses'=>'UsersController@storefb'));
 
