@@ -97,16 +97,7 @@
 			</div>
 	
 			<div class="col-sm-8   main-college-content">
-				<?php  $check=0; ?>
 				@yield('college-content')
-				<?php
-					if($check==0){
-						?>
-				No data
-
-						<?
-					}
-				?>
 			</div>	
 			
 			<div class="col-sm-2">

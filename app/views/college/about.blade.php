@@ -2,6 +2,8 @@
 
 
 @section('college-content')
+<?php $check=0; ?>
+
 <div class="row">
 	@if(File::exists(public_path().'/data'.'/'.$data['cid'].'/about/about_college.txt'))
 	@if(trim(file_get_contents(public_path().'/data'.'/'.$data['cid'].'/about/about_college.txt'))!='')
@@ -92,6 +94,10 @@
 	</div>
 </div>
 @endif
+@endif
+
+@if($check==0)
+@include('college.nodata')
 @endif
 
 @endsection

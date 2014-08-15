@@ -236,7 +236,7 @@ class CollegeController extends BaseController {
 
 	public function show_all()
 	{
-		$all =  DB::connection('infermap')->select('select * from college_id where disabled = 1');
+		$all =  DB::connection('infermap')->select('select * from college_id where  1');
 		foreach ($all as $key => $value) {
 			$value = (array) $value;
 			echo '<a href="';
