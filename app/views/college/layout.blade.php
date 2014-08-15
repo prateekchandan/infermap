@@ -107,7 +107,6 @@
 						<?
 					}
 				?>
-				@endif
 			</div>	
 			
 			<div class="col-sm-2">
