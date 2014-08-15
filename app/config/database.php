@@ -63,6 +63,17 @@ return array(
 			'prefix'    => '',
 		),
 
+		'college_data' => array(
+			'driver'    => 'mysql',
+			'host'      => 'localhost',
+			'database'  => 'college_data',
+			'username'  => 'prateek',
+			'password'  => 'Prateek5545@gmail.com',
+			'charset'   => 'utf8',
+			'collation' => 'utf8_unicode_ci',
+			'prefix'    => '',
+		),
+
 		'pgsql' => array(
 			'driver'   => 'pgsql',
 			'host'     => 'localhost',

@@ -8,6 +8,7 @@
 	<link href="{{URL::asset('assets/css/style.min.css')}}" rel="stylesheet">
 		
 	<link href="{{URL::asset('assets/css/parallax-slider.css')}}" rel="stylesheet">
+	<link href="{{URL::asset('assets/css/custom-css.css')}}" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Sans:400,700">
 	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Serif">
 	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Boogaloo">
