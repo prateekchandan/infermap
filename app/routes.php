@@ -21,11 +21,13 @@ Route::get('/college/{link}','CollegeController@college');
 
 
 Route::get('/register', array('as'=>'user.create', 'uses'=>'UsersController@create'));
-Route::post('/register1', array('as'=>'user.create1', 'uses'=>'UsersController@create1'));
 Route::post('/register', array('as'=>'user.store', 'uses'=>'UsersController@store'));
+Route::get('/edit-profile', array('as'=>'user.edit', 'uses'=>'UsersController@edit'));
+Route::post('/edit-profile', array('as'=>'user.update', 'uses'=>'UsersController@update'));
+Route::post('/fblogin', array('as'=>'user.fblogin', 'uses'=>'UsersController@fblogin'));
 
 Route::get('/test',function(){
-	return View::make('user.test');
+	return Auth::user();
 });
 
 Route::post('/storefb', array('as'=>'user.storefb', 'uses'=>'UsersController@storefb'));

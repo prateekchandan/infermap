@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Support\MessageBag;
 
 class UsersController extends \BaseController {
 
@@ -23,21 +24,6 @@ class UsersController extends \BaseController {
 		return View::make('user.create');
 	}
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create1()
-	{
-		$email = Input::get('email');
-		$name = Input::get('name');
-		$password = Input::get('password');
-		return View::make('user.create1')
-			->with('email', $email)
-			->with('name', $name)
-			->with('password');
-	}
 
 	/**
 	 * Store a newly created resource in storage.
@@ -46,9 +32,26 @@ class UsersController extends \BaseController {
 	 */
 	public function store()
 	{
+		$messageBag = new MessageBag;
+		$messageBag->add('password', Lang::get('validation.password.restrict'));
+		if(strlen(Input::get('password'))< 6) return Redirect::back()->withInput()->withErrors($messageBag);
 		$user = new User;
 		$user->email = Input::get('email');
 		$user->password = Hash::make(Input::get('password'));
+		$user->name = Input::get('name');
+		$user->save();
+		Auth::login($user);
+		return Redirect::route('user.edit');
+	}
+
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @return Response
+	 */
+	public function infostore()
+	{
+		$user = Auth::user();
 		$user->name = Input::get('name');
 		$user->city = Input::get('city');
 		$user->gender = Input::get('gender');
@@ -57,10 +60,8 @@ class UsersController extends \BaseController {
 		$user->std_passingout = Input::get('std_passingout');
 		$user->phone = Input::get('phone');
 		$user->save();
-		Auth::login($user);
-		return Auth::user();
+		return Redirect::to('/');
 	}
-
 
 	/**
 	 * Display the specified resource.
@@ -80,9 +81,12 @@ class UsersController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function edit()
 	{
-		//
+		if(!Auth::check()) return Redirect::to('/');
+		$user = Auth::user();
+		return View::make('user.edit')
+			->with('user', $user);
 	}
 
 
@@ -92,9 +96,18 @@ class UsersController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update()
 	{
-		//
+		$user = Auth::user();
+		$user->name = Input::get('name');
+		$user->city = Input::get('city');
+		$user->gender = Input::get('gender');
+		$user->school_college = Input::get('school_college');
+		$user->school_college_name = Input::get('school_college_name');
+		$user->std_passingout = Input::get('std_passingout');
+		$user->phone = Input::get('phone');
+		$user->save();
+		return Redirect::to('/');
 	}
 
 
@@ -109,9 +122,24 @@ class UsersController extends \BaseController {
 		//
 	}
 
-	public function storefb(){
-		dd(Input::all());
+	public function fblogin(){
+		$email = Input::get('email');
+		$users = User::where('email','=', $email)->get();
+		if(sizeof($users) == 0){
+			$user = new User;
+			$user->email = $email;
+			$user->name = Input::get('name');
+			$user->fbid = Input::get('fbid');
+			$user->save();
+			Auth::login($user);
+			return Redirect::route('user.edit');
+		}
+		$user = $users[0];
+		Auth::login($user);
+		return Redirect::to('/');
 	}
 
-
+	public function login(){
+		return View::make('user.login');
+	}
 }

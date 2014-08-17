@@ -20,24 +20,32 @@ window.fbAsyncInit = function() {
 	e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
 	document.getElementById('fb-root').appendChild(e);
 }());
-
+var info;
 function fblogin(){
 	FB.login(function(response){
 		//console.log(response);
 		if (response.authResponse) {
-			/*//window.location='validatefb.php';
-			console.log(Fb.api());*/
-			console.log(response);
+			FB.api('/me', function(response){
+				info = response;
+				var url = '{{ URL::route("user.fblogin") }}';
+				var form = $('<form action="' + url + '" method="post">' +
+					'<input type="hidden" name="fbid" value="' + info.id + '" />' +
+					'<input type="hidden" name="name" value="' + info.name + '" />' +
+					'<input type="hidden" name="email" value="' + info.email + '" />' +
+					'</form>');
+				$(form).submit();
+			});
 		}
 		else
 		{
 			alert('Authorization Failed');
 		}
-	},{scope: 'publish_stream'});
+	},{scope: 'publish_stream, email'});
 }
 </script>
 
 <div class="container">
+
 
 	<!--start: Row-->
 	<div class="row-fluid">
@@ -69,17 +77,23 @@ function fblogin(){
 
 				</div>
 
-				<form method="post" action="{{ URL::route('user.create1') }}">
+				<form method="post" action="{{ URL::route('user.store') }}">
 				<div class="form-group">
-					<input id="name" name="name" class="form-control" value="" placeholder="Name" required>
+					<input id="name" name="name" class="form-control" value="{{ Input::old('name') }}" placeholder="Name" required>
 				</div>
 				<div class="form-group">
-					<input type="email" id="email" name="email" class="form-control" value="" placeholder="email address" required>
+					<input type="email" id="email" name="email" class="form-control" value="{{ Input::old('email') }}" placeholder="email address" required>
 				</div>
 
 				<div class="form-group">
 					<input type="password" style="font-size:14px; height:34px;" id="password" name="password" class="form-control" value="" placeholder="password" required>
 				</div>
+				@if ($errors->has('password'))
+					<div class="alert alert-error alert-dismissable" style="" role="alert">
+					<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					{{ $errors->first('password') }}
+					</div>
+				@endif
 
 				<div class="actions">
 

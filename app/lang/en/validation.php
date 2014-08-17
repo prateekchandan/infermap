@@ -100,5 +100,6 @@ return array(
 	*/
 
 	'attributes' => array(),
+	'password.restrict' => 'The password should have at least 6 characters.'
 
 );
