@@ -64,5 +64,7 @@
 @endif
 @endif	
 
-{{public_path()}}
+@if($check==0)
+@include('college.nodata')
+@endif
 @endsection

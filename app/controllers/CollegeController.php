@@ -73,7 +73,6 @@ class CollegeController extends BaseController {
 					break;
 				case 'placements':
 					View::share('placement_table',$this->get_placement_table($data['cid']));
-					return;
 					return View::make('college.placements');
 					break;
 				case 'facilities':
@@ -205,26 +204,37 @@ class CollegeController extends BaseController {
 			$type=$type->type;
 			$table=array();
 
-			$type=DB::table('allcourses')->where('name', $type)->first();
-			$type=$type->value;
-
 			$placements=DB::connection('college_data')->select("select department,total_intake,placed,min_package,max_package,avg_package from t".$cid." where (placed != 0 || min_package!=0 || max_package!=0 || avg_package!=0) && program=?",array($type));
 
-			print_r($placements);
-			if(sizeof($table)>0)
+			$table[0]=array('Sl. No.','Depatment','Total Intake','Placed','Min Package','Max Package','Average Package');
+			$type=DB::table('allcourses')->where('name', $type)->first();
+			$type=$type->value;
+			$rc=1;
+			foreach ($placements as $key => $row) {
+				$array_row=array('department','total_intake','placed','min_package','max_package','avg_package');
+				$table[$rc]=array($rc);
+				foreach ($array_row as $key) {
+				if($row->$key!='0')
+					array_push($table[$rc],$row->$key);
+				else
+					array_push($table[$rc], '-');
+				}
+				$rc+=1;
+			}
+			
+			if(sizeof($table)>1)
 			$return[$type]=$table;
 		}
 		
 		if(sizeof($return)==0)
 			$return=0;
 
-		#return $return;
-		print_r($return);
+		return $return;
 	}
 
 	public function show_all()
 	{
-		$all =  DB::connection('infermap')->select('select * from college_id where disabled = 1');
+		$all =  DB::connection('infermap')->select('select * from college_id where  1');
 		foreach ($all as $key => $value) {
 			$value = (array) $value;
 			echo '<a href="';

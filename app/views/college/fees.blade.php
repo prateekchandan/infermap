@@ -85,6 +85,9 @@
 @endif
 @endif
 
+@if($check==0)
+@include('college.nodata')
+@endif
 	
 
 @endsection
