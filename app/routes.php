@@ -6,9 +6,6 @@ Route::get('/', function()
 	return View::make('layout.main');
 });
 
-Route::get('/review', function(){
-	return View::make('response.view');
-});
 
 Route::post('/review', function(){
 	$review = new CollegeReview;
@@ -24,11 +21,13 @@ Route::get('/college/{link}','CollegeController@college');
 
 
 Route::get('/register', array('as'=>'user.create', 'uses'=>'UsersController@create'));
+Route::post('/register1', array('as'=>'user.create1', 'uses'=>'UsersController@create1'));
 Route::post('/register', array('as'=>'user.store', 'uses'=>'UsersController@store'));
 
 Route::get('/test',function(){
-	return View::make('user.test');
+	return Auth::user();
 });
 
 Route::post('/storefb', array('as'=>'user.storefb', 'uses'=>'UsersController@storefb'));
+
 
