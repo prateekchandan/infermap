@@ -11,11 +11,6 @@ class CollegeController extends BaseController {
 	   return preg_replace('/[^A-Za-z0-9\-]/', '', $string); // Removes special chars.
 	}
 
-	public function home($link,$page)
-	{
-		$all =  DB::connection('infermap')->select('select * from college_id where ');
-		
-	}
 
 	public function college($link,$page='about')
 	{
@@ -83,6 +78,9 @@ class CollegeController extends BaseController {
 					break;
 				case 'facilities':
 					return View::make('college.facilities');
+					break;
+				case 'review':
+					return View::make('review.view');
 					break;
 				default:
 					return View::make('college.about');

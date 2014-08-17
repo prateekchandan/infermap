@@ -63,8 +63,10 @@ function fblogin(){
 
 				</div>
 
-				<form method="post" action="register">
-
+				<form method="post" action="{{ URL::route('user.create1') }}">
+				<div class="form-group">
+					<input id="name" name="name" class="form-control" value="" placeholder="Name" required>
+				</div>
 				<div class="form-group">
 					<input type="email" id="email" name="email" class="form-control" value="" placeholder="email address" required>
 				</div>

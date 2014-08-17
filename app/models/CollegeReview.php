@@ -1,24 +1,30 @@
 <?php
 
 class CollegeReview extends Eloquent{
-	protected $table = 'collegeReviews';
+	protected $table = 'college_reviews';
 
 
 	public function saveFromInput(){
-		$this->college_name = Input::get('college-name');
-		$this->facqual = (Input::get('facqual') == null ? null : implode(',',Input::get('facqual')));
+		$this->college_id = Input::get('cid');
+		$this->facqual = Input::get('facqual');
 		$this->class_hrs = Input::get('clshrs');
 		$this->attendance = Input::get('att');
+		$this->acad_quality = Input::get('acad-qual');
+		$this->acad_reputation = Input::get('acad-repo');
 		$this->placement = Input::get('plac');
-		$this->nomshstl = Input::get('nomshs');
+		$this->intern_help = Input::get('intern-help');
+		$this->intern = Input::get('intern');
+		$this->no_mess_hostel = Input::get('nomshs');
 		$this->hostel_rating = Input::get('hostel');
 		$this->mess_rating = Input::get('mess');
 		$this->sports_rating = Input::get('sports');
+		$this->co_currics_rating = Input::get('co-currics');
 		$this->facilities = (Input::get('facilities') == null ? null : implode(',',Input::get('facilities')));
-		$this->reco_rating = Input::get('reco');
 		$this->whychoose = Input::get('whychoose');
 		$this->improve = Input::get('improve');
+		$this->recommend = (Input::get('reco') == 'yes' ? 1 : (Input::get('reco') == 'no' ? 0 : null));
 		$this->personal_dept = Input::get('personal-dept');
 		$this->personal_year = Input::get('personal-year');
+		$this->stay_con = (Input::get('stay-con') == null ? null : implode(',',Input::get('stay-con')));
 	}
 }

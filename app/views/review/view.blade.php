@@ -9,18 +9,17 @@
 
           <div class="entry-content">
             <div class="main-body">
-      <h2 class="headings">
-        Response
-      </h2>
-		<form action="review" method="post" accept-charset="utf-8">
+		<form action="{{ URL::to('/review') }}" method="post" accept-charset="utf-8">
 
       <div class="media">
         <div class="media-body">
-
-		<img class="pull-left" src="~/Desktop/breakingbadsmoke.jpg" height="100" width="100">
+		<input name="cid" type="hidden" value="{{ $data['cid'] }}">
+		@if ($data['logo-img'] != 0)
+		<img class="pull-left" src="{{ $data['logo-img'] }}" height="100" width="100">
+		@endif
 		<div class="pull-left">
-			<h1>R.V. College of Engineering</h1>
-			<p>Mysore Rd, RV Vidyaniketan , Bangalore , Karnataka</p>
+			<h1>{{ $data['name'] }}</h1>
+			<p>{{ $data['location_bar'] }}</p>
 		</div>
 		</div>
 	</div>
@@ -201,7 +200,10 @@
 			</div>
 			<div class="form-group row">
 				<label class="col-md-3" for="reco">Would you recommend college to friends over similar colleges</label>
-				<div class="rating col-md-9" data-id="reco" data-max="10"></div>
+				<div class="col-md-9">
+					<input type="radio" name="reco" value="yes" id="reco-yes"><label for="reco-yes">Yes</label><br>
+					<input type="radio" name="reco" value="no" id="reco-no"><label for="reco-no">No</label>
+				</div>
 			</div>
 
 		</div>
