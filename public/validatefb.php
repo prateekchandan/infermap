@@ -6,7 +6,7 @@ include("facebook_constants.php");
 $users = $facebook->getUser();
 print_r($users);
 
-if ($users!="") {	
+/*if ($users!="") {	
 	echo 'here';
   try {
 
@@ -30,6 +30,6 @@ if ($users!="") {
   } catch (FacebookApiException $e) {
     $users = null;
   }
-}
+}*/
 ?>
 

@@ -23,9 +23,15 @@ window.fbAsyncInit = function() {
 
 function fblogin(){
 	FB.login(function(response){
+		//console.log(response);
 		if (response.authResponse) {
-			window.location='validatefb.php';
-			console.log(Fb.api());
+			/*//window.location='validatefb.php';
+			console.log(Fb.api());*/
+			console.log(response);
+		}
+		else
+		{
+			alert('Authorization Failed');
 		}
 	},{scope: 'publish_stream'});
 }

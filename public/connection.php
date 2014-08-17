@@ -1,7 +1,7 @@
 <?php
-$host="localhost:8000";
-$uname="root";
-$pass="anurag0912";
+$host="localhost";
+$uname="prateek";
+$pass="Prateek5545@gmail.com";
 $database = "infermap";	
 $connection=mysql_connect($host,$uname,$pass) or die("Database Connection Failed");
 $selectdb=mysql_select_db($database) or die("Database could not be selected");	

@@ -25,7 +25,7 @@ Route::post('/register1', array('as'=>'user.create1', 'uses'=>'UsersController@c
 Route::post('/register', array('as'=>'user.store', 'uses'=>'UsersController@store'));
 
 Route::get('/test',function(){
-	return Auth::user();
+	return View::make('user.test');
 });
 
 Route::post('/storefb', array('as'=>'user.storefb', 'uses'=>'UsersController@storefb'));
