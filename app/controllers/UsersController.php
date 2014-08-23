@@ -84,6 +84,7 @@ class UsersController extends \BaseController {
 	public function edit()
 	{
 		if(!Auth::check()) return Redirect::to('/');
+		
 		$user = Auth::user();
 		return View::make('user.edit')
 			->with('user', $user);
