@@ -31,6 +31,14 @@
 	</div>
 	<div class="form-group row">
 		<div class="col-md-3">
+			<label for"password">Password</label>
+		</div>
+		<div class="col-md-9">
+			<input id="password" password="password" placeholder="New Password" class="form-control" >
+		</div>
+	</div>
+	<div class="form-group row">
+		<div class="col-md-3">
 			<label for"city">Current City</label>
 		</div>
 		<div class="col-md-9">
@@ -68,7 +76,7 @@
 
 	<div class="actions">
 
-		<button type="submit" class="btn btn-primary col-sm-12">Submit</button>
+		<button type="submit" class="btn btn-primary col-sm-12">Save</button>
 
 	</div>
 

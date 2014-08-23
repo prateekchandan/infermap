@@ -26,6 +26,7 @@ class CreateUsersTable extends Migration {
 			$table->string('phone', 20)->nullable();
 			$table->string('fbid',20)->nullable();
 			$table->timestamps();
+			$table->rememberToken();
 		});
 	}
 

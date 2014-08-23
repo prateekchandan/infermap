@@ -30,15 +30,15 @@
 			</h3>
 			<br>
 			<div class="form-group row">
-				<label class="col-md-3">What is academic qualification of majority of faculty?</label>
-				<div class="col-md-9">
+				<label class="col-md-5">What is academic qualification of majority of faculty?</label>
+				<div class="col-md-7">
 				<input id="btech" name="facqual" value="btech" type="radio"><label for="btech">B.Tech</label><br>
 				<input id="mtech" name="facqual" value="mtech" type="radio"><label for="mtech">M.Tech</label><br>
 				<input id="phd" name="facqual" value="phd" type="radio"><label for="phd">Ph.D</label><br></div>
 			</div>
 			<div class="form-group row">
-				<label class="col-md-3" for="clshrs">Avg. no. of class hrs/week</label>
-				<div class="col-md-9">
+				<label class="col-md-5" for="clshrs">Avg. no. of class hrs/week</label>
+				<div class="col-md-7">
 					<select name="clshrs" class="form-control" id="clshrs">
 						<option value="select">Select</option>
 						<option value="10-15">10-15</option>
@@ -51,8 +51,8 @@
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-md-3" for="att">% Attendance required</label>
-				<div class="col-md-9">
+				<label class="col-md-5" for="att">% Attendance required</label>
+				<div class="col-md-7">
 					<select name="att" class="form-control" id="att">
 						<option value="select">Select</option>
 						<option value="50-60">50-60</option>
@@ -63,12 +63,12 @@
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-md-3" for="sports">Academic Quality</label>
-				<div class="rating col-md-9" data-id="acad-qual" data-max="5"></div>
+				<label class="col-md-5" for="sports">Academic Quality</label>
+				<div class="rating col-md-7" data-id="acad-qual" data-max="5"></div>
 			</div>
 			<div class="form-group row">
-				<label class="col-md-3" for="sports">Reputation of college amongst similar colleges</label>
-				<div class="rating col-md-9" data-id="acad-repo" data-max="5"></div>
+				<label class="col-md-5" for="sports">Reputation of college amongst similar colleges</label>
+				<div class="rating col-md-7" data-id="acad-repo" data-max="5"></div>
 			</div>
 		</div>
 	</div>
@@ -79,8 +79,8 @@
           </h3>
           <br>
 			<div class="form-group row">
-				<label class="col-md-3" for="plac">% Placed</label>
-				<div class="col-md-9">
+				<label class="col-md-5" for="plac">% Placed</label>
+				<div class="col-md-7">
 					<select name="plac" class="form-control" id="pack">
 						<option value="select">Select</option>
 						<option value="below 20">below 20</option>
@@ -96,8 +96,8 @@
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-md-3" for="pack">Avg. Package lpa</label>
-				<div class="col-md-9">
+				<label class="col-md-5" for="pack">Avg. Package lpa</label>
+				<div class="col-md-7">
 					<select name="pack" class="form-control" id="pack">
 						<option value="select">Select</option>
 						<option value="2">2</option>
@@ -113,15 +113,15 @@
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-md-3">Does your college help in securing internship/training?</label>
-				<div class="col-md-9">
+				<label class="col-md-5">Does your college help in securing internship/training?</label>
+				<div class="col-md-7">
 					<input type="radio" name="intern-help" id="intern-help-yes" value="yes"><label for="intern-help-yes">Yes</label><br>
 					<input type="radio" name="intern-help" id="intern-help-no" value="no"><label for="intern-help-no">No</label>
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-md-3" for="intern">Avg. % of 3rd year students securing internship/training</label>
-				<div class="col-md-9">
+				<label class="col-md-5" for="intern">Avg. % of 3rd year students securing internship/training</label>
+				<div class="col-md-7">
 					<select name="intern" class="form-control" id="intern">
 						<option value="select">Select</option>
 						<option value="below 20">below 20</option>
@@ -147,24 +147,24 @@
           <br>
 			<div class="form-group">
 				<div class="row">
-					<label class="col-md-3">Hostel and Mess facilities</label>
-					<div class="col-md-9">
+					<label class="col-md-5">Hostel and Mess facilities</label>
+					<div class="col-md-7">
 						<input type="checkbox" name="no-mshs" id="no-mshs"><label for="no-mshs">No Hostel/Mess</label><br>
 					</div>
 				</div><br>
 				<div class="row">
-					<label class="col-md-3" for="hostel">Hostel</label>
-					<div class="rating col-md-9" data-id="hostel"  data-max="5" data-descript="shared cramped rooms####single rooms with AC and internet"></div>
+					<label class="col-md-5" for="hostel">Hostel</label>
+					<div class="rating col-md-7" data-id="hostel"  data-max="5" data-descript="shared cramped rooms####single rooms with AC and internet"></div>
 				</div><br>
 				<div class="row">
-					<label class="col-md-3" for="mess">Mess</label>
-					<div class="rating col-md-9" data-id="mess", data-max="5"></div>
+					<label class="col-md-5" for="mess">Mess</label>
+					<div class="rating col-md-7" data-id="mess", data-max="5"></div>
 				</div>
 			</div>
 
 			<div class="form-group row">
-				<label class="col-md-3" for="sports">Sports</label>
-				<div class="rating col-md-9" data-id="sports" data-max="5" data-descript="no sports facilities####sports teams participation, sports equipments available"></div>
+				<label class="col-md-5" for="sports">Sports</label>
+				<div class="rating col-md-7" data-id="sports" data-max="5" data-descript="no sports facilities####sports teams participation, sports equipments available"></div>
 			</div>
 		</div>
 	</div>
@@ -177,12 +177,12 @@
 			<br>
 
 			<div class="form-group row">
-				<label class="col-md-3" for="sports">Co-curricular/Extra-curricular life</label>
-				<div class="rating col-md-9" data-id="co-curics" data-max="5"></div>
+				<label class="col-md-5" for="sports">Co-curricular/Extra-curricular life</label>
+				<div class="rating col-md-7" data-id="co-curics" data-max="5"></div>
 			</div>
 			<div class="form-group row">
-				<label class="col-md-3">Tick facilities available</label>
-				<div class="col-md-9">
+				<label class="col-md-5">Tick facilities available</label>
+				<div class="col-md-7">
 					<input id="canteen" name="facilities[]" value="canteen" type="checkbox"><label for="canteen">Canteen</label><br>
 					<input id="fests" name="facilities[]" value="fests" type="checkbox"><label for="fests">Fests</label><br>
 					<input id="clubs" name="facilities[]" value="clubs" type="checkbox"><label for="clubs">Clubs</label><br>
@@ -191,16 +191,16 @@
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-md-3" for="whycho">Why should someone choose your college? (50 words)</label>
-				<div class="col-md-9"><textarea name="whychoose" id="whychooose" class="form-control"></textarea></div>
+				<label class="col-md-5" for="whycho">Why should someone choose your college? (50 words)</label>
+				<div class="col-md-7"><textarea name="whychoose" id="whychooose" class="form-control"></textarea></div>
 			</div>
 			<div class="form-group row">
-				<label class="col-md-3" for="improve">Areas in which college can improve (50 words)</label>
-				<div class="col-md-9"><textarea name="improve" id="improve" class="form-control"></textarea></div>
+				<label class="col-md-5" for="improve">Areas in which college can improve (50 words)</label>
+				<div class="col-md-7"><textarea name="improve" id="improve" class="form-control"></textarea></div>
 			</div>
 			<div class="form-group row">
-				<label class="col-md-3" for="reco">Would you recommend college to friends over similar colleges</label>
-				<div class="col-md-9">
+				<label class="col-md-5" for="reco">Would you recommend college to friends over similar colleges</label>
+				<div class="col-md-7">
 					<input type="radio" name="reco" value="yes" id="reco-yes"><label for="reco-yes">Yes</label><br>
 					<input type="radio" name="reco" value="no" id="reco-no"><label for="reco-no">No</label>
 				</div>
@@ -216,16 +216,16 @@
 			</h3>
 			<br>
 			<div class="form-group row">
-				<label class="col-md-3" for="personal-year">Year of Graduation</label>
-				<div class="col-md-9"><input type="text" id="personal-year" name="personal-year" class="form-control" required></div>
+				<label class="col-md-5" for="personal-year">Year of Graduation</label>
+				<div class="col-md-7"><input type="text" id="personal-year" name="personal-year" class="form-control" required></div>
 			</div>
 			<div class="form-group row">
-				<label class="col-md-3" for="personal-dept">Department?</label>
-				<div class="col-md-9"><input type="text" id="personal-dept" name="personal-dept" class="form-control" required></div>
+				<label class="col-md-5" for="personal-dept">Department?</label>
+				<div class="col-md-7"><input type="text" id="personal-dept" name="personal-dept" class="form-control" required></div>
 			</div>
 			<div class="form-group row">
-				<label class="col-md-3">How are you most motivated to "stay connected" with the us? Check all that apply.</label>
-				<div class="col-md-9">
+				<label class="col-md-5">How are you most motivated to "stay connected" with the us? Check all that apply.</label>
+				<div class="col-md-7">
 				<input id="mentoring" name="stay-con[]" value="mentoring" type="checkbox"><label for="mentoring">Mentoring current/past student</label><br>
 				<input id="author" name="stay-con[]" value="author" type="checkbox"><label for="author">Appearing as guest author / Write Blogs on related articles</label><br>
 				<input id="newsletter" name="stay-con[]" value="newsletter" type="checkbox"><label for="newsletter">Receiving newsletters and articles</label><br>
