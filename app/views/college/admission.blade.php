@@ -6,11 +6,12 @@
 @if($admission_table!=0)
 <?php  $check=1;?>
 @foreach ($admission_table as $course => $tables)
-<div class="row col-md-12" style="overflow-x:auto">
+<div class="row col-md-12">
 <div class="title"><h3>Closing Ranks for {{{$course}}}</h3></div>
 	
 	@foreach($tables as $examname => $table)
-		<div class="col-md-12"><h3>Exam : {{{$examname}}}</h3></div>
+	<div  style="overflow-x:auto">
+		<div class="col-md-12" ><h3>Exam : {{{$examname}}}</h3></div>
 		<table class="table table-bordered">
 			<thead>
 				<tr>
@@ -27,6 +28,7 @@
 			</tr>
 			@endfor
 		</table>
+	</div>
 	@endforeach
 
 </div>

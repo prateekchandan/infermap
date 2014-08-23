@@ -39,6 +39,9 @@ class CollegeController extends BaseController {
 				}
 			}
 			catch(Exception $e){}
+
+			$data['related-colleges']=$this->get_related_colleges($data['cid'],4);
+			
 			if(sizeof($data['images'])==0) $data['images']=0;								
 			$check=0;
 			if($data['area']!=''){
@@ -57,7 +60,19 @@ class CollegeController extends BaseController {
 				$data['location_bar'].=' , ';
 				$data['location_bar'].=$data['state'];
 			}
-					
+			$allexams=DB::connection('infermap')->select('select distinct name from college_entrance_test where cid =? && name!=0',array($data['cid']));
+			$data['allexams']=array();
+			foreach ($allexams as $key => $value) {
+				$exam=DB::table('exam')->where('eid', $value->name)->first();
+				foreach ($data['allexams'] as $pre_ex) {
+					if($pre_ex->link==$exam->link)
+						$value=0;
+				}
+				if($value)
+				array_push($data['allexams'], $exam);
+			}
+		
+			$data['page_name']=$page;		
 			View::share('data',$data);
 			switch ($page) {
 				case 'about':
@@ -87,6 +102,50 @@ class CollegeController extends BaseController {
 			}
 			
 		}
+	}
+
+	private function get_related_colleges($cid,$no=10){
+		$allcollege=DB::connection('infermap')->select('select * from college_id where disabled="1" order by -rank desc');
+
+		$college=DB::table('college_id')->where('cid','=',$cid)->first();
+
+		$return = array();
+		foreach ($allcollege as $key => $value) {
+
+			$allcollege[$key]->score=0;
+
+			if($college->cid==$value->cid)
+				continue;
+
+			if($value->state==$college->state)
+				$allcollege[$key]->score+=2;
+			if($value->city==$college->city)
+				$allcollege[$key]->score+=2;
+			if($value->type==$college->type)
+				$allcollege[$key]->score+=2;
+
+			if($value->rank != null && $college->rank!=null)
+			{
+				$allcollege[$key]->score+=15-min(abs($college->rank-$value->rank),15);
+			}
+		}
+		function cmp($a1,$a2)
+		{
+			return $a1->score<$a2->score;
+		}
+		usort($allcollege, 'cmp');
+
+		$temp=array();
+		for ($i=0; $i < 2 * $no ; $i++) { 
+			array_push($temp, $allcollege[$i]);
+		}
+		shuffle($temp);
+
+		for ($i=0; $i <  $no ; $i++) { 
+			array_push($return, $temp[$i]);
+		}
+
+		return $return;
 	}
 
 	private function get_admission_table($cid){
@@ -244,5 +303,25 @@ class CollegeController extends BaseController {
 			
 		}
 	}	
+
+	public function collegebyplace($state='error',$city="error")
+	{
+		if($state=="error"||$city=="error")
+			App::abort(404);
+		if($city=='all')
+		{
+			$all=DB::table('college_id')->where('state', "=",$state)->get();
+			foreach ($all as $key => $value) {
+				echo $value->name.'<br>';
+			}
+		}
+		else
+		{
+			$all=DB::table('college_id')->where('state', "=",$state)->where('city','=',$city)->get();
+			foreach ($all as $key => $value) {
+				echo '<a href="../college/'.$value->link.'">'.$value->name.'</a><br>';
+			}
+		}
+	}
 
 }

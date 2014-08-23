@@ -18,7 +18,7 @@
 		<img class="pull-left" src="{{ $data['logo-img'] }}" height="100" width="100">
 		@endif
 		<div class="pull-left">
-			<h1>{{ $data['name'] }}</h1>
+			<h1><a href="{{URL::to('college').'/'.$data['link']}}">{{ $data['name'] }}</a></h1>
 			<p>{{ $data['location_bar'] }}</p>
 		</div>
 		</div>

@@ -57,10 +57,12 @@
 						@endfor
 
 					</ul>
+					@if(sizeof($data['images'])>1)
 					<ul class="flex-direction-nav">
 						<li><a class="flex-prev" href="#">Previous</a></li>
 						<li><a class="flex-next" href="#">Next</a></li>
 					</ul>
+					@endif
 				</div>
 			
 		</div>

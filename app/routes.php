@@ -19,6 +19,10 @@ Route::get('/college/{link}/{page}','CollegeController@college');
 Route::get('/college/{link}','CollegeController@college');
 
 
+Route::get('/exam/{link}',array('as'=>'exam','uses'=>'ExamsController@view'));
+Route::get('/exam/',array('as'=>'all_exam','uses'=>'ExamsController@all'));
+
+
 Route::get('/register', array('as'=>'user.create', 'uses'=>'UsersController@create'));
 Route::post('/register', array('as'=>'user.store', 'uses'=>'UsersController@store'));
 Route::get('/edit-profile', array('as'=>'user.edit', 'uses'=>'UsersController@edit'));
@@ -28,6 +32,9 @@ Route::post('/fblogin', array('as'=>'user.fblogin', 'uses'=>'UsersController@fbl
 Route::get('/test',function(){
 	return Auth::user();
 });
+
+
+Route::get('/{state}/{city}','CollegeController@collegebyplace');
 
 Route::get('autocomplete/{string}',array('as' => 'autocomplete' , 'uses' => 'SearchController@autocomplete'));
 Route::post('/storefb', array('as'=>'user.storefb', 'uses'=>'UsersController@storefb'));
