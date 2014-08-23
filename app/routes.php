@@ -30,6 +30,11 @@ Route::get('/test',function(){
 });
 
 Route::get('autocomplete/{string}',array('as' => 'autocomplete' , 'uses' => 'SearchController@autocomplete'));
+
+
 Route::post('/storefb', array('as'=>'user.storefb', 'uses'=>'UsersController@storefb'));
+Route::get('/login', array('as'=>'user.login.show', 'uses'=>'UsersController@showlogin'));
+Route::post('/login', array('as'=>'user.login', 'uses'=>'UsersController@login'));
+Route::get('/logout', array('as'=>'user.logout', 'uses'=>'UsersController@logout'));
 
 
