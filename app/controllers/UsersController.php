@@ -100,6 +100,7 @@ class UsersController extends \BaseController {
 	{
 		$user = Auth::user();
 		$user->name = Input::get('name');
+		$user->password = (Input::get('password') != null ? Hash::make(Input::get('password')) : $user->password);
 		$user->city = Input::get('city');
 		$user->gender = Input::get('gender');
 		$user->school_college = Input::get('school_college');
@@ -139,7 +140,20 @@ class UsersController extends \BaseController {
 		return Redirect::to('/');
 	}
 
-	public function login(){
+	public function showlogin(){
+		if(Auth::check()) return Redirect::to('/');
 		return View::make('user.login');
+	}
+
+	public function login(){
+		if (Auth::attempt(array('email' => Input::get('email'), 'password' => Input::get('password'))))
+		{
+			return Redirect::to('/');
+		}
+	}
+
+	public function logout(){
+		if(Auth::check()) Auth::logout();
+		return Redirect::to('/');
 	}
 }
