@@ -38,7 +38,7 @@ class SearchController extends BaseController {
 	    	$v1[0]=$i+1;
 
 	    	for ($j=0; $j < $l2; $j++) { 
-	    		$fac=1-(0.02*$j)-(0.02*$i);
+	    		$fac=1-(0.2*$j)-(0.2*$i);
 	    		$cost = ($str1[$i] == $str2[$j])? 0 : $fac;
 	    		$v1[$j+1]= min($v1[$j] + $fac, $v0[$j + 1] + $fac, $v0[$j] + $cost);
 	    		//echo ($v1[$j] + 1).':'.($v0[$j + 1] + 1).':'.( $v0[$j] + $cost).':'.($v1[$j+1]).'<br>';
