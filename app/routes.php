@@ -36,6 +36,9 @@ Route::get('/login', array('as'=>'user.login.show', 'uses'=>'UsersController@sho
 Route::post('/login', array('as'=>'user.login', 'uses'=>'UsersController@login'));
 Route::get('/logout', array('as'=>'user.logout', 'uses'=>'UsersController@logout'));
 
+Route::get('/user',function(){
+	return Auth::user();
+});
 
 // Keep this line at last
 Route::get('/{state}/{city}','CollegeController@collegebyplace');

@@ -70,33 +70,7 @@
 </div>		
 @endif		
 
-@if(File::exists(public_path().'/data'.'/'.$data['cid'].'/about/dean_intro.txt'))
-@if(trim(file_get_contents(public_path().'/data'.'/'.$data['cid'].'/about/dean_intro.txt'))!='')
-<?php  $check=1;?>
-<div class="row">
-	<div class="col-sm-12">	
-		<div class="title"><h3>Dean Introduction</h3></div>
-		<p>
-			<?php echo file_get_contents(public_path().'/data'.'/'.$data['cid'].'/about/dean_intro.txt'); ?>
-		</p>	
-	</div>
-</div>
-@endif
-@endif
 
-@if(File::exists(public_path().'/data'.'/'.$data['cid'].'/about/rules.txt'))
-@if(trim(file_get_contents(public_path().'/data'.'/'.$data['cid'].'/about/rules.txt'))!='')
-<?php  $check=1;?>
-<div class="row">
-	<div class="col-sm-12">	
-		<div class="title"><h3>Rules</h3></div>
-		<p>
-			<?php echo file_get_contents(public_path().'/data'.'/'.$data['cid'].'/about/rules.txt'); ?>
-		</p>	
-	</div>
-</div>
-@endif
-@endif
 
 @if($check==0)
 @include('college.nodata')
