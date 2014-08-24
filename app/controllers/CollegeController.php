@@ -210,7 +210,7 @@ class CollegeController extends BaseController {
 				$rc=1;
 
 				foreach ($closing_ranks as $closing_rank_key => $row) {
-					$t1[$rc]=[$rc,$row->department,$row->intake];
+					$t1[$rc]=[$rc,$row->department,($row->intake!='0'?$row->intake:'-')];
 					for ($i=0; $i <sizeof($cat_id) ; $i++) {
                        	if($cat_name[$i]!="")
                         {
