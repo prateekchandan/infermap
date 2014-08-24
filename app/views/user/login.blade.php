@@ -81,14 +81,19 @@ function fblogin(){
 				<div class="form-group">
 					<input type="email" id="email" name="email" class="form-control" value="{{ Input::old('email') }}" placeholder="email address" required>
 				</div>
-
+				@if ($errors->has('email.wrong'))
+					<div class="alert alert-error alert-dismissable" style="" role="alert">
+					<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					{{ $errors->first('email.wrong') }}
+					</div>
+				@endif
 				<div class="form-group">
 					<input type="password" style="font-size:14px; height:34px;" id="password" name="password" class="form-control" value="" placeholder="password" required>
 				</div>
-				@if ($errors->has('password'))
+				@if ($errors->has('password.mismatch'))
 					<div class="alert alert-error alert-dismissable" style="" role="alert">
 					<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-					{{ $errors->first('password') }}
+					{{ $errors->first('password.mismatch') }}
 					</div>
 				@endif
 

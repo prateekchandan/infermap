@@ -109,7 +109,10 @@ class UsersController extends \BaseController {
 		$user->std_passingout = Input::get('std_passingout');
 		$user->phone = Input::get('phone');
 		$user->save();
-		return Redirect::to('/');
+		$messageBag = new MessageBag;
+		$messageBag->add('home_message', Lang::get('user.profile.saved'));
+		return Redirect::to('/')
+			->with('messages', $messageBag);
 	}
 
 
@@ -150,6 +153,21 @@ class UsersController extends \BaseController {
 		if (Auth::attempt(array('email' => Input::get('email'), 'password' => Input::get('password'))))
 		{
 			return Redirect::to('/');
+		}
+		$user = User::where('email', '=', Input::get('email'))->first();
+		if ($user == null) {
+			$messageBag = new MessageBag;
+			$messageBag->add('email.wrong', Lang::get('user.email.wrong'));
+			return Redirect::back()
+				->withInput()
+				->withErrors($messageBag);
+		}
+		if ($user->password != Hash::make(Input::get('password'))){
+			$messageBag = new MessageBag;
+			$messageBag->add('password.mismatch', Lang::get('user.password.mismatch'));
+			return Redirect::back()
+				->withInput()
+				->withErrors($messageBag);
 		}
 	}
 
