@@ -24,8 +24,12 @@ class CollegeController extends BaseController {
 			$data['location_bar']="";
 			$data['images']=array();
 			// getting image logo
-			$data['logo-img']=asset('/data'.'/'.$data['cid'].'/logo.png');
-			if(!File::exists(public_path().'/data'.'/'.$data['cid'].'/logo.png'))
+			if(File::exists(public_path().'/data'.'/logo200/'.$data['cid'].'.png'))
+				$data['logo-img']=asset('/data'.'/logo200/'.$data['cid'].'.png');
+
+			else if(File::exists(public_path().'/data'.'/'.$data['cid'].'/logo.png'))
+				$data['logo-img']=asset('/data'.'/'.$data['cid'].'/logo.png');
+			else
 				$data['logo-img']='0';
 
 			// getting list of all images in directory

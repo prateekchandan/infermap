@@ -37,12 +37,12 @@
 @endif
 </div>
 
-@if(sizeof($data['allexams']>0))
+@if(sizeof($data['allexams'])>0)
 <div class="row col-md-12">
 	<div class="title"><h3>Exam for admission</h3></div>
 	<ul class="star_list">
 @foreach($data['allexams'] as $exam)
-	<li>Admission for {{$exam->type}}  is based on <a href="{{URL::to('exam').'/'.$exam->link}}"> {{$exam->name}}</a></li>
+		<li>Admission for {{$exam->type}}  is based on <a href="{{URL::to('exam').'/'.$exam->link}}"> {{$exam->name}}</a></li>
 @endforeach
 	</ul>
 </div>
