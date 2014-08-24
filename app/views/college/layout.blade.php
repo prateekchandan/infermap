@@ -101,17 +101,17 @@
 			       	<ul class="links-list-alt">
 			       		@if($data['state']!='')
 			       		@if($data['city']!='')
-							<li><a href="{{URl::to('/').'/'.$data['state'].'/'.$data['city']}}">Colleges in {{{$data['city']}}}</a></li>
+							<li><a href="{{URL::to('/').'/'.$data['state'].'/'.$data['city']}}">Colleges in {{{$data['city']}}}</a></li>
 						@endif
-							<li><a href="{{URl::to('/').'/'.$data['state'].'/all'}}">Colleges in {{{$data['state']}}}</a></li>
+							<li><a href="{{URL::to('/').'/'.$data['state'].'/all'}}">Colleges in {{{$data['state']}}}</a></li>
 						@endif
 
 						@foreach($data['allexams'] as $exam)
-							<li><a href="{{URl::to('exam').'/'.$exam->link}}">About {{$exam->name}}</a></li>
+							<li><a href="{{URL::to('exam').'/'.$exam->link}}">About {{$exam->name}}</a></li>
 						@endforeach
 
 						@foreach($data['related-colleges'] as $college)
-							<li><a href="{{URl::to('college').'/'.$college->link}}">{{$college->name}}</a></li>
+							<li><a href="{{URL::to('college').'/'.$college->link}}">{{$college->name}}</a></li>
 						@endforeach
 					</ul>
 			      	<!-- end: Skills -->
@@ -120,7 +120,7 @@
 
 					<div class="testimonial-container">
 
-						<div class="title"><h3>Testimonials</h3></div>
+						<div class="title"><h3>Reviews</h3></div>
 
 							<div class="testimonials-carousel" data-autorotate="3000">
 								<ul class="carousel">
@@ -169,7 +169,7 @@
 				<!-- start: Footer Menu Logo -->
 				<div class="col-sm-2">
 					<div id="footer-menu-logo">
-						<a class="brand" href="about.html#">Sma<span>rt</span>.</a>
+						<a class="brand" href="{{URL::to('/')}}"><span>Infermap</span></a>
 					</div>
 				</div>
 				<!-- end: Footer Menu Logo -->
@@ -177,23 +177,6 @@
 				<!-- start: Footer Menu Links-->
 				<div class="col-sm-9">
 					
-					<div id="footer-menu-links">
-
-						<ul id="footer-nav">
-
-							<li><a href="index.html">Start</a></li>
-
-							<li><a href="about.html">About</a></li>
-
-							<li><a href="services.html">Services</a></li>
-
-							<li><a href="pricing.html">Pricing</a></li>
-							
-							<li><a href="contact.html">Contact</a></li>
-
-						</ul>
-
-					</div>
 					
 				</div>
 				<!-- end: Footer Menu Links-->
@@ -202,7 +185,7 @@
 				<div class="col-sm-1">
 						
 					<div id="footer-menu-back-to-top">
-						<a href="about.html#"></a>
+						<a href="#"></a>
 					</div>
 				
 				</div>
@@ -222,113 +205,68 @@
 			
 			<!-- start: Row -->
 			<div class="row">
-
-				<!-- start: About -->
-				<div class="col-sm-3">
-					
-					<h3>About Us</h3>
-					<p>
-						Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-					</p>
-						
-				</div>
-				<!-- end: About -->
-
-				<!-- start: Photo Stream -->
-				<div class="col-sm-3">
-					
-					<h3>Photo Stream</h3>
-					<div class="flickr-widget">
-							<script type="text/javascript" src="http://www.flickr.com/badge_code_v2.gne?count=9&amp;display=latest&amp;size=s&amp;layout=x&amp;source=user&amp;user=29609591@N08"></script><div class="flickr_badge_image" id="flickr_badge_image1"><a href="http://www.flickr.com/photos/29609591@N08/14597619532/"><img src="http://farm3.staticflickr.com/2903/14597619532_44ce6cdfca_s.jpg" alt="A photo on Flickr" title="FOG horn" height="75" width="75"></a></div><div class="flickr_badge_image" id="flickr_badge_image2"><a href="http://www.flickr.com/photos/29609591@N08/14588412495/"><img src="http://farm4.staticflickr.com/3835/14588412495_71b651ca8f_s.jpg" alt="A photo on Flickr" title="Pennan" height="75" width="75"></a></div><div class="flickr_badge_image" id="flickr_badge_image3"><a href="http://www.flickr.com/photos/29609591@N08/14466613846/"><img src="http://farm6.staticflickr.com/5570/14466613846_3e17384ffb_s.jpg" alt="A photo on Flickr" title="St Colm's Abbey Inchcolm Island" height="75" width="75"></a></div><div class="flickr_badge_image" id="flickr_badge_image4"><a href="http://www.flickr.com/photos/29609591@N08/14381598632/"><img src="http://farm4.staticflickr.com/3909/14381598632_424293750f_s.jpg" alt="A photo on Flickr" title="Shipwrecked Selfie" height="75" width="75"></a></div><div class="flickr_badge_image" id="flickr_badge_image5"><a href="http://www.flickr.com/photos/29609591@N08/13845179383/"><img src="http://farm8.staticflickr.com/7389/13845179383_b7355843bd_s.jpg" alt="A photo on Flickr" title="Stewart Sycamore" height="75" width="75"></a></div><div class="flickr_badge_image" id="flickr_badge_image6"><a href="http://www.flickr.com/photos/29609591@N08/12344882985/"><img src="http://farm4.staticflickr.com/3785/12344882985_b1df3d961c_s.jpg" alt="A photo on Flickr" title="Rusty" height="75" width="75"></a></div><div class="flickr_badge_image" id="flickr_badge_image7"><a href="http://www.flickr.com/photos/29609591@N08/12234243593/"><img src="http://farm4.staticflickr.com/3737/12234243593_7cd8c5312c_s.jpg" alt="A photo on Flickr" title="Boathouse Isle of Danna" height="75" width="75"></a></div><div class="flickr_badge_image" id="flickr_badge_image8"><a href="http://www.flickr.com/photos/29609591@N08/12220237506/"><img src="http://farm8.staticflickr.com/7435/12220237506_0201bffebc_s.jpg" alt="A photo on Flickr" title="Vital Spark" height="75" width="75"></a></div><div class="flickr_badge_image" id="flickr_badge_image9"><a href="http://www.flickr.com/photos/29609591@N08/12176303006/"><img src="http://farm3.staticflickr.com/2888/12176303006_2d8f6e7924_s.jpg" alt="A photo on Flickr" title="Dancin Dog" height="75" width="75"></a></div><span style="position:absolute;left:-999em;top:-999em;visibility:hidden" class="flickr_badge_beacon"><img src="http://geo.yahoo.com/p?s=792600102&amp;t=0987526b481816787dfb7dea98fe9919&amp;r=http%3A%2F%2Flocalhost%3A8000%2Fabout.html&amp;fl_ev=0&amp;lang=en&amp;intl=us" width="0" height="0" alt=""></span>
-						<div class="clear"></div>
+				@if(File::exists(public_path().'/data'.'/'.$data['cid'].'/contact/contacts.txt'))
+				@if(trim(file_get_contents(public_path().'/data'.'/'.$data['cid'].'/contact/contacts.txt'))!='')
+					<div class="col-sm-6">	
+						<h3>Contacts</h3>
+						<p>
+							<?php echo file_get_contents(public_path().'/data'.'/'.$data['cid'].'/contact/contacts.txt'); ?>
+						</p>	
 					</div>
-					
-				</div>
-				<!-- end: Photo Stream -->
+				@endif
+				@endif
+		
 
-				<div class="col-sm-6">
+				<div class="col-sm-3">
 				
 					<!-- start: Follow Us -->
-					<h3>Follow Us!</h3>
-					<ul class="social-grid">
-						<li>
-							<div class="social-item">				
-								<div class="social-info-wrap">
-									<div class="social-info">
-										<div class="social-info-front social-twitter">
-											<a href="http://twitter.com/BootstrapMaster"><i class="fa fa-twitter"></i></a>
-										</div>
-										<div class="social-info-back social-twitter-hover">
-											<a href="http://twitter.com/BootstrapMaster"><i class="fa fa-twitter"></i></a>
-										</div>	
-									</div>
-								</div>
-							</div>
+					<h3>Links</h3>
+					<div class="row">
+					<ul class="social-bookmarks">
+
+						@if(isset($data['links']['fblink']))
+						<li class="facebook">
+							<a href="{{{$data['links']['fblink']}}}">Facebook</a>
 						</li>
-						<li>
-							<div class="social-item">				
-								<div class="social-info-wrap">
-									<div class="social-info">
-										<div class="social-info-front social-facebook">
-											<a href="http://facebook.com/BootstrapMaster"><i class="fa fa-facebook"></i></a>
-										</div>
-										<div class="social-info-back social-facebook-hover">
-											<a href="http://facebook.com/BootstrapMaster"><i class="fa fa-facebook"></i></a>
-										</div>
-									</div>
-								</div>
-							</div>
+						@endif
+						@if(isset($data['links']['twitterlink']))
+						<li class="twitter">
+							<a href="{{{$data['links']['twitterlink']}}}">Twitter</a>
 						</li>
-						<li>
-							<div class="social-item">				
-								<div class="social-info-wrap">
-									<div class="social-info">
-										<div class="social-info-front social-dribbble">
-											<a href="http://dribbble.com"><i class="fa fa-dribbble"></i></a>
-										</div>
-										<div class="social-info-back social-dribbble-hover">
-											<a href="http://dribbble.com"><i class="fa fa-dribbble"></i></a>
-										</div>	
-									</div>
-								</div>
-							</div>
+						@endif
+						@if(isset($data['links']['pluslink']))
+						<li class="googleplus">
+							<a href="{{{$data['links']['pluslink']}}}">google plus</a>
 						</li>
-						<li>
-							<div class="social-item">				
-								<div class="social-info-wrap">
-									<div class="social-info">
-										<div class="social-info-front social-flickr">
-											<a href="http://flickr.com"><i class="fa fa-flickr"></i></a>
-										</div>
-										<div class="social-info-back social-flickr-hover">
-											<a href="http://flickr.com"><i class="fa fa-flickr"></i></a>
-										</div>	
-									</div>
-								</div>
-							</div>
+						@endif
+						@if(isset($data['links']['linkedlink']))
+						<li class="linkedin">
+							<a href="{{{$data['links']['linkedlink']}}}">linked in</a>
 						</li>
+						@endif						
 					</ul>
+					</div>
 					<!-- end: Follow Us -->
-				
-					<!-- start: Newsletter -->
-					<h3>Newsletter</h3>
-					<form id="newsletter">
-						
-						<p>Please leave us your email</p>
+					<br>
+					@if($data['latitude']!=0 && $data['longitude']!=0)
+					<div class="row">
+						<a target=_blank href="https://www.google.com/maps/preview/{{'@'}}{{$data['latitude']}},{{$data['longitude']}},14z">View this college on map</a>
+					</div>
+					@endif
+					@if(isset($data['links']['weblink']))
 						<div class="row">
-							<div class="col-lg-12">
-								<label>@:</label>
-						    	<div class="input-group">
-						      		<input type="text" class="form-control">
-						      		<span class="input-group-btn">
-						        		<button class="btn btn-default" type="button">Submit!</button>
-						      		</span>
-						    	</div><!-- /input-group -->
-						  	</div><!-- /.col-->
+							<a href="{{{$data['links']['weblink']}}}">Visit college Website</a>
 						</div>
-					</form>
-					<!-- end: Newsletter -->
+						@endif
+			
 				
+				</div>
+
+				<div class="col-sm-3">
+					<h3>Related</h3>
+					<ul class="arrow_list">
+						<li><a href="./review">Write review for this college</a></li>
+					</ul>
 				</div>
 				
 			</div>

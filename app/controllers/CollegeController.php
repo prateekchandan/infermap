@@ -24,8 +24,12 @@ class CollegeController extends BaseController {
 			$data['location_bar']="";
 			$data['images']=array();
 			// getting image logo
-			$data['logo-img']=asset('/data'.'/'.$data['cid'].'/logo.png');
-			if(!File::exists(public_path().'/data'.'/'.$data['cid'].'/logo.png'))
+			if(File::exists(public_path().'/data'.'/logo200/'.$data['cid'].'.png'))
+				$data['logo-img']=asset('/data'.'/logo200/'.$data['cid'].'.png');
+
+			else if(File::exists(public_path().'/data'.'/'.$data['cid'].'/logo.png'))
+				$data['logo-img']=asset('/data'.'/'.$data['cid'].'/logo.png');
+			else
 				$data['logo-img']='0';
 
 			// getting list of all images in directory
@@ -41,6 +45,7 @@ class CollegeController extends BaseController {
 			catch(Exception $e){}
 
 			$data['related-colleges']=$this->get_related_colleges($data['cid'],4);
+			$data['links']=$this->get_links_social($data['cid']);			
 			
 			if(sizeof($data['images'])==0) $data['images']=0;								
 			$check=0;
@@ -60,7 +65,7 @@ class CollegeController extends BaseController {
 				$data['location_bar'].=' , ';
 				$data['location_bar'].=$data['state'];
 			}
-			$allexams=DB::connection('infermap')->select('select distinct name from college_entrance_test where cid =? && name!=0',array($data['cid']));
+			$allexams=DB::connection('infermap')->select('select distinct name,type from college_entrance_test where cid =? && name!=0',array($data['cid']));
 			$data['allexams']=array();
 			foreach ($allexams as $key => $value) {
 				$exam=DB::table('exam')->where('eid', $value->name)->first();
@@ -104,6 +109,19 @@ class CollegeController extends BaseController {
 		}
 	}
 
+	private function get_links_social($cid){
+		$links=['weblink','fblink','twitterlink','pluslink','linkedlink'];
+		$return=array();
+		foreach ($links as $key => $link) {
+			if(File::exists(public_path().'/data'.'/'.$cid.'/contact/'.$link.'.txt')){
+				if(trim(file_get_contents(public_path().'/data'.'/'.$cid.'/contact/'.$link.'.txt'))!=''){
+					$return[$link]=file_get_contents(public_path().'/data'.'/'.$cid.'/contact/'.$link.'.txt');
+				}
+			}
+		}
+		
+		return $return;
+	}
 	private function get_related_colleges($cid,$no=10){
 		$allcollege=DB::connection('infermap')->select('select * from college_id where disabled="1" order by -rank desc');
 
@@ -150,7 +168,7 @@ class CollegeController extends BaseController {
 
 	private function get_admission_table($cid){
 		$return=array();
-		$types = DB::connection('infermap')->select('select distinct type from college_entrance_test where cid = ?',array($cid));
+		$types = DB::connection('infermap')->select('select distinct type from college_entrance_test where cid = ? && (type="barch" || type="bpharm" || type="be" || type="bscit" || type="btech" || type="dd" ) ',array($cid));
 		$category = DB::table('category')->get();
 		foreach ($types as $types_key => $type) {
 			$type=$type->type;
@@ -196,7 +214,7 @@ class CollegeController extends BaseController {
 				$rc=1;
 
 				foreach ($closing_ranks as $closing_rank_key => $row) {
-					$t1[$rc]=[$rc,$row->department,$row->intake];
+					$t1[$rc]=[$rc,$row->department,($row->intake!='0'?$row->intake:'-')];
 					for ($i=0; $i <sizeof($cat_id) ; $i++) {
                        	if($cat_name[$i]!="")
                         {
