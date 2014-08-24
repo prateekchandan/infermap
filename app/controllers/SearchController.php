@@ -74,7 +74,7 @@ class SearchController extends BaseController {
 	public function autocomplete($input)
 	{
 
-		$allcollege=DB::connection('infermap')->select('select city,cid,name,alias1,alias2,alias3,alias4,alias5,alias6,alias7,alias8,rank,link from college_id where disabled="1" order by -rank desc');
+		$allcollege=DB::connection('infermap')->select('select city,state,cid,name,alias1,alias2,alias3,alias4,alias5,alias6,alias7,alias8,rank,link from college_id where disabled="1" order by -rank desc');
 
 		$arryain = $this->cleanStr($input);
 
@@ -86,6 +86,24 @@ class SearchController extends BaseController {
 					$alias = 'alias'.$i;
 					$a=$college->$alias;
 					if([$college->$alias]!=""){
+						$temp = $this->mylev($arryain, strtolower($a));
+						if($temp < $college->score) $college->score = $temp;
+					}
+				}
+				else if($i==9)
+				{
+					$a=$college->city;
+					if($a!="")
+					{
+						$temp = $this->mylev($arryain, strtolower($a));
+						if($temp < $college->score) $college->score = $temp;
+					}
+				}
+				else if($i == 10)
+				{
+					$a=$college->state;
+					if($a!="")
+					{
 						$temp = $this->mylev($arryain, strtolower($a));
 						if($temp < $college->score) $college->score = $temp;
 					}
