@@ -73,6 +73,7 @@ class SearchController extends BaseController {
 
 	public function autocomplete($input)
 	{
+
 		$allcollege=DB::connection('infermap')->select('select city,cid,name,alias1,alias2,alias3,alias4,alias5,alias6,alias7,alias8,rank,link from college_id where disabled="1" order by -rank desc');
 
 		$arryain = $this->cleanStr($input);
@@ -124,7 +125,6 @@ class SearchController extends BaseController {
 		foreach ($allcollege as $key => $value) {
 			echo $value->name.'<br>';
 		}
-
 	}
 
 }

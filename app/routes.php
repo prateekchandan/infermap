@@ -29,19 +29,15 @@ Route::get('/edit-profile', array('as'=>'user.edit', 'uses'=>'UsersController@ed
 Route::post('/edit-profile', array('as'=>'user.update', 'uses'=>'UsersController@update'));
 Route::post('/fblogin', array('as'=>'user.fblogin', 'uses'=>'UsersController@fblogin'));
 
-Route::get('/test',function(){
-	return Auth::user();
-});
-
-
-Route::get('/{state}/{city}','CollegeController@collegebyplace');
-
 Route::get('autocomplete/{string}',array('as' => 'autocomplete' , 'uses' => 'SearchController@autocomplete'));
-
 
 Route::post('/storefb', array('as'=>'user.storefb', 'uses'=>'UsersController@storefb'));
 Route::get('/login', array('as'=>'user.login.show', 'uses'=>'UsersController@showlogin'));
 Route::post('/login', array('as'=>'user.login', 'uses'=>'UsersController@login'));
 Route::get('/logout', array('as'=>'user.logout', 'uses'=>'UsersController@logout'));
+
+
+// Keep this line at last
+Route::get('/{state}/{city}','CollegeController@collegebyplace');
 
 
