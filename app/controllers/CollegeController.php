@@ -41,6 +41,7 @@ class CollegeController extends BaseController {
 			catch(Exception $e){}
 
 			$data['related-colleges']=$this->get_related_colleges($data['cid'],4);
+			$data['links']=$this->get_links_social($data['cid']);			
 			
 			if(sizeof($data['images'])==0) $data['images']=0;								
 			$check=0;
@@ -104,6 +105,19 @@ class CollegeController extends BaseController {
 		}
 	}
 
+	private function get_links_social($cid){
+		$links=['weblink','fblink','twitterlink','pluslink','linkedlink'];
+		$return=array();
+		foreach ($links as $key => $link) {
+			if(File::exists(public_path().'/data'.'/'.$cid.'/contact/'.$link.'.txt')){
+				if(trim(file_get_contents(public_path().'/data'.'/'.$cid.'/contact/'.$link.'.txt'))!=''){
+					$return[$link]=file_get_contents(public_path().'/data'.'/'.$cid.'/contact/'.$link.'.txt');
+				}
+			}
+		}
+		
+		return $return;
+	}
 	private function get_related_colleges($cid,$no=10){
 		$allcollege=DB::connection('infermap')->select('select * from college_id where disabled="1" order by -rank desc');
 
