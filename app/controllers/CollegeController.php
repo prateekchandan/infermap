@@ -61,7 +61,7 @@ class CollegeController extends BaseController {
 				$data['location_bar'].=' , ';
 				$data['location_bar'].=$data['state'];
 			}
-			$allexams=DB::connection('infermap')->select('select distinct name from college_entrance_test where cid =? && name!=0',array($data['cid']));
+			$allexams=DB::connection('infermap')->select('select distinct name,type from college_entrance_test where cid =? && name!=0',array($data['cid']));
 			$data['allexams']=array();
 			foreach ($allexams as $key => $value) {
 				$exam=DB::table('exam')->where('eid', $value->name)->first();
@@ -164,7 +164,7 @@ class CollegeController extends BaseController {
 
 	private function get_admission_table($cid){
 		$return=array();
-		$types = DB::connection('infermap')->select('select distinct type from college_entrance_test where cid = ?',array($cid));
+		$types = DB::connection('infermap')->select('select distinct type from college_entrance_test where cid = ? && (type="barch" || type="bpharm" || type="be" || type="bscit" || type="btech" || type="dd" ) ',array($cid));
 		$category = DB::table('category')->get();
 		foreach ($types as $types_key => $type) {
 			$type=$type->type;

@@ -101,17 +101,17 @@
 			       	<ul class="links-list-alt">
 			       		@if($data['state']!='')
 			       		@if($data['city']!='')
-							<li><a href="{{URl::to('/').'/'.$data['state'].'/'.$data['city']}}">Colleges in {{{$data['city']}}}</a></li>
+							<li><a href="{{URL::to('/').'/'.$data['state'].'/'.$data['city']}}">Colleges in {{{$data['city']}}}</a></li>
 						@endif
-							<li><a href="{{URl::to('/').'/'.$data['state'].'/all'}}">Colleges in {{{$data['state']}}}</a></li>
+							<li><a href="{{URL::to('/').'/'.$data['state'].'/all'}}">Colleges in {{{$data['state']}}}</a></li>
 						@endif
 
 						@foreach($data['allexams'] as $exam)
-							<li><a href="{{URl::to('exam').'/'.$exam->link}}">About {{$exam->name}}</a></li>
+							<li><a href="{{URL::to('exam').'/'.$exam->link}}">About {{$exam->name}}</a></li>
 						@endforeach
 
 						@foreach($data['related-colleges'] as $college)
-							<li><a href="{{URl::to('college').'/'.$college->link}}">{{$college->name}}</a></li>
+							<li><a href="{{URL::to('college').'/'.$college->link}}">{{$college->name}}</a></li>
 						@endforeach
 					</ul>
 			      	<!-- end: Skills -->
@@ -120,7 +120,7 @@
 
 					<div class="testimonial-container">
 
-						<div class="title"><h3>Testimonials</h3></div>
+						<div class="title"><h3>Reviews</h3></div>
 
 							<div class="testimonials-carousel" data-autorotate="3000">
 								<ul class="carousel">
@@ -223,12 +223,6 @@
 					<h3>Links</h3>
 					<div class="row">
 					<ul class="social-bookmarks">
-				
-						@if(isset($data['links']['weblink']))
-						<li class="dribbble">
-							<a href="{{{$data['links']['weblink']}}}">Website</a>
-						</li>
-						@endif
 
 						@if(isset($data['links']['fblink']))
 						<li class="facebook">
@@ -259,6 +253,11 @@
 						<a target=_blank href="https://www.google.com/maps/preview/{{'@'}}{{$data['latitude']}},{{$data['longitude']}},14z">View this college on map</a>
 					</div>
 					@endif
+					@if(isset($data['links']['weblink']))
+						<div class="row">
+							<a href="{{{$data['links']['weblink']}}}">Visit college Website</a>
+						</div>
+						@endif
 			
 				
 				</div>
