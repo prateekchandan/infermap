@@ -100,15 +100,13 @@
 				<div class="col-md-7">
 					<select name="pack" class="form-control" id="pack">
 						<option value="select">Select</option>
-						<option value="2">2</option>
-						<option value="3">3</option>
-						<option value="4">4</option>
-						<option value="5">5</option>
-						<option value="6">6</option>
-						<option value="7">7</option>
-						<option value="8">8</option>
-						<option value="9">9</option>
-						<option value="10+">10+</option>
+						<option value="0-3">0-3</option>
+						<option value="3-4">3-4</option>
+						<option value="4-5">4-5</option>
+						<option value="5-7">5-7</option>
+						<option value="7-9">7-9</option>
+						<option value="9-12">9-12</option>
+						<option value="12+">12+</option>
 					</select>
 				</div>
 			</div>
@@ -193,11 +191,12 @@
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-md-5" for="whycho">Why should someone choose your college? (50 words)</label>
-				<div class="col-md-7"><textarea name="whychoose" id="whychooose" class="form-control"></textarea></div>
+				<label class="col-md-5" for="whycho">What are the strengths of your college over other similar colleges? (50 words)<br>
+				Ex. The college encourage students to take part in a lot of competitions Or A lot of research facilities provided</label>
+				<div class="col-md-7"><textarea name="whychoose" id="whychooose" class="form-control" style=" height:120px"></textarea></div>
 			</div>
 			<div class="form-group row">
-				<label class="col-md-5" for="improve">Areas in which college can improve (50 words)</label>
+				<label class="col-md-5" for="improve">What areas you think your college should improve upon (50 words)</label>
 				<div class="col-md-7"><textarea name="improve" id="improve" class="form-control"></textarea></div>
 			</div>
 			<div class="form-group row">
