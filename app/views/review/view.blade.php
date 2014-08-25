@@ -30,7 +30,7 @@
 			</h3>
 			<br>
 			<div class="form-group row">
-				<label class="col-md-5">What is academic qualification of majority of faculty?</label>
+				<label class="col-md-5">What is academic qualification of majority of teaching faculty?</label>
 				<div class="col-md-7">
 				<input id="btech" name="facqual" value="btech" type="radio"><label for="btech">B.Tech</label><br>
 				<input id="mtech" name="facqual" value="mtech" type="radio"><label for="mtech">M.Tech</label><br>
@@ -63,7 +63,7 @@
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-md-5" for="sports">Academic Quality</label>
+				<label class="col-md-5" for="sports">How much satisfied are you by your teachers?</label>
 				<div class="rating col-md-7" data-id="acad-qual" data-max="5"></div>
 			</div>
 			<div class="form-group row">
@@ -79,7 +79,7 @@
           </h3>
           <br>
 			<div class="form-group row">
-				<label class="col-md-5" for="plac">% Placed</label>
+				<label class="col-md-5" for="plac">Approximate percent (%) placed students every year</label>
 				<div class="col-md-7">
 					<select name="plac" class="form-control" id="pack">
 						<option value="select">Select</option>
@@ -96,7 +96,7 @@
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-md-5" for="pack">Avg. Package lpa</label>
+				<label class="col-md-5" for="pack">Average Package LPA(Lacs per anum)</label>
 				<div class="col-md-7">
 					<select name="pack" class="form-control" id="pack">
 						<option value="select">Select</option>
@@ -113,7 +113,7 @@
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-md-5">Does your college help in securing internship/training?</label>
+				<label class="col-md-5">Does your college help in securing internship/training in third year?</label>
 				<div class="col-md-7">
 					<input type="radio" name="intern-help" id="intern-help-yes" value="yes"><label for="intern-help-yes">Yes</label><br>
 					<input type="radio" name="intern-help" id="intern-help-no" value="no"><label for="intern-help-no">No</label>
@@ -149,16 +149,18 @@
 				<div class="row">
 					<label class="col-md-5">Hostel and Mess facilities</label>
 					<div class="col-md-7">
-						<input type="checkbox" name="no-mshs" id="no-mshs"><label for="no-mshs">No Hostel/Mess</label><br>
+						<input type="checkbox" name="no-mshs" id="no-mshs"><label for="no-mshs"> Hostel not provided by the college</label><br>
 					</div>
 				</div><br>
+				<label>Rate the following based on your experience<br> 5: means very good , 1: Not so good</label>
+
 				<div class="row">
 					<label class="col-md-5" for="hostel">Hostel</label>
 					<div class="rating col-md-7" data-id="hostel"  data-max="5" data-descript="shared cramped rooms####single rooms with AC and internet"></div>
 				</div><br>
 				<div class="row">
 					<label class="col-md-5" for="mess">Mess</label>
-					<div class="rating col-md-7" data-id="mess", data-max="5"></div>
+					<div class="rating col-md-7" data-id="mess", data-max="5" data-descript="Not so good####Very good"></div>
 				</div>
 			</div>
 
@@ -181,12 +183,12 @@
 				<div class="rating col-md-7" data-id="co-curics" data-max="5"></div>
 			</div>
 			<div class="form-group row">
-				<label class="col-md-5">Tick facilities available</label>
+				<label class="col-md-5">Tick facilities available in your college.</label>
 				<div class="col-md-7">
 					<input id="canteen" name="facilities[]" value="canteen" type="checkbox"><label for="canteen">Canteen</label><br>
 					<input id="fests" name="facilities[]" value="fests" type="checkbox"><label for="fests">Fests</label><br>
-					<input id="clubs" name="facilities[]" value="clubs" type="checkbox"><label for="clubs">Clubs</label><br>
-					<input id="gne" name="facilities[]" value="gne" type="checkbox"><label for="gne">Groups and events held</label><br>
+					<input id="clubs" name="facilities[]" value="clubs" type="checkbox"><label for="clubs">Clubs (Photography/ Dance/ Debate)</label><br>
+					<input id="gne" name="facilities[]" value="gne" type="checkbox"><label for="gne">Events and competitions are held during semester</label><br>
 					<input id="concity" name="facilities[]" value="concity" type="checkbox"><label for="concity">Connectivity to the City</label><br>
 				</div>
 			</div>
