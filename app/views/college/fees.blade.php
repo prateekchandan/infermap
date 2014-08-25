@@ -16,6 +16,20 @@
 		@endif
 	</h3>
 </div>
+<div>
+	Following table contains Fee structure for 
+	@foreach($data['fee_type'] as $key => $value)
+		{{($key > 0)?',':''}}
+		{{$value->type}}
+	@endforeach
+	in <a href="{{URL::to('college')}}/{{$data['link']}}">{{$data['name']}}</a>
+	for
+	@foreach($data['fee_category'] as $key => $value)
+		{{($key > 0)?',':''}}
+		{{$value->category}}
+	@endforeach
+</div>
+<br>
 
 	<table class="table table-bordered">
 		<thead>

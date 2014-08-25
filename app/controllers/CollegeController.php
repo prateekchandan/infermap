@@ -46,6 +46,9 @@ class CollegeController extends BaseController {
 
 			$data['related-colleges']=$this->get_related_colleges($data['cid'],4);
 			$data['links']=$this->get_links_social($data['cid']);			
+			$data['fee_category']=$this->get_fee_category($data['cid']);	
+			$data['fee_type'] = DB::connection('college_data')->select('select distinct course as type from fee_t'.$data['cid']);
+
 			
 			if(sizeof($data['images'])==0) $data['images']=0;								
 			$check=0;
@@ -69,6 +72,7 @@ class CollegeController extends BaseController {
 			$data['allexams']=array();
 			foreach ($allexams as $key => $value) {
 				$exam=DB::table('exam')->where('eid', $value->name)->first();
+				$exam->type=DB::table('allcourses')->where('name','=',$exam->type)->first()->value;
 				foreach ($data['allexams'] as $pre_ex) {
 					if($pre_ex->link==$exam->link)
 						$value=0;
@@ -231,7 +235,7 @@ class CollegeController extends BaseController {
 				$name=DB::table('exam')->where('eid', $name)->first();
 				$name=$name->name;
 				if($name=='-No Exam Selected-')
-					$name="Not Specified";
+					$name="N/A";
 
 				if(sizeof($t1)>1)
                 $table[$name]=$t1;
@@ -261,7 +265,7 @@ class CollegeController extends BaseController {
 			$r1=array();
 			$fee_array=['course','category','tut_fee','misc_fee','mnh_fee','tot','refundable_fee'];
 			foreach ($fee_array as $key) {
-				if($row->$key!=0||$key=='course')
+				if($row->$key!='0')
 					array_push($r1,$row->$key);
 				else
 					array_push($r1, '-');
@@ -271,6 +275,14 @@ class CollegeController extends BaseController {
 		if(sizeof($return)<2)
 			$return=0;
 		return $return;
+	}
+
+	private function get_fee_category($cid)
+	{
+		$category = DB::connection('college_data')->select('select distinct category from fee_t'.$cid);
+		if(sizeof($category)==1 && $category[0]->category =='0')
+			$category[0]->category='all categories';
+		return $category;
 	}
 
 	private function get_placement_table($cid){
@@ -311,7 +323,7 @@ class CollegeController extends BaseController {
 
 	public function show_all()
 	{
-		$all =  DB::connection('infermap')->select('select * from college_id where  1');
+		$all =  DB::connection('infermap')->select('select * from college_id where disabled=1');
 		foreach ($all as $key => $value) {
 			$value = (array) $value;
 			echo '<a href="';

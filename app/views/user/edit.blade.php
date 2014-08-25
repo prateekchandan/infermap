@@ -34,7 +34,7 @@
 			<label for"password">Password</label>
 		</div>
 		<div class="col-md-9">
-			<input type="password" id="password" password="password" placeholder="New Password" class="form-control" {{ ($user->password == null ? 'required':'') }}>
+			<input type="password" id="password" password="password" placeholder="New Password" class="form-control" {{ ($user->password == null ? 'required':'') }} >
 		</div>
 	</div>
 	<div class="form-group row">

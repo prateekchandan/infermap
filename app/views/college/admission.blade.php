@@ -41,13 +41,13 @@
 <div class="row col-md-12">
 	<div class="title"><h3>Exam for admission</h3></div>
 	<ul class="star_list">
-@foreach($data['allexams'] as $exam)
-		<li>Admission for {{$exam->type}}  is based on <a href="{{URL::to('exam').'/'.$exam->link}}"> {{$exam->name}}</a></li>
-@endforeach
+	@foreach($data['allexams'] as $exam)
+		<li>Admission for {{$exam->type}}  is based on <a href="#{{$exam->name}}"> ranks </a> in <a href="{{URL::to('exam').'/'.$exam->link}}"> {{$exam->name}}</a></li>
+	@endforeach
 	</ul>
+	<br>
 </div>
 @endif
-
 @if($admission_table!=0)
 <?php  $check=1;?>
 @foreach ($admission_table as $course => $tables)
@@ -55,7 +55,7 @@
 <div class="title"><h3>Closing Ranks for {{{$course}}}</h3></div>
 	
 	@foreach($tables as $examname => $table)
-	<div  style="overflow-x:auto">
+	<div  style="overflow-x:auto" id="{{$examname}}">
 		<div class="col-md-12" ><h3>Exam : {{{$examname}}}</h3></div>
 		<table class="table table-bordered">
 			<thead>
