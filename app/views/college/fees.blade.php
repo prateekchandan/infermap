@@ -2,10 +2,10 @@
 
 @section('college-content')
 <?php  $check=0; ?>
-
+<div class="row">
 @if($fees_table!=0)
 <?php  $check=1;?>
-<div class="row col-md-12" style="overflow-x:auto">
+<div class="col-md-9" style="overflow-x:auto">
 <div class="title">
 	<h3>
 		Fee Structure Per
@@ -14,6 +14,7 @@
 		@else
 		Annum
 		@endif
+		(in ₹)
 	</h3>
 </div>
 <div>
@@ -30,26 +31,41 @@
 	@endforeach
 </div>
 <br>
-
-	<table class="table table-bordered">
-		<thead>
-			<tr>
-			@foreach($fees_table[0] as $element)
-				<th>{{{$element}}}</th>
-			@endforeach
-			</tr>
-		</thead>
-		@for($i=1;$i < sizeof($fees_table);$i++)
-		<tr>
-		@foreach($fees_table[$i] as $element)
-		<td>{{{$element}}}</td>
-		@endforeach
-		</tr>
+<ul>
+@for($i=1;$i < sizeof($fees_table);$i++)
+	<li><div>
+	<b>{{$fees_table[$i][0]}}</b>
+		<ol class="arrow_list">
+		@for( $j=1 ; $j < sizeof($fees_table[$i]);$j++)
+			@if($fees_table[$i][$j]!='-')
+				<li>
+					{{$fees_table[0][$j]}} => {{$fees_table[$i][$j]}}
+				</li>
+			@endif
 		@endfor
-	</table>
+		</ol>
+		</div>
+	</li>
+@endfor
+</ul>
+	
 	
 </div>
 @endif
+<div class="col-md-3">
+	<div class="title"><h3>Ratings</h3></div>
+		<ul class="skills">
+			<li>
+				<h5>Difficulty in admission ( 40% )</h5>
+				<div class="meter"><span style="width: 40%"></span></div><!-- Edite width here -->
+			</li>
+			<li>
+				<h5>Wordpress ( 80% )</h5>
+				<div class="meter"><span style="width: 80%"></span></div><!-- Edite width here -->
+			</li>
+		</ul>
+</div>
+</div>
 
 @if(File::exists(public_path().'/data'.'/'.$data['cid'].'/fees/scholarships.txt'))
 @if(trim(file_get_contents(public_path().'/data'.'/'.$data['cid'].'/fees/scholarships.txt'))!='')

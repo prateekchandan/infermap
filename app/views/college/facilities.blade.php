@@ -3,6 +3,8 @@
 @section('college-content')
 <?php  $check=0; ?>
 
+<div class="row">
+<div class="col-md-9">
 
 @if(File::exists(public_path().'/data'.'/'.$data['cid'].'/academics/facilities.txt'))
 @if(trim(file_get_contents(public_path().'/data'.'/'.$data['cid'].'/academics/facilities.txt'))!='')
@@ -63,7 +65,21 @@
 </div>
 @endif
 @endif	
-
+</div>
+	<div class="col-md-3">
+		<div class="title"><h3>Ratings</h3></div>
+		<ul class="skills">
+			<li>
+				<h5>Difficulty in admission ( 40% )</h5>
+				<div class="meter"><span style="width: 40%"></span></div><!-- Edite width here -->
+			</li>
+			<li>
+				<h5>Wordpress ( 80% )</h5>
+				<div class="meter"><span style="width: 80%"></span></div><!-- Edite width here -->
+			</li>
+		</ul>
+	</div>
+</div>
 @if($check==0)
 @include('college.nodata')
 @endif
