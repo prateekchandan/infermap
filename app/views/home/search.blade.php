@@ -120,7 +120,7 @@
 				            		<div class="form-group">
 				            			<label>Select City</label>
 				            			<select class="form-control" id="location-city" name="city" >
-				            				<option value=''>Select your City</option>
+				            				<option value=''>Select City</option>
 				            			</select>
 				            		</div>
 				            	</div>
