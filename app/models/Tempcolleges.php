@@ -1,6 +1,6 @@
 <?php
 
-class temp_colleges extends Eloquent{
+class Tempcolleges extends Eloquent{
 	protected $table = 'temp_colleges';
 
 

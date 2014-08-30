@@ -6,6 +6,7 @@ class CollegeReview extends Eloquent{
 
 	public function saveFromInput(){
 		$this->college_id = Input::get('cid');
+		$this->temp_college_id = Input::get('temp_college_id');
 		$this->facqual = Input::get('facqual');
 		$this->class_hrs = Input::get('clshrs');
 		$this->attendance = Input::get('att');

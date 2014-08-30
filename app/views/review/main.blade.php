@@ -1,5 +1,6 @@
 @extends('layout.main')
 @section('body')
+
 <div id="page-title">
 	<div id="page-title-inner">
 	<!-- start: Container -->

@@ -486,6 +486,8 @@ input[type='range']::-moz-range-thumb {
 </script>
 @else
 <div class="col-md-6 col-md-offset-3">
+<br>
+<div class="title"><h3>Please login to continue</h3></div>
 @include('user.login_template')
 </div>
 @endif

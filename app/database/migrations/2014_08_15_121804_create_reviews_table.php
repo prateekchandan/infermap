@@ -31,13 +31,13 @@ class CreateReviewsTable extends Migration {
 			$table->integer('mess_rating')->nullable();
 			$table->integer('sports_rating')->nullable();
 			$table->integer('co_currics_rating')->nullable();
-			$table->string('facilities', 200)->nullalbe();
+			$table->string('facilities', 200)->nullable();
 			$table->string('whychoose', 1000)->nullable();
 			$table->string('improve', 1000)->nullable();
 			$table->boolean('recommend')->nullable();
 			$table->string('personal_year', 20);
 			$table->string('personal_dept', 200);
-			$table->string('stay_con', 1000);
+			$table->string('stay_con', 1000)->nullable();
 			$table->timestamps();
 		});
 	}

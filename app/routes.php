@@ -10,6 +10,9 @@ Route::get('/', function()
 // URL for page for review and storing a review
 Route::get('/review',array('as'=>'review_main','uses'=>'ReviewController@get_college'));
 Route::get('/review/add',array('as'=>'review_new','uses'=>'ReviewController@add_new'));
+Route::post('/review/add',array('as'=>'review_new_save','uses'=>'ReviewController@save_new'));
+Route::get('/review/feedback',array('as'=>'review_feedback','uses'=>'ReviewController@feedback'));
+Route::post('/review/feedback',array('as'=>'review.feedback.save','uses'=>'ReviewController@feedback_save'));
 Route::post('/review', function(){
 	$review = new CollegeReview;
 	$review->saveFromInput(Input::all());
