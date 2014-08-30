@@ -232,7 +232,9 @@
 				<input id="newsletter" name="stay-con[]" value="newsletter" type="checkbox"><label for="newsletter">Receiving newsletters and articles</label><br>
 				<input id="contributing-newsletter" name="stay-con[]" value="contributing-newsletter" type="checkbox"><label for="contributing-newsletter">Contributing to newsletters and articles</label><br></div><br>
 			</div>
-		  
+		    <div class="form-group">
+				<input id="anonymous" name="anonymous" value="1" type="checkbox" checked><label for="anonymous">Include my credentials with this review</label><br>
+			</div>
 			<button class="btn btn-primary">Submit</button>
 		</form></div></div>
 		</div></div></div></div>

@@ -90,7 +90,7 @@
 				box.innerHTML=box.innerHTML+'<div class="col-md-12"><button type="button" class="close close_review_autocomplete" onclick="temp_review_autobox_remove()">×</button></div>';
 				str="<ul>";
 				for (var i = 0; i < data.length && i <6; i++) {
-					str+="<li><a href='{{URL::to('college')}}/"+data[i].link+"/review'>"+data[i].name+"<span class=\"pill-right\"></span></a></li>";
+					str+="<li><a href='{{URL::to('/')}}/"+data[i].link+"/review'>"+data[i].name+"<span class=\"pill-right\"></span></a></li>";
 				};
 				str+="</ul>";
 				box.innerHTML=box.innerHTML+str;

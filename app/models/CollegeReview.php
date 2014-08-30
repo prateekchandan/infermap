@@ -26,6 +26,7 @@ class CollegeReview extends Eloquent{
 		$this->recommend = (Input::get('reco') == 'yes' ? 1 : (Input::get('reco') == 'no' ? 0 : null));
 		$this->personal_dept = Input::get('personal-dept');
 		$this->personal_year = Input::get('personal-year');
+		$this->anonymous = Input::get('anonymous');
 		$this->stay_con = (Input::get('stay-con') == null ? null : implode(',',Input::get('stay-con')));
 	}
 }

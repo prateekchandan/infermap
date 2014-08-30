@@ -138,6 +138,7 @@ class SearchController extends BaseController {
 			return array(
 				'name' =>$name,
 				'link' => $college->link,
+				'score' => $college->score,
 			);
 		}
 		$allcollege=array_map("getdata",$allcollege);
@@ -146,7 +147,24 @@ class SearchController extends BaseController {
 
 	public function review_autocomplete(){
 		$str=Input::get('str','');
-		return $this->autocomplete($str);
+		$ret=$this->autocomplete($str,6);
+		foreach ($ret as $key => $value) {
+			$ret[$key]['link']='college/'.$ret[$key]['link'];
+		}
+		$allcollege=DB::connection('infermap')->select('select name from temp_colleges');
+		$arryain = $this->cleanStr($str);
+		foreach ($allcollege as $key=> $college) {
+			$college->score = $this->mylev($arryain, strtolower($college->name));
+			$college->link = 'review/add?college='.$college->name;
+			$allcollege[$key]=(array)$college;
+		}
+		$allcollege=(array)$allcollege;
+		function cmp1($c1,$c2){
+			return $c1['score'] > $c2['score'];
+		}
+		$ret=array_merge($allcollege,$ret);
+		usort($ret, 'cmp1');
+		return array_splice($ret,0,10);
 	}
 
 }

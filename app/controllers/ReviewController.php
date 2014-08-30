@@ -61,7 +61,10 @@ class ReviewController extends BaseController {
 	}
 
 	public function feedback(){
-		return View::make('review.feedback');
+		if(Auth::check())
+			return View::make('review.feedback');
+		else
+			return View::make('review.main');
 	}
 
 	private function refer_friend($email)

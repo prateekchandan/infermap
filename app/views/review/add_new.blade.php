@@ -424,7 +424,9 @@ input[type='range']::-moz-range-thumb {
                                 </div>
                                 <br>
                             </div>
-
+                            <div class="form-group">
+                                <input id="anonymous" name="anonymous" value="1" type="checkbox" checked> <label for="anonymous">Include my credentials with this review</label><br>
+                            </div>
                             <button class="btn btn-primary">Submit</button>
                 </form>
                 </div>

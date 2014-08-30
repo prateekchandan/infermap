@@ -38,6 +38,7 @@ class CreateReviewsTable extends Migration {
 			$table->string('personal_year', 20);
 			$table->string('personal_dept', 200);
 			$table->string('stay_con', 1000)->nullable();
+			$table->integer('anonymous')->nullable()->default('0');
 			$table->timestamps();
 		});
 	}
