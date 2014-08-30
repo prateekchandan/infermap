@@ -16,6 +16,7 @@ class CreateReviewsTable extends Migration {
 		{
 			$table->increments('review_id')->unique();
 			$table->integer('college_id');
+			$table->integer('temp_college_id')->nullable();
 			$table->string('facqual', 50)->nullable();
 			$table->string('class_hrs', 20)->mullable();
 			$table->string('attendance', 20)->nullable();

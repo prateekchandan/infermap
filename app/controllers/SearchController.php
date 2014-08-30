@@ -6,6 +6,7 @@ class SearchController extends BaseController {
 
 	private function cleanStr($str)
 	{
+		$str=strtolower($str);
 		$prep=array("amp","of","the","and","to","in","");
 		$str=trim($str);
 		$str=preg_replace('/[^A-Za-z0-9 \-]/', '', $str);
@@ -71,7 +72,7 @@ class SearchController extends BaseController {
 		return $sum;
 	}
 
-	public function autocomplete($input)
+	public function autocomplete($input,$no=10)
 	{
 
 		$allcollege=DB::connection('infermap')->select('select city,state,cid,name,alias1,alias2,alias3,alias4,alias5,alias6,alias7,alias8,rank,link from college_id where disabled="1" order by -rank desc');
@@ -139,10 +140,13 @@ class SearchController extends BaseController {
 				'link' => $college->link,
 			);
 		}
-		//dd(array_map("getdata",$allcollege));
-		foreach ($allcollege as $key => $value) {
-			echo $value->name.' , '.$value->city.'<br>';
-		}
+		$allcollege=array_map("getdata",$allcollege);
+		return array_splice($allcollege, 0,$no);
+	}
+
+	public function review_autocomplete(){
+		$str=Input::get('str','');
+		return $this->autocomplete($str);
 	}
 
 }

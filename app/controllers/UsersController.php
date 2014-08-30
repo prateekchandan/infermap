@@ -153,7 +153,7 @@ class UsersController extends \BaseController {
 	public function login(){
 		if (Auth::attempt(array('email' => Input::get('email'), 'password' => Input::get('password'))))
 		{
-			return Redirect::to('/');
+			return Redirect::back();
 		}
 		$user = User::where('email', '=', Input::get('email'))->first();
 		if ($user == null) {

@@ -1,7 +1,3 @@
-@extends ('layout.main')
-
-@section ('body')
-
 <div id="fb-root" style="float:left; width:1px;"></div>
 
 <script>
@@ -44,13 +40,10 @@ function fblogin(){
 }
 </script>
 
-<div class="container">
-
-
 	<!--start: Row-->
 	<div class="row-fluid">
 
-		<div class="lr-page span4 offset4">
+		
 
 		<!--start: Register Box-->
 		<div id="register-box" style="overflow:auto; box-shadow:0 0px 0px">
@@ -58,7 +51,7 @@ function fblogin(){
 			<!-- start: Row -->
 			<div class="row-fluid">
 
-			<div id="login-form" class="col-sm-6 col-sm-offset-3">
+			<div id="login-form" class="">
 
 
 
@@ -79,7 +72,7 @@ function fblogin(){
 
 				<form method="post" action="{{ URL::route('user.login') }}">
 				<div class="form-group">
-					<input type="email" id="email" name="email" class="form-control" value="{{ Input::old('email') }}" placeholder="email address" required>
+					<input type="email" id="email" name="email" class="form-control" style="width:100%" value="{{ Input::old('email') }}" placeholder="email address" required>
 				</div>
 				@if ($errors->has('email.wrong'))
 					<div class="alert alert-error alert-dismissable" style="" role="alert">
@@ -88,7 +81,7 @@ function fblogin(){
 					</div>
 				@endif
 				<div class="form-group">
-					<input type="password" style="font-size:14px; height:34px;" id="password" name="password" class="form-control" value="" placeholder="password" required>
+					<input type="password" style="font-size:14px; height:34px;width:100%" id="password" name="password" class="form-control" value="" placeholder="password" required>
 				</div>
 				@if ($errors->has('password.mismatch'))
 					<div class="alert alert-error alert-dismissable" style="" role="alert">
@@ -99,7 +92,7 @@ function fblogin(){
 
 				<div class="actions">
 
-					<button type="submit" class="btn btn-primary col-sm-12">Create Account!</button>
+					<button type="submit" class="btn btn-primary col-sm-12">Login!</button>
 
 				</div>
 
@@ -110,14 +103,9 @@ function fblogin(){
 			</div>
 			<!-- end: Row -->
 
-		</div>
-		<!--end: Register Box-->
+		
 
 		</div>
 
       	</div>
 	<!--end: Row -->
-
-	</div>
-
-@stop

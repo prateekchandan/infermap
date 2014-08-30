@@ -15,6 +15,9 @@
 	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Economica:700,400italic">
 	
 	<link rel="icon" href="{{URL::asset('assets/img/icons/icon.png')}}" type="image/x-icon">
+	<script src="{{URL::asset('assets/js/jquery-1.9.1.min.js')}}"></script>
+	<script src="{{URL::asset('assets/js/bootstrap.min.js')}}"></script>
+
 	<!-- end: CSS -->
 
     <!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -111,8 +114,6 @@
 
 <!-- start: Java Script -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="{{URL::asset('assets/js/jquery-1.9.1.min.js')}}"></script>
-<script src="{{URL::asset('assets/js/bootstrap.min.js')}}"></script>
 <script src="{{URL::asset('assets/js/jquery.isotope.min.js')}}"></script>
 <script src="{{URL::asset('assets/js/jquery.imagesloaded.js')}}"></script>
 <script src="{{URL::asset('assets/js/flexslider.js')}}"></script>
