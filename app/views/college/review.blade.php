@@ -103,7 +103,13 @@
         margin-left: 10px;
     }
 </style>
-@if(Auth::check())
+@if($errors->has('feedback'))
+    <div class="alert alert-success alert-dismissable" style="" role="alert">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h3>THANK YOU</h3>
+        <h4>The review is greatly appreciated</h4>
+    </div>
+@elseif(Auth::check())
 <div id="primary" class="content-area">
     <div id="content" class="site-content" role="main">
         <div class="entry-content">

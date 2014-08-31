@@ -60,6 +60,15 @@ class ReviewController extends BaseController {
 		return Redirect::route('review_feedback')->withErrors($messageBag);
 	}
 
+	public function save_college_review(){
+		$review = new CollegeReview;
+		$review->saveFromInput(Input::all());
+		$review->save();
+		$messageBag = new MessageBag;
+		$messageBag->add('feedback', 'Successfully Added the review');
+		return Redirect::back()->withErrors($messageBag);
+	}
+
 	public function feedback(){
 		if(Auth::check())
 			return View::make('review.feedback');

@@ -15,12 +15,7 @@ Route::post('/review/add',array('as'=>'review_new_save','uses'=>'ReviewControlle
 Route::get('/review/feedback',array('as'=>'review_feedback','uses'=>'ReviewController@feedback'));
 Route::post('/review/feedback',array('as'=>'review.feedback.save','uses'=>'ReviewController@feedback_save'));
 Route::get('/review/report',array('as'=>'review.report','uses'=>'ReviewController@report'));
-Route::post('/review', function(){
-	$review = new CollegeReview;
-	$review->saveFromInput(Input::all());
-	$review->save();
-	return Redirect::back();
-});
+Route::post('/review', array('as'=>'review.college.save','uses'=>'ReviewController@save_college_review'));
 
 // Some mains URLS's 
 
