@@ -29,7 +29,7 @@ function fblogin(){
 					'<input type="hidden" name="name" value="' + info.name + '" />' +
 					'<input type="hidden" name="email" value="' + info.email + '" />' +
 					'</form>');
-				JQuery.ajax({
+				$.ajax({
 					url:url,
 					type:'post',
 					data:$(form).serialize(),
