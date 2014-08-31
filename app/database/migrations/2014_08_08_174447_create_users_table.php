@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration {
 			$table->boolean('school_college')->nullable();
 			$table->string('school_college_name', 200)->nullable();
 			$table->integer('std_passingout')->nullable();
+			$table->integer('admin')->default(0);
 			$table->string('phone', 20)->nullable();
 			$table->string('fbid',20)->nullable();
 			$table->timestamps();

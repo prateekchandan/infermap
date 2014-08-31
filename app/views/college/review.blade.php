@@ -1,162 +1,114 @@
-@extends ('layout.main')
+@extends ('college.layout')
 
-@section ('body')
+@section ('college-content')
 <style>
-
-.main-body{
-	font-size:14px;
-	width:800px;
-	margin-right:auto;
-	margin-left:auto;
-}
-.form-control{
-	width:200px;
-}
-
-#hostel, #mess, #sports, #reco{
-	width:200px;
-}
-
-
-
-
-.media{
-  background-color: white;
-  padding: 3%;
-  box-shadow: 1px 1px 2px rgba(0,0,0,.08);
-}
-
-.media-heading{
-	text-align:center;
-	color:white;
-	line-height:50px;
-}
-
-#our-story{
-    text-align: center;
-}
-.right{
-    text-align: right;
-}
-
-.media img{
-    margin-right: 20px;
-}
-
-.right img{
-    margin-right: 0px;
-    margin-left: 20px;
-}
-.headings{
-    color: #3F94C5;
-}
-
-.team-member{
-    position: relative;
-}
-
-
-.member_profile{
-    width: 85%;
-    position: absolute;
-}
-hr { display: block; height: 1px;
-    border: 0; border-top: 1px solid #ccc;
-    margin: 1em 0; padding: 0;
-}
-
-
-
-#infermap-team{
-    text-align: right;
-    color: #FE7F29;
-}
-
-
-.answer{
-  display: none;
-}
-
-.question:hover{
-  color: #333;
-  cursor: pointer;
-}
-
-#content{
-  background-color: #f5f5f5;
-}
-
-input[type='range'] {
-	-webkit-appearance: none;
-	border-radius: 5px;
-	box-shadow: inset 0 0 5px #333;
-	background-color: #999;
-	height: 10px;
-	vertical-align: middle;
-}
-input[type='range']::-moz-range-track {
-	-moz-appearance: none;
-	border-radius: 5px;
-	box-shadow: inset 0 0 5px #333;
-	background-color: #999;
-	height: 10px;
-}
-input[type='range']::-webkit-slider-thumb {
-	-webkit-appearance: none !important;
-	border-radius: 20px;
-	background-color: #FFF;
-	box-shadow:inset 0 0 10px rgba(000,000,000,0.5);
-	border: 1px solid #999;
-	height: 20px;
-	width: 20px;
-}
-input[type='range']::-moz-range-thumb {
-	-moz-appearance: none;
-	border-radius: 20px;
-	background-color: #FFF;
-	box-shadow:inset 0 0 10px rgba(000,000,000,0.5);
-	border: 1px solid #999;
-	height: 20px;
-	width: 20px;
-}
-
-
-.rating-sq{
-	width:25px;
-	height:25px;
-	background-color: #bbb;
-	border-radius:3px;
-	margin:0.5px;
-}
-
-.rating-sq:hover{
-	cursor:pointer;
-}
-
-.rating-descript{
-	line-height:25px;
-	margin-left:10px;
-}
-
+    .form-control {
+        width: 200px;
+    }
+    #hostel,
+    #mess,
+    #sports,
+    #reco {
+        width: 200px;
+    }
+    .media {
+        background-color: white;
+        padding: 3%;
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .08);
+    }
+    .media-heading {
+        text-align: center;
+        color: white;
+        line-height: 50px;
+    }
+    #our-story {
+        text-align: center;
+    }
+    .right {
+        text-align: right;
+    }
+    .media img {
+        margin-right: 20px;
+    }
+    .right img {
+        margin-right: 0px;
+        margin-left: 20px;
+    }
+    .headings {
+        color: #3F94C5;
+    }
+    .team-member {
+        position: relative;
+    }
+    .member_profile {
+        width: 85%;
+        position: absolute;
+    }
+    #infermap-team {
+        text-align: right;
+        color: #FE7F29;
+    }
+    .answer {
+        display: none;
+    }
+    .question:hover {
+        color: #333;
+        cursor: pointer;
+    }
+    input[type='range'] {
+        -webkit-appearance: none;
+        border-radius: 5px;
+        box-shadow: inset 0 0 5px #333;
+        background-color: #999;
+        height: 10px;
+        vertical-align: middle;
+    }
+    input[type='range']::-moz-range-track {
+        -moz-appearance: none;
+        border-radius: 5px;
+        box-shadow: inset 0 0 5px #333;
+        background-color: #999;
+        height: 10px;
+    }
+    input[type='range']::-webkit-slider-thumb {
+        -webkit-appearance: none !important;
+        border-radius: 20px;
+        background-color: #FFF;
+        box-shadow: inset 0 0 10px rgba(000, 000, 000, 0.5);
+        border: 1px solid #999;
+        height: 20px;
+        width: 20px;
+    }
+    input[type='range']::-moz-range-thumb {
+        -moz-appearance: none;
+        border-radius: 20px;
+        background-color: #FFF;
+        box-shadow: inset 0 0 10px rgba(000, 000, 000, 0.5);
+        border: 1px solid #999;
+        height: 20px;
+        width: 20px;
+    }
+    .rating-sq {
+        width: 25px;
+        height: 25px;
+        background-color: #bbb;
+        border-radius: 3px;
+        margin: 0.5px;
+    }
+    .rating-sq:hover {
+        cursor: pointer;
+    }
+    .rating-descript {
+        line-height: 25px;
+        margin-left: 10px;
+    }
 </style>
 @if(Auth::check())
 <div id="primary" class="content-area">
     <div id="content" class="site-content" role="main">
         <div class="entry-content">
             <div class="main-body">
-                <form action="{{ URL::to('/review/add')}}" method="post" id="review-form" accept-charset="utf-8">
-
-                    <div class="media">
-                        <div class="media-body">
-
-
-                            <div class="pull-left">
-                                <h1>{{$data['name']}}</h1>
-                                <input type="hidden" name="name" value="{{$data['name']}}">
-                                <input type="hidden" name="cid" value="0">
-                            </div>
-                        </div>
-                    </div>
+                <form action="{{ URL::to('/review') }}" method="post" accept-charset="utf-8">
                     <div class="media">
                         <div class="media-body">
                             <h3 class="media-heading" style="background-color:#358EFB;">
@@ -166,6 +118,7 @@ input[type='range']::-moz-range-thumb {
                             <div class="form-group row">
                                 <label class="col-md-5">What is academic qualification of majority of teaching faculty?</label>
                                 <div class="col-md-7">
+                                	<input type="hidden" name="cid" value="{{$data['cid']}}">
                                     <input id="btech" name="facqual" value="btech" type="radio">
                                     <label for="btech">B.Tech</label>
                                     <br>
@@ -216,8 +169,8 @@ input[type='range']::-moz-range-thumb {
                     <div class="media">
                         <div class="media-body">
                             <h3 class="media-heading" style="background-color:#1ABC9C">
-            Placements
-          </h3>
+					            Placements
+					          </h3>
                             <br>
                             <div class="form-group row">
                                 <label class="col-md-5" for="plac">Approximate percent (%) placed students every year</label>
@@ -280,11 +233,11 @@ input[type='range']::-moz-range-thumb {
                             </div>
                         </div>
                     </div>
-                    <div class="media">
+                     <div class="media">
                         <div class="media-body">
                             <h3 class="media-heading" style="background-color:#ffba00">
-                                Fees
-                              </h3>
+					            Fees
+					          </h3>
                             <br>
                             <div class="form-group row">
                                 <label class="col-md-5" for="gross-fee">Gross Fee per Annum (in ₹)</label>
@@ -308,8 +261,8 @@ input[type='range']::-moz-range-thumb {
                         <div class="media-body">
 
                             <h3 class="media-heading" style="background-color:#E74C3C">
-            Facilities
-          </h3>
+					            Facilities
+					          </h3>
                             <br>
                             <div class="form-group">
                                 <div class="row">
@@ -403,84 +356,72 @@ input[type='range']::-moz-range-thumb {
                         <div class="media-body">
 
                             <h3 class="media-heading" style="background-color:#34495E">
-			  Tell us about yourself
-			</h3>
+							  Tell us about yourself
+							</h3>
                             <br>
-                            <div class="form-group row">
-                                <label class="col-md-5" for="college-name">College Name</label>
-                                <div class="col-md-7">
-                                    <input type="text" id="college-name" name="name" class="form-control" value="{{$data['name']}}" required>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-5" for="college-name">City</label>
-                                <div class="col-md-7">
-                                    <input type="text" id="college-name" name="city" class="form-control" value="" required>
-                                </div>
-                            </div>
                             <div class="form-group row">
                                 <label class="col-md-5" for="personal-year">Year of Graduation</label>
                                 <div class="col-md-7">
-                                    <input type="text" id="personal-year" name="personal-year" class="form-control" required>
+                                    <select type="text" id="personal-year" name="personal-year" class="form-control" required>
+                                    	<option value="">Select year</option>
+                                    	<option>2020</option>
+                                    	<option>2019</option>
+                                    	<option>2018</option>
+                                    	<option>2017</option>
+                                    	<option>2016</option>
+                                    	<option>2015</option>
+                                    	<option>2014</option>
+                                    	<option>2013</option>
+                                    	<option>2012</option>
+                                    	<option>2011</option>
+                                    	<option>2010</option>
+                                    	<option>2009</option>
+                                    	<option>2008</option>
+                                    	<option>2007</option>
+                                    	<option>2006</option>
+                                    	<option>2005</option>
+                                    	<option>2004</option>
+                                    	<option>2003</option>
+                                    	<option>2002</option>
+                                    	<option>2001</option>
+                                    	<option>2000</option>
+                                    	<option>1999</option>
+                                    	<option>1998</option>
+                                    	<option>1997</option>
+                                    	<option>1996</option>
+                                    	<option>1995</option>
+                                    	<option>1994</option>
+                                    	<option>1993</option>
+                                    	<option>1992</option>
+                                    	<option>1991</option>
+                                    	<option>1990</option>
+                                    	<option>1989</option>
+                                    	<option>1988</option>
+                                    	<option>1987</option>
+                                    	<option>1986</option>
+                                    	<option>1985</option>
+                                    	<option>1984</option>
+                                    	<option>1983</option>
+                                    	<option>1982</option>
+                                    	<option>1981</option>
+                                    	<option>1980</option>
+                                    	<option>1979</option>
+                                    	<option>1978</option>
+                                    	<option>1977</option>
+                                    	<option>1976</option>
+                                    	<option>1975</option>
+                                    	<option>1974</option>
+                                    	<option>1973</option>
+                                    	<option>1972</option>
+                                    	<option>1971</option>
+                                    	<option>1970</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-5" for="personal-dept">Department?</label>
                                 <div class="col-md-7">
-                                    <select type="text" id="personal-dept" name="personal-dept" class="form-control" required>
-                                        <option value="">Select year</option>
-                                        <option>2020</option>
-                                        <option>2019</option>
-                                        <option>2018</option>
-                                        <option>2017</option>
-                                        <option>2016</option>
-                                        <option>2015</option>
-                                        <option>2014</option>
-                                        <option>2013</option>
-                                        <option>2012</option>
-                                        <option>2011</option>
-                                        <option>2010</option>
-                                        <option>2009</option>
-                                        <option>2008</option>
-                                        <option>2007</option>
-                                        <option>2006</option>
-                                        <option>2005</option>
-                                        <option>2004</option>
-                                        <option>2003</option>
-                                        <option>2002</option>
-                                        <option>2001</option>
-                                        <option>2000</option>
-                                        <option>1999</option>
-                                        <option>1998</option>
-                                        <option>1997</option>
-                                        <option>1996</option>
-                                        <option>1995</option>
-                                        <option>1994</option>
-                                        <option>1993</option>
-                                        <option>1992</option>
-                                        <option>1991</option>
-                                        <option>1990</option>
-                                        <option>1989</option>
-                                        <option>1988</option>
-                                        <option>1987</option>
-                                        <option>1986</option>
-                                        <option>1985</option>
-                                        <option>1984</option>
-                                        <option>1983</option>
-                                        <option>1982</option>
-                                        <option>1981</option>
-                                        <option>1980</option>
-                                        <option>1979</option>
-                                        <option>1978</option>
-                                        <option>1977</option>
-                                        <option>1976</option>
-                                        <option>1975</option>
-                                        <option>1974</option>
-                                        <option>1973</option>
-                                        <option>1972</option>
-                                        <option>1971</option>
-                                        <option>1970</option>
-                                    </select>
+                                    <input type="text" id="personal-dept" name="personal-dept" class="form-control" required>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -502,7 +443,9 @@ input[type='range']::-moz-range-thumb {
                                 <br>
                             </div>
                             <div class="form-group">
-                                <input id="anonymous" name="anonymous" value="1" type="checkbox" checked> <label for="anonymous">Include my credentials with this review</label><br>
+                                <input id="anonymous" name="anonymous" value="1" type="checkbox" checked>
+                                <label for="anonymous">Include my credentials with this review</label>
+                                <br>
                             </div>
                             <button class="btn btn-primary">Submit</button>
                 </form>
@@ -512,6 +455,8 @@ input[type='range']::-moz-range-thumb {
         </div>
     </div>
 </div>
+
+<script src="{{ URL::asset('assets/js/jquery-1.9.1.min.js') }}"></script>
 <script>
     var colors = ['#9f1923', '#CB202D', '#DE1D0F', '#FF7800', '#FFBA00', '#EDD614', '#9ACD32', '#5BA829', '#3F7E00', '#305D02']
     $('.rating').each(function(index) {
@@ -563,17 +508,15 @@ input[type='range']::-moz-range-thumb {
         });
     });
 
-    $('#no-mshs').change(function(){
+    $('#no-mshs').change(function() {
         $('.hostel-row').toggle();
-        console.log('qdw');
     })
 </script>
 @else
-<div class="col-md-6 col-md-offset-3">
+<div class="col-md-8 col-md-offset-2">
 <br>
 <div class="title"><h3>Please login to continue</h3></div>
 @include('user.login_template')
 </div>
 @endif
-
 @stop

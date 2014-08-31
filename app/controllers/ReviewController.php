@@ -96,4 +96,23 @@ class ReviewController extends BaseController {
 		return Redirect::to('/');
 	}
 
+	public function report()
+	{
+		if(!Auth::check())
+			App::abort(403, 'Unauthorized action.');
+		if(Auth::user()->admin!=1)
+			App::abort(403, 'Unauthorized action.');
+		$allreview=DB::table('college_reviews')->get();
+		View::share('data',$allreview);
+		foreach ($allreview as $key => $value) {
+			$allreview[$key]->user=DB::table('users')->where('id','=' ,$value->user_id)->first();
+			if($value->college_id==0)
+				$allreview[$key]->college=DB::table('temp_colleges')->where('temp_id','=' ,$value->temp_college_id)->first();
+			else
+				$allreview[$key]->college=DB::table('college_id')->where('cid','=' ,$value->college_id)->first();
+		}
+		return View::make('review.report');
+		return $allreview;
+	}
+
 }

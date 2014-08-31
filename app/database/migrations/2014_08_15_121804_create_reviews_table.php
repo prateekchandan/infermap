@@ -16,15 +16,18 @@ class CreateReviewsTable extends Migration {
 		{
 			$table->increments('review_id')->unique();
 			$table->integer('college_id');
+			$table->integer('user_id');
 			$table->integer('temp_college_id')->nullable();
 			$table->string('facqual', 50)->nullable();
 			$table->string('class_hrs', 20)->mullable();
 			$table->string('attendance', 20)->nullable();
 			$table->integer('acad_quality')->nullable();
 			$table->integer('acad_reputation')->nullable();
+			$table->integer('gross_fees')->nullable();
 			$table->string('placement', 20)->nullable();
 			$table->string('package', 20)->nullable();
 			$table->boolean('intern_help')->nullable();
+			$table->boolean('scholarship')->nullable();
 			$table->string('intern', 20)->nullable();
 			$table->boolean('no_mess_hostel')->nullable();
 			$table->integer('hostel_rating')->nullable();

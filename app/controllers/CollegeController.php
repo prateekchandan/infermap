@@ -103,7 +103,7 @@ class CollegeController extends BaseController {
 					return View::make('college.facilities');
 					break;
 				case 'review':
-					return View::make('review.view');
+					return View::make('college.review');
 					break;
 				default:
 					return View::make('college.about');

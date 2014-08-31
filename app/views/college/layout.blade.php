@@ -75,7 +75,9 @@
 				            <li class="{{($data['page_name']=='facilities')?'active':''}}">
 				            	<a href="{{URL::to('college')}}/{{$data['link']}}/facilities">Facilities</a>
 				            </li>
-				            
+				             <li class="{{($data['page_name']=='review')?'active':''}}">
+				            	<a href="{{URL::to('college')}}/{{$data['link']}}/review">Review</a>
+				            </li>
 				          </ul>
 				        </div><!--/.nav-collapse -->
 				      </div>

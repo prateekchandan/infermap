@@ -7,6 +7,7 @@ class CollegeReview extends Eloquent{
 	public function saveFromInput(){
 		$this->college_id = Input::get('cid');
 		$this->temp_college_id = Input::get('temp_college_id');
+		$this->user_id = Auth::user()->id;
 		$this->facqual = Input::get('facqual');
 		$this->class_hrs = Input::get('clshrs');
 		$this->attendance = Input::get('att');
@@ -14,7 +15,10 @@ class CollegeReview extends Eloquent{
 		$this->acad_reputation = Input::get('acad-repo');
 		$this->placement = Input::get('plac');
 		$this->intern_help = Input::get('intern-help');
+		$this->scholarship = Input::get('scholarship');
+		$this->gross_fees = Input::get('gross-fees');
 		$this->intern = Input::get('intern');
+		$this->package = Input::get('pack');
 		$this->no_mess_hostel = Input::get('nomshs');
 		$this->hostel_rating = Input::get('hostel');
 		$this->mess_rating = Input::get('mess');
