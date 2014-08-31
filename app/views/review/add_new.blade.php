@@ -205,11 +205,11 @@ input[type='range']::-moz-range-thumb {
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-5" for="sports">How much satisfied are you by your teachers?</label>
-                                <div class="rating col-md-7" data-id="acad-qual" data-max="5"></div>
+                                <div class="rating col-md-7" data-id="acad-qual" data-max="5" data-descript="Very Dissatisfied#Dissatisfied#Neutral#Satisfied#Very Satisfied"></div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-5" for="sports">Reputation of college amongst similar colleges</label>
-                                <div class="rating col-md-7" data-id="acad-repo" data-max="5"></div>
+                                <div class="rating col-md-7" data-id="acad-repo" data-max="5" data-descript="Low#Neutral#Good#High#Very High"></div>
                             </div>
                         </div>
                     </div>
@@ -287,13 +287,13 @@ input[type='range']::-moz-range-thumb {
                               </h3>
                             <br>
                             <div class="form-group row">
-                                <label class="col-md-5" for="gross-fee">Gross Fee per Annum (in ₹)</label>
+                                <label class="col-md-5" for="gross-fee">Total fees per year (in ₹)</label>
                                 <div class="col-md-7">
                                     <input type="number" id="gross-fees" name="gross-fees" class="form-control">
                                 </div>
                             </div>
                              <div class="form-group row">
-                                <label class="col-md-5">Does your college provide scholarships?</label>
+                                <label class="col-md-5">Scholarships provided by college?</label>
                                 <div class="col-md-7">
                                     <input type="radio" name="scholarship" id="fee-help-yes" value="1">
                                     <label for="fee-help-yes">Yes</label>
@@ -350,7 +350,7 @@ input[type='range']::-moz-range-thumb {
                             <br>
 
                             <div class="form-group row">
-                                <label class="col-md-5" for="sports">Co-curricular/Extra-curricular life</label>
+                                <label class="col-md-5" for="sports">Co-curricular/Extra-curricular life<br>Rate the surrounding area of your college(based on facilities)</label>
                                 <div class="rating col-md-7" data-id="co-currics" data-max="5"></div>
                             </div>
                             <div class="form-group row">
@@ -421,13 +421,7 @@ input[type='range']::-moz-range-thumb {
                             <div class="form-group row">
                                 <label class="col-md-5" for="personal-year">Year of Graduation</label>
                                 <div class="col-md-7">
-                                    <input type="text" id="personal-year" name="personal-year" class="form-control" required>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-5" for="personal-dept">Department?</label>
-                                <div class="col-md-7">
-                                    <select type="text" id="personal-dept" name="personal-dept" class="form-control" required>
+                                <select type="text" id="personal-year" name="personal-year" class="form-control" required>
                                         <option value="">Select year</option>
                                         <option>2020</option>
                                         <option>2019</option>
@@ -481,6 +475,12 @@ input[type='range']::-moz-range-thumb {
                                         <option>1971</option>
                                         <option>1970</option>
                                     </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-5" for="personal-dept">Department?</label>
+                                <div class="col-md-7">
+                                    <input type="text" id="personal-dept" name="personal-dept" class="form-control" required>
                                 </div>
                             </div>
                             <div class="form-group row">

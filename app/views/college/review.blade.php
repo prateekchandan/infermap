@@ -1,6 +1,69 @@
 @extends ('college.layout')
 
 @section ('college-content')
+
+@if($errors->has('feedback'))
+    <div class="alert alert-success alert-dismissable" style="" role="alert">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h3>THANK YOU</h3>
+        <h4>The review is greatly appreciated</h4>
+    </div>
+    <form  method="post" action="{{ URL::route('review.feedback.save') }}">
+    <div class="col-md-10 col-md-offset-1">
+    <div class="title"><h3>Share Review on Social Media</h3></div>
+    </div>
+    <div class="col-md-10 col-md-offset-1">
+        
+        <div class="row">
+            <a target='_blank' style="cursor:pointer" class="facebook_connect" href="http://www.facebook.com/sharer/sharer.php?u={{URL::route('review_main')}}">
+                <div class="img"><i class="fa fa-facebook"></i></div>
+                <div class="text">Share on Facebook</div>
+            </a>
+            <a target='_blank' style="cursor:pointer" style="" class="gplus_connect" href="https://plus.google.com/share?url={{URL::route('review_main')}}">
+                <div class="img"><i class="fa fa-google-plus"></i></div>
+                <div class="text">Share on Google Plus</div>
+            </a>
+        </div>
+    </div>
+    <div class="col-md-10 col-md-offset-1">
+    <br>
+    <div class="title"><h3>Refer to your friends</h3></div>
+    </div>
+    <div class="col-md-10 col-md-offset-1">
+        <br>
+        <div class="row">
+            <div class="form-group">
+                <label>Friend 1</label>
+                <input type="email" id="email1" name="email1" class="form-control" placeholder="email address">
+            </div>
+            <div class="form-group">
+                <label>Friend 2</label>
+                <input type="email" id="email2" name="email2" class="form-control"  placeholder="email address">
+            </div>
+            <div class="form-group">
+                <label>Friend 3</label>
+                <input type="email" id="email3" name="email3" class="form-control" placeholder="email address">
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col-md-10 col-md-offset-1">
+    <br>
+    <div class="title"><h3>Comment about feedback</h3></div>
+    </div>
+    <div class="col-md-10 col-md-offset-1">
+        <br>
+        <div class="row">
+            <textarea class="form-control" name="comment" required></textarea>
+        </div>
+    </div>
+    <div class="col-md-10 col-md-offset-1">
+    <br>
+        <button type="submit" class="btn btn-primary col-sm-12">All Done!</button>
+    </div>
+</form>
+@elseif(Auth::check())
 <style>
     .form-control {
         width: 200px;
@@ -103,13 +166,6 @@
         margin-left: 10px;
     }
 </style>
-@if($errors->has('feedback'))
-    <div class="alert alert-success alert-dismissable" style="" role="alert">
-        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h3>THANK YOU</h3>
-        <h4>The review is greatly appreciated</h4>
-    </div>
-@elseif(Auth::check())
 <div id="primary" class="content-area">
     <div id="content" class="site-content" role="main">
         <div class="entry-content">
@@ -164,11 +220,11 @@
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-5" for="sports">How much satisfied are you by your teachers?</label>
-                                <div class="rating col-md-7" data-id="acad-qual" data-max="5"></div>
+                                <div class="rating col-md-7" data-id="acad-qual" data-max="5" data-descript="Very Dissatisfied#Dissatisfied#Neutral#Satisfied#Very Satisfied"></div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-5" for="sports">Reputation of college amongst similar colleges</label>
-                                <div class="rating col-md-7" data-id="acad-repo" data-max="5"></div>
+                                <div class="rating col-md-7" data-id="acad-repo" data-max="5" data-descript="Low#Neutral#Good#High#Very High"></div>
                             </div>
                         </div>
                     </div>
@@ -246,13 +302,13 @@
 					          </h3>
                             <br>
                             <div class="form-group row">
-                                <label class="col-md-5" for="gross-fee">Gross Fee per Annum (in ₹)</label>
+                                <label class="col-md-5" for="gross-fee">Total fees per year (in ₹)</label>
                                 <div class="col-md-7">
                                     <input type="number" id="gross-fees" name="gross-fees" class="form-control">
                                 </div>
                             </div>
                              <div class="form-group row">
-                                <label class="col-md-5">Does your college provide scholarships?</label>
+                                <label class="col-md-5">Scholarships provided by college?</label>
                                 <div class="col-md-7">
                                     <input type="radio" name="scholarship" id="fee-help-yes" value="1">
                                     <label for="fee-help-yes">Yes</label>
@@ -309,7 +365,7 @@
                             <br>
 
                             <div class="form-group row">
-                                <label class="col-md-5" for="sports">Co-curricular/Extra-curricular life</label>
+                                <label class="col-md-5" for="sports">Co-curricular/Extra-curricular life<br>Rate the surrounding area of your college(based on facilities)</label>
                                 <div class="rating col-md-7" data-id="co-currics" data-max="5"></div>
                             </div>
                             <div class="form-group row">

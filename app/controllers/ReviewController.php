@@ -102,7 +102,7 @@ class ReviewController extends BaseController {
 				$comment=Input::get('comment');
 			}
 
-		return Redirect::to('/');
+		return Redirect::back();
 	}
 
 	public function report()
