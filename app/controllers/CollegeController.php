@@ -334,7 +334,7 @@ class CollegeController extends BaseController {
 		}
 	}	
 
-	public function collegebyplace($state='error',$city="error")
+	public function collegebyplace($state,$city="all")
 	{
 		if($state=="error"||$city=="error")
 			App::abort(404);
@@ -344,7 +344,7 @@ class CollegeController extends BaseController {
 			if(sizeof($all)==0)
 				App::abort(404);
 			foreach ($all as $key => $value) {
-				echo $value->name.'<br>';
+				echo '<a href="../college/'.$value->link.'">'.$value->name.'</a><br>';
 			}
 		}
 		else

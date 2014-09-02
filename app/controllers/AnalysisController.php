@@ -31,7 +31,7 @@ class AnalysisController extends BaseController {
 				$res.=" (Pharmacy)";
 				$q_new.=" ,`pharm`=1";
 			}
-			$pos=strpos($dept,"electronics");
+			$pos=strpos($dept,"electronic");
 			if($pos!==false){
 				$res.=" (Electronics)";
 				$q_new.=" ,`electronic`=1";
@@ -150,8 +150,9 @@ class AnalysisController extends BaseController {
 			//echo '<b>'.$college->name.'</b><br>';
 			foreach ($depts as $key => $value) {
 				$tag=$this->tag($value->department);
-				if($tag!='' && $value->program != 'mtech' && $value->program != 'me' && $value->program != 'mba' && $value->program != 'phd' && $value->program != 'mca')
-					echo $value->program.','.strtolower(trim($value->department)).','.$tag.','.$college->cid.'<br>';
+				if(1||$tag=='' && $value->program != 'mtech' && $value->program != 'me' && $value->program != 'mba' && $value->program != 'phd' && $value->program != 'mca')
+					//echo $value->program.','.strtolower(trim($value->department)).','.$tag.','.$college->name.'<br>';
+					echo $value->department.'<br>';
 				//echo $value->department.' => <b>'.''.'</b><br>';
 			}
 			//echo '<hr>';

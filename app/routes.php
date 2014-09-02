@@ -10,7 +10,7 @@ Route::get('/', function()
 Route::filter('admin',function(){
 	if(!Auth::check())
 	{
-		return Redirect::route('user.login');
+		return View::make('user.login');
 	}
 });
 
@@ -59,6 +59,7 @@ Route::get('/user',function(){
 });
 
 // Keep this line at last
-Route::get('/{state}/{city}','CollegeController@collegebyplace');
+Route::get('/place/{state}/{city}',array('as'=>'place.state.city','uses'=>'CollegeController@collegebyplace'));
+Route::get('/place/{state}',array('as'=>'place.state','uses'=>'CollegeController@collegebyplace'));
 
 

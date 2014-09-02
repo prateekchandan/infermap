@@ -103,9 +103,9 @@
 			       	<ul class="links-list-alt">
 			       		@if($data['state']!='')
 			       		@if($data['city']!='')
-							<li><a href="{{URL::to('/').'/'.$data['state'].'/'.$data['city']}}">Colleges in {{{$data['city']}}}</a></li>
+							<li><a href="{{URL::to('/place').'/'.$data['state'].'/'.$data['city']}}">Colleges in {{{$data['city']}}}</a></li>
 						@endif
-							<li><a href="{{URL::to('/').'/'.$data['state'].'/all'}}">Colleges in {{{$data['state']}}}</a></li>
+							<li><a href="{{URL::to('/place').'/'.$data['state']}}">Colleges in {{{$data['state']}}}</a></li>
 						@endif
 
 						@foreach($data['allexams'] as $exam)
