@@ -142,7 +142,7 @@ class UsersController extends \BaseController {
 		}
 		$user = $users[0];
 		Auth::login($user);
-		return Redirect::to('/');
+		return Redirect::back();
 	}
 
 	public function showlogin(){
