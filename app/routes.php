@@ -7,6 +7,12 @@ Route::get('/', function()
 });
 
 
+Route::filter('admin',function(){
+	if(!Auth::check())
+	{
+		return Redirect::route('user.login');
+	}
+});
 
 // URL for page for review and storing a review
 Route::get('/review',array('as'=>'review_main','uses'=>'ReviewController@get_college'));
@@ -19,7 +25,7 @@ Route::post('/review', array('as'=>'review.college.save','uses'=>'ReviewControll
 
 
 //Analysis pages
-Route::get('/analysis/departments', array('as'=>'analysis.dept','uses'=>'AnalysisController@department'));
+Route::get('/analysis/departments', array('before'=>'admin','as'=>'analysis.dept','uses'=>'AnalysisController@department'));
 // Some mains URLS's 
 
 // URL's for college
