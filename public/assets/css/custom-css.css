@@ -47,10 +47,11 @@
 
 /*Autocomplete box*/
 .temp_review_autobox{
-	position: fixed;
+	position: absolute;
 	z-index: 100;
 	padding: 5px;
 	box-shadow: 0px 0px 15px #eee;
+	margin-top: -17px;
 }
 .temp_review_autobox ul li a{
 	display: block;

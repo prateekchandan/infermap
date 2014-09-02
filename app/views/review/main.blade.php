@@ -74,8 +74,8 @@
 		var box=document.createElement('div');
 		box.className="temp_review_autobox";
 		box.id="temp_review_autobox";
-		box.style.top=(h+18)+"px";
-		box.style.left=w+"px";
+		/*box.style.top=(h+18)+"px";
+		box.style.left=w+"px";*/
 		box.style.width=(inp.width()+30)+"px";
 		box.style.background="white";
 		
