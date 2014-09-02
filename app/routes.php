@@ -17,6 +17,9 @@ Route::post('/review/feedback',array('as'=>'review.feedback.save','uses'=>'Revie
 Route::get('/review/report',array('as'=>'review.report','uses'=>'ReviewController@report'));
 Route::post('/review', array('as'=>'review.college.save','uses'=>'ReviewController@save_college_review'));
 
+
+//Analysis pages
+Route::get('/analysis/departments', array('as'=>'analysis.dept','uses'=>'AnalysisController@department'));
 // Some mains URLS's 
 
 // URL's for college

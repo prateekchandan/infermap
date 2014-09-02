@@ -341,6 +341,8 @@ class CollegeController extends BaseController {
 		if($city=='all')
 		{
 			$all=DB::table('college_id')->where('state', "=",$state)->get();
+			if(sizeof($all)==0)
+				App::abort(404);
 			foreach ($all as $key => $value) {
 				echo $value->name.'<br>';
 			}
@@ -348,6 +350,8 @@ class CollegeController extends BaseController {
 		else
 		{
 			$all=DB::table('college_id')->where('state', "=",$state)->where('city','=',$city)->get();
+			if(sizeof($all)==0)
+				App::abort(404);
 			foreach ($all as $key => $value) {
 				echo '<a href="../college/'.$value->link.'">'.$value->name.'</a><br>';
 			}

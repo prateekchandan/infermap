@@ -493,7 +493,7 @@
                                     <label for="mentoring">Mentoring current/past student</label>
                                     <br>
                                     <input id="author" name="stay-con[]" value="author" type="checkbox">
-                                    <label for="author">Appearing as guest author / Write Blogs on related articles</label>
+                                    <label for="author">Appearing as guest author / Write on related articles</label>
                                     <br>
                                     <input id="newsletter" name="stay-con[]" value="newsletter" type="checkbox">
                                     <label for="newsletter">Receiving newsletters and articles</label>

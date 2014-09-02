@@ -322,22 +322,22 @@ input[type='range']::-moz-range-thumb {
                                 </div>
                                 <br>
                                 <label>Rate the following based on your experience
-                                    <br>5: means very good , 1: Not so good</label>
+                                    <br>5: means Awesome , 1: Bad</label>
 
                                 <div class="row hostel-row">
                                     <label class="col-md-5" for="hostel">Hostel</label>
-                                    <div class="rating col-md-7" data-id="hostel" data-max="5" data-descript="shared cramped rooms####single rooms with AC and internet"></div>
+                                    <div class="rating col-md-7" data-id="hostel" data-max="5" data-descript="Bad#neutral#good#Very good#Awesome"></div>
                                 </div>
                                 <br>
                                 <div class="row hostel-row">
                                     <label class="col-md-5" for="mess">Mess</label>
-                                    <div class="rating col-md-7" data-id="mess" , data-max="5" data-descript="Not so good####Very good"></div>
+                                    <div class="rating col-md-7" data-id="mess" , data-max="5" data-descript="Bad#neutral#good#Very good#Awesome"></div>
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label class="col-md-5" for="sports">Sports</label>
-                                <div class="rating col-md-7" data-id="sports" data-max="5" data-descript="no sports facilities####sports teams participation, sports equipments available"></div>
+                                <div class="rating col-md-7" data-id="sports" data-max="5" data-descript="Bad#neutral#good#Very good#Awesome"></div>
                             </div>
                         </div>
                     </div>
@@ -490,7 +490,7 @@ input[type='range']::-moz-range-thumb {
                                     <label for="mentoring">Mentoring current/past student</label>
                                     <br>
                                     <input id="author" name="stay-con[]" value="author" type="checkbox">
-                                    <label for="author">Appearing as guest author / Write Blogs on related articles</label>
+                                    <label for="author">Appearing as guest author / Write on related articles</label>
                                     <br>
                                     <input id="newsletter" name="stay-con[]" value="newsletter" type="checkbox">
                                     <label for="newsletter">Receiving newsletters and articles</label>
