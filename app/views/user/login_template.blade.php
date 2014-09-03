@@ -106,12 +106,12 @@
                 <div style="cursor:pointer" class="facebook_connect" onClick="fblogin();">
                     <div class="img"><i class="fa fa-facebook"></i>
                     </div>
-                    <div class="text">Register with Facebook</div>
+                    <div class="text">Connect with Facebook</div>
                 </div>
 	            <div id="google-plus-button" style="cursor:pointer" class="gplus_connect" onclick="google_login()">
 	                <div class="img"><i class="fa fa-google-plus"></i>
 	                </div>
-	                <div class="text">Register with Google Plus</div>
+	                <div class="text">Signin with Google Plus</div>
 	            </div>
               
 
