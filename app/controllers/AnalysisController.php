@@ -33,11 +33,9 @@ class AnalysisController extends BaseController {
 
 	public function department()
 	{
-		$allcollege=DB::table('college_id')->get();
+		/*$allcollege=DB::table('college_id')->get();
 		foreach ($allcollege as $key => $college) {
-			$depts=DB::connection('college_data')->select('select * from t'.$college->cid.' where placed=0 && min_package=0 && avg_package=0 && program != "mtech" && program != "me" ');
-			
-			
+			$depts=DB::connection('college_data')->select('select * from t'.$college->cid.' where placed=0 && min_package=0 && avg_package=0 && program != "mtech" && program != "me" ');		
 			$alltag=array();
 			foreach ($depts as $key => $value) {
 				$tag=$this->tag($value->department);
@@ -56,7 +54,8 @@ class AnalysisController extends BaseController {
 				echo $college->name.'<br>';
 			DB::connection('infermap')->insert($query);
 	//		echo '<br>';	
-		}
+		}*/
+		return Redirect::to('/');
 		
 	}
 }
