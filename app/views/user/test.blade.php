@@ -8,7 +8,7 @@
     </script>
 
     <html>
-    <span id="signinButton">
+    
   <span
     class="g-signin"
     data-callback="signinCallback"
@@ -17,7 +17,7 @@
     data-requestvisibleactions="http://schema.org/AddAction"
     data-scope="https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/plus.profile.emails.read">
   </span>
-</span>
+
 <script type="text/javascript">
   function signinCallback(authResult) {
   if (authResult['status']['signed_in']) {
