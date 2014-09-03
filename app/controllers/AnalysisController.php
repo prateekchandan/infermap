@@ -36,8 +36,7 @@ class AnalysisController extends BaseController {
 		$allcollege=DB::table('college_id')->get();
 		foreach ($allcollege as $key => $college) {
 			$depts=DB::connection('college_data')->select('select * from t'.$college->cid.' where placed=0 || min_package=0 || avg_package=0');
-			if(sizeof($depts)==0)
-				continue;
+			
 			
 			$alltag=array();
 			foreach ($depts as $key => $value) {
