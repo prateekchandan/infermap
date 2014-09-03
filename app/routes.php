@@ -47,6 +47,9 @@ Route::post('/storefb', array('as'=>'user.storefb', 'uses'=>'UsersController@sto
 Route::get('/login', array('as'=>'user.login.show', 'uses'=>'UsersController@showlogin'));
 Route::post('/login', array('as'=>'user.login', 'uses'=>'UsersController@login'));
 Route::get('/logout', array('as'=>'user.logout', 'uses'=>'UsersController@logout'));
+Route::get('/gplus',function(){
+	return View::make('user.test');
+});
 
 
 // URL for autocomplete
