@@ -6,7 +6,7 @@
 <div class="row">
 @if($admission_table!=0)
 <?php  $check=1;?>
-<div class="col-md-9">
+<div class="col-md-12">
 <div class="title"><h3>List of Courses</h3></div>
 <ul class="star_list">
 @foreach ($admission_table as $course => $tables)
@@ -21,6 +21,8 @@
 @endforeach
 </ul>
 </div>
+@endif
+<?php /*
 <div class="col-md-3">
 	<div class="title"><h3>Ratings</h3></div>
 		<ul class="skills">
@@ -34,7 +36,7 @@
 			</li>
 		</ul>
 </div>
-@endif
+*/ ?>
 </div>
 
 @if(sizeof($data['allexams'])>0)

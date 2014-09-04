@@ -5,52 +5,51 @@
 @if($fees_table!=0)
 <div class="row">
 <?php  $check=1;?>
-<div class="col-md-9" style="overflow-x:auto">
-<div class="title">
-	<h3>
-		Fee Structure Per
-		@if($data['fee_type']==0)
-		Semester
-		@else
-		Annum
-		@endif
-		(in ₹)
-	</h3>
-</div>
-<div>
-	Following table contains Fee structure for 
-	@foreach($data['fee_type'] as $key => $value)
-		{{($key > 0)?',':''}}
-		{{$value->type}}
-	@endforeach
-	in <a href="{{URL::to('college')}}/{{$data['link']}}">{{$data['name']}}</a>
-	for
-	@foreach($data['fee_category'] as $key => $value)
-		{{($key > 0)?',':''}}
-		{{$value->category}}
-	@endforeach
-</div>
-<br>
-<ul>
-@for($i=1;$i < sizeof($fees_table);$i++)
-	<li><div>
-	<b>{{$fees_table[$i][0]}}</b>
-		<ol class="arrow_list">
-		@for( $j=1 ; $j < sizeof($fees_table[$i]);$j++)
-			@if($fees_table[$i][$j]!='-')
-				<li>
-					{{$fees_table[0][$j]}} : {{$fees_table[$i][$j]}}
-				</li>
+<div class="col-md-12" style="overflow-x:auto">
+	<div class="title">
+		<h3>
+			Fee Structure Per
+			@if($data['fee_type']==0)
+			Semester
+			@else
+			Annum
 			@endif
-		@endfor
-		</ol>
-		</div>
-	</li>
-@endfor
-</ul>
-	
-	
+			(in ₹)
+		</h3>
+	</div>
+	<div>
+		Following table contains Fee structure for 
+		@foreach($data['fee_type'] as $key => $value)
+			{{($key > 0)?',':''}}
+			{{$value->type}}
+		@endforeach
+		in <a href="{{URL::to('college')}}/{{$data['link']}}">{{$data['name']}}</a>
+		for
+		@foreach($data['fee_category'] as $key => $value)
+			{{($key > 0)?',':''}}
+			{{$value->category}}
+		@endforeach
+	</div>
+	<br>
+	<ul>
+	@for($i=1;$i < sizeof($fees_table);$i++)
+		<li><div>
+		<b>{{$fees_table[$i][0]}}</b>
+			<ol class="arrow_list">
+			@for( $j=1 ; $j < sizeof($fees_table[$i]);$j++)
+				@if($fees_table[$i][$j]!='-')
+					<li>
+						{{$fees_table[0][$j]}} : {{$fees_table[$i][$j]}}
+					</li>
+				@endif
+			@endfor
+			</ol>
+			</div>
+		</li>
+	@endfor
+	</ul>
 </div>
+<?php /*
 <div class="col-md-3">
 	<div class="title"><h3>Ratings</h3></div>
 		<ul class="skills">
@@ -64,6 +63,7 @@
 			</li>
 		</ul>
 </div>
+*/?>
 </div>
 @endif
 

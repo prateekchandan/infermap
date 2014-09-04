@@ -88,11 +88,11 @@
 				
 			</div>
 	
-			<div class="col-sm-8   main-college-content">
+			<div class="col-sm-7   main-college-content">
 				@yield('college-content')
 			</div>	
 			
-			<div class="col-sm-2">
+			<div class="col-sm-3">
 				
 				<!-- start: Sidebar -->
 				<div id="sidebar">

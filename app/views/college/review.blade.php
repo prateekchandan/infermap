@@ -483,7 +483,51 @@
                             <div class="form-group row">
                                 <label class="col-md-5" for="personal-dept">Department?</label>
                                 <div class="col-md-7">
-                                    <input type="text" id="personal-dept" name="personal-dept" class="form-control" required>
+                                    <select id="personal-dept" name="personal-dept" class="form-control" required>
+                                        <option value="">Chose department</option>
+                                        <option value="aero">Aerospace</option>
+                                        <option value="aeronautics">Aeronautics</option>
+                                        <option value="agri">Agricultural</option>
+                                        <option value="arch">Architecture</option>
+                                        <option value="automation">Automation</option>
+                                        <option value="automobile">Automobile</option>
+                                        <option value="biotech">Bio Technology/Bio Medical</option>
+                                        <option value="cham">Chemistry</option>
+                                        <option value="chem">Chemical</option>
+                                        <option value="civil">Civil</option>
+                                        <option value="communication">Communication</option>
+                                        <option value="Construction">Construction</option>
+                                        <option value="control">Control</option>
+                                        <option value="cse">Computer Science and Engineering</option>
+                                        <option value="dairy">dairy</option>
+                                        <option value="elec">Electrical</option>
+                                        <option value="electronic">Electronics</option>
+                                        <option value="energy">Energy</option>
+                                        <option value="environment">Environment</option>
+                                        <option value="fashion">Fashion</option>
+                                        <option value="food">Food</option>
+                                        <option value="industrial">Industrial</option>
+                                        <option value="instrumentation">Instrumentation</option>
+                                        <option value="it">Information Technology</option>
+                                        <option value="manufacturing">Manufacturing</option>
+                                        <option value="marine">Marine</option>
+                                        <option value="material">Material</option>
+                                        <option value="math">Mathematics</option>
+                                        <option value="mech">Mechanical</option>
+                                        <option value="meta">Metallurgy</option>
+                                        <option value="mining">Mining</option>
+                                        <option value="nano">Nano Technology</option>
+                                        <option value="nuclear">Nuclear Scince</option>
+                                        <option value="petroleum">Petroleum</option>
+                                        <option value="pharm">Pharmacy</option>
+                                        <option value="phy">Physics</option>
+                                        <option value="plastic">Plastic</option>
+                                        <option value="polymer">Polymer</option>
+                                        <option value="production">Production</option>
+                                        <option value="telecommunication">Tele Communication</option>
+                                        <option value="textile">Textile</option>
+                                        <option>Others</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group row">

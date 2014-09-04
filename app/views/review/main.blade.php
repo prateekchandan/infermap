@@ -22,19 +22,14 @@
 			Give back to the community by sharing your college experience, guide the high school students by shedding some light on the details of your college. / letting them know more about your college.
 		</div>
 	</div>
-	<div class="row">
-		
+	<div class="row">		
 		<div class="col-sm-6 col-sm-offset-3">
-		
-					<div class="title"><h3>Type your college name to write review</h3></div>
-
-					<div class="form-group">							
-					    <input type="text" class="form-control review_autocomplete">
-					    <div>Tip: Start by typing college Name</div>
-					</div>
-					
-
-				</div>
+			<div class="title"><h3>Type your college name to write review</h3></div>
+			<div class="form-group">							
+			    <input type="text" class="form-control review_autocomplete">
+			    <div>Tip: Start by typing college Name</div>
+			</div>
+		</div>
 	</div>
 	
 </div>
@@ -47,7 +42,7 @@
     	@if(Auth::check())
     	window.location='{{URL::Route("review_new")}}?college='+inp.val();
     	@else
-    	$('#error-area').html('<div class="alert alert-error alert-dismissable" style="" role="alert">					<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>Please login to continue</div>');
+    	$('#error-area').html('<div class="alert alert-error alert-dismissable" style="" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>Please login to continue</div>');
     	return false;
     	@endif
     }

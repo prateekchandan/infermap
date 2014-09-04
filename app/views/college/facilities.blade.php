@@ -4,7 +4,7 @@
 <?php  $check=0; ?>
 
 <div class="row">
-<div class="col-md-9">
+<div class="col-md-12">
 
 @if(File::exists(public_path().'/data'.'/'.$data['cid'].'/academics/facilities.txt'))
 @if(trim(file_get_contents(public_path().'/data'.'/'.$data['cid'].'/academics/facilities.txt'))!='')
@@ -66,6 +66,7 @@
 @endif
 @endif	
 </div>
+<?php /*
 	<div class="col-md-3">
 		<div class="title"><h3>Ratings</h3></div>
 		<ul class="skills">
@@ -79,6 +80,7 @@
 			</li>
 		</ul>
 	</div>
+*/?>
 </div>
 @if($check==0)
 @include('college.nodata')

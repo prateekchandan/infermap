@@ -6,12 +6,13 @@
 @if(File::exists(public_path().'/data'.'/'.$data['cid'].'/placements/placement_info.txt'))
 @if(trim(file_get_contents(public_path().'/data'.'/'.$data['cid'].'/placements/placement_info.txt'))!='')
 	<?php  $check=1;?>
-	<div class="col-sm-9">	
+	<div class="col-sm-12">	
 		<div class="title"><h3>Placement  Information</h3></div>
 		<?php echo file_get_contents(public_path().'/data'.'/'.$data['cid'].'/placements/placement_info.txt'); ?>
 	</div>
 @endif
 @endif
+<?php /*
 	<div class="col-md-3">
 		<div class="title"><h3>Ratings</h3></div>
 		<ul class="skills">
@@ -25,6 +26,7 @@
 			</li>
 		</ul>
 	</div>
+	*/?>
 </div>
 
 @if($placement_table!=0)
