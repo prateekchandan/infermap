@@ -17,21 +17,15 @@
 <!-- end: Page Title -->
 
 <div class="container">
-	@if(!Auth::check())
-	<div class="row">
-	<div class="col-md-6">
-	@endif
 	<div class="jumbotron" style="margin:10px">
 		<div>
 			Give back to the community by sharing your college experience, guide the high school students by shedding some light on the details of your college. / letting them know more about your college.
 		</div>
 	</div>
 	<div class="row">
-		@if(Auth::check())
+		
 		<div class="col-sm-6 col-sm-offset-3">
-		@else
-		<div class="col-sm-12">
-		@endif
+		
 					<div class="title"><h3>Type your college name to write review</h3></div>
 
 					<div class="form-group">							
@@ -42,17 +36,7 @@
 
 				</div>
 	</div>
-	@if(!Auth::check())
-	</div>
-
-		<div class="col-md-6" id="login_prompt">
-		<div class="title"><h3>Please login to continue</h3></div>
-		<div id="error-area">
-		</div>
-		@include('user.login_template')
-		</div>
-	</div>
-	@endif
+	
 </div>
 <script type="text/javascript">		
 	var request_autocomplete=jQuery.ajax({});
