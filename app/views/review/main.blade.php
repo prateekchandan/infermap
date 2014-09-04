@@ -17,42 +17,21 @@
 <!-- end: Page Title -->
 
 <div class="container">
-	@if(!Auth::check())
-	<div class="row">
-	<div class="col-md-6">
-	@endif
 	<div class="jumbotron" style="margin:10px">
 		<div>
 			Give back to the community by sharing your college experience, guide the high school students by shedding some light on the details of your college. / letting them know more about your college.
 		</div>
 	</div>
-	<div class="row">
-		@if(Auth::check())
+	<div class="row">		
 		<div class="col-sm-6 col-sm-offset-3">
-		@else
-		<div class="col-sm-12">
-		@endif
-					<div class="title"><h3>Type your college name to write review</h3></div>
-
-					<div class="form-group">							
-					    <input type="text" class="form-control review_autocomplete">
-					    <div>Tip: Start by typing college Name</div>
-					</div>
-					
-
-				</div>
-	</div>
-	@if(!Auth::check())
-	</div>
-
-		<div class="col-md-6" id="login_prompt">
-		<div class="title"><h3>Please login to continue</h3></div>
-		<div id="error-area">
-		</div>
-		@include('user.login_template')
+			<div class="title"><h3>Type your college name to write review</h3></div>
+			<div class="form-group">							
+			    <input type="text" class="form-control review_autocomplete">
+			    <div>Tip: Start by typing college Name</div>
+			</div>
 		</div>
 	</div>
-	@endif
+	
 </div>
 <script type="text/javascript">		
 	var request_autocomplete=jQuery.ajax({});
@@ -63,7 +42,7 @@
     	@if(Auth::check())
     	window.location='{{URL::Route("review_new")}}?college='+inp.val();
     	@else
-    	$('#error-area').html('<div class="alert alert-error alert-dismissable" style="" role="alert">					<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>Please login to continue</div>');
+    	$('#error-area').html('<div class="alert alert-error alert-dismissable" style="" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>Please login to continue</div>');
     	return false;
     	@endif
     }

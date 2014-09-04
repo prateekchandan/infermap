@@ -63,6 +63,32 @@ Route::get('/user',function(){
 	return Auth::user();
 });
 
+Route::get('/correct_links',function(){
+	$allcolleges=DB::table('college_id')->get();
+	$links=array();
+	function clean($string) {
+	   $string = str_replace(' ', '-', trim($string)); // Replaces all spaces with hyphens.
+	   $string = str_replace('--', '-', $string); // Replaces all spaces with hyphens.
+	   $string = str_replace('--', '-', $string); // Replaces all spaces with hyphens.
+	   $string = str_replace('nbsp', '', $string); // Replaces all spaces with hyphens.
+	   return preg_replace('/[^A-Za-z0-9\-]/', '', $string); // Removes special chars.
+	}
+	foreach ($allcolleges as $key => $value) {
+		$a=$value->name;
+		if($value->city!='')
+			$a.='-'.$value->city;
+		$link=clean($a);
+		if(in_array($link,$links)){
+			$link=$link.$links[$link];
+		}
+		DB::table('college_id')
+            ->where('cid', $value->cid)
+            ->update(array('link' => $link));
+		$links[$link]=1;
+		echo $link.'<br>';
+	}
+});
+
 // Keep this line at last
 Route::get('/place/{state}/{city}',array('as'=>'place.state.city','uses'=>'CollegeController@collegebyplace'));
 Route::get('/place/{state}',array('as'=>'place.state','uses'=>'CollegeController@collegebyplace'));

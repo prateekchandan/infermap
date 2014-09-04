@@ -8,13 +8,13 @@
 	@if(File::exists(public_path().'/data'.'/'.$data['cid'].'/about/about_college.txt'))
 	@if(trim(file_get_contents(public_path().'/data'.'/'.$data['cid'].'/about/about_college.txt'))!='')
 	<?php  $check=1;?>
-	<div class="col-sm-9">	
+	<div class="col-sm-12">	
 		<div class="title"><h3>About Us</h3></div>
 		<?php echo file_get_contents(public_path().'/data'.'/'.$data['cid'].'/about/about_college.txt'); ?>
 	</div>
 	@endif
 	@endif
-
+	<?php /*
 	<div class="col-sm-3">	
 		<div class="title"><h3>Ratings</h3></div>
 		<ul class="skills">
@@ -36,6 +36,7 @@
 			</li>
 		</ul>
 	</div>
+	*/?>
 </div>
 
 @if($data['images']!='0')
