@@ -102,16 +102,21 @@
 			
 			       	<ul class="links-list-alt">
 			       		@if($data['state']!='')
-			       		@if($data['city']!='')
-							<li><a href="{{URL::to('/place').'/'.$data['state'].'/'.$data['city']}}">Colleges in {{{$data['city']}}}</a></li>
-						@endif
-							<li><a href="{{URL::to('/place').'/'.$data['state']}}">Colleges in {{{$data['state']}}}</a></li>
+				       		@if($data['city']!='')
+								<li><a href="{{URL::to('/place').'/'.$data['state'].'/'.$data['city']}}">Colleges in {{{$data['city']}}}</a></li>
+							@endif
+								<li><a href="{{URL::to('/place').'/'.$data['state']}}">Colleges in {{{$data['state']}}}</a></li>
+								<hr class="thin-hr">
 						@endif
 
 						@foreach($data['allexams'] as $exam)
 							<li><a href="{{URL::to('exam').'/'.$exam->link}}">About {{$exam->name}}</a></li>
 						@endforeach
 
+						@if(sizeof($data['allexams'])>0)
+							<hr class="thin-hr">
+						@endif
+						
 						@foreach($data['related-colleges'] as $college)
 							<li><a href="{{URL::to('college').'/'.$college->link}}">{{$college->name}}</a></li>
 						@endforeach
