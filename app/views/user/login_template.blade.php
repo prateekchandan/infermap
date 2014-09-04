@@ -116,9 +116,9 @@
               
 
                 <div class="page-title-small">
-
-                    <h3>or</h3>
-
+                    <hr class="thin-hr">
+                    <h3>Login if you are already registered</h3>
+                    <hr class="thin-hr">
                 </div>
 
                 <form method="post" action="{{ URL::route('user.login') }}">

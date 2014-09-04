@@ -116,7 +116,7 @@
 						@if(sizeof($data['allexams'])>0)
 							<hr class="thin-hr">
 						@endif
-						
+
 						@foreach($data['related-colleges'] as $college)
 							<li><a href="{{URL::to('college').'/'.$college->link}}">{{$college->name}}</a></li>
 						@endforeach
@@ -127,26 +127,16 @@
 
 					<div class="testimonial-container">
 
-						<div class="title"><h3>Reviews</h3></div>
+						<div class="title"><h3>About Infermap</h3></div>
 
 							<div class="testimonials-carousel" data-autorotate="3000">
 								<ul class="carousel">
 
 									<li class="testimonial">
-										<div class="testimonials">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</div>
+										<div class="testimonials">Infermap is a free comprehensive platform that improves the college selecting process, based on individual resources and requirements. 
+Inspired by a belief that all students deserve access to good guidance, infermap aims to create the interactive tools and media that guide students as they find, afford and enroll in a college that’s a good fit for them.</div>
 										<div class="testimonials-bg"></div>
-										<div class="testimonials-author">Shivam, <span>CEO</span></div>
-									</li>
-
-									<li class="testimonial">
-										<div class="testimonials">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</div>
-										<div class="testimonials-bg"></div>
-										<div class="testimonials-author">Yogesh, <span>CEO</span></div>
-									</li>
-									<li class="testimonial">
-										<div class="testimonials">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</div>
-										<div class="testimonials-bg"></div>
-										<div class="testimonials-author">Prateek, <span>CTO</span></div>
+										<div class="testimonials-author"></div>
 									</li>
 								</ul>
 							</div>
