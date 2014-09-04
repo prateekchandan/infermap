@@ -128,6 +128,23 @@ class UsersController extends \BaseController {
 		//
 	}
 
+	public function gpluslogin(){
+		$email = Input::get('email');
+		$users = User::where('email','=', $email)->get();
+		if(sizeof($users) == 0){
+			$user = new User;
+			$user->email = $email;
+			$user->name = Input::get('name');
+			$user->fbid = Input::get('fbid');
+			$user->save();
+			Auth::login($user);
+			return Redirect::route('user.edit');
+		}
+		$user = $users[0];
+		Auth::login($user);
+		return Redirect::back();
+	}
+
 	public function fblogin(){
 		$email = Input::get('email');
 		$users = User::where('email','=', $email)->get();
