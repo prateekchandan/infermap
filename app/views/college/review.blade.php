@@ -165,59 +165,47 @@
         line-height: 25px;
         margin-left: 10px;
     }
+
+
+
 </style>
 <div id="primary" class="content-area">
     <div id="content" class="site-content" role="main">
         <div class="entry-content">
             <div class="main-body">
                 <form action="{{ URL::to('/review') }}" method="post" accept-charset="utf-8">
-                    <div class="media">
+                     @if(sizeof($review_depts)>0)
+                    <div class="media"> 
                         <div class="media-body">
                             <h3 class="media-heading" style="background-color:#358EFB;">
-							  Academics
-							</h3>
+                                Academics
+                            </h3>
                             <br>
-                            <div class="form-group row">
-                                <label class="col-md-5">What is academic qualification of majority of teaching faculty?</label>
-                                <div class="col-md-7">
-                                	<input type="hidden" name="cid" value="{{$data['cid']}}">
-                                    <input id="btech" name="facqual" value="btech" type="radio">
-                                    <label for="btech">B.Tech</label>
-                                    <br>
-                                    <input id="mtech" name="facqual" value="mtech" type="radio">
-                                    <label for="mtech">M.Tech</label>
-                                    <br>
-                                    <input id="phd" name="facqual" value="phd" type="radio">
-                                    <label for="phd">Ph.D</label>
-                                    <br>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-5" for="clshrs">Avg. no. of class hrs/week</label>
-                                <div class="col-md-7">
-                                    <select name="clshrs" class="form-control" id="clshrs">
-                                        <option value="">Select</option>
-                                        <option value="10-15">10-15</option>
-                                        <option value="15-20">15-20</option>
-                                        <option value="20-25">20-25</option>
-                                        <option value="25-30">25-30</option>
-                                        <option value="30-40">30-40</option>
-                                        <option value="40-50">40-50</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-5" for="att">% Attendance required</label>
-                                <div class="col-md-7">
-                                    <select name="att" class="form-control" id="att">
-                                        <option value="">Select</option>
-                                        <option value="50-60">50-60</option>
-                                        <option value="60-70">60-70</option>
-                                        <option value="70-80">70-80</option>
-                                        <option value="80-100">80-100</option>
-                                    </select>
-                                </div>
-                            </div>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Sl No.</th>
+                                        <th>Department</th>
+                                        @foreach($review_depts as $r => $dept_rate)
+                                        <th>{{$r+1}}</th>
+                                        @endforeach
+                                    </tr>
+
+                                </thead>
+                                @foreach($review_depts as $key => $dept)
+                                <tr>
+                                    <td>{{$key+1}}</td>
+                                    <td>{{{$dept->department}}}</td>
+                                    @foreach($review_depts as $r => $dept_rate)
+                                    <td>
+                                        <input class="rate-radio" type="radio" data-waschecked="false" name="{{$dept->did}}" id="{{$dept->did}}-{{$r+1}}" value="{{$r+1}}">
+                                        <label for="{{$dept->did}}-{{$r+1}}"></label>
+                                    </td>
+                                    @endforeach
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </table>
                             <div class="form-group row">
                                 <label class="col-md-5" for="sports">How much satisfied are you by your teachers?</label>
                                 <div class="rating col-md-7" data-id="acad-qual" data-max="5" data-descript="Very Dissatisfied#Dissatisfied#Neutral#Satisfied#Very Satisfied"></div>
@@ -228,6 +216,8 @@
                             </div>
                         </div>
                     </div>
+                    @endif
+                   
                     <div class="media">
                         <div class="media-body">
                             <h3 class="media-heading" style="background-color:#1ABC9C">
@@ -295,9 +285,9 @@
                             </div>
                         </div>
                     </div>
-                     <div class="media">
+                     <div class="media"> 
                         <div class="media-body">
-                            <h3 class="media-heading" style="background-color:#ffba00">
+                            <h3 class="media-heading" style="background-color:rgb(248,208,47)">
 					            Fees
 					          </h3>
                             <br>
@@ -319,6 +309,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="media">
                         <div class="media-body">
 
@@ -616,6 +607,41 @@
 
     $('#no-mshs').change(function() {
         $('.hostel-row').toggle();
+    })
+    $('.rate-radio').click(function(){
+        if ($(this).data('waschecked') == true)
+        {
+            $(this).prop('checked', false);
+            $(this).data('waschecked', false);
+            for (var i = $('.rate-radio').length - 1; i >= 0; i--) {
+            var tempval=$('.rate-radio')[i].getAttribute('value');
+                if(tempval==$(this).val())
+                        $('.rate-radio')[i].removeAttribute('disabled','disabled');
+            }
+        }
+        else
+            $(this).data('waschecked', true);
+    })
+    $('.rate-radio').change(function(){
+        var total={{sizeof($review_depts)}};
+        $('.rate-radio').removeAttr('disabled');
+        @foreach($review_depts as $key => $row)
+            var name={{$row->did}};
+            if($('[name='+name+']:checked').val()!==undefined){
+                var val=$('[name='+name+']:checked').val();
+                for (var i = $('.rate-radio').length - 1; i >= 0; i--) {
+
+                    var tempname=$('.rate-radio')[i].getAttribute('name');
+                    if(tempname==name)
+                        continue;
+                    var tempval=$('.rate-radio')[i].getAttribute('value');
+                    if(tempval==val)
+                        $('.rate-radio')[i].setAttribute('disabled','disabled');
+
+                    console.log(tempname);
+                };
+            }
+        @endforeach
     })
 </script>
 @else

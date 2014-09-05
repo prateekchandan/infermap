@@ -103,6 +103,7 @@ class CollegeController extends BaseController {
 					return View::make('college.facilities');
 					break;
 				case 'review':
+					View::share('review_depts',$this->get_review_depts($data['cid']));
 					return View::make('college.review');
 					break;
 				default:
@@ -111,6 +112,21 @@ class CollegeController extends BaseController {
 			}
 			
 		}
+	}
+
+	private function get_review_depts($cid){
+		$correct_courses=DB::table('allcourses')->where('active','=','1')->get();
+		$str='';
+		foreach ($correct_courses as $key => $value) {
+			if($str!='')
+				$str.=' || ';
+			$str.='program="'.$value->name.'"';
+			
+
+		}
+		$query='select did,department,program from t'.$cid.' where '.$str;
+		$depts=DB::connection('college_data')->select($query);
+		return $depts;
 	}
 
 	private function get_links_social($cid){
