@@ -6,7 +6,10 @@
 
 @section('body')
 <style type="text/css">
-	
+	.editable-content ul{
+		padding-left:35px;
+		list-style: inherit;
+	}
 </style>
 <!-- start: Page Title -->
 	<div id="page-title">
@@ -55,7 +58,7 @@
 				            	<a href="{{URL::route('exam')}}/{{$data['link']}}/about">About</a>
 				            </li>
 				            <li class="{{($data['page_name']=='syllabus')?'active':''}}">
-				            	<a href="{{URL::route('exam')}}/{{$data['link']}}/syllabus">Admission</a>
+				            	<a href="{{URL::route('exam')}}/{{$data['link']}}/syllabus">Syllabus</a>
 				            </li>
 				            <li class="{{($data['page_name']=='exam_pattern')?'active':''}}">
 				            	<a href="{{URL::route('exam')}}/{{$data['link']}}/exam_pattern">Exam Pattern</a>
@@ -106,7 +109,7 @@
 										<div class="testimonials">Infermap is a free comprehensive platform that improves the college selecting process, based on individual resources and requirements. 
 Inspired by a belief that all students deserve access to good guidance, infermap aims to create the interactive tools and media that guide students as they find, afford and enroll in a college that’s a good fit for them.</div>
 										<div class="testimonials-bg"></div>
-										<div class="testimonials-author"></div>
+										<div class="testimonials-author">hjg</div>
 									</li>
 								</ul>
 							</div>

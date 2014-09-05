@@ -14,13 +14,43 @@ class ExamsController extends BaseController {
 	|	Route::get('/', 'HomeController@showWelcome');
 	|
 	*/
-	public function all(){
+	private function fetch_data($path_to_file)
+	{
+	  $str="";
+	    if(file_exists($path_to_file))
+	    {
+	      //$file = fopen($path_to_file, "r");
+	         $str.=file_get_contents($path_to_file);
+	          $str = iconv("UTF-8", "ASCII//TRANSLIT", $str);
+	      //fclose($file);
+	      $str=trim($str);
+	      return $str;
+	      }
+	    else
+	      return $str;
+	}
+		public function all(){
 		$exam=DB::table('exam')->get();
 		foreach ($exam as $key => $row) {
-			echo '<a href="exam/'.$row->link.'">'.$row->name.'</a><br>';
+			echo '<a href='.$row->link.'">'.$row->name.'</a><br>';
 		}
 	}
 
+	public function savefile(){
+		$filename=Input::get('filename');
+		$data=Input::get('data');
+		$eid=Input::get('eid');
+		$path=public_path().'/other-data/exam/'.$eid;
+		if(!is_dir($path))
+		{
+			mkdir($path,0777);
+		}
+		$file=$path.'/'.$filename.'.txt';
+		$file = fopen($file,"w");
+		fwrite($file,$data);
+		fclose($file);
+		return $path;
+	}
 	public function view($link,$page="about")
 	{
 		$exam=DB::table('exam')->where('link', $link)->first();
@@ -34,16 +64,23 @@ class ExamsController extends BaseController {
 			if($user->admin >= 1)
 				$exam->admin=1;
 		}
+		$files=['about','eligibility'];
+		foreach ($files as $key => $value) {
+			$path=public_path().'/other-data'.'/exam/'.$exam->eid.'/'.$value.'.txt';
+			$dat=trim($this->fetch_data($path));
+			$exam->$value=$dat;
+		}
+		
 		View::share('exam',$exam);
 		$data['page_name']=$page;
 		$data['link']=$link;
 		View::share('data',$data);
 		switch ($page) {
 				case 'about':
-					return View::make('exams.about');
+					return View::make('exams.about_edit');
 					break;
 				
-					break;
+					
 				default:
 					return View::make('exams.about');
 					break;
