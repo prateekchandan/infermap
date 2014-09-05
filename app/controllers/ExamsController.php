@@ -29,11 +29,11 @@ class ExamsController extends BaseController {
 	    else
 	      return $str;
 	}
-		public function all(){
-		$exam=DB::table('exam')->get();
-		foreach ($exam as $key => $row) {
-			echo '<a href='.$row->link.'">'.$row->name.'</a><br>';
-		}
+	public function all(){
+		$exam=DB::select('select distinct link,name from exam where eid!=0');
+		
+		View::share('exam',$exam);
+		return View::make('exams.all');
 	}
 
 	public function savefile(){
