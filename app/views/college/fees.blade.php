@@ -69,7 +69,7 @@
 
 @if($fees_table==0)
 <div class="row">
-	<div class="col-md-9">
+	<div class="col-md-12">
 		<div class="title">
 			<h3>
 				Fee Structure Per
@@ -97,8 +97,9 @@
 		</ul>
 		
 	</div>
+<?php /*
 	<div class="col-md-3">
-	<div class="title"><h3>Ratings</h3></div>
+		<div class="title"><h3>Ratings</h3></div>
 		<ul class="skills">
 			<li>
 				<h5>Difficulty in admission ( 40% )</h5>
@@ -109,8 +110,8 @@
 				<div class="meter"><span style="width: 80%"></span></div><!-- Edite width here -->
 			</li>
 		</ul>
-</div>
-	
+	</div>
+	*/?>
 </div>
 @endif
 

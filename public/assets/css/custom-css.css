@@ -63,3 +63,8 @@
 .temp_review_autobox div{
 	border-bottom: 1px solid #eee;
 }
+
+.thin-hr{
+	margin:5px;
+	border-top: 1px solid rgb(241, 241, 241);
+}
