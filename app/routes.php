@@ -34,8 +34,9 @@ Route::get('/college/{link}/{page}','CollegeController@college');
 Route::get('/college/{link}','CollegeController@college');
 
 // URLS for exam pages
-Route::get('/exam/{link}',array('as'=>'exam','uses'=>'ExamsController@view'));
-Route::get('/exam/',array('as'=>'all_exam','uses'=>'ExamsController@all'));
+Route::get('/exam/{link}',array('as'=>'exam.link','uses'=>'ExamsController@view'));
+Route::get('/exam/{link}/{page}',array('as'=>'exam.page','uses'=>'ExamsController@view'));
+Route::get('/exam/',array('as'=>'exam','uses'=>'ExamsController@all'));
 
 // URLS's for register and login
 Route::get('/register', array('as'=>'user.create', 'uses'=>'UsersController@create'));

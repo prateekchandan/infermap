@@ -5,29 +5,25 @@ class CollegeReview extends Eloquent{
 
 
 	public function saveFromInput(){
-		$this->college_id = Input::get('cid');
+		$this->college_id = Input::get('college_id');
 		$this->temp_college_id = Input::get('temp_college_id');
 		$this->user_id = Auth::user()->id;
-		$this->facqual = Input::get('facqual');
-		$this->class_hrs = Input::get('clshrs');
-		$this->attendance = Input::get('att');
-		$this->acad_quality = Input::get('acad-qual');
-		$this->acad_reputation = Input::get('acad-repo');
+		$this->college_depts = Input::get('college_depts');
+		$this->fac_teaching = Input::get('fac_teaching');
+		$this->research_work = Input::get('research_work');
 		$this->placement = Input::get('plac');
-		$this->intern_help = Input::get('intern-help');
-		$this->scholarship = Input::get('scholarship');
-		$this->gross_fees = Input::get('gross-fees');
-		$this->intern = Input::get('intern');
 		$this->package = Input::get('pack');
-		$this->no_mess_hostel = Input::get('nomshs');
+		$this->intern = Input::get('intern');
+		$this->gross_fees = Input::get('gross-fees');
+		$this->scholarship = Input::get('scholarship');
+		$this->mess_hostel = Input::get('mshs');
 		$this->hostel_rating = Input::get('hostel');
 		$this->mess_rating = Input::get('mess');
 		$this->sports_rating = Input::get('sports');
 		$this->co_currics_rating = Input::get('co-currics');
-		$this->facilities = (Input::get('facilities') == null ? null : implode(',',Input::get('facilities')));
-		$this->whychoose = Input::get('whychoose');
-		$this->improve = Input::get('improve');
+		$this->about_college = Input::get('about_college');
 		$this->recommend = (Input::get('reco') == 'yes' ? 1 : (Input::get('reco') == 'no' ? 0 : null));
+		$this->review_type = Input::get('label');
 		$this->personal_dept = Input::get('personal-dept');
 		$this->personal_year = Input::get('personal-year');
 		$this->anonymous = Input::get('anonymous');

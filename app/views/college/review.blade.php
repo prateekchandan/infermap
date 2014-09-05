@@ -65,9 +65,7 @@
 </form>
 @elseif(Auth::check())
 <style>
-    .form-control {
-        width: 200px;
-    }
+
     #hostel,
     #mess,
     #sports,
@@ -165,69 +163,64 @@
         line-height: 25px;
         margin-left: 10px;
     }
+
+
+
 </style>
 <div id="primary" class="content-area">
     <div id="content" class="site-content" role="main">
         <div class="entry-content">
             <div class="main-body">
-                <form action="{{ URL::to('/review') }}" method="post" accept-charset="utf-8">
-                    <div class="media">
+                <form action="{{ URL::to('/review') }}" method="post" accept-charset="utf-8" onsubmit="return validate();">
+                    <input type="hidden" name="college_id" value="{{$data['cid']}}">
+                    <div class="media"> 
                         <div class="media-body">
                             <h3 class="media-heading" style="background-color:#358EFB;">
-							  Academics
-							</h3>
+                                Academics
+                            </h3>
                             <br>
+                            @if(sizeof($review_depts)>0)
+                            <input type="hidden" name="college_depts" id="college_depts" value='{}'>
+                            <label>Rank departments of your college: </label>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Sl No.</th>
+                                        <th>Department</th>
+                                        @foreach($review_depts as $r => $dept_rate)
+                                        <th>{{$r+1}}</th>
+                                        @endforeach
+                                    </tr>
+
+                                </thead>
+                                @foreach($review_depts as $key => $dept)
+                                <tr>
+                                    <td>{{$key+1}}</td>
+                                    <td>{{{$dept->department}}}</td>
+                                    @foreach($review_depts as $r => $dept_rate)
+                                    <td>
+                                        <input class="rate-radio" type="radio" data-waschecked="false" name="{{$dept->did}}" id="{{$dept->did}}-{{$r+1}}" value="{{$r+1}}">
+                                        <label for="{{$dept->did}}-{{$r+1}}"></label>
+                                    </td>
+                                    @endforeach
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </table>
+
+                             @endif
                             <div class="form-group row">
-                                <label class="col-md-5">What is academic qualification of majority of teaching faculty?</label>
-                                <div class="col-md-7">
-                                	<input type="hidden" name="cid" value="{{$data['cid']}}">
-                                    <input id="btech" name="facqual" value="btech" type="radio">
-                                    <label for="btech">B.Tech</label>
-                                    <br>
-                                    <input id="mtech" name="facqual" value="mtech" type="radio">
-                                    <label for="mtech">M.Tech</label>
-                                    <br>
-                                    <input id="phd" name="facqual" value="phd" type="radio">
-                                    <label for="phd">Ph.D</label>
-                                    <br>
-                                </div>
+                                <label class="col-md-5" for="sports">How would you rate your faculty's teaching abilities?</label>
+                                <div class="rating col-md-7" data-id="fac_teaching" data-max="5" data-descript="Very Dissatisfied#Dissatisfied#Neutral#Satisfied#Very Satisfied"></div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-md-5" for="clshrs">Avg. no. of class hrs/week</label>
-                                <div class="col-md-7">
-                                    <select name="clshrs" class="form-control" id="clshrs">
-                                        <option value="">Select</option>
-                                        <option value="10-15">10-15</option>
-                                        <option value="15-20">15-20</option>
-                                        <option value="20-25">20-25</option>
-                                        <option value="25-30">25-30</option>
-                                        <option value="30-40">30-40</option>
-                                        <option value="40-50">40-50</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-5" for="att">% Attendance required</label>
-                                <div class="col-md-7">
-                                    <select name="att" class="form-control" id="att">
-                                        <option value="">Select</option>
-                                        <option value="50-60">50-60</option>
-                                        <option value="60-70">60-70</option>
-                                        <option value="70-80">70-80</option>
-                                        <option value="80-100">80-100</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-5" for="sports">How much satisfied are you by your teachers?</label>
-                                <div class="rating col-md-7" data-id="acad-qual" data-max="5" data-descript="Very Dissatisfied#Dissatisfied#Neutral#Satisfied#Very Satisfied"></div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-5" for="sports">Reputation of college amongst similar colleges</label>
-                                <div class="rating col-md-7" data-id="acad-repo" data-max="5" data-descript="Low#Neutral#Good#High#Very High"></div>
+                                <label class="col-md-5" for="sports">How much the college focuses on research and practical work?</label>
+                                <div class="rating col-md-7" data-id="research_work" data-max="5" data-descript="Low#Neutral#Good#High#Very High"></div>
                             </div>
                         </div>
                     </div>
+                   
+                   
                     <div class="media">
                         <div class="media-body">
                             <h3 class="media-heading" style="background-color:#1ABC9C">
@@ -235,7 +228,7 @@
 					          </h3>
                             <br>
                             <div class="form-group row">
-                                <label class="col-md-5" for="plac">Approximate percent (%) placed students every year</label>
+                                <label class="col-md-5" for="plac">Approximate percentage (%) of students who get placed every year</label>
                                 <div class="col-md-7">
                                     <select name="plac" class="form-control" id="pack">
                                         <option value="">Select</option>
@@ -252,7 +245,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-md-5" for="pack">Average Package LPA(Lacs per anum)</label>
+                                <label class="col-md-5" for="pack">Average Package offered (In Lacs per anum)</label>
                                 <div class="col-md-7">
                                     <select name="pack" class="form-control" id="pack">
                                         <option value="">Select</option>
@@ -264,16 +257,6 @@
                                         <option value="9-12">9-12</option>
                                         <option value="12+">12+</option>
                                     </select>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-5">Does your college help in securing internship/training in third year?</label>
-                                <div class="col-md-7">
-                                    <input type="radio" name="intern-help" id="intern-help-yes" value="1">
-                                    <label for="intern-help-yes">Yes</label>
-                                    <br>
-                                    <input type="radio" name="intern-help" id="intern-help-no" value="0">
-                                    <label for="intern-help-no">No</label>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -295,9 +278,9 @@
                             </div>
                         </div>
                     </div>
-                     <div class="media">
+                     <div class="media"> 
                         <div class="media-body">
-                            <h3 class="media-heading" style="background-color:#ffba00">
+                            <h3 class="media-heading" style="background-color:rgb(248,208,47)">
 					            Fees
 					          </h3>
                             <br>
@@ -310,49 +293,58 @@
                              <div class="form-group row">
                                 <label class="col-md-5">Scholarships provided by college?</label>
                                 <div class="col-md-7">
-                                    <input type="radio" name="scholarship" id="fee-help-yes" value="1">
-                                    <label for="fee-help-yes">Yes</label>
-                                    <br>
-                                    <input type="radio" name="scholarship" id="fee-help-no" value="0">
-                                    <label for="fee-help-no">No</label>
+                                    <div class="col-md-6">
+                                        <input type="radio" name="scholarship" id="fee-help-yes" value="1">
+                                        <label for="fee-help-yes">Yes</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="radio" name="scholarship" id="fee-help-no" value="0">
+                                        <label for="fee-help-no">No</label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                     <div class="media">
                         <div class="media-body">
 
                             <h3 class="media-heading" style="background-color:#E74C3C">
-					            Facilities
+					            Facilities &amp;  Campus Life
 					          </h3>
                             <br>
                             <div class="form-group">
                                 <div class="row">
-                                    <label class="col-md-5">Hostel and Mess facilities</label>
+                                    <label class="col-md-5">Uncheck if your college doesn’t provide Hostel facilities?</label>
                                     <div class="col-md-7">
-                                        <input type="checkbox" name="no-mshs" id="no-mshs">
-                                        <label for="no-mshs">Hostel not provided by the college</label>
+                                        <input type="checkbox" name="mshs" id="mshs" checked="checked" value="1">
+                                        <label for="mshs">Hostel provided by the college</label>
                                         <br>
                                     </div>
                                 </div>
                                 <br>
                                 <label>Rate the following based on your experience
-                                    <br>5: means very good , 1: Not so good</label>
+                                    <br>5: means Awesome , 1: Not so good</label>
 
                                 <div class="row hostel-row">
                                     <label class="col-md-5" for="hostel">Hostel</label>
-                                    <div class="rating col-md-7" data-id="hostel" data-max="5" data-descript="shared cramped rooms####single rooms with AC and internet"></div>
+                                    <div class="rating col-md-7" data-id="hostel" data-max="5" data-descript="Not so good#Okay#Good#Very Good#Awesome"></div>
                                 </div>
                                 <br>
                                 <div class="row hostel-row">
                                     <label class="col-md-5" for="mess">Mess</label>
-                                    <div class="rating col-md-7" data-id="mess" , data-max="5" data-descript="Not so good####Very good"></div>
+                                    <div class="rating col-md-7" data-id="mess" , data-max="5"  data-descript="Not so good#Okay#Good#Very Good#Awesome"></div>
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label class="col-md-5" for="sports">Sports</label>
-                                <div class="rating col-md-7" data-id="sports" data-max="5" data-descript="no sports facilities####sports teams participation, sports equipments available"></div>
+                                <div class="rating col-md-7" data-id="sports" data-max="5"  data-descript="Not so good#Okay#Good#Very Good#Awesome"></div>
+                            </div>
+
+                             <div class="form-group row">
+                                <label class="col-md-5" for="co-currics">Extra-curricular life</label>
+                                <div class="rating col-md-7" data-id="co-currics" data-max="5"  data-descript="Not so good#Okay#Good#Very Good#Awesome"></div>
                             </div>
                         </div>
                     </div>
@@ -360,55 +352,52 @@
                         <div class="media-body">
 
                             <h3 class="media-heading" style="background-color:#9B59B6">
-			  Campus Life
-			</h3>
+                                Write a review about your college.
+                			</h3>
                             <br>
 
+                           
                             <div class="form-group row">
-                                <label class="col-md-5" for="sports">Co-curricular/Extra-curricular life<br>Rate the surrounding area of your college(based on facilities)</label>
-                                <div class="rating col-md-7" data-id="co-currics" data-max="5"></div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-5">Tick facilities available in your college.</label>
-                                <div class="col-md-7">
-                                    <input id="canteen" name="facilities[]" value="canteen" type="checkbox">
-                                    <label for="canteen">Canteen</label>
-                                    <br>
-                                    <input id="fests" name="facilities[]" value="fests" type="checkbox">
-                                    <label for="fests">Fests</label>
-                                    <br>
-                                    <input id="clubs" name="facilities[]" value="clubs" type="checkbox">
-                                    <label for="clubs">Clubs (Photography/ Dance/ Debate)</label>
-                                    <br>
-                                    <input id="gne" name="facilities[]" value="gne" type="checkbox">
-                                    <label for="gne">Events and competitions are held during semester</label>
-                                    <br>
-                                    <input id="concity" name="facilities[]" value="concity" type="checkbox">
-                                    <label for="concity">Connectivity to the City</label>
-                                    <br>
+                                <label class="col-md-12" for="about_college"> What is good or bad about your school? <br>
+                                    Is there anything people should know about before deciding to attend? <br>
+                                    Any Advice?
+                                </label>
+                                <div class="col-md-12">
+                                    <textarea name="about_college" id="about_college" class="form-control" style=" height:120px"></textarea>
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-md-5" for="whycho">What are the strengths of your college over other similar colleges? (50 words)
-                                    <br>Ex. The college encourage students to take part in a lot of competitions Or A lot of research facilities provided</label>
-                                <div class="col-md-7">
-                                    <textarea name="whychoose" id="whychooose" class="form-control" style=" height:120px"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-5" for="improve">What areas you think your college should improve upon (50 words)</label>
-                                <div class="col-md-7">
-                                    <textarea name="improve" id="improve" class="form-control"></textarea>
+                             <div class="form-group row">
+                                <label class="col-md-3" for="label">Type of review</label>
+                                <div class="col-md-9">
+                                    <div class="col-md-3">
+                                        <input type="radio" name="label" value="Good" id="label-good">
+                                        <label for="label-good">Good</label>
+                                    </div>
+                                     <div class="col-md-3">
+                                        <input type="radio" name="label" value="Neutral" id="label-neutral">
+                                        <label for="label-neutral">Neutral</label>
+                                    </div>
+                                     <div class="col-md-3">
+                                        <input type="radio" name="label" value="Bad" id="label-bad">
+                                        <label for="label-bad">Bad</label>
+                                    </div>
+                                     <div class="col-md-3">
+                                        <input type="radio" name="label" value="Advice" id="label-advice">
+                                        <label for="label-advice">Advice</label>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-5" for="reco">Would you recommend college to friends over similar colleges</label>
                                 <div class="col-md-7">
-                                    <input type="radio" name="reco" value="yes" id="reco-yes">
-                                    <label for="reco-yes">Yes</label>
-                                    <br>
-                                    <input type="radio" name="reco" value="no" id="reco-no">
-                                    <label for="reco-no">No</label>
+                                    <div class="col-md-6">
+                                        <input type="radio" name="reco" value="yes" id="reco-yes">
+                                        <label for="reco-yes">Yes</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="radio" name="reco" value="no" id="reco-no">
+                                        <label for="reco-no">No</label>
+                                    </div>
                                 </div>
                             </div>
 
@@ -530,22 +519,10 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-md-5">How are you most motivated to "stay connected" with the us? Check all that apply.</label>
-                                <div class="col-md-7">
-                                    <input id="mentoring" name="stay-con[]" value="mentoring" type="checkbox">
-                                    <label for="mentoring">Mentoring current/past student</label>
-                                    <br>
-                                    <input id="author" name="stay-con[]" value="author" type="checkbox">
-                                    <label for="author">Appearing as guest author / Write on related articles</label>
-                                    <br>
-                                    <input id="newsletter" name="stay-con[]" value="newsletter" type="checkbox">
-                                    <label for="newsletter">Receiving newsletters and articles</label>
-                                    <br>
-                                    <input id="contributing-newsletter" name="stay-con[]" value="contributing-newsletter" type="checkbox">
-                                    <label for="contributing-newsletter">Contributing to newsletters and articles</label>
-                                    <br>
-                                </div>
+                            
+                            <div class="form-group">
+                                <input id="anonymous" name="stay-con[]" value="newsletter" type="checkbox" checked>
+                                <label for="anonymous">I am interested in receiving newsletters and articles related to engineering</label>
                                 <br>
                             </div>
                             <div class="form-group">
@@ -614,9 +591,54 @@
         });
     });
 
-    $('#no-mshs').change(function() {
+    $('#mshs').change(function() {
         $('.hostel-row').toggle();
     })
+    $('.rate-radio').click(function(){
+        if ($(this).data('waschecked') == true)
+        {
+            $(this).prop('checked', false);
+            $(this).data('waschecked', false);
+            for (var i = $('.rate-radio').length - 1; i >= 0; i--) {
+            var tempval=$('.rate-radio')[i].getAttribute('value');
+                if(tempval==$(this).val())
+                        $('.rate-radio')[i].removeAttribute('disabled','disabled');
+            }
+        }
+        else
+            $(this).data('waschecked', true);
+    })
+    $('.rate-radio').change(function(){
+        var total={{sizeof($review_depts)}};
+        $('.rate-radio').removeAttr('disabled');
+        @foreach($review_depts as $key => $row)
+            var name={{$row->did}};
+            if($('[name='+name+']:checked').val()!==undefined){
+                var val=$('[name='+name+']:checked').val();
+                for (var i = $('.rate-radio').length - 1; i >= 0; i--) {
+
+                    var tempname=$('.rate-radio')[i].getAttribute('name');
+                    if(tempname==name)
+                        continue;
+                    var tempval=$('.rate-radio')[i].getAttribute('value');
+                    if(tempval==val)
+                        $('.rate-radio')[i].setAttribute('disabled','disabled');
+                };
+            }
+        @endforeach
+    })
+    function validate(){
+        var s={};
+        @foreach($review_depts as $key => $row)
+            var name={{$row->did}};
+            if($('[name='+name+']:checked').val()!==undefined){
+                var val=$('[name='+name+']:checked').val();
+                s[name]=val;
+            }
+        @endforeach
+        $('#college_depts').val(JSON.stringify(s));
+        return true;
+    }
 </script>
 @else
 <div class="col-md-8 col-md-offset-2">
