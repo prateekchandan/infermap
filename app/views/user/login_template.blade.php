@@ -5,39 +5,64 @@
 <meta name="google-signin-cookiepolicy" content="single_host_origin" />
 <meta name="google-signin-callback" content="signinCallback" />
 <script type="text/javascript">
+function gplus_login(){
       (function() {
-       var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+       var po = document.createElement('script'); po.type = 'text/javascript'; po.async = false;
        po.src = 'https://apis.google.com/js/client:plusone.js';
        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
      })();
-     function google_login() {
+}
 
-		  // Additional params
-		  var additionalParams = {
-		     'callback': signinCallback
-		   };
+ function google_login() {
 
-		  gapi.auth.signIn(additionalParams);
+	  // Additional params
+	  var additionalParams = {
+		 'callback': signinCallback
+	   };
+
+	  gapi.auth.signIn(additionalParams);
+}
+function signinCallback(authResult) {
+	  if (authResult['status']['signed_in']) {
+		gapi.client.load('plus','v1', function(){
+		 var request = gapi.client.plus.people.get({
+		   'userId': 'me'
+		 });
+		 var info;
+		 request.execute(function(resp) {
+			info = resp;
+			var name = info['displayName'];
+			var email = info['emails'][0]['value'];
+			var gplusid = info['id'];
+			var img_url = info['image']['url'];
+			console.log(name, email, gplusid, img_url);
+			var url = '{{ URL::route("user.gpluslogin") }}';
+			var form = $('<form action="' + url + '" method="post">' +
+				'<input type="hidden" name="img_url" value="' + img_url + '" />' +
+				'<input type="hidden" name="gplusid" value="' + gplusid + '" />' +
+				'<input type="hidden" name="name" value="' + name + '" />' +
+				'<input type="hidden" name="email" value="' + email + '" />' +
+				'</form>');
+			$.ajax({
+				url: url,
+				type: 'post',
+				data: $(form).serialize(),
+				success: function() {
+					location.reload();
+				}
+			})
+		 });
+		});
+	  } else {
+		// Update the app to reflect a signed out user
+		// Possible error values:
+		//   "user_signed_out" - User is signed-out
+		//   "access_denied" - User denied access to your app
+		//   "immediate_failed" - Could not automatically log in the user
+		console.log('Sign-in state: ' + authResult['error']);
+	  }
 	}
-	function signinCallback(authResult) {
-		  if (authResult['status']['signed_in']) {
-		    gapi.client.load('plus','v1', function(){
-			 var request = gapi.client.plus.people.get({
-			   'userId': 'me'
-			 });
-			 request.execute(function(resp) {
-			   console.log(resp);
-			 });
-			});
-		  } else {
-		    // Update the app to reflect a signed out user
-		    // Possible error values:
-		    //   "user_signed_out" - User is signed-out
-		    //   "access_denied" - User denied access to your app
-		    //   "immediate_failed" - Could not automatically log in the user
-		    console.log('Sign-in state: ' + authResult['error']);
-		  }
-		}
+
 </script>
 <script>
     window.fbAsyncInit = function() {
@@ -108,7 +133,7 @@
                     </div>
                     <div class="text">Connect with Facebook</div>
                 </div>
-	            <div id="google-plus-button" style="cursor:pointer" class="gplus_connect" onclick="google_login()">
+	            <div id="google-plus-button" style="cursor:pointer" class="gplus_connect" onclick="gplus_login()">
 	                <div class="img"><i class="fa fa-google-plus"></i>
 	                </div>
 	                <div class="text">Signin with Google Plus</div>

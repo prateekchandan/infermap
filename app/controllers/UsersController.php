@@ -134,8 +134,9 @@ class UsersController extends \BaseController {
 		if(sizeof($users) == 0){
 			$user = new User;
 			$user->email = $email;
+			$user->gplusid = Input::get('gplusid');
 			$user->name = Input::get('name');
-			$user->fbid = Input::get('fbid');
+			$user->img_url = Input::get('img_url');
 			$user->save();
 			Auth::login($user);
 			return Redirect::route('user.edit');

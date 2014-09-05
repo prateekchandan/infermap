@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AddImageUrlGplusidToUsers' => $baseDir . '/app/database/migrations/2014_09_05_152758_add_image_url_gplusid_to_users.php',
     'AddImageUrlToUsers' => $baseDir . '/app/database/migrations/2014_09_04_164036_add_image_url_to_users.php',
     'AnalysisController' => $baseDir . '/app/controllers/AnalysisController.php',
     'BaseController' => $baseDir . '/app/controllers/BaseController.php',
