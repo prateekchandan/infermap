@@ -70,21 +70,33 @@ class ExamsController extends BaseController {
 			$dat=trim($this->fetch_data($path));
 			$exam->$value=$dat;
 		}
-		
+
 		View::share('exam',$exam);
 		$data['page_name']=$page;
 		$data['link']=$link;
 		View::share('data',$data);
-		switch ($page) {
+		if($exam->admin==1)
+		{
+			switch ($page) {
 				case 'about':
 					return View::make('exams.about_edit');
-					break;
-				
-					
+					break;		
 				default:
 					return View::make('exams.about');
 					break;
 			}
+		}
+		else
+		{
+			switch ($page) {
+				case 'about':
+					return View::make('exams.about');
+					break;		
+				default:
+					return View::make('exams.about');
+					break;
+			}
+		}
 	}
 
 }
