@@ -15,8 +15,8 @@
 	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Economica:700,400italic">
 	
 	<link rel="icon" href="{{URL::asset('assets/img/icons/icon.png')}}" type="image/x-icon">
-	<script async src="{{URL::asset('assets/js/jquery-1.9.1.min.js')}}"></script>
-	<script async src="{{URL::asset('assets/js/bootstrap.min.js')}}"></script>
+	<script  src="{{URL::asset('assets/js/jquery-1.9.1.min.js')}}"></script>
+	<script src="{{URL::asset('assets/js/bootstrap.min.js')}}"></script>
 
 	<!-- end: CSS -->
 
@@ -60,7 +60,7 @@
             			<a href="#" class="dropdown-toggle" data-toggle="dropdown">Account<b class="caret"></b></a>
             			<ul class="dropdown-menu">
 							<li><a href="{{URL::Route('user.edit')}}">Edit Profile</a></li>
-							<li><a href="{{URL::Route('user.logout')}}">Logout</a></li>
+							<li><a href="{{URL::Route('user.logout')}}?url={{Request::url()}}">Logout</a></li>
             			</ul>
           			</li>
 					@else

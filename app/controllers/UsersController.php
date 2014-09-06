@@ -205,6 +205,10 @@ class UsersController extends \BaseController {
 
 	public function logout(){
 		if(Auth::check()) Auth::logout();
-		return Redirect::to('/');
+		$url=Input::get('url');
+		if($url!='' && $url !=null)
+			return Redirect::away($url);
+		else
+		return Redirect::back();
 	}
 }
