@@ -22,7 +22,8 @@
 			<div class="container">
 
 				<div class="pull-left" style="max-width:80%">
-					<h2>List of All Exams</h2>
+					<h2>
+List of Engineering Entrance Exam 2014 - 2015 | India</h2>
 				</div>
 			</div>
 			<!-- end: Container  -->
@@ -34,8 +35,11 @@
 
 		<!--start: Row -->
     <div class="row">
-    	<div class="col-md-6 col-md-offset-2">
+    	<div class="col-md-8 col-md-offset-2">
     		<div class="title"><h3>List of all Exams</h3></div>
+    		<div style="text-align: justify;">
+				Engineering is the most hunted after specialized course after 12th in India. Students who are passionate about technology and machines can become an engineer by cracking one of the engineering entrance exams given below. These exams are conducted every year at both National and State ranks for choosing most skilled and competent candidates for admission into engineering institutes across the nation. Prominent engineering colleges in India include IITs, NITs, Birla Institute of Technology and few more. Most of the engineering colleges are AICTE permitted. The most significant and respected <b>Engineering Entrance Exams in India</b> are AIEEE, BITSAT, IIT JEE, ENAT, CETK, COMEDK, MHTCET and few more.
+			</div>
     		<table class="table">
     			<thead>
     				<tr>

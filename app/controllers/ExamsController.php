@@ -30,7 +30,7 @@ class ExamsController extends BaseController {
 	      return $str;
 	}
 	public function all(){
-		$exam=DB::select('select distinct link,name,fullform from exam where eid!=0');
+		$exam=DB::select('select distinct link,name,fullform from exam where eid!=0 order by name');
 		
 		View::share('exam',$exam);
 		return View::make('exams.all');
