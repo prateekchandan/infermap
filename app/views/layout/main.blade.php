@@ -15,8 +15,8 @@
 	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Economica:700,400italic">
 	
 	<link rel="icon" href="{{URL::asset('assets/img/icons/icon.png')}}" type="image/x-icon">
-	<script src="{{URL::asset('assets/js/jquery-1.9.1.min.js')}}"></script>
-	<script src="{{URL::asset('assets/js/bootstrap.min.js')}}"></script>
+	<script async src="{{URL::asset('assets/js/jquery-1.9.1.min.js')}}"></script>
+	<script async src="{{URL::asset('assets/js/bootstrap.min.js')}}"></script>
 
 	<!-- end: CSS -->
 
