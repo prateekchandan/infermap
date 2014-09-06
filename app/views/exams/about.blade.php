@@ -1,9 +1,9 @@
 @extends('exams.layout')
 @section('exam-content')
-<link rel="stylesheet" href="{{URL::asset('assets/css/redit.min.css')}}">
 
 <?php  $check=0; ?>
 
+@if($exam->about!='')
 <div class="row">
 	<div class="col-md-12">
 		<div class="title">
@@ -16,6 +16,8 @@
 		</div>
 	</div>
 </div>
+@endif
+@if($exam->eligibility!='')
 <div class="row">
 	<div class="col-md-12">
 		<div class="title">
@@ -28,4 +30,5 @@
 		</div>
 	</div>
 </div>	
+@endif
 @endsection

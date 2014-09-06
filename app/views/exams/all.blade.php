@@ -1,7 +1,7 @@
 @extends('layout.main')
 
 @section('meta')
-<title></title>
+<title>List of Exams for Engineering</title>
 @endsection
 
 @section('body')

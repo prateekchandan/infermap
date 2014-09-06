@@ -38,6 +38,8 @@ Route::get('/exam/{link}',array('as'=>'exam.link','uses'=>'ExamsController@view'
 Route::get('/exam/{link}/{page}',array('as'=>'exam.page','uses'=>'ExamsController@view'));
 Route::get('/exam/',array('as'=>'exam','uses'=>'ExamsController@all'));
 Route::post('/exam/',array('before'=>'admin','as'=>'exam.savefile','uses'=>'ExamsController@savefile'));
+Route::post('/exam/addevent',array('before'=>'admin','as'=>'exam.addevent','uses'=>'ExamsController@addevent'));
+Route::post('/exam/deleteevent',array('before'=>'admin','as'=>'exam.deleteevent','uses'=>'ExamsController@deleteevent'));
 
 // URLS's for register and login
 Route::get('/register', array('as'=>'user.create', 'uses'=>'UsersController@create'));

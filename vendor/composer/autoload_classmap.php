@@ -7,7 +7,6 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'AddImageUrlGplusidToUsers' => $baseDir . '/app/database/migrations/2014_09_05_152758_add_image_url_gplusid_to_users.php',
-    'AddImageUrlToUsers' => $baseDir . '/app/database/migrations/2014_09_04_164036_add_image_url_to_users.php',
     'AnalysisController' => $baseDir . '/app/controllers/AnalysisController.php',
     'BaseController' => $baseDir . '/app/controllers/BaseController.php',
     'Boris\\Boris' => $vendorDir . '/d11wtq/boris/lib/Boris/Boris.php',
@@ -34,6 +33,7 @@ return array(
     'College' => $baseDir . '/app/models/College.php',
     'CollegeController' => $baseDir . '/app/controllers/CollegeController.php',
     'CollegeReview' => $baseDir . '/app/models/CollegeReview.php',
+    'CreateExamDates' => $baseDir . '/app/database/migrations/2014_09_05_233356_create_exam_dates.php',
     'CreateReviewsTable' => $baseDir . '/app/database/migrations/2014_08_15_121804_create_reviews_table.php',
     'CreateTempCollegeTable' => $baseDir . '/app/database/migrations/2014_08_30_170226_create_temp_college_table.php',
     'CreateUsersTable' => $baseDir . '/app/database/migrations/2014_08_08_174447_create_users_table.php',

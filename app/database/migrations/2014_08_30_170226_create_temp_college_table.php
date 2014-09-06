@@ -29,7 +29,7 @@ class CreateTempCollegeTable extends Migration {
 	 */
 	public function down()
 	{
-		//
+		Schema::drop('temp_colleges');
 	}
 
 }
