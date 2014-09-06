@@ -21,7 +21,7 @@
 <div class="container">
 
 @if (Session::get('messages') != null && Session::get('messages')->has('home_message'))
-<div class="col-md-12 row">
+<div class="col-md-8 col-md-offset-2 row">
 	<div class="alert alert-success alert-dismissible" role="alert">
 	<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 	{{ Session::get('messages')->first('home_message') }}
@@ -43,7 +43,7 @@
                 <label for "password">Password</label>
             </div>
             <div class="col-md-9">
-                <input type="password" id="password" password="password" placeholder="New Password" class="form-control" {{ ($user->password == null ? 'required':'') }} >
+                <input type="password" id="password" name="password" password="password" placeholder="New Password" class="form-control" {{ ($user->password == null ? 'required':'') }} >
             </div>
         </div>
         <div class="form-group row">
