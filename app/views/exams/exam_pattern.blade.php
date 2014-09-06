@@ -2,7 +2,8 @@
 @section('exam-content')
 
 <?php  $check=0; ?>
-
+@if($exam->syllabus!='')
+<?php  $check=1; ?>
 <div class="row">
 	<div class="col-md-12">
 		<div class="title">
@@ -15,5 +16,9 @@
 		</div>
 	</div>
 </div>
+@endif
 
+@if($check==0)
+	@include('college.nodata')
+@endif
 @endsection
