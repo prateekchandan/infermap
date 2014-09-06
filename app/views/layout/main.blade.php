@@ -49,41 +49,23 @@
 	    	<!-- Collect the nav links, forms, and other content for toggling -->
 	    	<div class="collapse navbar-collapse" id="main-navigation">
 	      		<ul class="nav navbar-right navbar-nav">
-					<li class="dropdown">
-            			<a href="index.html#" class="dropdown-toggle" data-toggle="dropdown">Home<b class="caret"></b></a>
-            			<ul class="dropdown-menu">
-							<li><a href="index.html">Home standard</a></li>
-              				<li><a href="index2.html">Home alternative</a></li>
-							<li><a href="index3.html">Home alternative 2</a></li>
-							<li><a href="index4.html">Home alternative 3</a></li>
-            			</ul>
-          			</li>
-          			<li ><a href="about.html">About</a></li>
-					<li class="dropdown">
-            			<a href="index.html#" class="dropdown-toggle" data-toggle="dropdown">Features<b class="caret"></b></a>
-            			<ul class="dropdown-menu">
-              				<li><a href="social-icons.html">Social Icons</a></li>
-							<li><a href="fontawesome.html">Font Awesome</a></li>
-							<li><a href="halflings.html">Halflings</a></li>
-							<li><a href="glyphicons.html">Glyphicons PRO</a></li>
-							<li><a href="sliders.html">Sliders</a></li>
-							<li><a href="typography.html">Typography</a></li>
-							<li><a href="shortcodes.html">Shortcodes</a></li>
-							<li><a href="list-styles.html">List Styles</a></li>
-							<li><a href="charts.html">Charts</a></li>
-							<li><a href="login.html">Login</a></li>
-							<li><a href="register.html">Register</a></li>
-            			</ul>
-          			</li>
-					<li class="dropdown">
-            			<a href="index.html#" class="dropdown-toggle" data-toggle="dropdown">Portfolio<b class="caret"></b></a>
-            			<ul class="dropdown-menu">
-              				<li><a href="portfolio3.html">3 Columns</a></li>
-							<li><a href="portfolio4.html">4 Columns</a></li>
-            			</ul>
-          			</li>									
-					<li ><a href="services.html">Services</a></li>
+												
+					<li ><a href="#">College Search</a></li>
+					<li ><a href="#">My College Plan</a></li>
+					<li ><a href="#">Compare Colleges</a></li>
+					<li ><a href="{{URL::Route('exam')}}">Exams</a></li>
 					<li ><a href="http://blog.infermap.com">Blog</a></li>
+					@if(Auth::check())
+					<li class="dropdown">
+            			<a href="index.html#" class="dropdown-toggle" data-toggle="dropdown">Account<b class="caret"></b></a>
+            			<ul class="dropdown-menu">
+							<li><a href="{{URL::Route('user.edit')}}">Edit Profile</a></li>
+							<li><a href="{{URL::Route('user.logout')}}">Logout</a></li>
+            			</ul>
+          			</li>
+					@else
+						<li><a href="{{URL::Route('user.login')}}">Login/Register</a></li>
+					@endif
         		</ul>
 	    	</div><!-- /.navbar-collapse -->		
 		</div>
