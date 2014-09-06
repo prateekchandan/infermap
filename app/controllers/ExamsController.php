@@ -141,6 +141,7 @@ class ExamsController extends BaseController {
 		$r= DB::table('college_id')
             ->join('college_entrance_test', 'college_id.cid', '=', 'college_entrance_test.cid')
             ->where('college_entrance_test.name', '=', $eid)
+            ->where('college_id.disabled','=','1')
             ->select('college_id.link','college_id.name')
             ->get();
         shuffle($r);
