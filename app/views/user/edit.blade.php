@@ -21,7 +21,7 @@
 <div class="container">
 
 @if (Session::get('messages') != null && Session::get('messages')->has('home_message'))
-<div class="col-md-8 col-md-offset-2 row">
+<div class="col-md-8 col-md-offset-2">
 	<div class="alert alert-success alert-dismissible" role="alert">
 	<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 	{{ Session::get('messages')->first('home_message') }}
