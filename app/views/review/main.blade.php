@@ -1,4 +1,9 @@
 @extends('layout.main')
+
+@section('meta')
+<title>Review Your College</title>
+@endsection
+
 @section('body')
 <style type="text/css">
 	.temp_active{
