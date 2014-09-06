@@ -16,7 +16,7 @@
 		</div>
 	</div>
 </div>
-@indif
+@endif
 
 @if($check==0)
 	@include('college.nodata')
