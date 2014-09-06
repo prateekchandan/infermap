@@ -3,141 +3,103 @@
 @section ('body')
 <style>
 
-.main-body{
-	font-size:14px;
-	width:800px;
-	margin-right:auto;
-	margin-left:auto;
-}
-.form-control{
-	width:200px;
-}
-
-#hostel, #mess, #sports, #reco{
-	width:200px;
-}
-
-
-
-
-.media{
-  background-color: white;
-  padding: 3%;
-  box-shadow: 1px 1px 2px rgba(0,0,0,.08);
-}
-
-.media-heading{
-	text-align:center;
-	color:white;
-	line-height:50px;
-}
-
-#our-story{
-    text-align: center;
-}
-.right{
-    text-align: right;
-}
-
-.media img{
-    margin-right: 20px;
-}
-
-.right img{
-    margin-right: 0px;
-    margin-left: 20px;
-}
-.headings{
-    color: #3F94C5;
-}
-
-.team-member{
-    position: relative;
-}
-
-
-.member_profile{
-    width: 85%;
-    position: absolute;
-}
-hr { display: block; height: 1px;
-    border: 0; border-top: 1px solid #ccc;
-    margin: 1em 0; padding: 0;
-}
-
-
-
-#infermap-team{
-    text-align: right;
-    color: #FE7F29;
-}
-
-
-.answer{
-  display: none;
-}
-
-.question:hover{
-  color: #333;
-  cursor: pointer;
-}
-
-#content{
-  background-color: #f5f5f5;
-}
-
-input[type='range'] {
-	-webkit-appearance: none;
-	border-radius: 5px;
-	box-shadow: inset 0 0 5px #333;
-	background-color: #999;
-	height: 10px;
-	vertical-align: middle;
-}
-input[type='range']::-moz-range-track {
-	-moz-appearance: none;
-	border-radius: 5px;
-	box-shadow: inset 0 0 5px #333;
-	background-color: #999;
-	height: 10px;
-}
-input[type='range']::-webkit-slider-thumb {
-	-webkit-appearance: none !important;
-	border-radius: 20px;
-	background-color: #FFF;
-	box-shadow:inset 0 0 10px rgba(000,000,000,0.5);
-	border: 1px solid #999;
-	height: 20px;
-	width: 20px;
-}
-input[type='range']::-moz-range-thumb {
-	-moz-appearance: none;
-	border-radius: 20px;
-	background-color: #FFF;
-	box-shadow:inset 0 0 10px rgba(000,000,000,0.5);
-	border: 1px solid #999;
-	height: 20px;
-	width: 20px;
-}
-
-
-.rating-sq{
-	width:25px;
-	height:25px;
-	background-color: #bbb;
-	border-radius:3px;
-	margin:0.5px;
-}
-
-.rating-sq:hover{
-	cursor:pointer;
-}
-
-.rating-descript{
-	line-height:25px;
-	margin-left:10px;
-}
-
+    #hostel,
+    #mess,
+    #sports,
+    #reco {
+        width: 200px;
+    }
+    .media {
+        background-color: white;
+        padding: 3%;
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .08);
+    }
+    .media-heading {
+        text-align: center;
+        color: white;
+        line-height: 50px;
+    }
+    #our-story {
+        text-align: center;
+    }
+    .right {
+        text-align: right;
+    }
+    .media img {
+        margin-right: 20px;
+    }
+    .right img {
+        margin-right: 0px;
+        margin-left: 20px;
+    }
+    .headings {
+        color: #3F94C5;
+    }
+    .team-member {
+        position: relative;
+    }
+    .member_profile {
+        width: 85%;
+        position: absolute;
+    }
+    #infermap-team {
+        text-align: right;
+        color: #FE7F29;
+    }
+    .answer {
+        display: none;
+    }
+    .question:hover {
+        color: #333;
+        cursor: pointer;
+    }
+    input[type='range'] {
+        -webkit-appearance: none;
+        border-radius: 5px;
+        box-shadow: inset 0 0 5px #333;
+        background-color: #999;
+        height: 10px;
+        vertical-align: middle;
+    }
+    input[type='range']::-moz-range-track {
+        -moz-appearance: none;
+        border-radius: 5px;
+        box-shadow: inset 0 0 5px #333;
+        background-color: #999;
+        height: 10px;
+    }
+    input[type='range']::-webkit-slider-thumb {
+        -webkit-appearance: none !important;
+        border-radius: 20px;
+        background-color: #FFF;
+        box-shadow: inset 0 0 10px rgba(000, 000, 000, 0.5);
+        border: 1px solid #999;
+        height: 20px;
+        width: 20px;
+    }
+    input[type='range']::-moz-range-thumb {
+        -moz-appearance: none;
+        border-radius: 20px;
+        background-color: #FFF;
+        box-shadow: inset 0 0 10px rgba(000, 000, 000, 0.5);
+        border: 1px solid #999;
+        height: 20px;
+        width: 20px;
+    }
+    .rating-sq {
+        width: 25px;
+        height: 25px;
+        background-color: #bbb;
+        border-radius: 3px;
+        margin: 0.5px;
+    }
+    .rating-sq:hover {
+        cursor: pointer;
+    }
+    .rating-descript {
+        line-height: 25px;
+        margin-left: 10px;
+    }
 </style>
 @if(Auth::check())
 <div id="primary" class="content-area">
@@ -164,63 +126,22 @@ input[type='range']::-moz-range-thumb {
 							</h3>
                             <br>
                             <div class="form-group row">
-                                <label class="col-md-5">What is academic qualification of majority of teaching faculty?</label>
-                                <div class="col-md-7">
-                                    <input id="btech" name="facqual" value="btech" type="radio">
-                                    <label for="btech">B.Tech</label>
-                                    <br>
-                                    <input id="mtech" name="facqual" value="mtech" type="radio">
-                                    <label for="mtech">M.Tech</label>
-                                    <br>
-                                    <input id="phd" name="facqual" value="phd" type="radio">
-                                    <label for="phd">Ph.D</label>
-                                    <br>
-                                </div>
+                                <label class="col-md-5" for="sports">How would you rate your faculty's teaching abilities?</label>
+                                <div class="rating col-md-7" data-id="fac_teaching" data-max="5" data-descript="Very Dissatisfied#Dissatisfied#Neutral#Satisfied#Very Satisfied"></div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-md-5" for="clshrs">Avg. no. of class hrs/week</label>
-                                <div class="col-md-7">
-                                    <select name="clshrs" class="form-control" id="clshrs">
-                                        <option value="">Select</option>
-                                        <option value="10-15">10-15</option>
-                                        <option value="15-20">15-20</option>
-                                        <option value="20-25">20-25</option>
-                                        <option value="25-30">25-30</option>
-                                        <option value="30-40">30-40</option>
-                                        <option value="40-50">40-50</option>
-                                    </select>
-                                </div>
+                                <label class="col-md-5" for="sports">How much the college focuses on research and practical work?</label>
+                                <div class="rating col-md-7" data-id="research_work" data-max="5" data-descript="Low#Neutral#Good#High#Very High"></div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-md-5" for="att">% Attendance required</label>
-                                <div class="col-md-7">
-                                    <select name="att" class="form-control" id="att">
-                                        <option value="">Select</option>
-                                        <option value="50-60">50-60</option>
-                                        <option value="60-70">60-70</option>
-                                        <option value="70-80">70-80</option>
-                                        <option value="80-100">80-100</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-5" for="sports">How much satisfied are you by your teachers?</label>
-                                <div class="rating col-md-7" data-id="acad-qual" data-max="5" data-descript="Very Dissatisfied#Dissatisfied#Neutral#Satisfied#Very Satisfied"></div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-5" for="sports">Reputation of college amongst similar colleges</label>
-                                <div class="rating col-md-7" data-id="acad-repo" data-max="5" data-descript="Low#Neutral#Good#High#Very High"></div>
-                            </div>
-                        </div>
                     </div>
                     <div class="media">
                         <div class="media-body">
                             <h3 class="media-heading" style="background-color:#1ABC9C">
-            Placements
-          </h3>
+                                Placements
+                              </h3>
                             <br>
                             <div class="form-group row">
-                                <label class="col-md-5" for="plac">Approximate percent (%) placed students every year</label>
+                                <label class="col-md-5" for="plac">Approximate percentage (%) of students who get placed every year</label>
                                 <div class="col-md-7">
                                     <select name="plac" class="form-control" id="pack">
                                         <option value="">Select</option>
@@ -237,7 +158,7 @@ input[type='range']::-moz-range-thumb {
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-md-5" for="pack">Average Package LPA(Lacs per anum)</label>
+                                <label class="col-md-5" for="pack">Average Package offered (In Lacs per anum)</label>
                                 <div class="col-md-7">
                                     <select name="pack" class="form-control" id="pack">
                                         <option value="">Select</option>
@@ -249,16 +170,6 @@ input[type='range']::-moz-range-thumb {
                                         <option value="9-12">9-12</option>
                                         <option value="12+">12+</option>
                                     </select>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-5">Does your college help in securing internship/training in third year?</label>
-                                <div class="col-md-7">
-                                    <input type="radio" name="intern-help" id="intern-help-yes" value="1">
-                                    <label for="intern-help-yes">Yes</label>
-                                    <br>
-                                    <input type="radio" name="intern-help" id="intern-help-no" value="0">
-                                    <label for="intern-help-no">No</label>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -280,9 +191,9 @@ input[type='range']::-moz-range-thumb {
                             </div>
                         </div>
                     </div>
-                    <div class="media">
+                     <div class="media"> 
                         <div class="media-body">
-                            <h3 class="media-heading" style="background-color:#ffba00">
+                            <h3 class="media-heading" style="background-color:rgb(248,208,47)">
                                 Fees
                               </h3>
                             <br>
@@ -295,116 +206,67 @@ input[type='range']::-moz-range-thumb {
                              <div class="form-group row">
                                 <label class="col-md-5">Scholarships provided by college?</label>
                                 <div class="col-md-7">
-                                    <input type="radio" name="scholarship" id="fee-help-yes" value="1">
-                                    <label for="fee-help-yes">Yes</label>
-                                    <br>
-                                    <input type="radio" name="scholarship" id="fee-help-no" value="0">
-                                    <label for="fee-help-no">No</label>
+                                    <div class="col-md-6">
+                                        <input type="radio" name="scholarship" id="fee-help-yes" value="1">
+                                        <label for="fee-help-yes">Yes</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="radio" name="scholarship" id="fee-help-no" value="0">
+                                        <label for="fee-help-no">No</label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                     <div class="media">
                         <div class="media-body">
 
                             <h3 class="media-heading" style="background-color:#E74C3C">
-            Facilities
-          </h3>
+                                Facilities &amp;  Campus Life
+                              </h3>
                             <br>
                             <div class="form-group">
                                 <div class="row">
-                                    <label class="col-md-5">Hostel and Mess facilities</label>
+                                    <label class="col-md-5">Uncheck if your college doesn’t provide Hostel facilities?</label>
                                     <div class="col-md-7">
-                                        <input type="checkbox" name="no-mshs" id="no-mshs">
-                                        <label for="no-mshs">Hostel not provided by the college</label>
+                                        <input type="checkbox" name="mshs" id="mshs" checked="checked" value="1">
+                                        <label for="mshs">Hostel provided by the college</label>
                                         <br>
                                     </div>
                                 </div>
                                 <br>
                                 <label>Rate the following based on your experience
-                                    <br>5: means Awesome , 1: Bad</label>
+                                    <br>5: means Awesome , 1: Not so good</label>
 
                                 <div class="row hostel-row">
                                     <label class="col-md-5" for="hostel">Hostel</label>
-                                    <div class="rating col-md-7" data-id="hostel" data-max="5" data-descript="Bad#neutral#good#Very good#Awesome"></div>
+                                    <div class="rating col-md-7" data-id="hostel" data-max="5" data-descript="Not so good#Okay#Good#Very Good#Awesome"></div>
                                 </div>
                                 <br>
                                 <div class="row hostel-row">
                                     <label class="col-md-5" for="mess">Mess</label>
-                                    <div class="rating col-md-7" data-id="mess" , data-max="5" data-descript="Bad#neutral#good#Very good#Awesome"></div>
+                                    <div class="rating col-md-7" data-id="mess" , data-max="5"  data-descript="Not so good#Okay#Good#Very Good#Awesome"></div>
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label class="col-md-5" for="sports">Sports</label>
-                                <div class="rating col-md-7" data-id="sports" data-max="5" data-descript="Bad#neutral#good#Very good#Awesome"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="media">
-                        <div class="media-body">
-
-                            <h3 class="media-heading" style="background-color:#9B59B6">
-			  Campus Life
-			</h3>
-                            <br>
-
-                            <div class="form-group row">
-                                <label class="col-md-5" for="sports">Co-curricular/Extra-curricular life<br>Rate the surrounding area of your college(based on facilities)</label>
-                                <div class="rating col-md-7" data-id="co-currics" data-max="5"></div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-5">Tick facilities available in your college.</label>
-                                <div class="col-md-7">
-                                    <input id="canteen" name="facilities[]" value="canteen" type="checkbox">
-                                    <label for="canteen">Canteen</label>
-                                    <br>
-                                    <input id="fests" name="facilities[]" value="fests" type="checkbox">
-                                    <label for="fests">Fests</label>
-                                    <br>
-                                    <input id="clubs" name="facilities[]" value="clubs" type="checkbox">
-                                    <label for="clubs">Clubs (Photography/ Dance/ Debate)</label>
-                                    <br>
-                                    <input id="gne" name="facilities[]" value="gne" type="checkbox">
-                                    <label for="gne">Events and competitions are held during semester</label>
-                                    <br>
-                                    <input id="concity" name="facilities[]" value="concity" type="checkbox">
-                                    <label for="concity">Connectivity to the City</label>
-                                    <br>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-5" for="whycho">What are the strengths of your college over other similar colleges? (50 words)
-                                    <br>Ex. The college encourage students to take part in a lot of competitions Or A lot of research facilities provided</label>
-                                <div class="col-md-7">
-                                    <textarea name="whychoose" id="whychooose" class="form-control" style=" height:120px"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-5" for="improve">What areas you think your college should improve upon (50 words)</label>
-                                <div class="col-md-7">
-                                    <textarea name="improve" id="improve" class="form-control"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-5" for="reco">Would you recommend college to friends over similar colleges</label>
-                                <div class="col-md-7">
-                                    <input type="radio" name="reco" value="yes" id="reco-yes">
-                                    <label for="reco-yes">Yes</label>
-                                    <br>
-                                    <input type="radio" name="reco" value="no" id="reco-no">
-                                    <label for="reco-no">No</label>
-                                </div>
+                                <div class="rating col-md-7" data-id="sports" data-max="5"  data-descript="Not so good#Okay#Good#Very Good#Awesome"></div>
                             </div>
 
+                             <div class="form-group row">
+                                <label class="col-md-5" for="co-currics">Extra-curricular life</label>
+                                <div class="rating col-md-7" data-id="co-currics" data-max="5"  data-descript="Not so good#Okay#Good#Very Good#Awesome"></div>
+                            </div>
                         </div>
                     </div>
                     <div class="media">
                         <div class="media-body">
 
                             <h3 class="media-heading" style="background-color:#34495E">
-			  Tell us about yourself
-			</h3>
+                			  Tell us about yourself
+                			</h3>
                             <br>
                             <div class="form-group row">
                                 <label class="col-md-5" for="college-name">College Name</label>
@@ -527,26 +389,15 @@ input[type='range']::-moz-range-thumb {
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-md-5">How are you most motivated to "stay connected" with the us? Check all that apply.</label>
-                                <div class="col-md-7">
-                                    <input id="mentoring" name="stay-con[]" value="mentoring" type="checkbox">
-                                    <label for="mentoring">Mentoring current/past student</label>
-                                    <br>
-                                    <input id="author" name="stay-con[]" value="author" type="checkbox">
-                                    <label for="author">Appearing as guest author / Write on related articles</label>
-                                    <br>
-                                    <input id="newsletter" name="stay-con[]" value="newsletter" type="checkbox">
-                                    <label for="newsletter">Receiving newsletters and articles</label>
-                                    <br>
-                                    <input id="contributing-newsletter" name="stay-con[]" value="contributing-newsletter" type="checkbox">
-                                    <label for="contributing-newsletter">Contributing to newsletters and articles</label>
-                                    <br>
-                                </div>
+                             <div class="form-group">
+                                <input id="anonymous" name="stay-con[]" value="newsletter" type="checkbox" checked>
+                                <label for="anonymous">I am interested in receiving newsletters and articles related to engineering</label>
                                 <br>
                             </div>
                             <div class="form-group">
-                                <input id="anonymous" name="anonymous" value="1" type="checkbox" checked> <label for="anonymous">Include my credentials with this review</label><br>
+                                <input id="anonymous" name="anonymous" value="1" type="checkbox" checked>
+                                <label for="anonymous">Include my credentials with this review</label>
+                                <br>
                             </div>
                             <button class="btn btn-primary">Submit</button>
                 </form>

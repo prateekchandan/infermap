@@ -163,9 +163,6 @@
         line-height: 25px;
         margin-left: 10px;
     }
-
-
-
 </style>
 <div id="primary" class="content-area">
     <div id="content" class="site-content" role="main">
