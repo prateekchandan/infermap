@@ -4,6 +4,7 @@
 <?php  $check=0; ?>
 
 @if($exam->about!='')
+<?php  $check=1; ?>
 <div class="row">
 	<div class="col-md-12">
 		<div class="title">
@@ -18,6 +19,7 @@
 </div>
 @endif
 @if($exam->eligibility!='')
+<?php  $check=1; ?>
 <div class="row">
 	<div class="col-md-12">
 		<div class="title">
@@ -30,5 +32,9 @@
 		</div>
 	</div>
 </div>	
+@endif
+
+@if($check==0)
+	@include('college.nodata')
 @endif
 @endsection
