@@ -130,6 +130,7 @@ class SearchController extends BaseController {
 
 		uasort($allcollege, 'cmp');
 
+		$allcollege=array_splice($allcollege, 0,$no);
 		
 		function getdata($college)
 		{
@@ -142,14 +143,16 @@ class SearchController extends BaseController {
 			);
 		}
 		$allcollege=array_map("getdata",$allcollege);
-		return array_splice($allcollege, 0,$no);
+		return $allcollege;
 	}
 
 	public function review_autocomplete(){
 		$str=Input::get('str','');
+		$a=microtime();
 		$ret=$this->autocomplete($str,6);
+		$b=microtime();
 		foreach ($ret as $key => $value) {
-			$ret[$key]['link']='college/'.$ret[$key]['link'];
+			$ret[$key]['link']='college/'.$ret[$key]['link'].'/review'.($b-$a);
 		}
 		$allcollege=DB::connection('infermap')->select('select name from temp_colleges');
 		$arryain = $this->cleanStr($str);
