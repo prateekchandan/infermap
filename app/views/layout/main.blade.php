@@ -57,14 +57,14 @@
 					<li ><a href="http://blog.infermap.com">Blog</a></li>
 					@if(Auth::check())
 					<li class="dropdown">
-            			<a href="index.html#" class="dropdown-toggle" data-toggle="dropdown">Account<b class="caret"></b></a>
+            			<a href="#" class="dropdown-toggle" data-toggle="dropdown">Account<b class="caret"></b></a>
             			<ul class="dropdown-menu">
 							<li><a href="{{URL::Route('user.edit')}}">Edit Profile</a></li>
 							<li><a href="{{URL::Route('user.logout')}}">Logout</a></li>
             			</ul>
           			</li>
 					@else
-						<li><a href="{{URL::Route('user.login')}}">Login/Register</a></li>
+						<li><a href="{{URL::Route('user.login')}}?url={{Request::url()}}">Login/Register</a></li>
 					@endif
         		</ul>
 	    	</div><!-- /.navbar-collapse -->		

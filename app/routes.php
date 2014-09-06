@@ -47,9 +47,7 @@ Route::post('/register', array('as'=>'user.store', 'uses'=>'UsersController@stor
 Route::get('/edit-profile', array('as'=>'user.edit', 'uses'=>'UsersController@edit'));
 Route::post('/edit-profile', array('as'=>'user.update', 'uses'=>'UsersController@update'));
 Route::post('/fblogin', array('as'=>'user.fblogin', 'uses'=>'UsersController@fblogin'));
-Route::post('/storefb', array('as'=>'user.storefb', 'uses'=>'UsersController@storefb'));
 Route::post('/gpluslogin', array('as'=>'user.gpluslogin', 'uses'=>'UsersController@gpluslogin'));
-Route::post('/storegplus', array('as'=>'user.storegplus', 'uses'=>'UsersController@storegplus'));
 Route::get('/login', array('as'=>'user.login.show', 'uses'=>'UsersController@showlogin'));
 Route::post('/login', array('as'=>'user.login', 'uses'=>'UsersController@login'));
 Route::get('/logout', array('as'=>'user.logout', 'uses'=>'UsersController@logout'));

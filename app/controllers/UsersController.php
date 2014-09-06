@@ -128,6 +128,7 @@ class UsersController extends \BaseController {
 	}
 
 	public function gpluslogin(){
+		$url= Input::get('url');
 		$email = Input::get('email');
 		$users = User::where('email','=', $email)->get();
 		if(sizeof($users) == 0){
@@ -142,10 +143,14 @@ class UsersController extends \BaseController {
 		}
 		$user = $users[0];
 		Auth::login($user);
+		if($url!='' && $url !=null)
+			return Redirect::away($url);
+		else
 		return Redirect::back();
 	}
 
 	public function fblogin(){
+		$url= Input::get('url');
 		$email = Input::get('email');
 		$users = User::where('email','=', $email)->get();
 		if(sizeof($users) == 0){
@@ -159,18 +164,27 @@ class UsersController extends \BaseController {
 		}
 		$user = $users[0];
 		Auth::login($user);
+		if($url!='' && $url !=null)
+			return Redirect::away($url);
+		else
 		return Redirect::back();
 	}
 
 	public function showlogin(){
-		if(Auth::check()) return Redirect::to('/');
+		$url=Session::get('url');
+		if(Auth::check()){ 
+			if($url!='' && $url != null)
+				return Redirect::away($url);
+			else
+				return Redirect::to('/');
+		}
 		return View::make('user.login');
 	}
 
 	public function login(){
 		if (Auth::attempt(array('email' => Input::get('email'), 'password' => Input::get('password'))))
 		{
-			return Redirect::back();
+			return Redirect::back()->with('url',Input::get('url'));
 		}
 		$user = User::where('email', '=', Input::get('email'))->first();
 		if ($user == null) {

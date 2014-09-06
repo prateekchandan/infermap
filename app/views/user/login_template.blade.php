@@ -41,16 +41,10 @@ function signinCallback(authResult) {
 				'<input type="hidden" name="img_url" value="' + img_url + '" />' +
 				'<input type="hidden" name="gplusid" value="' + gplusid + '" />' +
 				'<input type="hidden" name="name" value="' + name + '" />' +
-				'<input type="hidden" name="email" value="' + email + '" />' +
+                '<input type="hidden" name="email" value="' + email + '" />' +
+				'<input type="hidden" name="url" value="{{Input::get('url')}}" />' +
 				'</form>');
-			$.ajax({
-				url: url,
-				type: 'post',
-				data: $(form).serialize(),
-				success: function() {
-					location.reload();
-				}
-			})
+			$(form).submit();
 		 });
 		});
 	  } else {
@@ -94,15 +88,9 @@ function signinCallback(authResult) {
                         '<input type="hidden" name="fbid" value="' + info.id + '" />' +
                         '<input type="hidden" name="name" value="' + info.name + '" />' +
                         '<input type="hidden" name="email" value="' + info.email + '" />' +
+                        '<input type="hidden" name="url" value="{{Input::get('url')}}" />' +
                         '</form>');
-                    $.ajax({
-                        url: url,
-                        type: 'post',
-                        data: $(form).serialize(),
-                        success: function() {
-                            location.reload();
-                        }
-                    })
+                    $(form).submit();
                 });
             } else {
                 alert('Authorization Failed');
@@ -147,6 +135,7 @@ function signinCallback(authResult) {
                 </div>
 
                 <form method="post" action="{{ URL::route('user.login') }}">
+                    <input type="hidden" name="url" value="{{Input::get('url')}}" />
                     <div class="form-group">
                         <input type="email" id="email" name="email" class="form-control" style="width:100%" value="{{ Input::old('email') }}" placeholder="email address" required>
                     </div>
