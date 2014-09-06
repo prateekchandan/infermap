@@ -135,6 +135,7 @@
         window.clearTimeout(forgiveness);
     });
 
+     $('.review_autocomplete').focus();
 
 	function temp_review_autobox_remove(){
 		$('.temp_review_autobox').remove();	
