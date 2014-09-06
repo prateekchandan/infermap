@@ -2,7 +2,7 @@
 	position: relative;
 	overflow: visible;
 	border: 1px solid #ddd;
-	background-color: #fff;
+	background-color: transparent;
 }
 
 body .redactor_air {
