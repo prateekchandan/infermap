@@ -52,7 +52,7 @@
 												
 					<li ><a href="#">College Search</a></li>
 					<li ><a href="#">My College Plan</a></li>
-					<li ><a href="{{URL::Route('review')}}">Review Your College</a></li>
+					<li ><a href="{{URL::Route('review_main')}}">Review Your College</a></li>
 					<li ><a href="{{URL::Route('exam')}}">Exams</a></li>
 					<li ><a href="http://blog.infermap.com">Blog</a></li>
 					@if(Auth::check())
