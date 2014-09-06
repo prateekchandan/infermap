@@ -148,11 +148,9 @@ class SearchController extends BaseController {
 
 	public function review_autocomplete(){
 		$str=Input::get('str','');
-		$a=microtime();
 		$ret=$this->autocomplete($str,6);
-		$b=microtime();
 		foreach ($ret as $key => $value) {
-			$ret[$key]['link']='college/'.$ret[$key]['link'].'/review'.($b-$a);
+			$ret[$key]['link']='college/'.$ret[$key]['link'].'/review';
 		}
 		$allcollege=DB::connection('infermap')->select('select name from temp_colleges');
 		$arryain = $this->cleanStr($str);
