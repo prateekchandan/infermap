@@ -3,103 +3,137 @@
 @section ('body')
 <style>
 
-    #hostel,
-    #mess,
-    #sports,
-    #reco {
-        width: 200px;
-    }
-    .media {
-        background-color: white;
-        padding: 3%;
-        box-shadow: 1px 1px 2px rgba(0, 0, 0, .08);
-    }
-    .media-heading {
-        text-align: center;
-        color: white;
-        line-height: 50px;
-    }
-    #our-story {
-        text-align: center;
-    }
-    .right {
-        text-align: right;
-    }
-    .media img {
-        margin-right: 20px;
-    }
-    .right img {
-        margin-right: 0px;
-        margin-left: 20px;
-    }
-    .headings {
-        color: #3F94C5;
-    }
-    .team-member {
-        position: relative;
-    }
-    .member_profile {
-        width: 85%;
-        position: absolute;
-    }
-    #infermap-team {
-        text-align: right;
-        color: #FE7F29;
-    }
-    .answer {
-        display: none;
-    }
-    .question:hover {
-        color: #333;
-        cursor: pointer;
-    }
-    input[type='range'] {
-        -webkit-appearance: none;
-        border-radius: 5px;
-        box-shadow: inset 0 0 5px #333;
-        background-color: #999;
-        height: 10px;
-        vertical-align: middle;
-    }
-    input[type='range']::-moz-range-track {
-        -moz-appearance: none;
-        border-radius: 5px;
-        box-shadow: inset 0 0 5px #333;
-        background-color: #999;
-        height: 10px;
-    }
-    input[type='range']::-webkit-slider-thumb {
-        -webkit-appearance: none !important;
-        border-radius: 20px;
-        background-color: #FFF;
-        box-shadow: inset 0 0 10px rgba(000, 000, 000, 0.5);
-        border: 1px solid #999;
-        height: 20px;
-        width: 20px;
-    }
-    input[type='range']::-moz-range-thumb {
-        -moz-appearance: none;
-        border-radius: 20px;
-        background-color: #FFF;
-        box-shadow: inset 0 0 10px rgba(000, 000, 000, 0.5);
-        border: 1px solid #999;
-        height: 20px;
-        width: 20px;
-    }
-    .rating-sq {
-        width: 25px;
-        height: 25px;
-        background-color: #bbb;
-        border-radius: 3px;
-        margin: 0.5px;
-    }
-    .rating-sq:hover {
-        cursor: pointer;
-    }
-    .rating-descript {
-        line-height: 25px;
-        margin-left: 10px;
-    }
+.main-body{
+	font-size:14px;
+	width:800px;
+	margin-right:auto;
+	margin-left:auto;
+}
+#hostel, #mess, #sports, #reco{
+	width:200px;
+}
+
+
+
+
+.media{
+  background-color: white;
+  padding: 3%;
+  box-shadow: 1px 1px 2px rgba(0,0,0,.08);
+}
+
+.media-heading{
+	text-align:center;
+	color:white;
+	line-height:50px;
+}
+
+#our-story{
+    text-align: center;
+}
+.right{
+    text-align: right;
+}
+
+.media img{
+    margin-right: 20px;
+}
+
+.right img{
+    margin-right: 0px;
+    margin-left: 20px;
+}
+.headings{
+    color: #3F94C5;
+}
+
+.team-member{
+    position: relative;
+}
+
+
+.member_profile{
+    width: 85%;
+    position: absolute;
+}
+hr { display: block; height: 1px;
+    border: 0; border-top: 1px solid #ccc;
+    margin: 1em 0; padding: 0;
+}
+
+
+
+#infermap-team{
+    text-align: right;
+    color: #FE7F29;
+}
+
+
+.answer{
+  display: none;
+}
+
+.question:hover{
+  color: #333;
+  cursor: pointer;
+}
+
+#content{
+  background-color: #f5f5f5;
+}
+
+input[type='range'] {
+	-webkit-appearance: none;
+	border-radius: 5px;
+	box-shadow: inset 0 0 5px #333;
+	background-color: #999;
+	height: 10px;
+	vertical-align: middle;
+}
+input[type='range']::-moz-range-track {
+	-moz-appearance: none;
+	border-radius: 5px;
+	box-shadow: inset 0 0 5px #333;
+	background-color: #999;
+	height: 10px;
+}
+input[type='range']::-webkit-slider-thumb {
+	-webkit-appearance: none !important;
+	border-radius: 20px;
+	background-color: #FFF;
+	box-shadow:inset 0 0 10px rgba(000,000,000,0.5);
+	border: 1px solid #999;
+	height: 20px;
+	width: 20px;
+}
+input[type='range']::-moz-range-thumb {
+	-moz-appearance: none;
+	border-radius: 20px;
+	background-color: #FFF;
+	box-shadow:inset 0 0 10px rgba(000,000,000,0.5);
+	border: 1px solid #999;
+	height: 20px;
+	width: 20px;
+}
+
+
+.rating-sq{
+	width:25px;
+	height:25px;
+	background-color: #bbb;
+	border-radius:3px;
+	margin:0.5px;
+}
+
+.rating-sq:hover{
+	cursor:pointer;
+}
+
+.rating-descript{
+	line-height:25px;
+	margin-left:10px;
+}
+
 </style>
 @if(Auth::check())
 <div id="primary" class="content-area">
@@ -107,7 +141,7 @@
         <div class="entry-content">
             <div class="main-body">
                 <form action="{{ URL::to('/review/add')}}" method="post" id="review-form" accept-charset="utf-8">
-
+                    <input type="hidden" name="college_id" value="0">
                     <div class="media">
                         <div class="media-body">
 
@@ -122,8 +156,8 @@
                     <div class="media">
                         <div class="media-body">
                             <h3 class="media-heading" style="background-color:#358EFB;">
-							  Academics
-							</h3>
+                              Academics
+                            </h3>
                             <br>
                             <div class="form-group row">
                                 <label class="col-md-5" for="sports">How would you rate your faculty's teaching abilities?</label>
@@ -133,6 +167,7 @@
                                 <label class="col-md-5" for="sports">How much the college focuses on research and practical work?</label>
                                 <div class="rating col-md-7" data-id="research_work" data-max="5" data-descript="Low#Neutral#Good#High#Very High"></div>
                             </div>
+                        </div>
                     </div>
                     <div class="media">
                         <div class="media-body">
@@ -191,7 +226,7 @@
                             </div>
                         </div>
                     </div>
-                     <div class="media"> 
+                    <div class="media"> 
                         <div class="media-body">
                             <h3 class="media-heading" style="background-color:rgb(248,208,47)">
                                 Fees
@@ -218,7 +253,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="media">
                         <div class="media-body">
 
@@ -264,9 +298,64 @@
                     <div class="media">
                         <div class="media-body">
 
+                            <h3 class="media-heading" style="background-color:#9B59B6">
+                                Write a review about your college.
+                            </h3>
+                            <br>
+
+                           
+                            <div class="form-group row">
+                                <label class="col-md-12" for="about_college"> What is good or bad about your school? <br>
+                                    Is there anything people should know about before deciding to attend? <br>
+                                    Any Advice?
+                                </label>
+                                <div class="col-md-12">
+                                    <textarea name="about_college" id="about_college" class="form-control" style=" height:120px"></textarea>
+                                </div>
+                            </div>
+                             <div class="form-group row">
+                                <label class="col-md-3" for="label">Type of review</label>
+                                <div class="col-md-9">
+                                    <div class="col-md-3">
+                                        <input type="radio" name="label" value="Good" id="label-good">
+                                        <label for="label-good">Good</label>
+                                    </div>
+                                     <div class="col-md-3">
+                                        <input type="radio" name="label" value="Neutral" id="label-neutral">
+                                        <label for="label-neutral">Neutral</label>
+                                    </div>
+                                     <div class="col-md-3">
+                                        <input type="radio" name="label" value="Bad" id="label-bad">
+                                        <label for="label-bad">Bad</label>
+                                    </div>
+                                     <div class="col-md-3">
+                                        <input type="radio" name="label" value="Advice" id="label-advice">
+                                        <label for="label-advice">Advice</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-5" for="reco">Would you recommend college to friends over similar colleges</label>
+                                <div class="col-md-7">
+                                    <div class="col-md-6">
+                                        <input type="radio" name="reco" value="yes" id="reco-yes">
+                                        <label for="reco-yes">Yes</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="radio" name="reco" value="no" id="reco-no">
+                                        <label for="reco-no">No</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="media">
+                        <div class="media-body">
+
                             <h3 class="media-heading" style="background-color:#34495E">
-                			  Tell us about yourself
-                			</h3>
+                              Tell us about yourself
+                            </h3>
                             <br>
                             <div class="form-group row">
                                 <label class="col-md-5" for="college-name">College Name</label>
@@ -400,6 +489,8 @@
                                 <br>
                             </div>
                             <button class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
                 </form>
                 </div>
                 </div>
