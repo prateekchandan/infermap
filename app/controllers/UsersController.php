@@ -99,7 +99,6 @@ class UsersController extends \BaseController {
 	 */
 	public function update()
 	{
-		return Input::get('password');
 		$user = Auth::user();
 		$user->name = Input::get('name');
 		$user->password = (Input::get('password') != null ? Hash::make(Input::get('password')) : $user->password);
