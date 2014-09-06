@@ -111,7 +111,7 @@ class UsersController extends \BaseController {
 		$user->save();
 		$messageBag = new MessageBag;
 		$messageBag->add('home_message', Lang::get('user.profile.saved'));
-		return Redirect::to('/')
+		return Redirect::back()
 			->with('messages', $messageBag);
 	}
 
