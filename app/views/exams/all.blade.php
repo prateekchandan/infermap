@@ -5,6 +5,15 @@
 @endsection
 
 @section('body')
+<style type="text/css">
+	a{
+		color: #5F647C;;
+		text-decoration: none;
+	}
+	a:hover{
+		color: #5F647C;;
+	}
+</style>
 <div id="page-title">
 
 		<div id="page-title-inner">
@@ -27,11 +36,22 @@
     <div class="row">
     	<div class="col-md-6 col-md-offset-2">
     		<div class="title"><h3>List of all Exams</h3></div>
-    		<ul class="arrow_list">
+    		<table class="table">
+    			<thead>
+    				<tr>
+    					<th>Sl no</th>
+    					<th>Exam Name</th>
+    					<th>Full Form</th>
+    				</tr>
+    			</thead>
     			@foreach ($exam as $key => $row) 
-				<li><a href='{{URL::route('exam')}}/{{$row->link}}'>{{$row->name}}</a></li>
+    			<tr>
+    				<td>{{$key+1}}</td>
+					<td><a href='{{URL::route('exam')}}/{{$row->link}}'>{{$row->name}}</a></td>
+					<td><a href='{{URL::route('exam')}}/{{$row->link}}'>{{$row->fullform}}</a></td>
+				</tr>
 				@endforeach
-    		</ul>
+    		</table>
     		
     	</div>
    	</div>

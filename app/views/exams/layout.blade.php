@@ -1,7 +1,7 @@
 @extends('layout.main')
 
 @section('meta')
-<title>{{{$exam->name}}}</title>
+<title>{{{$exam->fullform}}}</title>
 @endsection
 
 @section('body')
@@ -20,7 +20,7 @@
 			<div class="container">
 
 				<div class="pull-left" style="max-width:80%">
-					<h2>{{{$exam->name}}}</h2>
+					<h2>{{{$exam->fullform}}} ({{{$exam->name}}})</h2>
 				</div>`
 			</div>
 			<!-- end: Container  -->
