@@ -115,14 +115,14 @@ class SearchController extends BaseController {
 				
 			}
 			$allcollege[$key]=$college;
-			if($key<10)
+			/*if($key<10)
 			{
 				array_push($retarray, $college);
 			}
 			if($key==10)
 			{
 				uasort($retarray, 'cmp');
-			}
+			}*/
 		}
 		
 		function cmp($c1,$c2){
