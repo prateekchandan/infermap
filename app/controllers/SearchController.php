@@ -72,12 +72,15 @@ class SearchController extends BaseController {
 		return $sum;
 	}
 
+
 	public function autocomplete($input,$no=10)
 	{
 
 		$allcollege=DB::connection('infermap')->select('select city,state,cid,name,alias1,alias2,alias3,alias4,alias5,alias6,alias7,alias8,rank,link from college_id where disabled="1" order by -rank desc');
 
 		$arryain = $this->cleanStr($input);
+
+		$retarray=array();
 
 		foreach ($allcollege as $key=> $college) {
 			$college->score = $this->mylev($arryain, strtolower($college->name));
@@ -112,6 +115,14 @@ class SearchController extends BaseController {
 				
 			}
 			$allcollege[$key]=$college;
+			if($key<10)
+			{
+				array_push($retarray, $college);
+			}
+			if($key==10)
+			{
+				uasort($retarray, 'cmp');
+			}
 		}
 		
 		function cmp($c1,$c2){
@@ -128,7 +139,7 @@ class SearchController extends BaseController {
 			return $c1->score > $c2->score;
 		}
 
-		uasort($allcollege, 'cmp');
+		
 
 		$allcollege=array_splice($allcollege, 0,$no);
 		
@@ -166,6 +177,25 @@ class SearchController extends BaseController {
 		$ret=array_merge($allcollege,$ret);
 		usort($ret, 'cmp1');
 		return array_splice($ret,0,10);
+	}
+
+	public function test()
+	{
+		function microtime_float()
+		{
+		    list($usec, $sec) = explode(" ", microtime());
+		    return ((float)$usec + (float)$sec)*1000;
+		}
+
+		$a=microtime_float();
+		$res=$this->review_autocomplete();
+		$b=microtime_float()-$a;
+		var_dump(time());
+		echo '<br>';
+		var_dump(microtime_float());
+		echo '<br>';
+		echo 'Time taken : '.$b.'<br>';
+		print_r($res);
 	}
 
 }
