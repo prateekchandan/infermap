@@ -48,12 +48,11 @@
 
 	    	<!-- Collect the nav links, forms, and other content for toggling -->
 	    	<div class="collapse navbar-collapse" id="main-navigation">
-	      		<ul class="nav navbar-right navbar-nav">
-												
-					<li ><a href="#">College Search</a></li>
+	      		<ul class="nav navbar-right navbar-nav">												
 					<li ><a href="#">My College Plan</a></li>
 					<li ><a href="{{URL::Route('review_main')}}">Review Your College</a></li>
 					<li ><a href="{{URL::Route('exam')}}">Exams</a></li>
+					<li ><a href="{{URL::Route('department')}}">Departments</a></li>
 					<li ><a href="http://blog.infermap.com">Blog</a></li>
 					@if(Auth::check())
 					<li class="dropdown">

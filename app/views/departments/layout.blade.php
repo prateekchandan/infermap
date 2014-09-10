@@ -112,7 +112,7 @@
 										<div class="testimonials">Infermap is a free comprehensive platform that improves the college selecting process, based on individual resources and requirements. 
 Inspired by a belief that all students deserve access to good guidance, infermap aims to create the interactive tools and media that guide students as they find, afford and enroll in a college that’s a good fit for them.</div>
 										<div class="testimonials-bg"></div>
-										<div class="testimonials-author">hjg</div>
+										<div class="testimonials-author"></div>
 									</li>
 								</ul>
 							</div>
