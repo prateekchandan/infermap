@@ -82,6 +82,20 @@ class SearchController extends BaseController {
 
 		$retarray=array();
 
+		function cmp($c1,$c2){
+			if($c1->score==$c2->score){
+				if(($c1->rank == NULL || $c1->rank=='') && ($c2->rank == NULL && $c2->rank==''))
+					return 0;
+				else if($c1->rank == '' || $c1->rank == NULL)
+					return 0;
+				else if($c2->rank == '' || $c2->rank == NULL)
+					return 1;
+				else
+					return $c1->rank > $c2 ->rank;
+			}
+			return $c1->score > $c2->score;
+		}
+
 		foreach ($allcollege as $key=> $college) {
 			$college->score = $this->mylev($arryain, strtolower($college->name));
 			for($i = 1; $i < 11; $i++){
@@ -115,32 +129,50 @@ class SearchController extends BaseController {
 				
 			}
 			$allcollege[$key]=$college;
-			/*if($key<10)
+			/*if($key<$no)
 			{
 				array_push($retarray, $college);
 			}
-			if($key==10)
+			if($key==$no)
 			{
 				uasort($retarray, 'cmp');
+
+			}
+			if($key>=$no)
+			{
+				if(cmp($retarray[$no-1],$college))
+				{	/*echo $retarray[$no-1]->score.' > '.$college->score;
+					foreach ($retarray as $key => $ret) {
+
+						echo $ret->name.$ret->score.' '.$ret->rank.'<br>';
+					}
+
+					echo '<br>-------------------<br>';
+
+					for ($i=$no-1; $i > 0; $i--) { 
+						if(cmp($retarray[$i-1],$college))
+						{
+							$retarray[$i]=$retarray[$i-1];
+						}
+						else
+						{
+			//				echo 'break at : '.$i.'<br>';
+							break;
+						}
+					}
+			//		echo ' '.$i.' ';
+					$retarray[$i]=$college;
+			//		echo '<br>--------------------<br>';
+				}
 			}*/
 		}
 		
-		function cmp($c1,$c2){
-			if($c1->score==$c2->score){
-				if($c1->rank == NULL && $c2->rank==NULL)
-					return 0;
-				else if($c1->rank == '')
-					return 1;
-				else if($c2->rank == '')
-					return -1;
-				else
-					return $c1->rank > $c2 ->rank;
-			}
-			return $c1->score > $c2->score;
+		/*foreach ($retarray as $key => $ret) {
+
+						echo $ret->name.$ret->score.' '.$ret->rank.'<br>';
 		}
-
-		
-
+		echo '<br>--------------------<br>';*/
+		uasort($allcollege, 'cmp');
 		$allcollege=array_splice($allcollege, 0,$no);
 		
 		function getdata($college)
@@ -158,8 +190,13 @@ class SearchController extends BaseController {
 	}
 
 	public function review_autocomplete(){
+
 		$str=Input::get('str','');
-		$ret=$this->autocomplete($str,6);
+		$ret=$this->autocomplete($str,10);
+		/*echo '<br>-------------------------<br>';
+		foreach ($ret as $key => $value) {
+			echo $value['name'].$value['score'].'<br>';
+		}*/
 		foreach ($ret as $key => $value) {
 			$ret[$key]['link']='college/'.$ret[$key]['link'].'/review';
 		}
@@ -176,7 +213,10 @@ class SearchController extends BaseController {
 		}
 		$ret=array_merge($allcollege,$ret);
 		usort($ret, 'cmp1');
-		return array_splice($ret,0,10);
+		$ret= array_splice($ret,0,10);
+		
+		return $ret;
+
 	}
 
 	public function test()
