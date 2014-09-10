@@ -66,6 +66,12 @@
 				            <li class="{{($data['page_name']=='placement_opportunities')?'active':''}}">
 				            	<a href="{{URL::route('department')}}/{{$data['link']}}/placement_opportunities">Placement Opportunities</a>
 				            </li>
+				            <li class="{{($data['page_name']=='research')?'active':''}}">
+				            	<a href="{{URL::route('department')}}/{{$data['link']}}/research">Research and Higher Studies</a>
+				            </li>
+				            <li class="{{($data['page_name']=='future_prospect')?'active':''}}">
+				            	<a href="{{URL::route('department')}}/{{$data['link']}}/future_prospect">Future Prospects</a>
+				            </li>
 				          </ul>
 				        </div><!--/.nav-collapse -->
 				      </div>
