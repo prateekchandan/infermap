@@ -43,7 +43,7 @@
 	        		<span class="icon-bar"></span>
 	        		<span class="icon-bar"></span>
 	      		</button>
-	      		<a class="navbar-brand" href="http://www.infermap.com"><img style="height:60px;margin-top:-5px;margin-right:4px" src="{{URL::asset('assets/img/icons/icon.png')}}"><span>INFERMAP</span></a>
+	      		<a class="navbar-brand" href="{{URL::to('/')}}"><img style="height:60px;margin-top:-5px;margin-right:4px" src="{{URL::asset('assets/img/icons/icon.png')}}"><span>INFERMAP</span></a>
 	    	</div>
 
 	    	<!-- Collect the nav links, forms, and other content for toggling -->
