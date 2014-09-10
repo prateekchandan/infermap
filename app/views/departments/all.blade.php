@@ -23,7 +23,7 @@
 
 				<div class="pull-left" style="max-width:80%">
 					<h2>
-LList of All Undergraduate Engineering courses</h2>
+				List of All Undergraduate Engineering courses</h2>
 				</div>
 			</div>
 			<!-- end: Container  -->
