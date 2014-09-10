@@ -57,8 +57,14 @@
 				            <li class="{{($data['page_name']=='about')?'active':''}}">
 				            	<a href="{{URL::route('department')}}/{{$data['link']}}/about">About</a>
 				            </li>
+				             <li class="{{($data['page_name']=='academic_info')?'active':''}}">
+				            	<a href="{{URL::route('department')}}/{{$data['link']}}/academic_info">Acedemic Information</a>
+				            </li>
 				            <li class="{{($data['page_name']=='top_colleges')?'active':''}}">
 				            	<a href="{{URL::route('department')}}/{{$data['link']}}/top_colleges">Top Colleges</a>
+				            </li>
+				            <li class="{{($data['page_name']=='placement_opportunities')?'active':''}}">
+				            	<a href="{{URL::route('department')}}/{{$data['link']}}/placement_opportunities">Placement Opportunities</a>
 				            </li>
 				          </ul>
 				        </div><!--/.nav-collapse -->

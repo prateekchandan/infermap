@@ -65,7 +65,7 @@ class DepartmentController extends BaseController {
 			if($user->admin >= 1)
 				$department->admin=1;
 		}
-		$files=['intro','field'];
+		$files=['intro','field','top_companies','salary_package'];
 		foreach ($files as $key => $value) {
 			$path=public_path().'/other-data'.'/department/'.$department->key.'/'.$value.'.txt';
 			$dat=trim($this->fetch_data($path));
@@ -85,6 +85,12 @@ class DepartmentController extends BaseController {
 					break;		
 				case 'top_colleges':
 					return View::make('departments.top_colleges');
+					break;
+				case 'placement_opportunities':
+					return View::make('departments.placement_opportunities_edit');
+					break;
+				case 'academic_info':
+					return View::make('departments.academic_info_edit');
 					break;						
 				default:
 					return View::make('departments.about');
@@ -99,7 +105,13 @@ class DepartmentController extends BaseController {
 					break;	
 				case 'top_colleges':
 					return View::make('departments.top_colleges');
-					break;	
+					break;
+				case 'academic_info':
+					return View::make('departments.academic_info');
+					break;
+				case 'placement_opportunities':
+					return View::make('departments.placement_opportunities');
+					break;		
 				default:
 					return View::make('departments.about');
 					break;
