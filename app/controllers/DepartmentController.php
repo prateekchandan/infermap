@@ -30,31 +30,17 @@ class DepartmentController extends BaseController {
 	      return $str;
 	}
 	public function all(){
-		function clean($string) {
-			$string=strtolower($string);
-	   $string = str_replace('/', '-', trim($string)); // Replaces all spaces with hyphens.
-	   $string = str_replace(' ', '-', trim($string)); // Replaces all spaces with hyphens.
-	   $string = str_replace('--', '-', $string); // Replaces all spaces with hyphens.
-	   $string = str_replace('--', '-', $string); // Replaces all spaces with hyphens.
-	   $string = str_replace('nbsp', '', $string); // Replaces all spaces with hyphens.
-	   return preg_replace('/[^A-Za-z0-9\-]/', '', $string); // Removes special chars.
-	}
 		$dept=DB::select('select * from departments');
-		foreach ($dept as $key => $value) {
-			$link=clean($value->value);
-			DB::table('departments')
-            ->where('key', $value->key)
-            ->update(array('link' => $link));
-		}
-		//View::share('exam',$exam);
-		//return View::make('exams.all');
+		
+		View::share('department',$dept);
+		return View::make('departments.all');
 	}
 
 	public function savefile(){
 		$filename=Input::get('filename');
 		$data=Input::get('data');
-		$eid=Input::get('eid');
-		$path=public_path().'/other-data/exam/'.$eid;
+		$key=Input::get('eid');
+		$path=public_path().'/other-data/department/'.$key;
 		if(!is_dir($path))
 		{
 			mkdir($path,0777);
@@ -67,50 +53,41 @@ class DepartmentController extends BaseController {
 	}
 	public function view($link,$page="about")
 	{
-		$exam=DB::table('exam')->where('link', $link)->first();
-		if(sizeof($exam)==0)
-			return View::make('exams.error');
+		$department=DB::table('departments')->where('link', $link)->first();
+		if(sizeof($department)==0)
+			return View::make('departments.error');
 
-		$exam->admin=0;
+		
+		$department->admin=0;
 		if(Auth::check())
 		{
 			$user=Auth::user();
 			if($user->admin >= 1)
-				$exam->admin=1;
+				$department->admin=1;
 		}
-		$files=['about','eligibility','exam_pattern','syllabus'];
+		$files=['intro','field'];
 		foreach ($files as $key => $value) {
-			$path=public_path().'/other-data'.'/exam/'.$exam->eid.'/'.$value.'.txt';
+			$path=public_path().'/other-data'.'/department/'.$department->key.'/'.$value.'.txt';
 			$dat=trim($this->fetch_data($path));
-			$exam->$value=$dat;
+			$department->$value=$dat;
 		}
 
-		View::share('exam',$exam);
+		View::share('department',$department);
 		$data['page_name']=$page;
 		$data['link']=$link;
-		$exam->related_colleges=$this->get_related_colleges($exam->eid);
-		$exam->events=$this->get_events($exam->eid);
+		$department->related_colleges=$this->get_related_colleges($department->key);
 		View::share('data',$data);
-		if($exam->admin==1)
+		if($department->admin==1)
 		{
 			switch ($page) {
 				case 'about':
-					return View::make('exams.about_edit');
+					return View::make('departments.about_edit');
 					break;		
-				case 'related_colleges':
-					return View::make('exams.related_colleges');
-					break;	
-				case 'updates':
-					return View::make('exams.updates_edit');
-					break;	
-				case 'exam_pattern':
-					return View::make('exams.exam_pattern_edit');
-					break;
-				case 'syllabus':
-					return View::make('exams.syllabus_edit');
-					break;	
+				case 'top_colleges':
+					return View::make('departments.top_colleges');
+					break;						
 				default:
-					return View::make('exams.about');
+					return View::make('departments.about');
 					break;
 			}
 		}
@@ -118,49 +95,41 @@ class DepartmentController extends BaseController {
 		{
 			switch ($page) {
 				case 'about':
-					return View::make('exams.about');
+					return View::make('departments.about');
 					break;	
-				case 'related_colleges':
-					return View::make('exams.related_colleges');
-					break;	
-				case 'updates':
-					return View::make('exams.updates');
-					break;
-				case 'exam_pattern':
-					return View::make('exams.exam_pattern');
-					break;	
-				case 'syllabus':
-					return View::make('exams.syllabus');
+				case 'top_colleges':
+					return View::make('departments.top_colleges');
 					break;	
 				default:
-					return View::make('exams.about');
+					return View::make('departments.about');
 					break;
 			}
 		}
 	}
-	public function addevent()
-	{
-		$event=new Examevents;
-		$event->saveFromInput(Input::all());
-		$event->save();
-		return Redirect::back();
-	}
-	public function deleteevent()
-	{
-		DB::table('exam_dates')->where('id', '=', Input::get('id'))->delete();
-		return Redirect::back();
-	}
-	private function get_related_colleges($eid)
+	private function get_related_colleges($key)
 	{
 		$r= DB::table('college_id')
-            ->join('college_entrance_test', 'college_id.cid', '=', 'college_entrance_test.cid')
-            ->where('college_entrance_test.name', '=', $eid)
+            ->join('college_department', 'college_id.cid', '=', 'college_department.cid')
+            ->where('college_department.'.$key, '=','1')
             ->where('college_id.disabled','=','1')
-            ->select('college_id.link','college_id.name')
+            ->select('college_id.link','college_id.name','college_id.state','college_id.city')
+            ->orderby('college_id.state')
+            ->orderby('college_id.city')
             ->get();
-        shuffle($r);
-        $r=array_splice($r, 0,20);
-        return $r;
+         $ret=array();
+         $pre=0;
+         foreach ($r as $key => $value) {
+         	if($value->state=='--Select State--')
+         		$value->state="-N/A-";
+         	if($pre===$value->state)
+         		array_push($ret[$value->state], $value);
+         	else
+         	{
+         		$ret[$value->state]=array($value);
+         		$pre=$value->state;
+         	}
+         }
+        return $ret;
 	}
 
 	private function get_events($eid)

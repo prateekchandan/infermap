@@ -10,7 +10,7 @@
 	<ul class="arrow_list">
 	@foreach($exam->related_colleges as $college)
 		<li>
-			<a href="{{URL::to('college')}}/{{$college->link}}">{{$college->name}}
+			<a href="{{URL::to('college')}}/{{$college->link}}">{{$college->name}}</a>
 		</li>
 
 	@endforeach

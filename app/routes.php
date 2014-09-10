@@ -29,7 +29,7 @@ Route::get('/analysis/departments', array('before'=>'admin','as'=>'analysis.dept
 // Some mains URLS's 
 
 // URL's for college
-Route::get('/college','CollegeController@show_all');
+Route::get('/college',array('as'=>'college','uses' => 'CollegeController@show_all'));
 Route::get('/college/{link}/{page}','CollegeController@college');
 Route::get('/college/{link}','CollegeController@college');
 
@@ -41,8 +41,11 @@ Route::post('/exam/',array('before'=>'admin','as'=>'exam.savefile','uses'=>'Exam
 Route::post('/exam/addevent',array('before'=>'admin','as'=>'exam.addevent','uses'=>'ExamsController@addevent'));
 Route::post('/exam/deleteevent',array('before'=>'admin','as'=>'exam.deleteevent','uses'=>'ExamsController@deleteevent'));
 
-// URLS for exam pages
+// URLS for department pages
 Route::get('/department',array('as'=>'department','uses'=>'DepartmentController@all'));
+Route::get('/department/{link}',array('as'=>'department.link','uses'=>'DepartmentController@view'));
+Route::get('/department/{link}/{page}',array('as'=>'department.page','uses'=>'DepartmentController@view'));
+Route::post('/department/',array('before'=>'admin','as'=>'department.savefile','uses'=>'DepartmentController@savefile'));
 
 // URLS's for register and login
 Route::get('/register', array('as'=>'user.create', 'uses'=>'UsersController@create'));
@@ -67,32 +70,6 @@ Route::get('/actest',array('as' => 'review_autocomplete_get' , 'uses' => 'Search
 
 Route::get('/user',function(){
 	return Auth::user();
-});
-
-Route::get('/correct_links',function(){
-	$allcolleges=DB::table('college_id')->get();
-	$links=array();
-	function clean($string) {
-	   $string = str_replace(' ', '-', trim($string)); // Replaces all spaces with hyphens.
-	   $string = str_replace('--', '-', $string); // Replaces all spaces with hyphens.
-	   $string = str_replace('--', '-', $string); // Replaces all spaces with hyphens.
-	   $string = str_replace('nbsp', '', $string); // Replaces all spaces with hyphens.
-	   return preg_replace('/[^A-Za-z0-9\-]/', '', $string); // Removes special chars.
-	}
-	foreach ($allcolleges as $key => $value) {
-		$a=$value->name;
-		if($value->city!='')
-			$a.='-'.$value->city;
-		$link=clean($a);
-		if(in_array($link,$links)){
-			$link=$link.$links[$link];
-		}
-		DB::table('college_id')
-            ->where('cid', $value->cid)
-            ->update(array('link' => $link));
-		$links[$link]=1;
-		echo $link.'<br>';
-	}
 });
 
 // Keep this line at last
