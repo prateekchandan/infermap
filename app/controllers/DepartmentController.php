@@ -65,7 +65,7 @@ class DepartmentController extends BaseController {
 			if($user->admin >= 1)
 				$department->admin=1;
 		}
-		$files=['intro','field','top_companies','salary_package'];
+		$files=['intro','field','top_companies','salary_package','acad_info'];
 		foreach ($files as $key => $value) {
 			$path=public_path().'/other-data'.'/department/'.$department->key.'/'.$value.'.txt';
 			$dat=trim($this->fetch_data($path));
