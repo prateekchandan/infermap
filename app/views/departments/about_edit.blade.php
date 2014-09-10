@@ -24,7 +24,7 @@
 <div class="row">
 	<div class="col-md-12">
 		<div class="title">
-			<h3>Field Of Work</h3>
+			<h3>Field of Work</h3>
 		</div>
 		<div class="col-md-12 row">
 			<a class="halflings edit  edit-btn" href="#" data-filename="field">
