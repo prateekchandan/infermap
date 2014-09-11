@@ -9,10 +9,6 @@
 		
 	<link href="{{URL::asset('assets/css/parallax-slider.css')}}" rel="stylesheet">
 	<link href="{{URL::asset('assets/css/custom-css.css')}}" rel="stylesheet">
-		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Sans:400,700">
-	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Serif">
-	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Boogaloo">
-	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Economica:700,400italic">
 	
 	<link rel="icon" href="{{URL::asset('assets/img/icons/icon.png')}}" type="image/x-icon">
 	<script  src="{{URL::asset('assets/js/jquery-1.9.1.min.js')}}"></script>
