@@ -1,10 +1,4 @@
-@import "social-icons.css";
-@import "hover.css";
-@import "fancybox.css";
-@import "font-awesome.min.css";
-@import "font-awesome-ie7.min.css";
-@import "glyphicons.css";
-@import "halflings.css";
+@import "import.css";
 .row{margin-right:-15px;margin-left:-15px!important}
 html{-webkit-font-smoothing:antialiased}
 .clear{clear:both}
