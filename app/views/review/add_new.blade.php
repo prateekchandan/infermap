@@ -305,7 +305,7 @@ input[type='range']::-moz-range-thumb {
 
                            
                             <div class="form-group row">
-                                <label class="col-md-12" for="about_college"> What is good or bad about your school? <br>
+                                <label class="col-md-12" for="about_college"> What is good or bad about your college? <br>
                                     Is there anything people should know about before deciding to attend? <br>
                                     Any Advice?
                                 </label>

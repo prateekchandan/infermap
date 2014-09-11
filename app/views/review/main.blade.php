@@ -82,7 +82,7 @@
 				for (var i = 0; i < data.length && i <6; i++) {
 					str+="<li><a href='{{URL::to('/')}}/"+data[i].link+"'>"+data[i].name+"<span class=\"pill-right\"></span></a></li>";
 				};
-				str+='<li><a href="#" onclick="submit_review()">If your college doesn\'t appear above click here</a></li>';
+				str+='<li><a href="#" onclick="submit_review()" style="color:#4E77CE">If your college doesn\'t appear above click here</a></li>';
 				str+="</ul>";
 				window.temp_box_size=Math.min(data.length,6)+2;
     			window.temp_box_cur=0;
