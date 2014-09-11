@@ -14,6 +14,7 @@
 	<script  src="{{URL::asset('assets/js/jquery-1.9.1.min.js')}}"></script>
 	<script src="{{URL::asset('assets/js/bootstrap.min.js')}}"></script>
 
+	<meta name=viewport content="width=device-width, initial-scale=1">
 	<!-- end: CSS -->
 
     <!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
