@@ -50,7 +50,7 @@
 				            <span class="icon-bar"></span>
 				            <span class="icon-bar"></span>
 				          </button>
-				          <span class="visible-xs navbar-brand">Navigate this college</span>
+				          <span class="visible-xs navbar-brand">Pages</span>
 				        </div>
 				        <div class="navbar-collapse collapse sidebar-navbar-collapse">
 				          <ul class="nav navbar-nav">
