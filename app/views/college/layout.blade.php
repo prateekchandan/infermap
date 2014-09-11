@@ -17,7 +17,7 @@
 			<div class="container">
 
 				<div class="col-md-10">
-					<h2>{{{$data['name']}}}</h2>
+					<h2>{{$data['name']}}</h2>
 					<div class="head-locations">
 						{{{$data['location_bar']}}}
 					</div>
