@@ -16,14 +16,14 @@
 			<!-- start: Container -->
 			<div class="container">
 
-				<div class="pull-left" style="max-width:80%">
+				<div class="col-md-10">
 					<h2>{{{$data['name']}}}</h2>
 					<div class="head-locations">
 						{{{$data['location_bar']}}}
 					</div>
 				</div>`
 				@if($data['logo-img']!='0')
-				<div class="pull-right" style="max-width:20%">
+				<div class="col-md-2">
 					<img class="logo-img" src="{{$data['logo-img']}}">
 				</div>
 				@endif
