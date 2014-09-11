@@ -99,11 +99,11 @@
 <script src="{{URL::asset('assets/js/slider.js')}}"></script>
 <script src="{{URL::asset('assets/js/jquery.fancybox.js')}}"></script>
 
-<script src="{{URL::asset('assets/js/excanvas.js')}}"></script>
+<!--script src="{{URL::asset('assets/js/excanvas.js')}}"></script>
 <script src="{{URL::asset('assets/js/jquery.flot.js')}}"></script>
 <script src="{{URL::asset('assets/js/jquery.flot.pie.min.js')}}"></script>
 <script src="{{URL::asset('assets/js/jquery.flot.stack.js')}}"></script>
-<script src="{{URL::asset('assets/js/jquery.flot.resize.min.js')}}"></script>
+<script src="{{URL::asset('assets/js/jquery.flot.resize.min.js')}}"></script-->
 
 <script src="{{URL::asset('assets/js/custom.js')}}"></script>
 <!-- end: Java Script -->
