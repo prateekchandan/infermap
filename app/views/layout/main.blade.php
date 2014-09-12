@@ -15,6 +15,8 @@
 	<script src="{{URL::asset('assets/js/bootstrap.min.js')}}"></script>
 
 	<meta name=viewport content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta property="og:site_name" content="Infermap"/>
 	<!-- end: CSS -->
 
     <!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->

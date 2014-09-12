@@ -39,6 +39,7 @@ class CreateReviewsTable extends Migration {
 			$table->string('stay_con', 1000)->nullable();
 			$table->integer('anonymous')->nullable()->default('0');
 			$table->timestamps();
+			$table->foreign('user_id')->references('id')->on('users');
 		});
 	}
 

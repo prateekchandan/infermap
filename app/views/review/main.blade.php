@@ -2,6 +2,8 @@
 
 @section('meta')
 <title>Review Your College</title>
+<meta name="title" content="Review Your College - Infermap">
+<meta name="description" content="Give back to the community by sharing your college experience, guide the high school students by shedding some light on the details of your college. / letting them know more about your college.">
 @endsection
 
 @section('body')
