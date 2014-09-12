@@ -215,7 +215,7 @@ Use our interactive guide to plan your college search. A series of simple questi
     	var inp=$('.autocomplete');
 		var val=$.trim(inp.val());
         inp.val(val);
-        if(val.length<2)
+        if(val.length<1)
             return;
 		var h=inp.offset().top+inp.height()-inp.parent().offset().top , w=inp.offset().left;
 		var box=document.createElement('div');
