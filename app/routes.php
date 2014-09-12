@@ -64,6 +64,7 @@ Route::get('/gplus',function(){
 
 // URL for autocomplete
 Route::get('/autocomplete/{string}',array('as' => 'autocomplete' , 'uses' => 'SearchController@autocomplete'));
+Route::post('/autocomplete',array('as' => 'autocomplete_get' , 'uses' => 'SearchController@autocomplete_get'));
 Route::post('/review_autocomplete',array('as' => 'review_autocomplete' , 'uses' => 'SearchController@review_autocomplete'));
 Route::get('/review_autocomplete',array('as' => 'review_autocomplete_get' , 'uses' => 'SearchController@review_autocomplete'));
 Route::get('/actest',array('as' => 'review_autocomplete_get' , 'uses' => 'SearchController@test'));

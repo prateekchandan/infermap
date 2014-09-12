@@ -238,4 +238,14 @@ class SearchController extends BaseController {
 		print_r($res);
 	}
 
+	public function autocomplete_get($value='')
+	{
+		
+
+		$str=Input::get('str','');
+		$ret=$this->autocomplete($str,10);
+
+		return $ret;
+	}
+
 }

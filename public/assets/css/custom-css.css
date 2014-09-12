@@ -46,7 +46,7 @@
 }
 
 /*Autocomplete box*/
-.temp_review_autobox{
+.temp_review_autobox,.temp_autobox{
 	position: absolute;
 	z-index: 100;
 	padding: 5px;
@@ -54,11 +54,14 @@
 	border: 1px solid #ccc;
 	border-top: 0px;
 }
-.temp_review_ul{
+.temp_autobox{
+	margin-top: -1px;
+}
+.temp_review_ul,.temp_ul{
 	float: left;
 	width: 100%;
 }
-.temp_review_autobox ul li a{
+.temp_review_autobox ul li a,.temp_autobox ul li a{
 	display: block;
 	width: 100%;
 	color: #666;
@@ -68,6 +71,7 @@
 .temp_review_autobox div{
 	border-bottom: 1px solid #eee;
 }
+
 
 .thin-hr{
 	margin:5px;
