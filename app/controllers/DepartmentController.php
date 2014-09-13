@@ -153,6 +153,10 @@ class DepartmentController extends BaseController {
          		$pre=$value->state;
          	}
          }
+        foreach ($ret as $key => $value) {
+        	shuffle($value);
+        	$ret[$key]=array_splice($value,0,10);
+        }
         return $ret;
 	}
 
