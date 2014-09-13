@@ -94,6 +94,10 @@
 
 <!-- start: Java Script -->
 <!-- Placed at the end of the document so the pages load faster -->
+<script type="text/javascript">
+	window.autocomplete_url="{{{URL::route('autocomplete_get')}}}";
+	window.autocomplete_college_url="{{URL::to('college')}}";
+</script>
 <script src="{{URL::asset('assets/js/jquery.isotope.min.js')}}"></script>
 <script src="{{URL::asset('assets/js/jquery.imagesloaded.js')}}"></script>
 <script src="{{URL::asset('assets/js/flexslider.js')}}"></script>
@@ -101,6 +105,7 @@
 <script src="{{URL::asset('assets/js/jquery.cslider.js')}}"></script>
 <script src="{{URL::asset('assets/js/slider.js')}}"></script>
 <script src="{{URL::asset('assets/js/jquery.fancybox.js')}}"></script>
+<script src="{{URL::asset('assets/js/autocomplete.js')}}"></script>
 
 <!--script src="{{URL::asset('assets/js/excanvas.js')}}"></script>
 <script src="{{URL::asset('assets/js/jquery.flot.js')}}"></script>

@@ -6,6 +6,23 @@ Route::get('/', function()
 	return View::make('home.home');
 });
 
+Route::get('test', function()
+{
+	$college=DB::table('college_id')->get();
+	$sum=0;
+	foreach ($college as $key => $value) {
+		//echo $value->name.'<br>';
+		$depts=DB::connection('college_data')->select('select * from t'.$value->cid);
+		//$sum+= sizeof($depts);
+		if(sizeof($depts)==0)
+		{
+			echo '<a href="'.URL::route('college').'/'.$value->link.'">'.$value->name.' : '.$value->cid.'</a><br>';
+		}
+		//echo '<hr>';
+	}
+	echo $sum;
+});
+
 
 Route::filter('admin',function(){
 	if(!Auth::check())

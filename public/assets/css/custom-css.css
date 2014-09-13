@@ -77,3 +77,12 @@
 	margin:5px;
 	border-top: 1px solid rgb(241, 241, 241);
 }
+
+.autocomplete{
+	border-radius: 0px;
+}
+.autocomplete:focus{
+	box-shadow: 0px ;
+	box-shadow: 0px 0px 0px #000;
+	border-color: #ccc;
+}
