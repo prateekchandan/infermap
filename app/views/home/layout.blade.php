@@ -62,7 +62,7 @@
 					<h3>Quick links</h3>
 					<ul class="arrow_list">
 						<li><a href="{{URL::route('exam')}}">Check all exams for admission in Btech</a></li>
-						<li><a href="{{URL::route('department')}}">See all engineering colleges</a></li>
+						<li><a href="{{URL::route('department')}}">See all engineering departments</a></li>
 					</ul>
 					
 				</div>
