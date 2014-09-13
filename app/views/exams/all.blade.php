@@ -1,10 +1,10 @@
-@extends('layout.main')
+@extends('home.layout')
 
 @section('meta')
 <title>List of Exams for Engineering</title>
 @endsection
 
-@section('body')
+@section('content')
 <style type="text/css">
 	a{
 		color: #5F647C;;

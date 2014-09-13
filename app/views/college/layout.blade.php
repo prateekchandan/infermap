@@ -171,12 +171,7 @@ Inspired by a belief that all students deserve access to good guidance, infermap
 				</div>
 				<!-- end: Footer Menu Logo -->
 
-				<!-- start: Footer Menu Links-->
-				<div class="col-sm-9">
-					
-					
-				</div>
-				<!-- end: Footer Menu Links-->
+				@include('home.footer_links')
 
 				<!-- start: Footer Menu Back To Top -->
 				<div class="col-sm-1">

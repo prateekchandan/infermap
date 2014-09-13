@@ -1,10 +1,10 @@
-@extends('layout.main')
+@extends('home.layout')
 
 @section('meta')
 <title>{{{$exam->fullform}}}</title>
 @endsection
 
-@section('body')
+@section('content')
 <style type="text/css">
 	.editable-content ul{
 		padding-left:35px;
@@ -128,55 +128,4 @@ Inspired by a belief that all students deserve access to good guidance, infermap
 	</div>
 	<!--end: Container-->
 
-	<div id="footer-menu" class="hidden-sm hidden-xs">
-
-		<!-- start: Container -->
-		<div class="container">
-			
-			<!-- start: Row -->
-			<div class="row">
-
-				<!-- start: Footer Menu Logo -->
-				<div class="col-sm-2">
-					<div id="footer-menu-logo">
-						<a class="brand" href="{{URL::to('/')}}"><span>Infermap</span></a>
-					</div>
-				</div>
-				<!-- end: Footer Menu Logo -->
-
-				<!-- start: Footer Menu Links-->
-				<div class="col-sm-9">
-					
-					
-				</div>
-				<!-- end: Footer Menu Links-->
-
-				<!-- start: Footer Menu Back To Top -->
-				<div class="col-sm-1">
-						
-					<div id="footer-menu-back-to-top">
-						<a href="#"></a>
-					</div>
-				
-				</div>
-				<!-- end: Footer Menu Back To Top -->
-			
-			</div>
-			<!-- end: Row -->
-			
-		</div>
-		<!-- end: Container  -->	
-
-	</div>
-	<div id="footer">
-		
-		<!-- start: Container -->
-		<div class="container">
-			
-			
-			
-		</div>
-		<!-- end: Container  -->
-
-	</div>
 @endsection

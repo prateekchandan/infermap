@@ -1,11 +1,6 @@
 <?php
 
 
-Route::get('/', function()
-{
-	return View::make('home.home');
-});
-
 Route::get('test', function()
 {
 	$college=DB::table('college_id')->get();
@@ -30,6 +25,12 @@ Route::filter('admin',function(){
 		return View::make('user.login');
 	}
 });
+
+
+// URL for general pages over site
+Route::get('/',array('as'=>'home','uses'=>'HomeController@home'));
+Route::get('about-us',array('as'=>'home.about','uses'=>'HomeController@about'));
+Route::get('frequently-asked-questions',array('as'=>'home.faq','uses'=>'HomeController@faq'));
 
 // URL for page for review and storing a review
 Route::get('/review',array('as'=>'review_main','uses'=>'ReviewController@get_college'));
