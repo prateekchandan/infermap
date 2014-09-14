@@ -16,7 +16,10 @@ class UsersController extends \BaseController {
 		$user=Auth::user();
 		$review=DB::table('college_reviews')
 			->where('user_id','=',$user->id)->first();
-		if($review->college_id==0)
+		if($review==NULL){
+			
+		}
+		else if($review->college_id==0)
 		{
 			$review=DB::table('college_reviews')
 			->join('temp_colleges','temp_colleges.temp_id','=','college_reviews.temp_college_id')
