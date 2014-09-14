@@ -139,6 +139,7 @@ class DepartmentController extends BaseController {
             ->select('college_id.link','college_id.name','college_id.state','college_id.city')
             ->orderby('college_id.state')
             ->orderby('college_id.city')
+            ->orderby('college_id.rank')
             ->get();
          $ret=array();
          $pre=0;
@@ -154,7 +155,7 @@ class DepartmentController extends BaseController {
          	}
          }
         foreach ($ret as $key => $value) {
-        	shuffle($value);
+        	//shuffle($value);
         	$ret[$key]=array_splice($value,0,10);
         }
         return $ret;

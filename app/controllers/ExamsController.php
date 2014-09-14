@@ -143,6 +143,7 @@ class ExamsController extends BaseController {
             ->where('college_entrance_test.name', '=', $eid)
             ->where('college_id.disabled','=','1')
             ->select('college_id.link','college_id.name')
+            ->orderby('college_id.rank')
             ->get();
         shuffle($r);
         $r=array_splice($r, 0,20);
