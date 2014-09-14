@@ -170,10 +170,11 @@ class UsersController extends \BaseController {
 			$user->img_url = Input::get('img_url');
 			$user->save();
 			Auth::login($user);
-			return Redirect::route('user.edit');
 		}
-		$user = $users[0];
-		Auth::login($user);
+		else{
+			$user = $users[0];
+			Auth::login($user);
+		}
 		if($url!='' && $url !=null)
 			return Redirect::away($url);
 		else

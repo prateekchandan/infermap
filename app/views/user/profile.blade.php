@@ -77,8 +77,16 @@
 							</blockquote>
 							@else
 								<table class="table">
-									@foreach($refer as $person)
+								<thead>
 									<tr>
+										<th>Sl No</th>
+										<th>Name</th>
+										<th>Email</th>
+									</tr>
+								</thead>
+									@foreach($refer as $key=> $person)
+									<tr>
+										<td>{{$key+1}}</td>
 										<td>{{$person->name}}</td><td>{{$person->email}}</td>
 									</tr>
 									@endforeach
