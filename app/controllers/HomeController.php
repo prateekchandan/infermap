@@ -27,5 +27,9 @@ class HomeController extends BaseController {
 	{
 		return View::make('home.faq');
 	}
+	public function compare()
+	{
+		return View::make('home.home');
+	}
 
 }

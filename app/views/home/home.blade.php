@@ -33,7 +33,7 @@
                 Infermap is a free comprehensive platform that improves the college selecting process, based on individual resources and requirements. 
                 Inspired by a belief that all students deserve access to good guidance, infermap aims to create the interactive tools and media that guide students as they find, afford and enroll in a college that’s a good fit for them.
             </h3>
-            <p><a class="btn btn-primary btn-lg">About Us &raquo;</a></p>
+            <p><a href="{{URL::route('home.about')}}" class="btn btn-primary btn-lg">About Us &raquo;</a></p>
         </div><!--/.jumbotron-->
         <!-- start: Row -->
         <div class="row">

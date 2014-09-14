@@ -5,7 +5,6 @@
 	.question{
 		background-color: #fcfcfc;
 		border: 1px solid #f6f6f6;
-		border-right: 0;
 		border-bottom: 1px solid #f6f6f6;
 		color: #888;
 		display: block;
@@ -312,13 +311,8 @@
         </div>
     </div>
 <script type="text/javascript">
-
-var lasttoggle = "doggy";
-
-	$(".question").click(function(){
-	  $("#"+this.id+"a").slideToggle();
-	 
-	});
-
+    $(".question").click(function(){
+      $("#"+this.id+"a").slideToggle();	 
+    });
 </script>
 @endsection

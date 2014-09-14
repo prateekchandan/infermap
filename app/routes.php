@@ -31,6 +31,7 @@ Route::filter('admin',function(){
 Route::get('/',array('as'=>'home','uses'=>'HomeController@home'));
 Route::get('about-us',array('as'=>'home.about','uses'=>'HomeController@about'));
 Route::get('frequently-asked-questions',array('as'=>'home.faq','uses'=>'HomeController@faq'));
+Route::get('compare-colleges',array('as'=>'home.compare','uses'=>'HomeController@compare'));
 
 // URL for page for review and storing a review
 Route::get('/review',array('as'=>'review_main','uses'=>'ReviewController@get_college'));
@@ -79,6 +80,14 @@ Route::get('/gplus',function(){
 	return View::make('user.test');
 });
 
+
+// URL for blog operations
+Route::get('/blog',array('as'=> 'blog' , 'uses' => 'BlogController@all'));
+Route::get('/blog/page/{page}',array('as'=> 'blog.pages' , 'uses' => 'BlogController@all'));
+Route::get('/blog/post',array('as'=> 'blog.post' , 'uses' => 'BlogController@all'));
+Route::get('/blog/post/{link}',array('as'=> 'blog.post.link' , 'uses' => 'BlogController@show_post'));
+Route::get('/blog/add-new',array('before'=>'admin','as'=> 'blog.add' , 'uses' => 'BlogController@add'));
+Route::post('/blog/add-new',array('before'=>'admin','as'=> 'blog.add' , 'uses' => 'BlogController@save'));
 
 // URL for autocomplete
 Route::get('/autocomplete/{string}',array('as' => 'autocomplete' , 'uses' => 'SearchController@autocomplete'));

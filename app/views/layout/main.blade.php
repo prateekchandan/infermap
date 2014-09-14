@@ -52,7 +52,7 @@
 					<li ><a href="{{URL::Route('review_main')}}">Review Your College</a></li>
 					<li ><a href="{{URL::Route('exam')}}">Exams</a></li>
 					<li ><a href="{{URL::Route('department')}}">Departments</a></li>
-					<li ><a href="http://blog.infermap.com">Blog</a></li>
+					<li ><a href="{{URL::Route('blog')}}">Blog</a></li>
 					@if(Auth::check())
 					<li class="dropdown">
             			<a href="#" class="dropdown-toggle" data-toggle="dropdown">Account<b class="caret"></b></a>
