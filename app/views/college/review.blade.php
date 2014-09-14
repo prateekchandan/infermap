@@ -15,11 +15,11 @@
     <div class="col-md-10 col-md-offset-1">
         
         <div class="row">
-            <a target='_blank' style="cursor:pointer" class="facebook_connect" href="http://www.facebook.com/sharer/sharer.php?u={{URL::route('review_main')}}">
+            <a target='_blank' style="cursor:pointer" class="facebook_connect" href="http://www.facebook.com/sharer/sharer.php?u={{$errors->first('link')}}">
                 <div class="img"><i class="fa fa-facebook"></i></div>
                 <div class="text">Share on Facebook</div>
             </a>
-            <a target='_blank' style="cursor:pointer" style="" class="gplus_connect" href="https://plus.google.com/share?url={{URL::route('review_main')}}">
+            <a target='_blank' style="cursor:pointer" style="" class="gplus_connect" href="https://plus.google.com/share?url={{$errors->first('link')}}">
                 <div class="img"><i class="fa fa-google-plus"></i></div>
                 <div class="text">Share on Google Plus</div>
             </a>
@@ -28,6 +28,11 @@
     <div class="col-md-10 col-md-offset-1">
     <br>
     <div class="title"><h3>Refer to your friends</h3></div>
+    <blockquote>
+        Share this link with your friends to earn review points and benefits
+        <br>
+        <a href="{{$errors->first('link')}}">{{$errors->first('link')}}</a>
+    </blockquote>
     </div>
     <div class="col-md-10 col-md-offset-1">
         <br>
@@ -169,7 +174,21 @@
         <div class="entry-content">
             <div class="main-body">
                 <form action="{{ URL::to('/review') }}" method="post" accept-charset="utf-8" onsubmit="return validate();">
+                    @if(isset($id))
+                        <input type="hidden" name="referer" value="{{$id}}">
+                    @endif
                     <input type="hidden" name="college_id" value="{{$data['cid']}}">
+                    @if(isset($prev_msg))
+                    <div class="media"> 
+                        <div class="media-body">
+                            <blockquote>
+                                <h3>
+                                    Note: You have already submitted a review. Submitting this will over write your previous review
+                                </h3>
+                            </blockquote>
+                        </div>
+                    </div>
+                    @endif
                     <div class="media"> 
                         <div class="media-body">
                             <h3 class="media-heading" style="background-color:#358EFB;">

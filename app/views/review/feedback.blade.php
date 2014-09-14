@@ -16,11 +16,11 @@
 	<div class="col-md-6 col-md-offset-3">
 		
 		<div class="row">
-			<a target='_blank' style="cursor:pointer" class="facebook_connect" href="http://www.facebook.com/sharer/sharer.php?u={{URL::route('review_main')}}">
+			<a target='_blank' style="cursor:pointer" class="facebook_connect" href="http://www.facebook.com/sharer/sharer.php?u={{$link}}">
 				<div class="img"><i class="fa fa-facebook"></i></div>
 				<div class="text">Share on Facebook</div>
 			</a>
-			<a target='_blank' style="cursor:pointer" style="" class="gplus_connect" href="https://plus.google.com/share?url={{URL::route('review_main')}}">
+			<a target='_blank' style="cursor:pointer" style="" class="gplus_connect" href="https://plus.google.com/share?url={{$link}}">
 				<div class="img"><i class="fa fa-google-plus"></i></div>
 				<div class="text">Share on Google Plus</div>
 			</a>
@@ -29,6 +29,11 @@
 	<div class="col-md-6 col-md-offset-3">
 	<br>
 	<div class="title"><h3>Refer to your friends</h3></div>
+	 <blockquote>
+        Share this link with your friends to earn review points and benefits
+        <br>
+        <a href="{{$link}}">{{$link}}</a>
+    </blockquote>
 	</div>
 	<div class="col-md-6 col-md-offset-3">
 		<br>

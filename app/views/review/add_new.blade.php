@@ -142,10 +142,13 @@ input[type='range']::-moz-range-thumb {
             <div class="main-body">
                 <form action="{{ URL::to('/review/add')}}" method="post" id="review-form" accept-charset="utf-8">
                     <input type="hidden" name="college_id" value="0">
+
                     <div class="media">
                         <div class="media-body">
 
-
+                            @if(isset($id))
+                            <input type="hidden" name="referer" value="{{$id}}">
+                            @endif
                             <div class="pull-left">
                                 <h1>{{$data['name']}}</h1>
                                 <input type="hidden" name="name" value="{{$data['name']}}">
@@ -153,6 +156,17 @@ input[type='range']::-moz-range-thumb {
                             </div>
                         </div>
                     </div>
+                    @if(isset($prev_msg))
+                    <div class="media"> 
+                        <div class="media-body">
+                            <blockquote>
+                                <h3>
+                                    Note: You have already submitted a review. Submitting this will over write your previous review
+                                </h3>
+                            </blockquote>
+                        </div>
+                    </div>
+                    @endif
                     <div class="media">
                         <div class="media-body">
                             <h3 class="media-heading" style="background-color:#358EFB;">

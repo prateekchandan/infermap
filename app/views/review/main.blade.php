@@ -53,7 +53,7 @@
     
     function submit_review(){
     	var inp=$('.review_autocomplete');
-    	window.location='{{URL::Route("review_new")}}?college='+inp.val();
+    	window.location='{{URL::Route("review_new")}}?college='+inp.val()+"{{(isset($id))?'&referer='.$id:''}}";
     	$('#error-area').html('<div class="alert alert-error alert-dismissable" style="" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>Please login to continue</div>');
     	return false;
     }
@@ -82,7 +82,7 @@
 				box.innerHTML=box.innerHTML+'<div class="col-md-12"><button type="button" class="close close_review_autocomplete" onclick="temp_review_autobox_remove()">×</button></div>';
 				str="<ul class='temp_review_ul'>";
 				for (var i = 0; i < data.length && i <6; i++) {
-					str+="<li><a href='{{URL::to('/')}}/"+data[i].link+"'>"+data[i].name+"<span class=\"pill-right\"></span></a></li>";
+					str+="<li><a href='{{URL::to('/')}}/"+data[i].link+"{{(isset($id))?'?referer='.$id:''}}"+"'>"+data[i].name+"<span class=\"pill-right\"></span></a></li>";
 				};
 				str+='<li><a href="#" onclick="submit_review()" style="color:#4E77CE">If your college doesn\'t appear above click here</a></li>';
 				str+="</ul>";

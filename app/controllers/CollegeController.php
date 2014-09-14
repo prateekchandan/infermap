@@ -103,6 +103,10 @@ class CollegeController extends BaseController {
 					return View::make('college.facilities');
 					break;
 				case 'review':
+					if(Input::has('referer'))
+						View::share('id',Input::get('referer'));
+					if(sizeof(DB::table('college_reviews')->where('user_id','=',Auth::user()->id)->get())>0)
+						View::share('prev_msg','1');
 					View::share('review_depts',$this->get_review_depts($data['cid']));
 					return View::make('college.review');
 					break;
