@@ -8,9 +8,28 @@ class UsersController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function profile()
 	{
-		//
+		if(!Auth::check()){
+			return View::make('user.login');
+		}
+		$user=Auth::user();
+		$review=DB::table('college_reviews')
+			->where('user_id','=',$user->id)->first();
+		if($review->college_id==0)
+		{
+			$review=DB::table('college_reviews')
+			->join('temp_colleges','temp_colleges.temp_id','=','college_reviews.temp_college_id')
+			->where('user_id','=',$user->id)->first();
+		}
+		else{
+			$review=DB::table('college_reviews')
+			->join('college_id','college_id.cid','=','college_reviews.college_id')
+			->where('user_id','=',$user->id)->first();
+		}
+		View::share('user',$user);
+		View::share('review',$review);
+		return View::make('user.profile');
 	}
 
 

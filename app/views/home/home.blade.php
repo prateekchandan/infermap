@@ -75,7 +75,7 @@
                         </div>
 
                         <div class="col-xs-8">
-                            <h3>Location</h3>
+                            <h3>Location Search</h3>
                             <p>If you dreamt college life to be your gate to freedom Or are homesick. Our search engine gets you the best colleges depending on location. Just choose how far away or close to home you desire it</p>
                         </div>
                         
@@ -98,9 +98,11 @@
                         </div>
 
                         <div class="col-xs-8">
-                            <h3>Step by step</h3>
-                            <p>No Idea? Grab our hand.
-Use our interactive guide to plan your college search. A series of simple questions to help you decide what you want.</p>
+                            <h3>Department Search</h3>
+                            <p>Have a stream in mind?<br>
+                              or Freezed on a department?<br>
+                              Which engineer are you at heart?<br>
+                              </p>
                         </div>
                         
                     </div>      
@@ -109,10 +111,78 @@ Use our interactive guide to plan your college search. A series of simple questi
                 
             </div>
             <!-- end: Icon Box-->
-        
         </div>
         <!-- end: Row -->   
 
+        <div class="row">
+            <!-- start: Icon Box Start -->
+            <div class="col-sm-6 col-md-4">
+                
+                <div class="icons-box vertical">
+                    
+                    <div class="row">
+                        
+                        <div class="col-xs-4">
+                            <i class="fa  fa-bullseye circle full-color big"></i>
+                        </div>
+
+                        <div class="col-xs-8">
+                            <h3>Counselling</h3>
+                            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
+                        </div>
+                        
+                    </div>      
+
+                </div>
+                
+            </div>
+            <!-- end: Icon Box-->
+             <!-- start: Icon Box Start -->
+            <div class="col-sm-6 col-md-4">
+                
+                <div class="icons-box vertical">
+                    
+                    <div class="row">
+                        
+                        <div class="col-xs-4">
+                            <i class="fa   fa-caret-square-o-up circle full-color big"></i>
+                        </div>
+
+                        <div class="col-xs-8">
+                            <h3>Preparation meter</h3>
+                            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
+                        </div>
+                        
+                    </div>      
+
+                </div>
+                
+            </div>
+            <!-- end: Icon Box-->
+
+              <!-- start: Icon Box Start -->
+            <div class="col-sm-6 col-md-4">
+                
+                <div class="icons-box vertical">
+                    
+                    <div class="row">
+                        
+                        <div class="col-xs-4">
+                            <i class="fa   fa-caret-square-o-up circle full-color big"></i>
+                        </div>
+
+                        <div class="col-xs-8">
+                            <h3>My College Plan</h3>
+                            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
+                        </div>
+                        
+                    </div>      
+
+                </div>
+                
+            </div>
+            <!-- end: Icon Box-->
+        </div>
         <hr>
         
         <!-- start: Row -->

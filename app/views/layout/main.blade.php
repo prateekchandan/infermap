@@ -57,6 +57,7 @@
 					<li class="dropdown">
             			<a href="#" class="dropdown-toggle" data-toggle="dropdown">Account<b class="caret"></b></a>
             			<ul class="dropdown-menu">
+							<li><a href="{{URL::Route('user.profile')}}">View Your Profile</a></li>
 							<li><a href="{{URL::Route('user.edit')}}">Edit Profile</a></li>
 							<li><a href="{{URL::Route('user.logout')}}?url={{Request::url()}}">Logout</a></li>
             			</ul>
