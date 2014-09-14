@@ -59,7 +59,7 @@
     }
     window.temp_box_size=0;
     window.temp_box_cur=0;
-    var myServiceCall = function() {
+    var myServiceCall1 = function() {
     	var inp=$('.review_autocomplete');
 		var val=inp.val();
 		var h=inp.offset().top+inp.height() , w=inp.offset().left;
@@ -133,7 +133,7 @@
         }
         else
         {
-        	forgiveness = window.setTimeout(myServiceCall, 700);
+        	forgiveness = window.setTimeout(myServiceCall1, 700);
         }
      });
 

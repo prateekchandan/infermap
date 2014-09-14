@@ -69,11 +69,8 @@
 				<div class="widget">
 					<div class="title"><h3>Menu</h3></div>
 					<ul class="links-list-alt">
-						<li><a href="http://localhost:8888/bootstrap/smart2/full_width.html">Full Width</a></li>
-						<li><a href="http://localhost:8888/bootstrap/smart2/sidebar.html">Sidebar</a></li>
-						<li><a href="post.html">Single Post</a></li>
-						<li><a href="about.html">About Us</a></li>
-						<li><a href="http://localhost:8888/bootstrap/smart2/pricing_tables.html">Pricing Tables</a></li>
+						<li><a href="{{URL::route('blog.add')}}">Add New Blog</a></li>
+						<li><a href="{{URL::route('blog')}}">See all Blogs</a></li>
 					</ul>
 				</div>
 				<!-- end: Sidebar Menu -->
@@ -82,18 +79,7 @@
 				<div class="widget">
 					<div class="title"><h3>Tags</h3></div>
 					<div class="tags">
-						<a href="blog.html#">Tag1</a>
-						<a href="blog.html#">Tag2</a>
-						<a href="blog.html#">Tag3</a>
-						<a href="blog.html#">Tag4</a>
-						<a href="blog.html#">Tag5</a>
-						<a href="blog.html#">Tag6</a>
-						<a href="blog.html#">Tag7</a>
-						<a href="blog.html#">Tag8</a>
-						<a href="blog.html#">Tag9</a>
-						<a href="blog.html#">Tag10</a>
-						<a href="blog.html#">Tag11</a>
-						<a href="blog.html#">Tag12</a>
+						<a href="">Tag1</a>
 					</div>
 				</div>
 				<!-- end: Tags -->
