@@ -5,13 +5,13 @@
 <meta name="google-signin-cookiepolicy" content="single_host_origin" />
 <meta name="google-signin-callback" content="signinCallback" />
 <script type="text/javascript">
-function gplus_login(){
+
       (function() {
        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = false;
        po.src = 'https://apis.google.com/js/client:plusone.js';
        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
      })();
-}
+
 
  function google_login() {
 
@@ -121,7 +121,7 @@ function signinCallback(authResult) {
                     </div>
                     <div class="text">Connect with Facebook</div>
                 </div>
-	            <div id="google-plus-button" style="cursor:pointer" class="gplus_connect" onclick="gplus_login()">
+	            <div id="google-plus-button" style="cursor:pointer" class="gplus_connect" onclick="google_login()">
 	                <div class="img"><i class="fa fa-google-plus"></i>
 	                </div>
 	                <div class="text">Signin with Google Plus</div>
