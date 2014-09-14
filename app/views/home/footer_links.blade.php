@@ -11,6 +11,7 @@
 
 							<li><a href="{{URL::route('home.faq')}}">FAQ</a></li>
 							<li><a href="{{URL::route('blog')}}">Blog</a></li>
+							<li><a href="{{URL::route('career')}}">Careers</a></li>
 
 						
 						</ul>
