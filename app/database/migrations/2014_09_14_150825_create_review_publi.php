@@ -18,8 +18,8 @@ class CreateReviewPubli extends Migration {
 		}
 		Schema::create('review_publi', function(Blueprint $table)
 		{
-			$table->integer('user_admin')->unsigned();
-			$table->integer('user_refered')->unsigned();
+			$table->integer('user_admin');
+			$table->integer('user_refered');
 			$table->timestamps();
 			$table->primary(array('user_admin', 'user_refered'));
 			$table->foreign('user_admin')->references('id')->on('users');
