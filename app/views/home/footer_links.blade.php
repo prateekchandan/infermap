@@ -10,6 +10,7 @@
 							<li><a href="{{URL::route('home.about')}}">About</a></li>
 
 							<li><a href="{{URL::route('home.faq')}}">FAQ</a></li>
+							<li><a href="{{URL::route('blog')}}">Blog</a></li>
 
 						
 						</ul>
