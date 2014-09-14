@@ -47,6 +47,7 @@
 			<br>
 				<div class="jumbotron">
 					<h3>Note : We are currently open only for short term interns</h3>
+					<h3>To apply mail at data@infermap.com</h3>
 				</div>
 			</div>
 		</div>

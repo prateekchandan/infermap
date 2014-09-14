@@ -14,11 +14,14 @@
     .temp_active{
         background: #eee;
     }
+    .main-search{
+        height: 40px;
+    }
 </style>
 <!-- start: Flexslider -->
         <div class="main">
                 <div class="from-group col-md-6 col-md-offset-3">
-                    <input class="autocomplete form-control">
+                    <input class="autocomplete form-control main-search">
                 </div>
 
                 <label class="col-md-6 col-md-offset-3"> Tip: Start searching by college name</label>
@@ -235,7 +238,7 @@
         <!-- start: Row -->
         <div class="row">
 
-            <div class="col-sm-9">
+            <div class="col-sm-12">
                 
                 <div class="title"><h3>Related Blogs</h3></div>
                 
@@ -271,45 +274,7 @@
 
             </div>
 
-            <div class="col-sm-3">
-                
-                <!-- start: Testimonials-->
-
-                <div class="testimonial-container">
-
-                    <div class="title"><h3>What People Say</h3></div>
-
-                        <div class="testimonials-carousel" data-autorotate="3000">
-
-                            <ul class="carousel">
-
-                                <li class="testimonial">
-                                    <div class="testimonials">Infermap.com is changing the education scene by cutting through the traditional norms and practices.</div>
-                                    <div class="testimonials-bg"></div>
-                                    <div class="testimonials-author">Saurav Suman, <span>Co-Founder timemytask.com</span></div>
-                                </li>
-
-                                <li class="testimonial">
-                                    <div class="testimonials">Infermap.com is aimed at transforming college hunting through it’s modern and unique user interface which empowers students with the ability to judge view a college based on hard core data.</div>
-                                    <div class="testimonials-bg"></div>
-                                    <div class="testimonials-author">Kritagya Tripathi ,<span>COO shoesonloose.com</span></div>
-                                </li>
-
-                                <li class="testimonial">
-                                    <div class="testimonials">Infermap.com is a revolutionized way to help students tame the ‘chaotic’ education scenario in India. Providing such an extensive information to students who are fresh out of their high school, will definitely help them to mold their career.</div>
-                                    <div class="testimonials-bg"></div>
-                                    <div class="testimonials-author">Kshitij thavre, <span>CTO Humming Whale Product Innovations</span></div>
-                                </li>
-
-                            </ul>
-
-                        </div>
-
-                    </div>
-
-                <!-- end: Testimonials-->
-                
-            </div>
+           
 
         </div>
         <!-- end: Row -->
