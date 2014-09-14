@@ -36,6 +36,10 @@
             <p><a href="{{URL::route('home.about')}}" class="btn btn-primary btn-lg">About Us &raquo;</a></p>
         </div><!--/.jumbotron-->
         <!-- start: Row -->
+        <div class="title">
+            <h3>Our Products</h3>
+        </div>
+        <hr>
         <div class="row">
 
             <!-- start: Icon Box Start -->
@@ -50,11 +54,9 @@
                         </div>
 
                         <div class="col-xs-8">
-                            <h3>Rank Search</h3>
-                            <p>Recently gave an exam got no idea which colleges it can fetch you?<br>
-                                Or confused with the options at hand<br>
-                                Just enter your expected rank and leave the rest to our advanced search engine.</p>
-                        </div>
+                            <h3>College Search</h3>
+                            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
+                            </div>
                         
                     </div>      
 
@@ -75,8 +77,8 @@
                         </div>
 
                         <div class="col-xs-8">
-                            <h3>Location Search</h3>
-                            <p>If you dreamt college life to be your gate to freedom Or are homesick. Our search engine gets you the best colleges depending on location. Just choose how far away or close to home you desire it</p>
+                            <h3>Review</h3>
+                            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
                         </div>
                         
                     </div>      
@@ -98,11 +100,8 @@
                         </div>
 
                         <div class="col-xs-8">
-                            <h3>Department Search</h3>
-                            <p>Have a stream in mind?<br>
-                              or Freezed on a department?<br>
-                              Which engineer are you at heart?<br>
-                              </p>
+                            <h3>Ask a Question</h3>
+                            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
                         </div>
                         
                     </div>      
@@ -182,6 +181,54 @@
                 
             </div>
             <!-- end: Icon Box-->
+        </div>
+
+         <div class="row">
+            <!-- start: Icon Box Start -->
+            <div class="col-sm-6 col-md-4">
+                
+                <div class="icons-box vertical">
+                    
+                    <div class="row">
+                        
+                        <div class="col-xs-4">
+                            <i class="fa  fa-bullseye circle full-color big"></i>
+                        </div>
+
+                        <div class="col-xs-8">
+                            <h3>My College Plan</h3>
+                            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
+                        </div>
+                        
+                    </div>      
+
+                </div>
+                
+            </div>
+            <!-- end: Icon Box-->
+             <!-- start: Icon Box Start -->
+            <div class="col-sm-6 col-md-4">
+                
+                <div class="icons-box vertical">
+                    
+                    <div class="row">
+                        
+                        <div class="col-xs-4">
+                            <i class="fa   fa-caret-square-o-up circle full-color big"></i>
+                        </div>
+
+                        <div class="col-xs-8">
+                            <h3>Blog</h3>
+                            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
+                        </div>
+                        
+                    </div>      
+
+                </div>
+                
+            </div>
+            <!-- end: Icon Box-->
+
         </div>
         <hr>
         

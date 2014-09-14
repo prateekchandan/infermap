@@ -7,7 +7,7 @@
 </style>
 <link rel="stylesheet" href="{{URL::asset('assets/css/redit.min.css')}}">
 
-<!-- start: Page Title -->
+	<!-- start: Page Title -->
 	<div id="page-title">
 
 		<div id="page-title-inner">
