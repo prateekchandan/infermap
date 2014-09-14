@@ -1,5 +1,10 @@
 @extends('home.layout')
 @section('content')
+<style type="text/css">
+	.redactor_editor{
+		min-height: 300px;
+	}
+</style>
 <link rel="stylesheet" href="{{URL::asset('assets/css/redit.min.css')}}">
 
 <!-- start: Page Title -->
