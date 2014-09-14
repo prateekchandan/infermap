@@ -359,25 +359,25 @@ class CollegeController extends BaseController {
 	public function collegebyplace($state,$city="all")
 	{
 		if($state=="error"||$city=="error")
-			App::abort(404);
+			return View::make('college.error');
 		if($city=='all')
 		{
-			$all=DB::table('college_id')->where('state', "=",$state)->get();
-			if(sizeof($all)==0)
-				App::abort(404);
-			foreach ($all as $key => $value) {
-				echo '<a href="../college/'.$value->link.'">'.$value->name.'</a><br>';
-			}
+			$all=DB::table('college_id')->where('state', "=",$state)->where('disabled','=','1')->orderby('rank')->get();
 		}
 		else
 		{
-			$all=DB::table('college_id')->where('state', "=",$state)->where('city','=',$city)->get();
-			if(sizeof($all)==0)
-				App::abort(404);
-			foreach ($all as $key => $value) {
-				echo '<a href="../college/'.$value->link.'">'.$value->name.'</a><br>';
-			}
+			$all=DB::table('college_id')->where('state', "=",$state)->where('city','=',$city)->where('disabled','=','1')->orderby('rank')->get();
 		}
+		if($city=='all')
+			$title="Colleges in ".$state;
+		else
+			$title="Colleges in ".$city." , ".$state;
+		View::share('title',$title);
+		View::share('list',$all);
+		if(sizeof($all)==0)
+			return View::make('college.error');
+		else
+			return View::make('college.listall');
 	}
 
 }
