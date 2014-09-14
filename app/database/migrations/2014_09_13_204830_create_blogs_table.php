@@ -19,7 +19,7 @@ class CreateBlogsTable extends Migration {
 		Schema::create('blog_list', function(Blueprint $table)
 		{
 			$table->increments('blog_id');
-			$table->integer('user_id')->unsigned();
+			$table->integer('user_id');
 			$table->string('Title',2000);
 			$table->string('link',2000);
 			$table->longText('content');
