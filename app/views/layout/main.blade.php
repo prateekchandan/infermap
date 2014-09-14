@@ -63,7 +63,7 @@
             			</ul>
           			</li>
 					@else
-						<li><a href="{{URL::Route('user.login')}}?url={{Request::url()}}">Login/Register</a></li>
+						<li><a href="{{URL::Route('user.login')}}?url={{URL::full()}}">Login/Register</a></li>
 					@endif
         		</ul>
 	    	</div><!-- /.navbar-collapse -->		

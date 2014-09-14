@@ -16,8 +16,9 @@ class UsersController extends \BaseController {
 		$user=Auth::user();
 		$review=DB::table('college_reviews')
 			->where('user_id','=',$user->id)->first();
+		
 		if($review==NULL){
-			
+
 		}
 		else if($review->college_id==0)
 		{
@@ -30,6 +31,14 @@ class UsersController extends \BaseController {
 			->join('college_id','college_id.cid','=','college_reviews.college_id')
 			->where('user_id','=',$user->id)->first();
 		}
+
+		$referred=DB::table('review_publi')->where('user_admin','=',$user->id)->get();
+		$referred_ppl=array();
+		foreach ($referred as $key => $user) {
+			$us=DB::table('users')->where('id','=',$user->user_refered)->first();
+			array_push($referred_ppl, $us);
+		}
+		View::share('refer',$referred_ppl);
 		View::share('user',$user);
 		View::share('review',$review);
 		return View::make('user.profile');

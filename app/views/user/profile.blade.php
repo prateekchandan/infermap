@@ -41,14 +41,14 @@
 						</div>	
 
 						<div>
-							<div class="title"><h3>Review submitted by you </h3></div>
+							<div class="title"><h3>Review for College submitted by you </h3></div>
 							@if($review==NULL)
 							<blockquote>
 								OOps.. This Place seems to be empty<br>
 								<div>
 									Give back to the community by sharing your college experience, guide the high school students by shedding some light on the details of your college. / letting them know more about your college.
 								</div>
-								<a href="{{URL::Route('review_main')}}" class="btn btn-primary">Submit a review</a>
+								<a href="{{URL::Route('review_main')}}" class="btn btn-primary">Submit a college review</a>
 							</blockquote>
 							@else
 							<blockquote>
@@ -62,6 +62,27 @@
 									<h5>Note: You can submit a new review for any college. The previous will be automatically deleted</h5>
 								@endif
 							</blockquote>
+							@endif							
+						</div>	
+
+						<div>
+							<div class="title"><h3>Referred People by You</h3></div>
+							@if(sizeof($refer)==0)
+							<blockquote>
+								<div>
+									You haven't referred anyone yet to submit a college review. Refer people an get points and awards.
+									<br>
+									Send this link to your friends : {{URL::route('review_main')}}?referer={{$user->id}}
+								</div>
+							</blockquote>
+							@else
+								<table class="table">
+									@foreach($refer as $person)
+									<tr>
+										<td>{{$person->name}}</td><td>{{$person->email}}</td>
+									</tr>
+									@endforeach
+								</table>
 							@endif							
 						</div>	
 					</div>	
