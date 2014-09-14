@@ -34,11 +34,10 @@ class UsersController extends \BaseController {
 
 		$referred=DB::table('review_publi')->where('user_admin','=',$user->id)->get();
 		$referred_ppl=array();
-		foreach ($referred as $key => $user) {
-			$us=DB::table('users')->where('id','=',$user->user_refered)->first();
+		foreach ($referred as $key => $usr) {
+			$us=DB::table('users')->where('id','=',$usr->user_refered)->first();
 			array_push($referred_ppl, $us);
 		}
-		print_r($referred_ppl);
 		View::share('refer',$referred_ppl);
 		View::share('user',$user);
 		View::share('review',$review);
