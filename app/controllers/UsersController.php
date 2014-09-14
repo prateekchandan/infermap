@@ -38,6 +38,7 @@ class UsersController extends \BaseController {
 			$us=DB::table('users')->where('id','=',$user->user_refered)->first();
 			array_push($referred_ppl, $us);
 		}
+		print_r($referred_ppl);
 		View::share('refer',$referred_ppl);
 		View::share('user',$user);
 		View::share('review',$review);

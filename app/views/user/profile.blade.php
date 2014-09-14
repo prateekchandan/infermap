@@ -79,7 +79,7 @@
 								<table class="table">
 									@foreach($refer as $person)
 									<tr>
-										<td>{{$person->name}}</td><td>{{$person->email}}</td>
+										
 									</tr>
 									@endforeach
 								</table>
