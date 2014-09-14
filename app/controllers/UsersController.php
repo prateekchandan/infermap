@@ -172,6 +172,9 @@ class UsersController extends \BaseController {
 			Auth::login($user);
 		}
 		else{
+			DB::table('users')
+				->where('id','=',$users[0]->id)
+				->update(array('gplusid' => Input::get('gplusid') , 'img_url' => Input::get('img_url')));
 			$user = $users[0];
 			Auth::login($user);
 		}
@@ -194,6 +197,9 @@ class UsersController extends \BaseController {
 			Auth::login($user);
 			return Redirect::route('user.edit');
 		}
+		DB::table('users')
+				->where('id','=',$users[0]->id)
+				->update(array('fbid' => Input::get('fbid')));
 		$user = $users[0];
 		Auth::login($user);
 		if($url!='' && $url !=null)
