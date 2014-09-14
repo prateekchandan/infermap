@@ -145,7 +145,6 @@ class ExamsController extends BaseController {
             ->select('college_id.link','college_id.name')
             ->orderby('college_id.rank')
             ->get();
-        shuffle($r);
         $r=array_splice($r, 0,20);
         return $r;
 	}

@@ -138,7 +138,6 @@ class DepartmentController extends BaseController {
             ->where('college_id.disabled','=','1')
             ->select('college_id.link','college_id.name','college_id.state','college_id.city')
             ->orderby('college_id.state')
-            ->orderby('college_id.city')
             ->orderby('college_id.rank')
             ->get();
          $ret=array();
