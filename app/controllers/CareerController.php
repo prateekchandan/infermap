@@ -93,7 +93,7 @@ class CareerController extends BaseController {
 			$message->from('noreply@infermap.com', 'Infermap');
 		    $message->to('infermap@gmail.com')->subject('New Applicant');
 		});
-		Redirect::back();
+		return Redirect::back();
 	}
 	
 }
