@@ -95,6 +95,11 @@ Route::get('/review_autocomplete',array('as' => 'review_autocomplete_get' , 'use
 
 //URL for interns and careers
 Route::get('/career',array('as'=>'career','uses' => 'CareerController@home'));
+Route::get('/career/add-position',array('before'=>'admin','as'=>'career.add','uses' => 'CareerController@view_add'));
+Route::post('/career/add-position',array('before'=>'admin','as'=>'career.add','uses' => 'CareerController@save_add'));
+Route::get('/career/position',array('as'=>'career.position','uses' => 'CareerController@home'));
+Route::get('/career/position/{link}',array('as'=>'career.positon.link','uses' => 'CareerController@view_post'));
+Route::post('/career/position/{link}',array('as'=>'career.positon.link','uses' => 'CareerController@intern_apply'));
 
 Route::get('/user',function(){
 	return Auth::user();

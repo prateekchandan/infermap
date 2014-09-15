@@ -47,8 +47,34 @@
 			<br>
 				<div class="jumbotron">
 					<h3>Note : We are currently open only for short term interns</h3>
-					<h3>To apply mail at data@infermap.com</h3>
 				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+			<br>
+				@foreach($post as $key=>$value)
+				<div class="title"><h3>{{$key}}</h3></div>
+					<ul>
+					@foreach($value as $position)
+						<li>
+							<div class="col-md-12">
+								<div class="row">
+									<div class="col-md-10">
+										<h3><a href="{{URL::Route('career.position')}}/{{$position->link}}">{{$position->position}}</a></h3>
+									</div>
+									<div class="col-md-2">
+										<a href="{{URL::Route('career.position')}}/{{$position->link}}#apply" class="btn btn-success">Apply</a>
+									</div>
+								</div>
+								<p>{{$position->desc}}</p>
+								<hr class="thin-hr">
+							</div>
+						</li>
+					
+					@endforeach
+					</ul>
+				@endforeach
 			</div>
 		</div>
 	</div>
