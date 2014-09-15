@@ -41,7 +41,7 @@ return array(
 	|
 	*/
 
-	'port' => 597,
+	'port' => 587,
 
 	/*
 	|--------------------------------------------------------------------------
@@ -54,7 +54,7 @@ return array(
 	|
 	*/
 
-	'from' => array('address' => 'noreply@infermap.com', 'name' => 'Infermap'),
+	'from' => array('address' => 'infermap@gmail.com', 'name' => 'Infermap'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -67,7 +67,7 @@ return array(
 	|
 	*/
 
-	'encryption' => 'ssl',
+	'encryption' => 'tls',
 
 	/*
 	|--------------------------------------------------------------------------
