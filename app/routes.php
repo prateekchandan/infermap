@@ -1,21 +1,21 @@
 <?php
 
 
-Route::get('test', function()
+Route::get('clean', function()
 {
 	$college=DB::table('college_id')->get();
 	$sum=0;
 	foreach ($college as $key => $value) {
-		//echo $value->name.'<br>';
-		$depts=DB::connection('college_data')->select('select * from t'.$value->cid);
-		//$sum+= sizeof($depts);
-		if(sizeof($depts)==0)
-		{
-			echo '<a href="'.URL::route('college').'/'.$value->link.'">'.$value->name.' : '.$value->cid.'</a><br>';
-		}
-		//echo '<hr>';
+		$string=$value->name;
+		$string = str_replace('&nbsp;', ' ', $string);
+		$string = str_replace('<span style="font-weight: normal;">', '', trim($string));
+		$string = str_replace('</span>', '', $string);
+		$string = str_replace('<br>', '', $string);
+		$string = str_replace('&amp;', '&', $string);
+		DB::table('college_id')->where('cid','=',$value->cid)->update(array('name'=>$string));
+		echo $string.'
+';
 	}
-	echo $sum;
 });
 
 
