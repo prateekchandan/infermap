@@ -20,6 +20,24 @@
 
 	<div class="container">
 		<div class="row">
+			@if (Session::get('messages') != null && Session::get('messages')->has('error'))
+			<div class="col-md-12">
+				<div class="alert alert-error alert-dismissible" role="alert">
+				<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				{{ Session::get('messages')->first('error') }}
+				</div>
+			</div>
+			@endif
+			@if (Session::get('messages') != null && Session::get('messages')->has('success'))
+				<div class="col-md-12">
+					<div class="alert alert-success alert-dismissible" role="alert">
+					<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					{{ Session::get('messages')->first('success') }}
+					</div>
+				</div>
+			@endif
+		</div>
+		<div class="row">
 			<div class="slider">
 			
 				<div id="flex1" class="flexslider">
@@ -36,6 +54,7 @@
 			
 			</div>
 		</div>
+		
 		<div class="row">
 			<div class="col-md-12">
 			<br>
@@ -72,8 +91,20 @@
 		<div class="row" id="apply">
 			<div class="title"><h3>Apply Now</h3></div>
 			<div class="col-md-12">
+
 			@if(!Auth::check())
-				Please login to apply
+				Please <a href="{{URL::Route('user.login')}}?url={{URL::full()}}">login</a> to apply
+			@elseif(isset($applied))
+			<div class="alert alert-info">
+				<strong>Well done!</strong> You have already applied for this position
+			</div>
+			@elseif(isset($accept))
+			<div class="alert alert-success">
+				<h3>Congrats</h3>
+				<strong>
+					You are selected! View Your profile to know more
+				</strong>
+			</div>
 			@else
 				<div class="col-md-6">
 				{{ Form::open(array('files'=>true)) }}

@@ -54,6 +54,16 @@ class CareerController extends BaseController {
 		}
 		if(Auth::check()){
 			View::Share('user',Auth::user());
+			$pre=DB::table('intern_application')
+			->where('user_id','=', Auth::user()->id)
+			->where('position_id','=', $post->id)
+			->first();
+			if($pre!=NULL){
+				if($pre->accept==0)
+					View::Share('applied','true');
+				else
+					View::Share('accept','true');
+			}
 		}
 		View::Share('post',$post);
 		return View::make('career.post');
@@ -61,10 +71,19 @@ class CareerController extends BaseController {
 
 	public function intern_apply()
 	{
-		$file=Input::file('resume');
 		$messageBag = new MessageBag;
-		$messageBag->add('title', Input::get('title'));
-		$messageBag->add('content', Input::get('content'));
+
+		$pre=DB::table('intern_application')
+			->where('user_id','=', Auth::user()->id)
+			->where('position_id','=', Input::get('id'))
+			->first();
+
+		if($pre!=NULL){
+			$messageBag->add('error','You have already applied for this position');
+			return Redirect::back()->with('messages', $messageBag);
+		}
+
+		$file=Input::file('resume');
 		if ($file!=NULL)
 		{
 			if(!$file->isValid()){
@@ -80,6 +99,10 @@ class CareerController extends BaseController {
 			$resumename=str_shuffle(md5($file->getClientOriginalName())).'.'.$file->getClientOriginalExtension();
 			$file->move($dst, $resumename);
 		}
+		else{
+			$messageBag->add('error','Error Uploading File. Please upload files less than 2MB');
+			return Redirect::back()->with('messages', $messageBag);
+		}
 		$applicant=array();
 		$applicant['name']=Auth::user()->name;
 		$applicant['email']=Auth::user()->email;
@@ -88,12 +111,67 @@ class CareerController extends BaseController {
 		$applicant['post']=$post->position;
 		$applicant['resume']=URL::asset('assets/resume/'.$resumename);
 		$resume=public_path().'/assets/resume/'.$resumename;
-		Mail::send('email.intern', $applicant, function($message)
-		{
-			$message->from('noreply@infermap.com', 'Infermap');
-		    $message->to('infermap@gmail.com')->subject('New Applicant');
-		});
+
+		
+		DB::table('intern_application')->insert(
+		    array('user_id' => Auth::user()->id, 'position_id' => Input::get('id')
+		    		,'resume_link'=>URL::asset('assets/resume/'.$resumename)
+		    		,'resume_path'=>'assets/resume/'.$resumename)
+		);
+		if(Request::server('SERVER_NAME')!='localhost'){
+			Mail::send('email.intern', $applicant, function($message)
+			{
+				$message->from('noreply@infermap.com', 'Infermap');
+			    $message->to('infermap@gmail.com')->subject('New Applicant');
+			});
+		}
+		$messageBag->add('success','You have successfully applied for this');
+		return Redirect::back()->with('messages', $messageBag);
+	}
+
+	public function all()
+	{
+		$posts=DB::table('intern_application')
+			->join('users','users.id','=','intern_application.user_id')
+			->join('intern_positions','intern_positions.id','=','intern_application.position_id')
+			->get();
+		View::Share('app',$posts);
+		return View::make('career.all');
+	}
+
+	public function acceptapp()
+	{
+		DB::table('intern_application')
+		->where('user_id','=',Input::get('user'))
+		->where('position_id','=',Input::get('pos'))
+		->update(array('accept' => 1));
+
+		if(Request::server('SERVER_NAME')!='localhost'){
+			Mail::send('email.accept_intern',array(), function($message)
+			{
+				$user=DB::table('users')->where('id','=',Input::get('user'))->first();
+				$message->from('noreply@infermap.com', 'Infermap');
+			    $message->to($user->email)->subject('Selected for Intern at Infermap');
+			});
+		}
+
 		return Redirect::back();
+	}
+	public function deleteapp()
+	{
+		$app=DB::table('intern_application')
+		->where('user_id','=',Input::get('user'))
+		->where('position_id','=',Input::get('pos'))->first();
+		if($app!=NULL){
+			$path = public_path().'/'.$app->resume_path;
+			unlink($path);
+		}
+		DB::table('intern_application')
+		->where('user_id','=',Input::get('user'))
+		->where('position_id','=',Input::get('pos'))->delete();
+
+		return Redirect::back();
+
 	}
 	
 }

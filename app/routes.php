@@ -19,13 +19,24 @@ Route::get('test', function()
 });
 
 
-Route::filter('admin',function(){
+Route::filter('login',function(){
 	if(!Auth::check())
 	{
 		return View::make('user.login');
 	}
 });
 
+Route::filter('admin',function(){
+	if(!Auth::check())
+	{
+		return View::make('user.login');
+	}
+	else{
+		$admin=DB::table('admin')->where('id','=',Auth::user()->id)->first();
+		if($admin==NULL)
+		return View::make('error.403');
+	}
+});
 
 // URL for general pages over site
 Route::get('/',array('as'=>'home','uses'=>'HomeController@home'));
@@ -56,15 +67,15 @@ Route::get('/college/{link}','CollegeController@college');
 Route::get('/exam/{link}',array('as'=>'exam.link','uses'=>'ExamsController@view'));
 Route::get('/exam/{link}/{page}',array('as'=>'exam.page','uses'=>'ExamsController@view'));
 Route::get('/exam/',array('as'=>'exam','uses'=>'ExamsController@all'));
-Route::post('/exam/',array('before'=>'admin','as'=>'exam.savefile','uses'=>'ExamsController@savefile'));
-Route::post('/exam/addevent',array('before'=>'admin','as'=>'exam.addevent','uses'=>'ExamsController@addevent'));
-Route::post('/exam/deleteevent',array('before'=>'admin','as'=>'exam.deleteevent','uses'=>'ExamsController@deleteevent'));
+Route::post('/exam/',array('before'=>'login','as'=>'exam.savefile','uses'=>'ExamsController@savefile'));
+Route::post('/exam/addevent',array('before'=>'login','as'=>'exam.addevent','uses'=>'ExamsController@addevent'));
+Route::post('/exam/deleteevent',array('before'=>'login','as'=>'exam.deleteevent','uses'=>'ExamsController@deleteevent'));
 
 // URLS for department pages
 Route::get('/department',array('as'=>'department','uses'=>'DepartmentController@all'));
 Route::get('/department/{link}',array('as'=>'department.link','uses'=>'DepartmentController@view'));
 Route::get('/department/{link}/{page}',array('as'=>'department.page','uses'=>'DepartmentController@view'));
-Route::post('/department/',array('before'=>'admin','as'=>'department.savefile','uses'=>'DepartmentController@savefile'));
+Route::post('/department/',array('before'=>'login','as'=>'department.savefile','uses'=>'DepartmentController@savefile'));
 
 // URLS's for register and login
 Route::get('/register', array('as'=>'user.create', 'uses'=>'UsersController@create'));
@@ -76,7 +87,7 @@ Route::post('/gpluslogin', array('as'=>'user.gpluslogin', 'uses'=>'UsersControll
 Route::get('/login', array('as'=>'user.login.show', 'uses'=>'UsersController@showlogin'));
 Route::post('/login', array('as'=>'user.login', 'uses'=>'UsersController@login'));
 Route::get('/logout', array('as'=>'user.logout', 'uses'=>'UsersController@logout'));
-Route::get('/user-profile', array('before'=>'admin','as'=>'user.profile', 'uses'=>'UsersController@profile'));
+Route::get('/user-profile', array('before'=>'login','as'=>'user.profile', 'uses'=>'UsersController@profile'));
 
 
 // URL for blog operations
@@ -84,8 +95,8 @@ Route::get('/blog',array('as'=> 'blog' , 'uses' => 'BlogController@all'));
 Route::get('/blog/page/{page}',array('as'=> 'blog.pages' , 'uses' => 'BlogController@all'));
 Route::get('/blog/post',array('as'=> 'blog.post' , 'uses' => 'BlogController@all'));
 Route::get('/blog/post/{link}',array('as'=> 'blog.post.link' , 'uses' => 'BlogController@show_post'));
-Route::get('/blog/add-new',array('before'=>'admin','as'=> 'blog.add' , 'uses' => 'BlogController@add'));
-Route::post('/blog/add-new',array('before'=>'admin','as'=> 'blog.add' , 'uses' => 'BlogController@save'));
+Route::get('/blog/add-new',array('before'=>'login','as'=> 'blog.add' , 'uses' => 'BlogController@add'));
+Route::post('/blog/add-new',array('before'=>'login','as'=> 'blog.add' , 'uses' => 'BlogController@save'));
 
 // URL for autocomplete
 Route::get('/autocomplete/{string}',array('as' => 'autocomplete' , 'uses' => 'SearchController@autocomplete'));
@@ -97,9 +108,12 @@ Route::get('/review_autocomplete',array('as' => 'review_autocomplete_get' , 'use
 Route::get('/career',array('as'=>'career','uses' => 'CareerController@home'));
 Route::get('/career/add-position',array('before'=>'admin','as'=>'career.add','uses' => 'CareerController@view_add'));
 Route::post('/career/add-position',array('before'=>'admin','as'=>'career.add','uses' => 'CareerController@save_add'));
+Route::get('/career/all-application',array('before'=>'admin','as'=>'career.all','uses' => 'CareerController@all'));
 Route::get('/career/position',array('as'=>'career.position','uses' => 'CareerController@home'));
 Route::get('/career/position/{link}',array('as'=>'career.positon.link','uses' => 'CareerController@view_post'));
 Route::post('/career/position/{link}',array('as'=>'career.positon.link','uses' => 'CareerController@intern_apply'));
+Route::get('/career/accept-application',array('before'=>'admin','as'=>'intern.accept','uses' => 'CareerController@acceptapp'));
+Route::get('/career/decline-application',array('before'=>'admin','as'=>'intern.delete','uses' => 'CareerController@deleteapp'));
 
 Route::get('/user',function(){
 	return Auth::user();

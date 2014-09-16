@@ -26,7 +26,6 @@ class InternPositions extends Migration {
 			$table->string('term', 2000)->nullable();
 			$table->string('link', 200);
 			$table->timestamps();
-			$table->rememberToken();
 		});
 	}
 

@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'AddImageUrlGplusidToUsers' => $baseDir . '/app/database/migrations/2014_09_05_152758_add_image_url_gplusid_to_users.php',
+    'Admin' => $baseDir . '/app/database/migrations/2014_09_15_222809_admin.php',
     'AnalysisController' => $baseDir . '/app/controllers/AnalysisController.php',
     'BaseController' => $baseDir . '/app/controllers/BaseController.php',
     'BlogController' => $baseDir . '/app/controllers/BlogController.php',
@@ -430,7 +431,9 @@ return array(
     'Illuminate\\Workbench\\PackageCreator' => $vendorDir . '/laravel/framework/src/Illuminate/Workbench/PackageCreator.php',
     'Illuminate\\Workbench\\Starter' => $vendorDir . '/laravel/framework/src/Illuminate/Workbench/Starter.php',
     'Illuminate\\Workbench\\WorkbenchServiceProvider' => $vendorDir . '/laravel/framework/src/Illuminate/Workbench/WorkbenchServiceProvider.php',
+    'InternApplication' => $baseDir . '/app/database/migrations/2014_09_15_223125_intern_application.php',
     'InternPositions' => $baseDir . '/app/database/migrations/2014_09_15_191539_intern_positions.php',
+    'InternPosts' => $baseDir . '/app/models/InternPosts.php',
     'Jeremeamia\\SuperClosure\\ClosureLocation' => $vendorDir . '/jeremeamia/SuperClosure/src/Jeremeamia/SuperClosure/ClosureLocation.php',
     'Jeremeamia\\SuperClosure\\ClosureParser' => $vendorDir . '/jeremeamia/SuperClosure/src/Jeremeamia/SuperClosure/ClosureParser.php',
     'Jeremeamia\\SuperClosure\\SerializableClosure' => $vendorDir . '/jeremeamia/SuperClosure/src/Jeremeamia/SuperClosure/SerializableClosure.php',
