@@ -106,8 +106,27 @@ class CollegeController extends BaseController {
 					if(Input::has('referer'))
 						View::share('id',Input::get('referer'));
 					if(Auth::check()){
-						if(sizeof(DB::table('college_reviews')->where('user_id','=',Auth::user()->id)->get())>0)
-							View::share('prev_msg','1');
+						$user=Auth::user();
+						$review_pre=DB::table('college_reviews')->where('user_id','=',Auth::user()->id)->get();
+						if(sizeof($review_pre)>0){
+							if($review_pre[0]->college_id==0)
+							{
+								$review_pre=DB::table('college_reviews')
+								->join('temp_colleges','temp_colleges.temp_id','=','college_reviews.temp_college_id')
+								->where('user_id','=',$user->id)->first();
+								View::share('temp_college',$review_pre);
+							}
+							else{
+								$review_pre=DB::table('college_reviews')
+								->join('college_id','college_id.cid','=','college_reviews.college_id')
+								->where('user_id','=',$user->id)->first();
+
+								if($review_pre->college_id!=$data['cid'])
+									View::share('other_college',$review_pre);
+								else
+									View::share('prev_msg','1');
+							}
+						}
 					}
 					View::share('review_depts',$this->get_review_depts($data['cid']));
 					return View::make('college.review');

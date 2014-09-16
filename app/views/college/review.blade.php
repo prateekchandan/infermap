@@ -68,6 +68,14 @@
         <button type="submit" class="btn btn-primary col-sm-12">All Done!</button>
     </div>
 </form>
+@elseif(isset($temp_college))
+<div class="jumbotron">
+    You have already submitted review for {{$temp_college->name}}
+</div>
+@elseif(isset($other_college))
+<div class="jumbotron">
+    You have already submitted review for <a href="{{URL::Route('college')}}/$other_college->link">{{$other_college->name}}</a>
+</div>
 @elseif(Auth::check())
 <style>
 
