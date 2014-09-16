@@ -2,6 +2,8 @@
 
 @section ('content')
 
+	<link href="{{URL::asset('assets/css/chosen.min.css')}}" rel="stylesheet">
+
 <style type="text/css">
     .main{
         height: 100%;
@@ -17,12 +19,36 @@
     .main-search{
         height: 40px;
     }
+
+
 </style>
 <!-- start: Flexslider -->
         <div class="main">
-                <div class="from-group col-md-6 col-md-offset-3">
+				<div class="col-md-1 col-md-offset-2">
+					<div class="dropdown">
+					  <button style="height:40px" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+						Search by
+						<span class="caret"></span>
+					  </button>
+					  <ul style="border-radius:0px;padding:0px" class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Keyword</a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Location</a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Department</a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">College name</a></li>
+
+					  </ul>
+					</div>
+				</div>
+                <div class="from-group col-md-6">
                     <input class="autocomplete form-control main-search">
                 </div>
+				<select id="myselect" class="chosen-select">
+					<option>o1</option>
+					<option>o1</option>
+					<option>o1</option>
+					<option>o1</option>
+				</select>
+
 
                 <label class="col-md-6 col-md-offset-3"> Tip: Start searching by college name</label>
         </div>
@@ -286,4 +312,5 @@
 <script type="text/javascript">
 
 </script>
+<script src="{{URL::asset('assets/js/chosen.jquery.min.js')}}"></script>
 @stop
