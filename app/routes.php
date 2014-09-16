@@ -99,6 +99,9 @@ Route::get('/career/position/{link}',array('as'=>'career.positon.link','uses' =>
 Route::post('/career/position/{link}',array('as'=>'career.positon.link','uses' => 'CareerController@intern_apply'));
 Route::get('/career/accept-application',array('before'=>'admin','as'=>'intern.accept','uses' => 'CareerController@acceptapp'));
 Route::get('/career/decline-application',array('before'=>'admin','as'=>'intern.delete','uses' => 'CareerController@deleteapp'));
+Route::get('/intern/profile',array('as'=>'career.page','uses' => 'CareerController@intern_monitor'));
+Route::get('/intern/profile/{id}/{posid}',array('as'=>'career.page.intern','uses' => 'CareerController@intern_monitor'));
+Route::get('/intern/profile/{id}',array('as'=>'career.page.intern','uses' => 'CareerController@intern_monitor'));
 
 Route::get('/user',function(){
 	return Auth::user();

@@ -1,5 +1,14 @@
 @extends('home.layout')
 @section('content')
+<style>
+.icons-box p {
+float: initial;
+}
+.icons-box{
+	background-color: #fefefe;
+	color:#666;
+}
+</style>
 <div id="page-title">
 
 		<div id="page-title-inner">
@@ -93,6 +102,33 @@
 								</table>
 							@endif							
 						</div>	
+
+						@if(sizeof('intern')>0)
+						<div>
+							<div class="title"><h3>View your internship profile</h3></div>
+							@foreach($intern as $pos)
+								 <!-- start: Icon Box Start -->
+					            <a href="{{URL::Route('career.page')}}/{{$user->id}}/{{$pos->position_id}}" class="col-sm-6 col-md-6">
+					                
+					                <div class="icons-box vertical">
+					                    
+					                    <div class="row">
+
+					                        <div class="col-md-12">
+					                            <h3>{{$pos->position}}</h3>
+					                            <div class="col-md-12 row">{{$pos->desc}}</div>
+					                        </div>
+					                        
+					                    </div>      
+
+					                </div>
+					                
+					            </a>
+					            <!-- end: Icon Box-->
+							@endforeach
+						
+						</div>
+						@endif
 					</div>	
 					
 				</div>

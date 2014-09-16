@@ -173,5 +173,28 @@ class CareerController extends BaseController {
 		return Redirect::back();
 
 	}
+
+	public function intern_monitor($id='',$pos='')
+	{
+		if($id==''||$pos=='')
+		{
+			return Redirect::route('career');
+		}
+		$position=DB::table('intern_application')
+			->where('user_id','=',$id)
+			->where('position_id','=',$pos)
+			->get();
+		if(sizeof($position)==0){
+			return Redirect::route('career');
+		}
+		if(!Auth::check()){
+			return View::make('error.403');
+		}
+		if(!(Auth::user()->id==$id || DB::table('admin')->where('id','=',Auth::user()->id==$id)->first()==NULL)){
+			return View::make('error.403');
+		}
+		View::share('weeks',array(1,2,3,4,5,6,7,8));
+		return View::make('career.work_profile');
+	}
 	
 }

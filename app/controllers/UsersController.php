@@ -38,6 +38,13 @@ class UsersController extends \BaseController {
 			$us=DB::table('users')->where('id','=',$usr->user_refered)->first();
 			array_push($referred_ppl, $us);
 		}
+
+		$interns=DB::table('intern_application')
+			->join('intern_positions','intern_positions.id','=','intern_application.position_id')
+			->where('intern_application.user_id','=',$user->id)
+			->where('intern_application.accept','=','1')->get();
+
+		View::share('intern',$interns);
 		View::share('refer',$referred_ppl);
 		View::share('user',$user);
 		View::share('review',$review);
@@ -195,7 +202,10 @@ class UsersController extends \BaseController {
 			$user->fbid = Input::get('fbid');
 			$user->save();
 			Auth::login($user);
-			return Redirect::route('user.edit');
+			if($url!='' && $url !=null)
+				return Redirect::away($url);
+			else
+				return Redirect::back();
 		}
 		DB::table('users')
 				->where('id','=',$users[0]->id)
@@ -205,7 +215,7 @@ class UsersController extends \BaseController {
 		if($url!='' && $url !=null)
 			return Redirect::away($url);
 		else
-		return Redirect::back();
+			return Redirect::back();
 	}
 
 	public function showlogin(){
@@ -244,9 +254,9 @@ class UsersController extends \BaseController {
 	public function logout(){
 		if(Auth::check()) Auth::logout();
 		$url=Input::get('url');
-		if($url!='' && $url !=null)
+		if($url!='' && $url !=NULL)
 			return Redirect::away($url);
 		else
-		return Redirect::back();
+		return Redirect::to('/');
 	}
 }

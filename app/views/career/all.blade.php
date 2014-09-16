@@ -35,7 +35,7 @@
 						</tr>
 						<thead>
 							@foreach($app as $key => $pos)
-							<tr>
+							<tr class="{{($pos->accept==1)?"success":"danger"}}">
 								<td>{{$key+1}}</td>
 								<td>{{$pos->name}}</td>
 								<td>{{$pos->email}}</td>
@@ -45,7 +45,9 @@
 									@if($pos->accept!=1)
 									<a class="btn btn-success" href="{{URL::Route('intern.accept')}}?user={{$pos->user_id}}&pos={{$pos->position_id}}">Accept</a>
 									@else
-									<span class="alert-success alert">Already accepted</span>
+									<a class="btn btn-success" href="{{URL::Route('career.page')}}/{{$pos->user_id}}/{{$pos->position_id}}">
+										Check Tasks
+									</a>
 									@endif
 									<a class="btn btn-danger" href="{{URL::Route('intern.delete')}}?user={{$pos->user_id}}&pos={{$pos->position_id}}">Delete</a>
 								</td>
