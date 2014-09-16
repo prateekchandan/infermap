@@ -1,4 +1,4 @@
-@extends('layout.main')
+@extends('home.layout')
 
 @section('meta')
 <title>Review Your College</title>
@@ -6,7 +6,7 @@
 <meta name="description" content="Give back to the community by sharing your college experience, guide the high school students by shedding some light on the details of your college. / letting them know more about your college.">
 @endsection
 
-@section('body')
+@section('content')
 <style type="text/css">
 	.temp_active{
 		background: #ddd;
@@ -47,6 +47,15 @@
 	</div>
 	
 </div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <script type="text/javascript">		
 	var request_autocomplete=jQuery.ajax({});
     var forgiveness;

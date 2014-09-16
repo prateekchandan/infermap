@@ -1,6 +1,6 @@
-@extends ('layout.main')
+@extends ('home.layout')
 
-@section ('body')
+@section ('content')
 <style>
 
 .main-body{
@@ -135,7 +135,19 @@ input[type='range']::-moz-range-thumb {
 }
 
 </style>
-@if(Auth::check())
+@if(isset($temp_college))
+<div class="container">
+<div class="jumbotron">
+    <h3>You have already submitted review for {{$temp_college->name}}</h3>
+</div>
+</div>
+@elseif(isset($other_college))
+<div class="container">
+<div class="jumbotron">
+    <h3>You have already submitted review for <a href="{{URL::Route('college')}}/$other_college->link">{{$other_college->name}}</a></h3>
+</div>
+</div>
+@elseif(Auth::check())
 <div id="primary" class="content-area">
     <div id="content" class="site-content" role="main">
         <div class="entry-content">
