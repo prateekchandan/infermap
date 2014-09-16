@@ -31,5 +31,9 @@ class HomeController extends BaseController {
 	{
 		return View::make('home.home');
 	}
+	public function admin()
+	{
+		return View::make('admin.home');
+	}
 
 }
