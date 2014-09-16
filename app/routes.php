@@ -1,24 +1,6 @@
 <?php
 
 
-Route::get('clean', function()
-{
-	$college=DB::table('college_id')->get();
-	$sum=0;
-	foreach ($college as $key => $value) {
-		$string=$value->name;
-		$string = str_replace('&nbsp;', ' ', $string);
-		$string = str_replace('<span style="font-weight: normal;">', '', trim($string));
-		$string = str_replace('</span>', '', $string);
-		$string = str_replace('<br>', '', $string);
-		$string = str_replace('&amp;', '&', $string);
-		DB::table('college_id')->where('cid','=',$value->cid)->update(array('name'=>$string));
-		echo $string.'
-';
-	}
-});
-
-
 Route::filter('login',function(){
 	if(!Auth::check())
 	{
