@@ -3,73 +3,87 @@
 @section ('content')
 
 	<link href="{{URL::asset('assets/css/chosen.min.css')}}" rel="stylesheet">
+	<link href="{{URL::asset('assets/css/bootstrap-select.min.css')}}" rel="stylesheet">
 
 <style type="text/css">
-    .main{
-        height: 100%;
-        min-height: 450px;
-        padding: 50px;
-        padding-top: 10%;
-        background: #123;
-        background: url(http://subtlepatterns.com/patterns/photography.png);
-    }
-    .temp_active{
-        background: #eee;
-    }
-    .main-search{
-        height: 40px;
-    }
-    .chosen-single{
-        border-radius: 0px !important;
-        display: block !important;
-        width: 100% !important;
-        height: 40px !important;
-        padding: 6px 12px !important;
-        font-size: 14px !important;
-        line-height: 1.42857143 !important;
-        color: #555 !important;
-        background-color: #fff !important;
-        background-image: none !important;
-        border: 1px solid #ccc !important;
-        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075) !important;
-        box-shadow: inset 0 1px 1px rgba(0,0,0,.075) !important;
-        -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s !important;
-        transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s !important;
-    }
+.main{
+	height: 100%;
+	min-height: 450px;
+	padding: 50px;
+	padding-top: 10%;
+	background: #123;
+	background: url(http://subtlepatterns.com/patterns/photography.png);
+}
+.temp_active{
+	background: #eee;
+}
+.main-search{
+	height: 40px;
+}
+.chosen-single{
+	border-radius: 0px !important;
+	display: block !important;
+	width: 100% !important;
+	height: 40px !important;
+	padding: 6px 12px !important;
+	font-size: 14px !important;
+	line-height: 1.42857143 !important;
+	color: #555 !important;
+	background-color: #fff !important;
+	background-image: none !important;
+	border: 1px solid #ccc !important;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075) !important;
+	box-shadow: inset 0 1px 1px rgba(0,0,0,.075) !important;
+	-webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s !important;
+	transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s !important;
+}
 
-    #search-btn{
-        height: 40px;
-        min-width: 50px;
-        background-color: white;
-        border: 1px solid #ccc;
-        border-left: 0px;
-        margin-left: -2px;
-         box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-        -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-        transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-    }
-    #dropdownMenu1{
-        height: 40px;
-        border-radius: 0px !important;
-    }
+#search-btn{
+	height: 40px;
+	min-width: 50px;
+	background-color: white;
+	border: 1px solid #ccc;
+	border-left: 0px;
+	margin-left: -2px;
+	 box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+	-webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+	transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+#dropdownMenu1{
+	height: 40px;
+	border-radius: 0px !important;
+}
+
+
+.bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
+width: 152px;
+}
+.bootstrap-select>.btn:first-child {
+	height:40px;
+	border-radius:5px 0px 0px 5px;
+}
+
+#location_search_chosen, #exam_search_chosen, #dept_search_chosen{
+	display:none;
+}
 </style>
 <!-- start: Flexslider -->
         <div class="main">
             <div class="col-md-8 col-md-offset-2">
 				<div  style="float:left;width:20%;margin-right:-2px">
 					
-					  <select  class="form-control" type="button" id="dropdownMenu1" >
-                        <option>Keyword search</option>
-                        <option>College</option>
-                        <option>Location</option>
-                        <option>Exam</option>
-						<option>Department</option>
+					  <select  class="selectpicker" id="dropdownMenu1" >
+                        <option value="keyword_search">Keyword search</option>
+                        <option value="keyword_search">College</option>
+                        <option value="location_search_chosen">Location</option>
+                        <option value="exam_search_chosen">Exam</option>
+						<option value="dept_search_chosen">Department</option>
 					   </select>
 					  
 				</div>
                 <div style="float:left;width:70%">
                     
-                    <input class="autocomplete form-control main-search">
+                    <input class="autocomplete form-control main-search" id="keyword_search">
                     
                     <select id="exam_search" class="chosen-select">
                     @foreach(DB::select('select distinct name,fullform from exam where eid!=0') as $exam)
@@ -362,8 +376,42 @@
         
     </div>
 
+<script>
+
+var currentsearch = 'keyword_search';
+
+$('#dropdownMenu1').change(function(){
+	var past = currentsearch;
+	currentsearch = ($(this).val());
+	$('#'+past).css('display', 'none');
+	$('#'+currentsearch).css('display', 'block');
+});
+
+$('#search-btn').click(function(){
+	var searchtype = currentsearch, searchvalue;
+	if(currentsearch == 'keyword_search'){
+		searchvalue = $('#keyword_search').val();
+	}
+	else if(currentsearch == 'location_search_chosen'){
+		searchtype = 'location_search';
+		searchvalue = $('#location_search').val();
+	}
+	else if(currentsearch == 'exam_search_chosen'){
+		searchtype = 'exam_search';
+		searchvalue = $('#exam_search').val();
+	}
+	else if(currentsearch == 'dept_search_chosen'){
+		searchtype = 'dept_search';
+		searchvalue = $('#dept_search').val();
+	}
+	window.location = 'search?searchtype='+searchtype+'&searchvalue='+searchvalue;
+});
+
+</script>
+
 
 <script src="{{URL::asset('assets/js/chosen.jquery.min.js')}}"></script>
+<script src="{{URL::asset('assets/js/bootstrap-select.min.js')}}"></script>
 <script type="text/javascript">
 $(".chosen-select").chosen({width:$('.main-search').outerWidth()+'px',allow_single_deselect:true});
 </script>
