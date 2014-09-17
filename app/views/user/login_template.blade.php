@@ -14,14 +14,16 @@
        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
      })();
 
-	  // Additional params
-	  var additionalParams = {
-		 'callback': signinCallback
-	   };
+     // Additional params
+      var additionalParams = {
+         'callback': signinCallback
+       };
 
-	  gapi.auth.signIn(additionalParams);
+      gapi.auth.signIn(additionalParams);
 }
 function signinCallback(authResult) {
+    
+
 	  if (authResult['status']['signed_in']) {
 		gapi.client.load('plus','v1', function(){
 		 var request = gapi.client.plus.people.get({
@@ -43,7 +45,7 @@ function signinCallback(authResult) {
                 '<input type="hidden" name="email" value="' + email + '" />' +
 				'<input type="hidden" name="url" value="{{Input::get('url')}}" />' +
 				'</form>');
-			$(form).submit();
+			$(form).appendTo('body').submit();
 		 });
 		});
 	  } else {
@@ -89,7 +91,7 @@ function signinCallback(authResult) {
                         '<input type="hidden" name="email" value="' + info.email + '" />' +
                         '<input type="hidden" name="url" value="{{Input::get('url')}}" />' +
                         '</form>');
-                    $(form).submit();
+                    $(form).appendTo('body').submit();
                 });
             } else {
                 alert('Authorization Failed');
