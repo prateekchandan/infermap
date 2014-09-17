@@ -27,7 +27,7 @@ Route::get('frequently-asked-questions',array('as'=>'home.faq','uses'=>'HomeCont
 Route::get('compare-colleges',array('as'=>'home.compare','uses'=>'HomeController@compare'));
 
 //URL for admin jobs
-Route::get('/admin',array('as'=>'admin.home','uses'=>'HomeController@admin'));
+Route::get('/admin',array('before'=>'admin','as'=>'admin.home','uses'=>'HomeController@admin'));
 
 // URL for page for review and storing a review
 Route::get('/review',array('as'=>'review_main','uses'=>'ReviewController@get_college'));

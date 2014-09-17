@@ -434,6 +434,7 @@ return array(
     'InternApplication' => $baseDir . '/app/database/migrations/2014_09_15_223125_intern_application.php',
     'InternPositions' => $baseDir . '/app/database/migrations/2014_09_15_191539_intern_positions.php',
     'InternPosts' => $baseDir . '/app/models/InternPosts.php',
+    'InternTasks' => $baseDir . '/app/database/migrations/2014_09_17_163502_intern_tasks.php',
     'Jeremeamia\\SuperClosure\\ClosureLocation' => $vendorDir . '/jeremeamia/SuperClosure/src/Jeremeamia/SuperClosure/ClosureLocation.php',
     'Jeremeamia\\SuperClosure\\ClosureParser' => $vendorDir . '/jeremeamia/SuperClosure/src/Jeremeamia/SuperClosure/ClosureParser.php',
     'Jeremeamia\\SuperClosure\\SerializableClosure' => $vendorDir . '/jeremeamia/SuperClosure/src/Jeremeamia/SuperClosure/SerializableClosure.php',
