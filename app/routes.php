@@ -21,6 +21,7 @@ Route::filter('admin',function(){
 
 // URL for general pages over site
 Route::get('/',array('as'=>'home','uses'=>'HomeController@home'));
+Route::get('/search',array('as'=>'search','uses'=>'HomeController@home'));
 Route::get('about-us',array('as'=>'home.about','uses'=>'HomeController@about'));
 Route::get('frequently-asked-questions',array('as'=>'home.faq','uses'=>'HomeController@faq'));
 Route::get('compare-colleges',array('as'=>'home.compare','uses'=>'HomeController@compare'));
