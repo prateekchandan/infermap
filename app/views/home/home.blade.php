@@ -55,34 +55,52 @@
 </style>
 <!-- start: Flexslider -->
         <div class="main">
-				<div class="col-md-1 col-md-offset-2" style="margin-right: -7px;">
-					<div class="dropdown">
-					  <button  class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
-						Search by
-						<span class="caret"></span>
-					  </button>
-					  <ul style="border-radius:0px;padding:0px" class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Keyword</a></li>
-						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Location</a></li>
-						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Department</a></li>
-						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">College name</a></li>
-					  </ul>
-					</div>
+            <div class="col-md-8 col-md-offset-2">
+				<div  style="float:left;width:20%;margin-right:-2px">
+					
+					  <select  class="form-control" type="button" id="dropdownMenu1" >
+                        <option>Keyword search</option>
+                        <option>College</option>
+                        <option>Location</option>
+                        <option>Exam</option>
+						<option>Department</option>
+					   </select>
+					  
 				</div>
-                <div class="from-group col-md-6">
+                <div style="float:left;width:70%">
                     
-                    <input class="autocomplete form-control main-search" style="display:none">
+                    <input class="autocomplete form-control main-search">
                     
-                    <select id="myselect" class="chosen-select">
+                    <select id="exam_search" class="chosen-select">
                     @foreach(DB::select('select distinct name,fullform from exam where eid!=0') as $exam)
-                        <option>{{$exam->fullform}} ( {{$exam->name}} )</option>
+                        <option value="{{$exam->name}}">{{$exam->fullform}} ( {{$exam->name}} )</option>
                     @endforeach
                     </select>
+
+                    <select data-placeholder="Select location" id="location_search" class="chosen-select">
+                    @foreach($places as $state=>$cities)
+                        <optgroup label="{{$state}}">
+                            @if($state!='Others')
+                                <option value='{{$state}}'>All</option>
+                            @endif
+                            @foreach($cities as $city)
+                            <option>{{$city->city}}</option>
+                            @endforeach
+                        </optgroup>
+                    @endforeach
+                    </select>
+
+                    <select id="dept_search" class="chosen-select">
+                    @foreach(DB::select('select * from departments') as $dept)
+                        <option value="{{$dept->key}}">{{$dept->value}}</option>
+                    @endforeach
+                    </select>
+
                 </div>
-                <div class="col-md-1">
-                    <button class="button" id="search-btn"><i class="fa fa-search"></i></button>
+                <div style="float:left;width:10%">
+                    <button class="button form-" id="search-btn"><i class="fa fa-search"></i></button>
                 </div>
-				
+			</div>
 
 
                 <label class="col-md-6 col-md-offset-3"> Tip: Start searching by college name</label>
@@ -347,6 +365,6 @@
 
 <script src="{{URL::asset('assets/js/chosen.jquery.min.js')}}"></script>
 <script type="text/javascript">
-$(".chosen-select").chosen({width:$('.main-search').outerWidth()+'px'});
+$(".chosen-select").chosen({width:$('.main-search').outerWidth()+'px',allow_single_deselect:true});
 </script>
 @stop

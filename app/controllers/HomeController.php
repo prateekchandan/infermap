@@ -17,6 +17,18 @@ class HomeController extends BaseController {
 
 	public function home()
 	{
+		$location_query=DB::select('select distinct state,city from college_id where disabled=1 order by state ,city');
+		$location=array();
+		foreach ($location_query as $key => $place) {
+			if($place->state==''||$place->state=='--Select State--')
+				$place->state='Others';
+
+			if(!isset($location[$place->state]))
+				$location[$place->state]=array();
+
+			array_push($location[$place->state],$place);
+		}
+		View::share('places',$location);
 		return View::make('home.home');
 	}
 	public function about()
