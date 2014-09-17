@@ -96,13 +96,13 @@ border-radius: 0px;
                     
                     <input class="autocomplete form-control main-search" id="keyword_search">
                     
-                    <select id="exam_search" class="chosen-select">
+                    <select id="exam_search" class="chosen-select" style="display:none">
                     @foreach(DB::select('select distinct name,fullform from exam where eid!=0') as $exam)
                         <option value="{{$exam->name}}">{{$exam->fullform}} ( {{$exam->name}} )</option>
                     @endforeach
                     </select>
 
-                    <select data-placeholder="Select location" id="location_search" class="chosen-select">
+                    <select data-placeholder="Select location" id="location_search" class="chosen-select" style="display:none">
                     @foreach($places as $state=>$cities)
                         <optgroup label="{{$state}}">
                             @if($state!='Others')
@@ -115,7 +115,7 @@ border-radius: 0px;
                     @endforeach
                     </select>
 
-                    <select id="dept_search" class="chosen-select">
+                    <select id="dept_search" class="chosen-select" style="display:none">
                     @foreach(DB::select('select * from departments') as $dept)
                         <option value="{{$dept->key}}">{{$dept->value}}</option>
                     @endforeach
