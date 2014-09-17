@@ -170,6 +170,10 @@ class CareerController extends BaseController {
 		->where('user_id','=',Input::get('user'))
 		->where('position_id','=',Input::get('pos'))->delete();
 
+		DB::table('intern_tasks')
+		->where('user_id','=',Input::get('user'))
+		->where('position_id','=',Input::get('pos'))->delete();
+
 		return Redirect::back();
 
 	}
