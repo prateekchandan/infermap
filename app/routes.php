@@ -102,6 +102,9 @@ Route::get('/career/decline-application',array('before'=>'admin','as'=>'intern.d
 Route::get('/intern/profile',array('as'=>'career.page','uses' => 'CareerController@intern_monitor'));
 Route::get('/intern/profile/{id}/{posid}',array('as'=>'career.page.intern','uses' => 'CareerController@intern_monitor'));
 Route::get('/intern/profile/{id}',array('as'=>'career.page.intern','uses' => 'CareerController@intern_monitor'));
+Route::post('/intern/save_tasks',array('as'=>'intern.save_task','uses' => 'CareerController@intern_save_task'));
+Route::post('/intern/tasks_comment',array('as'=>'intern.task_comment','uses' => 'CareerController@intern_comment_task'));
+Route::get('/intern/tasks_comment_delete',array('as'=>'intern.task_comment_delete','uses' => 'CareerController@intern_comment_delete'));
 
 Route::get('/user',function(){
 	return Auth::user();

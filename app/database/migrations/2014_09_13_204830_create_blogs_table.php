@@ -25,7 +25,7 @@ class CreateBlogsTable extends Migration {
 			$table->longText('content');
 			$table->string('img',200)->nullable();
 			$table->timestamps();
-			$table->foreign('user_id')->references('id')->on('users');
+			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 		});
 	}
 
