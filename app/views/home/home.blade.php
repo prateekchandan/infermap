@@ -19,35 +19,70 @@
     .main-search{
         height: 40px;
     }
+    .chosen-single{
+        border-radius: 0px !important;
+        display: block !important;
+        width: 100% !important;
+        height: 40px !important;
+        padding: 6px 12px !important;
+        font-size: 14px !important;
+        line-height: 1.42857143 !important;
+        color: #555 !important;
+        background-color: #fff !important;
+        background-image: none !important;
+        border: 1px solid #ccc !important;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075) !important;
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075) !important;
+        -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s !important;
+        transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s !important;
+    }
 
-
+    #search-btn{
+        height: 40px;
+        min-width: 50px;
+        background-color: white;
+        border: 1px solid #ccc;
+        border-left: 0px;
+        margin-left: -2px;
+         box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+        -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+        transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    }
+    #dropdownMenu1{
+        height: 40px;
+        border-radius: 0px !important;
+    }
 </style>
 <!-- start: Flexslider -->
         <div class="main">
-				<div class="col-md-1 col-md-offset-2">
+				<div class="col-md-1 col-md-offset-2" style="margin-right: -7px;">
 					<div class="dropdown">
-					  <button style="height:40px" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+					  <button  class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
 						Search by
 						<span class="caret"></span>
 					  </button>
 					  <ul style="border-radius:0px;padding:0px" class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Keyword</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Keyword</a></li>
 						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Location</a></li>
 						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Department</a></li>
 						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">College name</a></li>
-
 					  </ul>
 					</div>
 				</div>
                 <div class="from-group col-md-6">
-                    <input class="autocomplete form-control main-search">
+                    
+                    <input class="autocomplete form-control main-search" style="display:none">
+                    
+                    <select id="myselect" class="chosen-select">
+                    @foreach(DB::select('select distinct name,fullform from exam where eid!=0') as $exam)
+                        <option>{{$exam->fullform}} ( {{$exam->name}} )</option>
+                    @endforeach
+                    </select>
                 </div>
-				<select id="myselect" class="chosen-select">
-					<option>o1</option>
-					<option>o1</option>
-					<option>o1</option>
-					<option>o1</option>
-				</select>
+                <div class="col-md-1">
+                    <button class="button" id="search-btn"><i class="fa fa-search"></i></button>
+                </div>
+				
 
 
                 <label class="col-md-6 col-md-offset-3"> Tip: Start searching by college name</label>
@@ -309,8 +344,9 @@
         
     </div>
 
-<script type="text/javascript">
 
-</script>
 <script src="{{URL::asset('assets/js/chosen.jquery.min.js')}}"></script>
+<script type="text/javascript">
+$(".chosen-select").chosen({width:$('.main-search').outerWidth()+'px'});
+</script>
 @stop
