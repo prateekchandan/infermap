@@ -56,13 +56,24 @@
 
 
 .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
-width: 152px;
+width:100%;
+border-radius: 0px;
 }
 .bootstrap-select>.btn:first-child {
 	height:40px;
 	border-radius:5px 0px 0px 5px;
 }
-
+.selectpicker{
+    border-radius: 0px !important;
+    width:100%;
+    background-color: #fff !important;
+    background-image: none !important;
+    border: 1px solid #ccc !important;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075) !important;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075) !important;
+    -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s !important;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s !important;
+}
 #location_search_chosen, #exam_search_chosen, #dept_search_chosen{
 	display:none;
 }
@@ -388,6 +399,7 @@ $('#dropdownMenu1').change(function(){
 });
 
 $('#search-btn').click(function(){
+    temp_autobox_remove();
 	var searchtype = currentsearch, searchvalue;
 	if(currentsearch == 'keyword_search'){
 		searchvalue = $('#keyword_search').val();
