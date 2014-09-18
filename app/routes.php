@@ -1,5 +1,4 @@
 <?php
-
 Route::filter('login',function(){
 	if(!Auth::check())
 	{
