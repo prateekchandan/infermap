@@ -113,7 +113,7 @@
 								<div class="comments">
 									<div class="comment-des" style="width:100%">
 										<div class="comment-by"><strong>Post Comment:</strong></div>
-										<form method="post" action="{{URL::Route('intern.task_comment')}}">
+										<form class="row" method="post" action="{{URL::Route('intern.task_comment')}}">
 											<input type="hidden" name="task_id" value="{{$tasks[$week]->id}}">
 											<textarea class="form-control" name="message" placeholder="Write your message here"></textarea>		
 										
