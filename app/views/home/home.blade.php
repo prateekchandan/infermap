@@ -14,7 +14,7 @@
 	background: #123;
 	background: url(http://subtlepatterns.com/patterns/photography.png);
 }
-.immybox{
+.immybox,.immybox:focus{
     box-shadow: 0px 0px 0px #000;
     border-color: #CCC;
     border-radius: 0px;
@@ -395,6 +395,7 @@ $('#dept_search').immybox({
     choices : departments
 });
 $('#dropdownMenu1').change(function(){
+    $('.main-search').val('');
     temp_autobox_remove();
 	var past = currentsearch;
 	currentsearch = ($(this).val());
@@ -402,6 +403,12 @@ $('#dropdownMenu1').change(function(){
 	$('#'+currentsearch).css('display', 'block');
 });
 
+$('.main-search').keydown(function(e){
+      var code=e.keyCode;
+      if(code==13){
+        $('#search-btn').click();
+      }
+})
 $('#search-btn').click(function(){
     temp_autobox_remove();
 	var searchtype = currentsearch, searchvalue;

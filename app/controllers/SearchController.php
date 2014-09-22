@@ -21,7 +21,7 @@ class SearchController extends BaseController {
 	}
 
 	private function modified_levenshtein($str1,$str2){
-		 //if ($str1 == $str2) return 0;
+		//if ($str1 == $str2) return 0;
 	    if (strlen($str1) == 0) return strlen($str2);
 	    if (strlen($str2) == 0) return strlen($str1);
 
@@ -246,6 +246,12 @@ class SearchController extends BaseController {
 		$ret=$this->autocomplete($str,10);
 
 		return $ret;
+	}
+
+	// Function to get search inputs and find best college
+	public function search()
+	{
+		print_r(Input::all());
 	}
 
 }
