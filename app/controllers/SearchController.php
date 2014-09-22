@@ -219,25 +219,6 @@ class SearchController extends BaseController {
 
 	}
 
-	public function test()
-	{
-		function microtime_float()
-		{
-		    list($usec, $sec) = explode(" ", microtime());
-		    return ((float)$usec + (float)$sec)*1000;
-		}
-
-		$a=microtime_float();
-		$res=$this->review_autocomplete();
-		$b=microtime_float()-$a;
-		var_dump(time());
-		echo '<br>';
-		var_dump(microtime_float());
-		echo '<br>';
-		echo 'Time taken : '.$b.'<br>';
-		print_r($res);
-	}
-
 	public function autocomplete_get($value='')
 	{
 		
@@ -248,10 +229,123 @@ class SearchController extends BaseController {
 		return $ret;
 	}
 
+	public function  keyword_search($input){
+		if(!isset($input['searchvalue'])){
+			return $this->nocollege();
+		}
+		$value=$input['searchvalue'];
+		$college=$this->autocomplete($value,50);
+		foreach ($college as $key => $val) {
+			$college[$key]=(object)$val;
+		}
+		$text='Showing best matches for "'.$value.'"';
+		$this->show_colleges($college,$text);
+	}
+
+	public function  exam_search($input){
+		if(!isset($input['searchvalue'])){
+			return $this->nocollege();
+		}
+		$exam=$input['searchvalue'];
+		
+		$eid=DB::table('exam')->where(DB::raw("concat(fullform,' (',name,')')"),'=',$exam)->get();
+		if(sizeof($eid)==0){
+			return $this->nocollege('No college found with Exam "'.$exam.'"');
+		}
+		//print_r($eid);
+		$college=DB::table('college_entrance_test')
+			->join('college_id','college_id.cid','=','college_entrance_test.cid')
+			->where('college_id.disabled','=','1');
+		foreach ($eid as $key => $id) {
+			if($key==0)
+				$college=$college->where('college_entrance_test.name','=',$id->eid);
+			else
+				$college=$college->orWhere('college_entrance_test.name','=',$id->eid);
+		}	
+		$college=$college->groupby(array('college_id.cid','college_id.name'))
+			->orderby('college_id.rank')
+			->get();
+
+		if(sizeof($college)==0){
+			return $this->nocollege('No college found with Exam "'.$exam.'"');
+		}
+		$text=sizeof($college).' colleges found with exam "'.$exam.'"';
+		$this->show_colleges($college,$text);
+	}
+
+	public function  dept_search($input){
+		if(!isset($input['searchvalue'])){
+			return $this->nocollege();
+		}
+		$dept_input=$input['searchvalue'];
+		$dept=$input['searchvalue'];
+		
+		$dept=DB::table('departments')->where('value','=',$dept)->first();
+		if(sizeof($dept)==NULL){
+			return $this->nocollege('No college found with "'.$dept_input.'" Department');
+		}
+		
+		$college=DB::table('college_department')
+			->join('college_id','college_id.cid','=','college_department.cid')
+			->where('college_department.'.$dept->key,'=','1')->orderby('college_id.rank')->get();
+	
+		if(sizeof($college)==0){
+			return $this->nocollege('No college found with "'.$dept.'" Department');
+		}
+		$text=sizeof($college).' colleges found with "'.$dept->value.'" Department';
+		$this->show_colleges($college,$text);
+	}
+
+	public function  location_search($input){
+		if(!isset($input['searchvalue'])){
+			return $this->nocollege();
+		}
+		$place=$input['searchvalue'];
+		
+		$college=DB::table('college_id')
+			->where('college_id.disabled','=','1')
+			->where(DB::raw('concat(city ," , " ,state)'),'=',$place)
+			->orderby('rank')
+			->get();
+		
+		if(sizeof($college)==0){
+			return $this->nocollege('No college found in "'.$place.'"');
+		}
+		$text=sizeof($college).' colleges found in "'.$place.'"';
+		$this->show_colleges($college,$text);
+	}
+
+	public function show_colleges($college,$text=""){
+		echo '<h2>'.$text.'</h2>';
+		foreach ($college as $key => $c) {
+			echo '<a href="'.URL::Route('college').'/'.$c->link.'">'.$c->name.'</a><br>';
+		}
+	}
+	public function nocollege($text="No College Found"){
+		print_r($text);
+		return '';
+	}
 	// Function to get search inputs and find best college
 	public function search()
 	{
-		print_r(Input::all());
+		$s_type=Input::get('searchtype');
+		switch ($s_type) {
+			case 'keyword_search':
+				return $this->keyword_search(Input::all());
+				break;
+			case 'exam_search':
+				return $this->exam_search(Input::all());
+				break;
+			case 'dept_search':
+				return $this->dept_search(Input::all());
+				break;
+			case 'location_search':
+				return $this->location_search(Input::all());
+				break;
+			default:
+				# code...
+				break;
+		}
 	}
 
 }

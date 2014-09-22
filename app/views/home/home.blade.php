@@ -356,7 +356,6 @@ border-radius: 0px;
         
     </div>
 <script src="{{URL::asset('assets/js/jquery.immybox.min.js')}}"></script>
-<script src="{{URL::asset('assets/js/bootstrap-select.min.js')}}"></script>
 
 <script>
 
