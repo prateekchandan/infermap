@@ -236,10 +236,10 @@ class SearchController extends BaseController {
 		$value=$input['searchvalue'];
 		$college=$this->autocomplete($value,50);
 		foreach ($college as $key => $val) {
-			$college[$key]=(object)$val;
+			$college[$key]=DB::table('college_id')->where('link','=',$val['link'])->first();
 		}
 		$text='Showing best matches for "'.$value.'"';
-		$this->show_colleges($college,$text);
+		return  $this->show_colleges($college,$text);
 	}
 
 	public function  exam_search($input){
@@ -270,7 +270,7 @@ class SearchController extends BaseController {
 			return $this->nocollege('No college found with Exam "'.$exam.'"');
 		}
 		$text=sizeof($college).' colleges found with exam "'.$exam.'"';
-		$this->show_colleges($college,$text);
+		return  $this->show_colleges($college,$text);
 	}
 
 	public function  dept_search($input){
@@ -293,7 +293,7 @@ class SearchController extends BaseController {
 			return $this->nocollege('No college found with "'.$dept.'" Department');
 		}
 		$text=sizeof($college).' colleges found with "'.$dept->value.'" Department';
-		$this->show_colleges($college,$text);
+		return $this->show_colleges($college,$text);
 	}
 
 	public function  location_search($input){
@@ -312,14 +312,43 @@ class SearchController extends BaseController {
 			return $this->nocollege('No college found in "'.$place.'"');
 		}
 		$text=sizeof($college).' colleges found in "'.$place.'"';
-		$this->show_colleges($college,$text);
+		return  $this->show_colleges($college,$text);
 	}
 
 	public function show_colleges($college,$text=""){
-		echo '<h2>'.$text.'</h2>';
-		foreach ($college as $key => $c) {
-			echo '<a href="'.URL::Route('college').'/'.$c->link.'">'.$c->name.'</a><br>';
+		foreach ($college as $key => $value) {
+			if(File::exists(public_path().'/data'.'/logo200/'.$value->cid.'.png'))
+				$value->logoimg=asset('/data'.'/logo200/'.$value->cid.'.png');
+
+			else if(File::exists(public_path().'/data'.'/'.$value->cid.'/logo.png'))
+				$value->logoimg=asset('/data'.'/'.$value->cid.'/logo.png');
+			else
+				$value->logoimg=asset('/assets/img/icons/icon.png');;
+
+			$check=0;
+			$value->location_bar="";
+			if($value->area!=''){
+				$value->location_bar=$value->area;
+				$check=1;
+			}
+			if($value->city!='')
+			{
+				if($check==1)
+				$value->location_bar.=' , ';
+				$value->location_bar.=$value->city;
+				$check=1;
+			}
+			if($value->state!=''){
+				if($check==1)
+				$value->location_bar.=' , ';
+				$value->location_bar.=$value->state;
+			}
+
+			$college[$key]=$value;
 		}
+		View::share('text',$text);
+		View::share('college',$college);
+		return View::make('home.search');
 	}
 	public function nocollege($text="No College Found"){
 		print_r($text);
