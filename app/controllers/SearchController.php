@@ -378,7 +378,8 @@ class SearchController extends BaseController {
 				return $this->location_search(Input::all());
 				break;
 			default:
-				# code...
+				$home =new HomeController;
+				return $home->home();
 				break;
 		}
 	}
