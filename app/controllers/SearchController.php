@@ -307,7 +307,13 @@ class SearchController extends BaseController {
 			->where(DB::raw('concat(city ," , " ,state)'),'=',$place)
 			->orderby('rank')
 			->get();
-		
+		if(sizeof($college)==0){
+			$college=DB::table('college_id')
+			->where('college_id.disabled','=','1')
+			->where('state','=',$place)
+			->orderby('rank')
+			->get();
+		}
 		if(sizeof($college)==0){
 			return $this->nocollege('No college found in "'.$place.'"');
 		}
