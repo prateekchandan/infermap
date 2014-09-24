@@ -352,6 +352,18 @@ class SearchController extends BaseController {
 
 			$college[$key]=$value;
 		}
+		$states=array();
+		foreach(DB::select('select distinct state from college_id where state!=""') as $key => $state ) {
+				foreach(DB::table('college_id')->select(DB::raw('distinct city'))->where('state','=',$state->state)->where('city','!=','')->get() as $key1 => $city )
+				{
+					if($key1==0)
+						$states[$state->state]=array();
+
+					array_push($states[$state->state],$city->city);
+				}
+		}
+
+		View::share('cities',json_encode($states));
 		View::share('text',$text);
 		View::share('college',$college);
 		return View::make('home.search');

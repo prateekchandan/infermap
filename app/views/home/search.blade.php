@@ -27,7 +27,14 @@
 		content: 'I';
 		color: orange;
 	}
+
+	.side-option{
+		display: none;
+		padding: 20px;
+		background-color: #fafafa;
+	}
 </style>
+<link rel="stylesheet" type="text/css" href="{{URL::asset('assets/css/chosen.min.css')}}">
 <!-- start: Page Title -->
 	<div id="page-title">
 
@@ -73,6 +80,24 @@
 				            			<i class="fa fa-caret-right"></i>
 				            		</span>
 				            	</a>
+				            	<div class="side-option" id="location-box">
+				            		<div class="form-group">
+				            			<label>Select State</label>
+				            			<select class="form-control" id="location-state" name="state">
+				            				<option value=''>Select State</option>
+				            				@foreach(DB::select('select distinct state from college_id where state!=""') as $state )
+				            					<option>{{$state->state}}</option>
+				            				@endforeach
+				            			</select>
+				            		</div>
+
+				            		<div class="form-group">
+				            			<label>Select City</label>
+				            			<select class="form-control" id="location-city" name="city" >
+				            				<option value=''>Select City</option>
+				            			</select>
+				            		</div>
+				            	</div>
 				            </li>
 				            <li>
 				            	<a href="#" class="side-filter" data-search="exam">
@@ -81,6 +106,24 @@
 				            			<i class="fa fa-caret-right"></i>
 				            		</span>
 				            	</a>
+				            	<div class="side-option" id="exam-box">
+				            		<div class="form-group">
+				            			<label>Select State</label>
+				            			<select class="form-control" id="exam-name" name="exam-name">
+				            				<option value=''>Select Exam</option>
+				            				@foreach(DB::select('select distinct fullform from exam where eid!=0') as $exam )
+				            					<option>{{$exam->fullform}}</option>
+				            				@endforeach
+				            			</select>
+				            		</div>
+
+				            		<div class="form-group">
+				            			<label>Select City</label>
+				            			<select class="form-control" id="location-city" name="city" >
+				            				<option value=''>Select City</option>
+				            			</select>
+				            		</div>
+				            	</div>
 				            </li>
 				            <li>
 				            	<a href="#" class="side-filter" data-search="department">
@@ -105,6 +148,38 @@
 		<!--end: Container-->
 				
 	</div>
+<script src="{{URL::asset('assets/js/chosen.jquery.min.js')}}"></script>
+<script type="text/javascript">
+	$('.side-filter').click(function(e) {
+		e.preventDefault();	
+		var id=$(this).data('search');
+		$('#'+id+'-box').slideToggle();
+		var attrtoggle=$('#'+id+'-search>span>i').attr('class');
+		if(attrtoggle=="fa fa-caret-right")
+			$('#'+id+'-search>span>i').attr('class',"fa fa-caret-down");
+		else
+			$('#'+id+'-search>span>i').attr('class',"fa fa-caret-right");
+	})
+	
+	$('.chosen-select').chosen({width: "100%"});
 
-
+	var states={{$cities}};
+	$('#location-state').change(function(e){
+		var val=$(this).val();
+		if(val=='')
+		{
+			$('#location-city').html('<option>Select City</option>');
+			$('#location-city').attr('disabled','disabled');
+		}
+		else
+		{
+			var str='<option>Select City</option>';
+			for (var i = 0; i < states[val].length; i++) {
+				str+='<option>'+states[val][i]+'</option>';
+			};
+			$('#location-city').html(str);
+			$('#location-city').removeAttr('disabled');
+		}
+	})
+</script>
 @endsection
