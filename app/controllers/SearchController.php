@@ -296,6 +296,96 @@ class SearchController extends BaseController {
 		return $this->show_colleges($college,$text);
 	}
 
+	public function main_search($input)
+	{
+		$col=DB::select('select *,0 as score from college_id where disabled=1 order by rank');
+		$college=array();
+		foreach ($col as $key => $colleges) {
+			$college[$colleges->cid]=$colleges;
+		}
+		$filters=array('state'=>'state','city'=>'city','exam'=>'exam-name','rank'=>'exam-rank','category'=>'exam-category','dept'=>'department');
+		foreach ($filters as $key => $value) {
+			if(isset($input[$value]) && $input[$value]!="")
+			{
+				$filters[$key]=$input[$value];
+			}
+			else
+			{
+				$filters[$key]=NULL;
+			}
+		}
+		echo '<br>';
+		$location_weight=10;
+		$department_weigth=10;
+		$exam_weight=10;
+		$maxscore=0;
+		if($filters['state']!=NULL){
+			$temp=DB::table('college_id')
+				->where('state','=',$filters['state'])
+				->where('disabled','=','1')->get();
+			if($filters['city']==NULL)
+				$weight=$location_weight;
+			else
+				$weight=$location_weight/2;
+			foreach ($temp as $key => $value) {
+				$college[$value->cid]->score+=$weight;
+			}
+			$maxscore+=$weight;
+			if($filters['city']!=NULL){
+				$maxscore+=$location_weight/2;
+				$temp=DB::table('college_id')
+				->where('state','=',$filters['state'])
+				->where('city','=',$filters['city'])
+				->where('disabled','=','1')->get();
+
+				foreach ($temp as $key => $value) {
+					$college[$value->cid]->score+=$location_weight/2;
+				}
+			}
+		}
+
+		if($filters['dept']!=NULL){
+			$dept_name=DB::table('departments')->where('key','=',$filters['dept'])->first();
+			if($dept_name!=NULL){
+				$maxscore+=$department_weigth;
+				$temp=DB::table('college_department')->where($filters['dept'],'=','1')->get();
+				foreach ($temp as $key => $value) {
+					if(isset($college[$value->cid]))
+					$college[$value->cid]->score+=$department_weigth;
+				}
+			}
+		}
+
+		function cmp($a,$b)
+		{
+			return $a->score<$b->score;
+		}
+		uasort($college, 'cmp');
+		$return_college=array();
+		$maxcount=0;
+		$cunt=0;
+		foreach ($college as $key => $value) {
+			//echo $value->name . ', '.$value->city.' , '.$value->state.' : '.$value->score.'<br>';
+			if($value->score==$maxscore && $maxscore!=0)
+				$maxcount++;
+			if($value->score>0){
+				array_push($return_college,$value);
+				$cunt++;
+			}
+			else
+				break;
+			if($cunt>200){
+				break;
+			}
+		}
+		//print_r($filters);
+		$text=$maxcount.' Colleges with perfect match and '.sizeof($return_college).' colleges with some match';
+		if($maxcount!=0)
+			return $this->show_colleges($return_college,$text);
+		else
+			return $this->show_colleges();
+
+	}
 	public function  location_search($input){
 		if(!isset($input['searchvalue'])){
 			return $this->nocollege();
@@ -321,7 +411,7 @@ class SearchController extends BaseController {
 		return  $this->show_colleges($college,$text);
 	}
 
-	public function show_colleges($college,$text=""){
+	public function show_colleges($college=array(),$text=""){
 		foreach ($college as $key => $value) {
 			if(File::exists(public_path().'/data'.'/logo200/'.$value->cid.'.png'))
 				$value->logoimg=asset('/data'.'/logo200/'.$value->cid.'.png');
@@ -363,14 +453,27 @@ class SearchController extends BaseController {
 				}
 		}
 
+		$exam_categories=array();
+		foreach(DB::select('select distinct fullform from exam where eid!=0') as $key => $exam ) {
+				$exam_categories[$exam->fullform]=json_decode(DB::table('exam')->where('fullform','=',$exam->fullform)->first()->category);
+		}
+		$categories=array();
+		foreach(DB::select('select * from category') as $key => $cat ) {
+				$categories[$cat->id]=$cat->name;
+		}
 		View::share('cities',json_encode($states));
-		View::share('text',$text);
-		View::share('college',$college);
+		View::share('exam_categories',json_encode($exam_categories));
+		View::share('categories',json_encode($categories));
+		if($text!="")
+			View::share('text',$text);
+
+		if(sizeof($college)>0){
+			View::share('college',$college);
+		}
 		return View::make('home.search');
 	}
 	public function nocollege($text="No College Found"){
-		print_r($text);
-		return '';
+		return $this->show_colleges(array(),$text);
 	}
 	// Function to get search inputs and find best college
 	public function search()
@@ -389,9 +492,11 @@ class SearchController extends BaseController {
 			case 'location_search':
 				return $this->location_search(Input::all());
 				break;
+			case 'side-filter':
+				return $this->main_search(Input::all());
+				break;
 			default:
-				$home =new HomeController;
-				return $home->home();
+				return $this->show_colleges();
 				break;
 		}
 	}
