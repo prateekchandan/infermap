@@ -107,7 +107,7 @@
 					            	</div>
 					            </li>
 					            <li>
-					            	<a href="#" class="side-filter" data-search="exam">
+					            	<a href="#" class="side-filter" id="exam-search" data-search="exam">
 					            		Exam Search
 					            		<span class="pull-right">
 					            			<i class="fa fa-caret-right"></i>
@@ -137,7 +137,7 @@
 					            	</div>
 					            </li>
 					            <li>
-					            	<a href="#" class="side-filter" data-search="department">
+					            	<a href="#" class="side-filter" id="department-search" data-search="department">
 					            		Department Search
 					            		<span class="pull-right">
 					            			<i class="fa fa-caret-right"></i>
