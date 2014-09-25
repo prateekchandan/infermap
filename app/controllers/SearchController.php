@@ -374,9 +374,6 @@ class SearchController extends BaseController {
 			}
 			else
 				break;
-			if($cunt>200){
-				break;
-			}
 		}
 		//print_r($filters);
 		$text=$maxcount.' Colleges with perfect match and '.sizeof($return_college).' colleges with some match';
