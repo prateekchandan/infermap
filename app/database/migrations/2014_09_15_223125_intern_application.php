@@ -26,7 +26,7 @@ class InternApplication extends Migration {
 			$table->timestamps();
 			$table->primary(array('user_id', 'position_id'));
 			$table->foreign('user_id')->references('id')->on('users');
-			$table->foreign('position_id')->references('id')->on('intern_positions');
+			$table->foreign('position_id')->references('id')->on('intern_positions')->onDelete('cascade');
 
 		});
 	}

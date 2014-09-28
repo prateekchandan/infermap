@@ -23,7 +23,7 @@ class CreateExamDates extends Migration {
 			$table->date('date');
 			$table->string('event',2000);
 			$table->timestamps();
-			$table->foreign('eid')->references('eid')->on('exam');
+			$table->foreign('eid')->references('eid')->on('exam')->onDelete('cascade');
 		});
 	}
 

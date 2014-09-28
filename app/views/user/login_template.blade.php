@@ -6,14 +6,14 @@
 <meta name="google-signin-callback" content="signinCallback" />
 <script type="text/javascript">
 
-
- function google_login() {
-    (function() {
+(function() {
        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = false;
        po.src = 'https://apis.google.com/js/client:plusone.js';
        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
      })();
 
+
+ function google_login() {
      // Additional params
       var additionalParams = {
          'callback': signinCallback

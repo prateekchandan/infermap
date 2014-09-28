@@ -170,31 +170,141 @@ class CareerController extends BaseController {
 		->where('user_id','=',Input::get('user'))
 		->where('position_id','=',Input::get('pos'))->delete();
 
+		DB::table('intern_tasks')
+		->where('user_id','=',Input::get('user'))
+		->where('position_id','=',Input::get('pos'))->delete();
+
 		return Redirect::back();
 
 	}
 
-	public function intern_monitor($id='',$pos='')
-	{
+	private function is_an_intern($id='',$pos=''){
 		if($id==''||$pos=='')
 		{
-			return Redirect::route('career');
+			return false;
 		}
 		$position=DB::table('intern_application')
 			->where('user_id','=',$id)
 			->where('position_id','=',$pos)
+			->where('accept','=','1')
 			->get();
 		if(sizeof($position)==0){
-			return Redirect::route('career');
+			return false;
 		}
+		if(!Auth::check()){
+			return false;
+		}
+		if(!(Auth::user()->id==$id || DB::table('admin')->where('id','=',Auth::user()->id==$id)->first()==NULL)){
+			return false;
+		}
+		return true;
+	}
+	public function intern_monitor($id='',$pos='')
+	{
+		if(!$this->is_an_intern($id,$pos)){
+			return View::make('error.403');
+		}
+
+		$alltasks=DB::table('intern_tasks')
+			->where('user_id','=',$id)
+			->where('position_id','=',$pos)
+			->get();
+		
+		if(DB::table('admin')->where('id','=',Auth::user()->id)->first()!=NULL)
+			View::share('admin','=','1');
+
+		$comments_all=DB::table('intern_tasks_comment')
+			->join('intern_tasks','intern_tasks.id','=','intern_tasks_comment.task_id')
+			->join('users','users.id','=','intern_tasks_comment.user_id')
+			->where('intern_tasks.user_id','=',$id)
+			->where('intern_tasks.position_id','=',$pos)
+			->get();
+		$comments=array();
+		for($i=1;$i<=8;$i++) $comments[$i]=array();
+
+		foreach ($comments_all as $key => $comment) {
+			array_push($comments[$comment->week],$comment);
+		}
+
+		$tasks=array();
+
+		foreach ($alltasks as $key => $task) {
+			$tasks[$task->week]=$task;
+		}
+
+		View::share('id',$id);
+		View::share('pos',$pos);
+		View::share('tasks',$tasks);
+		View::share('commentlist',$comments);
+		View::share('weeks',array(1,2,3,4,5,6,7,8));
+		return View::make('career.work_profile');
+	}
+
+	public function intern_save_task()
+	{
+		$id=Input::get('user_id');
+		$pos=Input::get('position_id');
+		$week=Input::get('week');
+		$ps=Input::get('ps');
+		$work=Input::get('work_status');
+
+		if(!$this->is_an_intern($id,$pos)){
+			return View::make('error.403');
+		}
+
+		$alltasks=DB::table('intern_tasks')
+			->where('user_id','=',$id)
+			->where('position_id','=',$pos)
+			->where('week','=',$week)
+			->get();
+
+		if(	sizeof($alltasks)==0){
+			$alltasks=DB::table('intern_tasks')
+			->insert(array('user_id'=>$id,'position_id'=>$pos,'week'=>$week,'ps'=>$ps,'work_status'=>$work));
+		}
+		else{
+			$alltasks=DB::table('intern_tasks')
+			->where('user_id','=',$id)
+			->where('position_id','=',$pos)
+			->where('week','=',$week)
+			->update(array('ps'=>$ps,'work_status'=>$work));
+		}
+
+		return Redirect::back();
+	}
+
+	public function intern_comment_task()
+	{
 		if(!Auth::check()){
 			return View::make('error.403');
 		}
-		if(!(Auth::user()->id==$id || DB::table('admin')->where('id','=',Auth::user()->id==$id)->first()==NULL)){
+
+		$task_id=Input::get('task_id');
+		$message=Input::get('message');
+		$user_id=Auth::user()->id;
+
+		$task=DB::table('intern_tasks')
+			->where('id','=',$task_id)->first();
+		if($task==NULL){
 			return View::make('error.403');
 		}
-		View::share('weeks',array(1,2,3,4,5,6,7,8));
-		return View::make('career.work_profile');
+
+		DB::table('intern_tasks_comment')->insert(array('user_id'=>$user_id,'task_id'=>$task_id,'message'=>$message));
+		return Redirect::back();
+
+	}
+	public function intern_comment_delete()
+	{
+		if(!Auth::check()){
+			return View::make('error.403');
+		}
+
+		$id=Input::get('id');
+		$cmnt=DB::table('intern_tasks_comment')->where('comment_id','=',$id)->first();
+		//print_r($cmnt);
+		if($cmnt!=NULL&&Auth::user()->id==$cmnt->user_id)
+			DB::table('intern_tasks_comment')->where('comment_id','=',$id)->delete();
+		return Redirect::back();
 	}
 	
 }

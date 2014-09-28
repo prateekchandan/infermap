@@ -2,7 +2,7 @@
 
 @section ('content')
 
-	<link href="{{URL::asset('assets/css/chosen.min.css')}}" rel="stylesheet">
+	<link href="{{URL::asset('assets/css/immybox.css')}}" rel="stylesheet">
 	<link href="{{URL::asset('assets/css/bootstrap-select.min.css')}}" rel="stylesheet">
 
 <style type="text/css">
@@ -14,28 +14,17 @@
 	background: #123;
 	background: url(http://subtlepatterns.com/patterns/photography.png);
 }
+.immybox,.immybox:focus{
+    box-shadow: 0px 0px 0px #000;
+    border-color: #CCC;
+    border-radius: 0px;
+    height: 40px;
+}
 .temp_active{
 	background: #eee;
 }
 .main-search{
 	height: 40px;
-}
-.chosen-single{
-	border-radius: 0px !important;
-	display: block !important;
-	width: 100% !important;
-	height: 40px !important;
-	padding: 6px 12px !important;
-	font-size: 14px !important;
-	line-height: 1.42857143 !important;
-	color: #555 !important;
-	background-color: #fff !important;
-	background-image: none !important;
-	border: 1px solid #ccc !important;
-	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075) !important;
-	box-shadow: inset 0 1px 1px rgba(0,0,0,.075) !important;
-	-webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s !important;
-	transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s !important;
 }
 
 #search-btn{
@@ -49,7 +38,7 @@
 	-webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 	transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 }
-#dropdownMenu1{
+#dropdownMenu1,.chosen-container,.chosen-choices,.chosen-choices li{
 	height: 40px;
 	border-radius: 0px !important;
 }
@@ -86,40 +75,20 @@ border-radius: 0px;
 					  <select  class="selectpicker" id="dropdownMenu1" >
                         <option value="keyword_search">Keyword search</option>
                         <option value="keyword_search">College</option>
-                        <option value="location_search_chosen">Location</option>
-                        <option value="exam_search_chosen">Exam</option>
-						<option value="dept_search_chosen">Department</option>
+                        <option value="location_search">Location</option>
+                        <option value="exam_search">Exam</option>
+						<option value="dept_search">Department</option>
 					   </select>
 					  
 				</div>
                 <div style="float:left;width:70%">
                     
-                    <input class="autocomplete form-control main-search" id="keyword_search">
+                    <input class="autocomplete form-control main-search" id="keyword_search" >
                     
-                    <select id="exam_search" class="chosen-select" style="display:none">
-                    @foreach(DB::select('select distinct name,fullform from exam where eid!=0') as $exam)
-                        <option value="{{$exam->name}}">{{$exam->fullform}} ( {{$exam->name}} )</option>
-                    @endforeach
-                    </select>
-
-                    <select data-placeholder="Select location" id="location_search" class="chosen-select" style="display:none">
-                    @foreach($places as $state=>$cities)
-                        <optgroup label="{{$state}}">
-                            @if($state!='Others')
-                                <option value='{{$state}}'>All</option>
-                            @endif
-                            @foreach($cities as $city)
-                            <option>{{$city->city}}</option>
-                            @endforeach
-                        </optgroup>
-                    @endforeach
-                    </select>
-
-                    <select id="dept_search" class="chosen-select" style="display:none">
-                    @foreach(DB::select('select * from departments') as $dept)
-                        <option value="{{$dept->key}}">{{$dept->value}}</option>
-                    @endforeach
-                    </select>
+                    <input class="form-control main-search" id="exam_search" style="display:none">
+                    
+                    <input class="form-control main-search" id="location_search" style="display:none">
+                    <input class="form-control main-search" id="dept_search" style="display:none">
 
                 </div>
                 <div style="float:left;width:10%">
@@ -386,33 +355,74 @@ border-radius: 0px;
         <hr>
         
     </div>
+<script src="{{URL::asset('assets/js/jquery.immybox.min.js')}}"></script>
 
 <script>
 
+
 var currentsearch = 'keyword_search';
 
+var exams=[
+@foreach(DB::select('select distinct name,fullform from exam where eid!=0') as $key=> $exam)
+    {{($key>0?',':'')}}{text:'{{{$exam->fullform}}} ({{$exam->name}})',value:'{{{$exam->name}}}'}
+@endforeach
+];
+
+$('#exam_search').immybox({
+    choices : exams
+});
+var locations=[
+@foreach($places as $state=>$cities)
+    {{($state!='Others'?',':'')}} {text:'{{$state}}',value:'{{$state}}'}
+    @foreach($cities as $city)
+      , {text:'{{$city->city}} , {{$city->state}}',value:'{{$city->city}}'}
+    @endforeach
+@endforeach
+];
+
+var departments=[
+@foreach(DB::select('select * from departments') as $key => $dept)
+    {{($key>0?',':'')}}{text:'{{{$dept->value}}}',value:'{{{$dept->value}}}'}
+@endforeach
+];
+
+$('#location_search').immybox({
+    choices : locations
+});
+
+$('#dept_search').immybox({
+    choices : departments
+});
 $('#dropdownMenu1').change(function(){
+    $('.main-search').val('');
+    temp_autobox_remove();
 	var past = currentsearch;
 	currentsearch = ($(this).val());
 	$('#'+past).css('display', 'none');
 	$('#'+currentsearch).css('display', 'block');
 });
 
+$('.main-search').keydown(function(e){
+      var code=e.keyCode;
+      if(code==13){
+        $('#search-btn').click();
+      }
+})
 $('#search-btn').click(function(){
     temp_autobox_remove();
 	var searchtype = currentsearch, searchvalue;
 	if(currentsearch == 'keyword_search'){
 		searchvalue = $('#keyword_search').val();
 	}
-	else if(currentsearch == 'location_search_chosen'){
+	else if(currentsearch == 'location_search'){
 		searchtype = 'location_search';
 		searchvalue = $('#location_search').val();
 	}
-	else if(currentsearch == 'exam_search_chosen'){
+	else if(currentsearch == 'exam_search'){
 		searchtype = 'exam_search';
 		searchvalue = $('#exam_search').val();
 	}
-	else if(currentsearch == 'dept_search_chosen'){
+	else if(currentsearch == 'dept_search'){
 		searchtype = 'dept_search';
 		searchvalue = $('#dept_search').val();
 	}
@@ -422,9 +432,8 @@ $('#search-btn').click(function(){
 </script>
 
 
-<script src="{{URL::asset('assets/js/chosen.jquery.min.js')}}"></script>
-<script src="{{URL::asset('assets/js/bootstrap-select.min.js')}}"></script>
+
 <script type="text/javascript">
-$(".chosen-select").chosen({width:$('.main-search').outerWidth()+'px',allow_single_deselect:true});
+//$(".chosen-select").chosen({width:$('.main-search').outerWidth()+'px'});
 </script>
 @stop

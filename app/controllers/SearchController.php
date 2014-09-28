@@ -21,7 +21,7 @@ class SearchController extends BaseController {
 	}
 
 	private function modified_levenshtein($str1,$str2){
-		 //if ($str1 == $str2) return 0;
+		//if ($str1 == $str2) return 0;
 	    if (strlen($str1) == 0) return strlen($str2);
 	    if (strlen($str2) == 0) return strlen($str1);
 
@@ -219,25 +219,6 @@ class SearchController extends BaseController {
 
 	}
 
-	public function test()
-	{
-		function microtime_float()
-		{
-		    list($usec, $sec) = explode(" ", microtime());
-		    return ((float)$usec + (float)$sec)*1000;
-		}
-
-		$a=microtime_float();
-		$res=$this->review_autocomplete();
-		$b=microtime_float()-$a;
-		var_dump(time());
-		echo '<br>';
-		var_dump(microtime_float());
-		echo '<br>';
-		echo 'Time taken : '.$b.'<br>';
-		print_r($res);
-	}
-
 	public function autocomplete_get($value='')
 	{
 		
@@ -246,6 +227,275 @@ class SearchController extends BaseController {
 		$ret=$this->autocomplete($str,10);
 
 		return $ret;
+	}
+
+	public function  keyword_search($input){
+		if(!isset($input['searchvalue'])){
+			return $this->nocollege();
+		}
+		$value=$input['searchvalue'];
+		$college=$this->autocomplete($value,50);
+		foreach ($college as $key => $val) {
+			$college[$key]=DB::table('college_id')->where('link','=',$val['link'])->first();
+		}
+		$text='Showing best matches for "'.$value.'"';
+		return  $this->show_colleges($college,$text);
+	}
+
+	public function  exam_search($input){
+		if(!isset($input['searchvalue'])){
+			return $this->nocollege();
+		}
+		$exam=$input['searchvalue'];
+		
+		$eid=DB::table('exam')->where(DB::raw("concat(fullform,' (',name,')')"),'=',$exam)->get();
+		if(sizeof($eid)==0){
+			return $this->nocollege('No college found with Exam "'.$exam.'"');
+		}
+		//print_r($eid);
+		$college=DB::table('college_entrance_test')
+			->join('college_id','college_id.cid','=','college_entrance_test.cid')
+			->where('college_id.disabled','=','1');
+		foreach ($eid as $key => $id) {
+			if($key==0)
+				$college=$college->where('college_entrance_test.name','=',$id->eid);
+			else
+				$college=$college->orWhere('college_entrance_test.name','=',$id->eid);
+		}	
+		$college=$college->groupby(array('college_id.cid','college_id.name'))
+			->orderby('college_id.rank')
+			->get();
+
+		if(sizeof($college)==0){
+			return $this->nocollege('No college found with Exam "'.$exam.'"');
+		}
+		$text=sizeof($college).' colleges found with exam "'.$exam.'"';
+		return  $this->show_colleges($college,$text);
+	}
+
+	public function  dept_search($input){
+		if(!isset($input['searchvalue'])){
+			return $this->nocollege();
+		}
+		$dept_input=$input['searchvalue'];
+		$dept=$input['searchvalue'];
+		
+		$dept=DB::table('departments')->where('value','=',$dept)->first();
+		if(sizeof($dept)==NULL){
+			return $this->nocollege('No college found with "'.$dept_input.'" Department');
+		}
+		
+		$college=DB::table('college_department')
+			->join('college_id','college_id.cid','=','college_department.cid')
+			->where('college_department.'.$dept->key,'=','1')->orderby('college_id.rank')->get();
+	
+		if(sizeof($college)==0){
+			return $this->nocollege('No college found with "'.$dept.'" Department');
+		}
+		$text=sizeof($college).' colleges found with "'.$dept->value.'" Department';
+		return $this->show_colleges($college,$text);
+	}
+
+	public function main_search($input)
+	{
+		$col=DB::select('select *,0 as score from college_id where disabled=1 order by rank');
+		$college=array();
+		foreach ($col as $key => $colleges) {
+			$college[$colleges->cid]=$colleges;
+		}
+		$filters=array('state'=>'state','city'=>'city','exam'=>'exam-name','rank'=>'exam-rank','category'=>'exam-category','dept'=>'department');
+		foreach ($filters as $key => $value) {
+			if(isset($input[$value]) && $input[$value]!="")
+			{
+				$filters[$key]=$input[$value];
+			}
+			else
+			{
+				$filters[$key]=NULL;
+			}
+		}
+		echo '<br>';
+		$location_weight=10;
+		$department_weigth=10;
+		$exam_weight=10;
+		$maxscore=0;
+		if($filters['state']!=NULL){
+			$temp=DB::table('college_id')
+				->where('state','=',$filters['state'])
+				->where('disabled','=','1')->get();
+			if($filters['city']==NULL)
+				$weight=$location_weight;
+			else
+				$weight=$location_weight/2;
+			foreach ($temp as $key => $value) {
+				$college[$value->cid]->score+=$weight;
+			}
+			$maxscore+=$weight;
+			if($filters['city']!=NULL){
+				$maxscore+=$location_weight/2;
+				$temp=DB::table('college_id')
+				->where('state','=',$filters['state'])
+				->where('city','=',$filters['city'])
+				->where('disabled','=','1')->get();
+
+				foreach ($temp as $key => $value) {
+					$college[$value->cid]->score+=$location_weight/2;
+				}
+			}
+		}
+
+		if($filters['dept']!=NULL){
+			$dept_name=DB::table('departments')->where('key','=',$filters['dept'])->first();
+			if($dept_name!=NULL){
+				$maxscore+=$department_weigth;
+				$temp=DB::table('college_department')->where($filters['dept'],'=','1')->get();
+				foreach ($temp as $key => $value) {
+					if(isset($college[$value->cid]))
+					$college[$value->cid]->score+=$department_weigth;
+				}
+			}
+		}
+
+		function cmp($a,$b)
+		{
+			return $a->score<$b->score;
+		}
+		uasort($college, 'cmp');
+		$return_college=array();
+		$maxcount=0;
+		$cunt=0;
+		foreach ($college as $key => $value) {
+			//echo $value->name . ', '.$value->city.' , '.$value->state.' : '.$value->score.'<br>';
+			if($value->score==$maxscore && $maxscore!=0)
+				$maxcount++;
+			if($value->score>0){
+				array_push($return_college,$value);
+				$cunt++;
+			}
+			else
+				break;
+		}
+		//print_r($filters);
+		$text=$maxcount.' Colleges with perfect match and '.sizeof($return_college).' colleges with some match';
+		if($maxcount!=0)
+			return $this->show_colleges($return_college,$text);
+		else
+			return $this->show_colleges();
+
+	}
+	public function  location_search($input){
+		if(!isset($input['searchvalue'])){
+			return $this->nocollege();
+		}
+		$place=$input['searchvalue'];
+		
+		$college=DB::table('college_id')
+			->where('college_id.disabled','=','1')
+			->where(DB::raw('concat(city ," , " ,state)'),'=',$place)
+			->orderby('rank')
+			->get();
+		if(sizeof($college)==0){
+			$college=DB::table('college_id')
+			->where('college_id.disabled','=','1')
+			->where('state','=',$place)
+			->orderby('rank')
+			->get();
+		}
+		if(sizeof($college)==0){
+			return $this->nocollege('No college found in "'.$place.'"');
+		}
+		$text=sizeof($college).' colleges found in "'.$place.'"';
+		return  $this->show_colleges($college,$text);
+	}
+
+	public function show_colleges($college=array(),$text=""){
+		foreach ($college as $key => $value) {
+			if(File::exists(public_path().'/data'.'/logo200/'.$value->cid.'.png'))
+				$value->logoimg=asset('/data'.'/logo200/'.$value->cid.'.png');
+
+			else if(File::exists(public_path().'/data'.'/'.$value->cid.'/logo.png'))
+				$value->logoimg=asset('/data'.'/'.$value->cid.'/logo.png');
+			else
+				$value->logoimg=asset('/assets/img/icons/icon.png');;
+
+			$check=0;
+			$value->location_bar="";
+			if($value->area!=''){
+				$value->location_bar=$value->area;
+				$check=1;
+			}
+			if($value->city!='')
+			{
+				if($check==1)
+				$value->location_bar.=' , ';
+				$value->location_bar.=$value->city;
+				$check=1;
+			}
+			if($value->state!=''){
+				if($check==1)
+				$value->location_bar.=' , ';
+				$value->location_bar.=$value->state;
+			}
+
+			$college[$key]=$value;
+		}
+		$states=array();
+		foreach(DB::select('select distinct state from college_id where state!=""') as $key => $state ) {
+				foreach(DB::table('college_id')->select(DB::raw('distinct city'))->where('state','=',$state->state)->where('city','!=','')->get() as $key1 => $city )
+				{
+					if($key1==0)
+						$states[$state->state]=array();
+
+					array_push($states[$state->state],$city->city);
+				}
+		}
+
+		$exam_categories=array();
+		foreach(DB::select('select distinct fullform from exam where eid!=0') as $key => $exam ) {
+				$exam_categories[$exam->fullform]=json_decode(DB::table('exam')->where('fullform','=',$exam->fullform)->first()->category);
+		}
+		$categories=array();
+		foreach(DB::select('select * from category') as $key => $cat ) {
+				$categories[$cat->id]=$cat->name;
+		}
+		View::share('cities',json_encode($states));
+		View::share('exam_categories',json_encode($exam_categories));
+		View::share('categories',json_encode($categories));
+		if($text!="")
+			View::share('text',$text);
+
+		if(sizeof($college)>0){
+			View::share('college',$college);
+		}
+		return View::make('home.search');
+	}
+	public function nocollege($text="No College Found"){
+		return $this->show_colleges(array(),$text);
+	}
+	// Function to get search inputs and find best college
+	public function search()
+	{
+		$s_type=Input::get('searchtype');
+		switch ($s_type) {
+			case 'keyword_search':
+				return $this->keyword_search(Input::all());
+				break;
+			case 'exam_search':
+				return $this->exam_search(Input::all());
+				break;
+			case 'dept_search':
+				return $this->dept_search(Input::all());
+				break;
+			case 'location_search':
+				return $this->location_search(Input::all());
+				break;
+			case 'side-filter':
+				return $this->main_search(Input::all());
+				break;
+			default:
+				return $this->show_colleges();
+				break;
+		}
 	}
 
 }

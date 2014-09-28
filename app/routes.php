@@ -1,5 +1,4 @@
 <?php
-
 Route::filter('login',function(){
 	if(!Auth::check())
 	{
@@ -21,7 +20,7 @@ Route::filter('admin',function(){
 
 // URL for general pages over site
 Route::get('/',array('as'=>'home','uses'=>'HomeController@home'));
-Route::get('/search',array('as'=>'search','uses'=>'HomeController@home'));
+Route::get('/search',array('as'=>'search','uses'=>'SearchController@search'));
 Route::get('about-us',array('as'=>'home.about','uses'=>'HomeController@about'));
 Route::get('frequently-asked-questions',array('as'=>'home.faq','uses'=>'HomeController@faq'));
 Route::get('compare-colleges',array('as'=>'home.compare','uses'=>'HomeController@compare'));
@@ -102,6 +101,9 @@ Route::get('/career/decline-application',array('before'=>'admin','as'=>'intern.d
 Route::get('/intern/profile',array('as'=>'career.page','uses' => 'CareerController@intern_monitor'));
 Route::get('/intern/profile/{id}/{posid}',array('as'=>'career.page.intern','uses' => 'CareerController@intern_monitor'));
 Route::get('/intern/profile/{id}',array('as'=>'career.page.intern','uses' => 'CareerController@intern_monitor'));
+Route::post('/intern/save_tasks',array('as'=>'intern.save_task','uses' => 'CareerController@intern_save_task'));
+Route::post('/intern/tasks_comment',array('as'=>'intern.task_comment','uses' => 'CareerController@intern_comment_task'));
+Route::get('/intern/tasks_comment_delete',array('as'=>'intern.task_comment_delete','uses' => 'CareerController@intern_comment_delete'));
 
 Route::get('/user',function(){
 	return Auth::user();

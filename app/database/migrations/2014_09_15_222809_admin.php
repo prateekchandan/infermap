@@ -21,7 +21,7 @@ class Admin extends Migration {
 			$table->integer('id');
 			$table->timestamps();
 			$table->primary(array('id'));
-			$table->foreign('id')->references('id')->on('users');
+			$table->foreign('id')->references('id')->on('users')->onDelete('cascade');
 
 		});
 	}
