@@ -74,7 +74,7 @@
 </div>
 @elseif(isset($other_college))
 <div class="jumbotron">
-    You have already submitted review for <a href="{{URL::Route('college')}}/$other_college->link">{{$other_college->name}}</a>
+    You have already submitted review for <a href="{{URL::Route('college')}}/{{$other_college->link}}">{{$other_college->name}}</a>
 </div>
 @elseif(Auth::check())
 <style>
@@ -93,7 +93,7 @@
     .media-heading {
         text-align: center;
         color: white;
-        line-height: 50px;
+        line-height: 40px;
     }
     #our-story {
         text-align: center;
