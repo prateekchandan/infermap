@@ -32,6 +32,15 @@ class ExamsController extends BaseController {
 	public function all(){
 		$exam=DB::select('select distinct link,name,fullform from exam where eid!=0 order by name');
 		
+		$admin=0;
+
+		if(Auth::check())
+		{
+			$user=Auth::user();
+			if($user->admin >= 1)
+				$admin=1;
+		}
+		View::share('admin',$admin);
 		View::share('exam',$exam);
 		return View::make('exams.all');
 	}

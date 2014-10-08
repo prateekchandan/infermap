@@ -42,7 +42,13 @@
 	    		<ul class="arrow_list">
 	    			@foreach($department as $key => $value)
 	    				@if($key <= sizeof($department)/2)
-	    				<li><a href="{{URL::route('department')}}/{{$value->link}}">{{$value->value}}</a></li>
+	    				<li>
+	    					@if($admin)
+	    					<a href="{{URL::route('department')}}/{{$value->link}}">{{$value->value}}</a>
+	    					@else
+	    					{{$value->value}}
+	    					@endif
+	    				</li>
 	    				@endif
 	    			@endforeach
 	    		</ul>
@@ -52,7 +58,13 @@
 	    		<ul class="arrow_list">
 	    			@foreach($department as $key => $value)
 	    				@if($key > sizeof($department)/2)
-	    				<li><a href="{{URL::route('department')}}/{{$value->link}}">{{$value->value}}</a></li>
+	    				<li>
+	    					@if($admin)
+	    					<a href="{{URL::route('department')}}/{{$value->link}}">{{$value->value}}</a>
+	    					@else
+	    					{{$value->value}}
+	    					@endif
+	    				</li>
 	    				@endif
 	    			@endforeach
 	    		</ul>

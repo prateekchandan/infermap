@@ -52,8 +52,22 @@ List of Engineering Entrance Exam 2014 - 2015 | India</h2>
     			@foreach ($exam as $key => $row) 
     			<tr>
     				<td>{{$key+1}}</td>
-					<td><a href='{{URL::route('exam')}}/{{$row->link}}'>{{$row->name}}</a></td>
-					<td><a href='{{URL::route('exam')}}/{{$row->link}}'>{{$row->fullform}}</a></td>
+					<td>
+						@if($admin)
+						<a href='{{URL::route('exam')}}/{{$row->link}}'>
+						{{$row->name}}
+						</a>
+						@else
+						{{$row->name}}
+						@endif
+					</td>
+					<td>
+						@if($admin)
+						<a href='{{URL::route('exam')}}/{{$row->link}}'>{{$row->fullform}}</a>
+						@else
+						{{$row->fullform}}
+						@endif
+					</td>
 				</tr>
 				@endforeach
     		</table>

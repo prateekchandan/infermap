@@ -31,7 +31,15 @@ class DepartmentController extends BaseController {
 	}
 	public function all(){
 		$dept=DB::select('select * from departments');
-		
+		$admin=0;
+
+		if(Auth::check())
+		{
+			$user=Auth::user();
+			if($user->admin >= 1)
+				$admin=1;
+		}
+		View::share('admin',$admin);
 		View::share('department',$dept);
 		return View::make('departments.all');
 	}
