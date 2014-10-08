@@ -9,22 +9,7 @@
         <h4>The review is greatly appreciated</h4>
     </div>
     <form  method="post" action="{{ URL::route('review.feedback.save') }}">
-    <div class="col-md-10 col-md-offset-1">
-    <div class="title"><h3>Share Review on Social Media</h3></div>
-    </div>
-    <div class="col-md-10 col-md-offset-1">
-        
-        <div class="row">
-            <a target='_blank' style="cursor:pointer" class="facebook_connect" href="http://www.facebook.com/sharer/sharer.php?u={{$errors->first('link')}}">
-                <div class="img"><i class="fa fa-facebook"></i></div>
-                <div class="text">Share on Facebook</div>
-            </a>
-            <a target='_blank' style="cursor:pointer" style="" class="gplus_connect" href="https://plus.google.com/share?url={{$errors->first('link')}}">
-                <div class="img"><i class="fa fa-google-plus"></i></div>
-                <div class="text">Share on Google Plus</div>
-            </a>
-        </div>
-    </div>
+    
     <div class="col-md-10 col-md-offset-1">
     <br>
     <div class="title"><h3>Refer to your friends</h3></div>
@@ -32,9 +17,29 @@
         Share this link with your friends to earn review points and benefits
         <br>
         <a href="{{$errors->first('link')}}">{{$errors->first('link')}}</a>
+        <br>
     </blockquote>
+        <center>Or share via social media</center>
+        <br>
+        <div class="col-md-10 col-md-offset-1">
+        
+        <div class="row">
+            <div class="col-md-6">
+                <a target='_blank' style="cursor:pointer" class="facebook_connect" href="http://www.facebook.com/sharer/sharer.php?u={{$errors->first('link')}}">
+                    <div class="img"><i class="fa fa-facebook"></i></div>
+                    <div class="text">Facebook</div>
+                </a>
+            </div>
+             <div class="col-md-6">
+                <a target='_blank' style="cursor:pointer" style="" class="gplus_connect" href="https://plus.google.com/share?url={{$errors->first('link')}}">
+                    <div class="img"><i class="fa fa-google-plus"></i></div>
+                    <div class="text">Google Plus</div>
+                </a>
+            </div>
+        </div>
     </div>
-    <div class="col-md-10 col-md-offset-1">
+    </div>
+    <!--div class="col-md-10 col-md-offset-1">
         <br>
         <div class="row">
             <div class="form-group">
@@ -51,7 +56,7 @@
             </div>
 
         </div>
-    </div>
+    </div-->
 
     <div class="col-md-10 col-md-offset-1">
     <br>
