@@ -1,0 +1,19 @@
+<p>The question papers of <strong>VITEEE 2015</strong> will be based on the <strong>VITEEE 2015</strong> Syllabus.</p><ul>
+	
+<li>The <strong>Syllabus of VITEEE 2015</strong> will be as per the syllabus of the Tamilnadu State Board of Higher Secondary Education and the CBSE syllabus only.</li></ul><h5><strong>The section wise syllabus are:</strong></h5><p>
+	<strong>Mathematics Physics Chemistry Biology</strong></p><p style="margin-left: 80px;">
+	<strong></strong><b style="font-family: inherit; font-size: 1em; text-align: inherit; background-color: initial;">MATHEMATICS</b></p><ul>
+	
+<li>Applications of Matrices and Determinants</li>	
+<li> Complex Numbers<br>
+	</li>	
+<li>. Analytical Geometry of two dimensions<br>
+	</li>	
+<li> Vector Algebra<br>
+	</li>	
+<li> Analytical Geometry of Three Dimensions</li>	
+<li>Differential Calculus</li>	
+<li> Integral Calculus and its Applications</li>	
+<li>Differential Equations</li>	
+<li> Probability Distributions</li>	
+<li> Discrete Mathematics</li></ul><p style="margin-left: 120px;"><strong>PHYSICS</strong></p><ul><li>Electrostatics</li><li>Current Electricity</li><li>Magnetic Effects of Electric Current and Magnetism</li><li>Electromagnetic Induction and Alternating Current</li><li>Optics </li><li>Electromagnetic Waves and Wave Optics</li><li>Atomic and Nuclear Physics</li><li>Dual Nature of Radiation and Matter</li><li>Semiconductor Devices and their Applications</li></ul><p style="margin-left: 120px;"><strong>CHEMISTRY</strong></p><ul><li>Atomic Structure</li><li>p,d and f – Block Elements:</li><li>Coordination Chemistry and Solid State Chemistry</li><li>Thermodynamics, Chemical Equilibrium and Chemical Kinetics</li><li>Electrochemistry</li><li>Isomerism in Organic Compounds</li><li>Alcohols and Ethers</li><li>Carbonyl Compounds</li><li>Carboxylic Acids and their derivatives</li><li>Organic Nitrogen Compounds</li><li>Biomolecules</li></ul><p style="margin-left: 100px;"><strong>BIOLOGY</strong></p><ul><li>Taxonomy</li><li>Evolution</li><li>Cell and Molecular Biology</li><li>Reproduction</li><li>Genetics</li><li>Microbiology and Immunology</li><li>Biochemistry</li><li>Physiology: Plant and Human</li><li>Biotechnology and its applications</li><li>Biodiversity, ecology, and environment</li><li>Applied biology and human welfare</li></ul><p style="margin-left: 100px;"></p><p style="margin-left: 100px;"></p>

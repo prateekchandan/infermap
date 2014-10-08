@@ -1,0 +1,16 @@
+<p>
+	<strong>About JEE Main 2015:</strong></p><p><strong><br></strong></p><p>
+	<strong></strong>A common National Exam for Undergraduate Engineering admissions in two stages comprising of</p><ul>
+	<li>JEE-Main 2015 : conducted by CBSE for admissions to the NITs and  CFTIs</li>	<li>JEE-Advanced 2015</li></ul>
+<table>
+<tbody>
+<tr>
+	<td>
+		Start of JEE 2015 Online Applications
+	</td>
+	<td>
+		<strong>Third week of November, 2014</strong>
+	</td>
+</tr>
+</tbody>
+</table>
