@@ -314,6 +314,7 @@ class SearchController extends BaseController {
 				$filters[$key]=NULL;
 			}
 		}
+		
 		echo '<br>';
 		$location_weight=10;
 		$department_weigth=10;
