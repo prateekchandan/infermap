@@ -179,22 +179,25 @@ input[type='range']::-moz-range-thumb {
                         </div>
                     </div>
                     @endif
-                    <div class="media">
+                     <!-- ACADEMICS -->
+                    <div class="media"> 
                         <div class="media-body">
                             <h3 class="media-heading" style="background-color:#358EFB;">
-                              Academics
+                                Academics
                             </h3>
                             <br>
                             <div class="form-group row">
-                                <label class="col-md-5" for="sports">How would you rate your faculty's teaching abilities?</label>
+                                <label class="col-md-5" for="sports">How good are your faculty members ?</label>
                                 <div class="rating col-md-7" data-id="fac_teaching" data-max="5" data-descript="Very Dissatisfied#Dissatisfied#Neutral#Satisfied#Very Satisfied"></div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-md-5" for="sports">How much the college focuses on research and practical work?</label>
+                                <label class="col-md-5" for="sports">How much your department focus on research and practical work?</label>
                                 <div class="rating col-md-7" data-id="research_work" data-max="5" data-descript="Low#Neutral#Good#High#Very High"></div>
                             </div>
                         </div>
                     </div>
+
+                    <!-- PLACEMENT -->
                     <div class="media">
                         <div class="media-body">
                             <h3 class="media-heading" style="background-color:#1ABC9C">
@@ -206,15 +209,12 @@ input[type='range']::-moz-range-thumb {
                                 <div class="col-md-7">
                                     <select name="plac" class="form-control" id="pack">
                                         <option value="">Select</option>
-                                        <option value="below 20">below 20</option>
-                                        <option value="20-30">20-30</option>
-                                        <option value="30-40">30-40</option>
-                                        <option value="40-50">40-50</option>
+                                        <option value="0-30">0-30</option>
+                                        <option value="30-50">30-50</option>
                                         <option value="50-60">50-60</option>
                                         <option value="60-70">60-70</option>
                                         <option value="70-80">70-80</option>
-                                        <option value="80-90">80-90</option>
-                                        <option value="above 90">above 90</option>
+                                        <option value="80-100">80-100</option>
                                     </select>
                                 </div>
                             </div>
@@ -228,8 +228,7 @@ input[type='range']::-moz-range-thumb {
                                         <option value="4-5">4-5</option>
                                         <option value="5-7">5-7</option>
                                         <option value="7-9">7-9</option>
-                                        <option value="9-12">9-12</option>
-                                        <option value="12+">12+</option>
+                                        <option value="9+">9+</option>
                                     </select>
                                 </div>
                             </div>
@@ -238,47 +237,49 @@ input[type='range']::-moz-range-thumb {
                                 <div class="col-md-7">
                                     <select name="intern" class="form-control" id="intern">
                                         <option value="select">Select</option>
-                                        <option value="below 20">below 20</option>
-                                        <option value="20-30">20-30</option>
-                                        <option value="30-40">30-40</option>
-                                        <option value="40-50">40-50</option>
+                                        <option value="0-30">0-30</option>
+                                        <option value="30-50">30-50</option>
                                         <option value="50-60">50-60</option>
                                         <option value="60-70">60-70</option>
                                         <option value="70-80">70-80</option>
-                                        <option value="80-90">80-90</option>
-                                        <option value="above 90">above 90</option>
+                                        <option value="80-100">80-100</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    <!-- FEES -->
                     <div class="media"> 
                         <div class="media-body">
                             <h3 class="media-heading" style="background-color:rgb(248,208,47)">
                                 Fees
                               </h3>
                             <br>
+                           
                             <div class="form-group row">
-                                <label class="col-md-5" for="gross-fee">Total fees per year (in ₹)</label>
-                                <div class="col-md-7">
-                                    <input type="number" id="gross-fees" name="gross-fees" class="form-control">
-                                </div>
-                            </div>
-                             <div class="form-group row">
                                 <label class="col-md-5">Scholarships provided by college?</label>
                                 <div class="col-md-7">
                                     <div class="col-md-6">
-                                        <input type="radio" name="scholarship" id="fee-help-yes" value="1">
+                                        <input type="radio" name="scholarship" id="fee-help-yes" value="1" checked="checked" onchange="$('#scholarship-box').fadeToggle()">
                                         <label for="fee-help-yes">Yes</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="radio" name="scholarship" id="fee-help-no" value="0">
+                                        <input type="radio" name="scholarship" id="fee-help-no" value="0" onchange="$('#scholarship-box').fadeToggle()">
                                         <label for="fee-help-no">No</label>
                                     </div>
                                 </div>
                             </div>
+                            <div class="form-group row" id="scholarship-box">
+                                <label class="col-md-5" for="scholarship-amnt">How much scholarship per year? (in ₹)</label>
+                                <div class="col-md-7">
+                                    <input type="number" id="scholarship-amnt" name="scholarship-amount" class="form-control">
+                                </div>
+                            </div>
                         </div>
                     </div>
+
+                     <!-- FACILITIES AND CAMPUS LIFE -->
                     <div class="media">
                         <div class="media-body">
 
@@ -300,40 +301,50 @@ input[type='range']::-moz-range-thumb {
                                     <br>5: means Awesome , 1: Not so good</label>
 
                                 <div class="row hostel-row">
-                                    <label class="col-md-5" for="hostel">Hostel</label>
+                                    <label class="col-md-5" for="hostel">Hostel facility</label>
                                     <div class="rating col-md-7" data-id="hostel" data-max="5" data-descript="Not so good#Okay#Good#Very Good#Awesome"></div>
                                 </div>
                                 <br>
                                 <div class="row hostel-row">
-                                    <label class="col-md-5" for="mess">Mess</label>
+                                    <label class="col-md-5" for="mess">Mess facility</label>
                                     <div class="rating col-md-7" data-id="mess" , data-max="5"  data-descript="Not so good#Okay#Good#Very Good#Awesome"></div>
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-md-5" for="sports">Sports</label>
+                                <label class="col-md-5" for="sports">Sports facility</label>
                                 <div class="rating col-md-7" data-id="sports" data-max="5"  data-descript="Not so good#Okay#Good#Very Good#Awesome"></div>
                             </div>
 
-                             <div class="form-group row">
+                            <div class="form-group row">
                                 <label class="col-md-5" for="co-currics">Extra-curricular life</label>
                                 <div class="rating col-md-7" data-id="co-currics" data-max="5"  data-descript="Not so good#Okay#Good#Very Good#Awesome"></div>
                             </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-5" for="ragging">Ragging Practiced in College?</label>
+                                <div class="rating col-md-7" data-id="ragging" data-max="5"  data-descript="Unbearable Ragging#Acceptable tasks are given#Just for Introduction#Very few Cases#Not at all"></div>
+                            </div>
                         </div>
                     </div>
+
+                    <!-- REVIEW -->
                     <div class="media">
                         <div class="media-body">
 
                             <h3 class="media-heading" style="background-color:#9B59B6">
-                                Write a review about your college.
+                                Overall College Review
                             </h3>
                             <br>
 
-                           
+                           <div class="form-group row">
+                                <label class="col-md-12" for="ragging">Title</label>
+                                <div class="col-md-12">
+                                    <input class="form-control" name="review_title">
+                                </div>
+                            </div>
                             <div class="form-group row">
-                                <label class="col-md-12" for="about_college"> What is good or bad about your college? <br>
-                                    Is there anything people should know about before deciding to attend? <br>
-                                    Any Advice?
+                                <label class="col-md-12" for="about_college"> Write your overall college experience (min 20 words)
                                 </label>
                                 <div class="col-md-12">
                                     <textarea name="about_college" id="about_college" class="form-control" style=" height:120px"></textarea>
@@ -376,6 +387,7 @@ input[type='range']::-moz-range-thumb {
 
                         </div>
                     </div>
+                    
                     <div class="media">
                         <div class="media-body">
 
