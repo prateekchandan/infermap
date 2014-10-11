@@ -160,31 +160,22 @@ class ReviewController extends BaseController {
 			return View::make('review.main');
 	}
 
-	private function refer_friend($email)
-	{
-		if(!Auth::check()){return;}
-		$sender=Auth::user()->email;
-
-	}
-
 	public function feedback_save(){
-		if(Input::has('email1'))
-			if(Input::get('email1')!='')
-				$this->refer_friend(Input::get('email1'));
-
-		if(Input::has('email2'))
-			if(Input::get('email2')!='')
-				$this->refer_friend(Input::get('email2'));
-
-		if(Input::has('email3'))
-			if(Input::get('email3')!='')
-				$this->refer_friend(Input::get('email3'));
-
+		
 		if(Input::has('comment'))
-			if(Input::get('comment')!='')
-			{
-				$comment=Input::get('comment');
+		if(Input::get('comment')!='')
+		{
+			$comment=Input::get('comment');
+			$message="<h2>Feedback on college review by ".Auth::user()->name."</h2>";
+			$message.=$comment;
+			if(Request::server('SERVER_NAME')!='localhost'){
+				Mail::send('email.default',array('message'=>$message), function($message)
+				{
+					$message->from('noreply@infermap.com', 'Infermap');
+				    $message->to('infermap@gmail.com')->subject('Feedback about college review');
+				});
 			}
+		}
 
 		return Redirect::back();
 	}

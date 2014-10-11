@@ -14,14 +14,16 @@ class CollegeReview extends Eloquent{
 		$this->placement = Input::get('plac');
 		$this->package = Input::get('pack');
 		$this->intern = Input::get('intern');
-		$this->gross_fees = Input::get('gross-fees');
+		$this->scholarship_amount = Input::get('scholarship_amount');
 		$this->scholarship = Input::get('scholarship');
 		$this->mess_hostel = Input::get('mshs');
 		$this->hostel_rating = Input::get('hostel');
 		$this->mess_rating = Input::get('mess');
 		$this->sports_rating = Input::get('sports');
 		$this->co_currics_rating = Input::get('co-currics');
+		$this->ragging = Input::get('ragging');
 		$this->about_college = Input::get('about_college');
+		$this->review_title = Input::get('review_title');
 		$this->recommend = (Input::get('reco') == 'yes' ? 1 : (Input::get('reco') == 'no' ? 0 : null));
 		$this->review_type = Input::get('label');
 		$this->personal_dept = Input::get('personal-dept');

@@ -24,14 +24,16 @@ class CreateReviewsTable extends Migration {
 			$table->string('placement', 20)->nullable();
 			$table->string('package', 20)->nullable();
 			$table->string('intern', 20)->nullable();
-			$table->integer('gross_fees')->nullable();
+			$table->integer('scholarship_amount')->nullable();
 			$table->boolean('scholarship')->nullable();
 			$table->boolean('mess_hostel')->nullable();
 			$table->integer('hostel_rating')->nullable();
 			$table->integer('mess_rating')->nullable();
 			$table->integer('sports_rating')->nullable();
 			$table->integer('co_currics_rating')->nullable();
+			$table->integer('ragging')->nullable();
 			$table->string('about_college', 2000)->nullable();
+			$table->text('review_title')->nullable();
 			$table->string('review_type', 200)->nullable();
 			$table->boolean('recommend')->nullable();
 			$table->string('personal_year', 20);
