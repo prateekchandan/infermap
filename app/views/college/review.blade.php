@@ -385,11 +385,17 @@
                             <br>
                             <div class="form-group">
                                 <div class="row">
-                                    <label class="col-md-5">Uncheck if your college doesn’t provide Hostel facilities?</label>
+                                    <label class="col-md-5">Hostel facilities provided by college?</label>
                                     <div class="col-md-7">
-                                        <input type="checkbox" name="mshs" id="mshs" checked="checked" value="1">
-                                        <label for="mshs">Hostel provided by the college</label>
-                                        <br>
+                                        <div class="col-md-6">
+                                            <input type="radio" name="mshs" id="mshs" checked="checked" value="1">
+                                            Yes
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="radio" name="mshs" id="mshs"  value="0">
+                                            No
+                                        </div>
+                                        
                                     </div>
                                 </div>
                                 <br>

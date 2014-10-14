@@ -283,7 +283,7 @@ border-radius: 0px;
             </div>
             <!-- end: Icon Box-->
              <!-- start: Icon Box Start -->
-            <div class="col-sm-6 col-md-4">
+            <a class="col-sm-6 col-md-4" href="{{URL::route('blog')}}">
                 
                 <div class="icons-box vertical">
                     
@@ -302,7 +302,7 @@ border-radius: 0px;
 
                 </div>
                 
-            </div>
+            </a>
             <!-- end: Icon Box-->
 
         </div>

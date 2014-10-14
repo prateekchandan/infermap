@@ -345,6 +345,31 @@ class SearchController extends BaseController {
 			}
 		}
 
+		if($filters['exam']!=NULL){
+			$eid=DB::table('exam')->where('fullform','=',$filters['exam'])->get();
+			if(sizeof($eid)>0){
+				$maxscore+=$exam_weight;
+				$college_search=DB::table('college_entrance_test')
+					->join('college_id','college_id.cid','=','college_entrance_test.cid')
+					->where('college_id.disabled','=','1');
+				foreach ($eid as $key => $id) {
+					if($key==0)
+						$college_search=$college_search->where('college_entrance_test.name','=',$id->eid);
+					else
+						$college_search=$college_search->orWhere('college_entrance_test.name','=',$id->eid);
+				}	
+				$temp=$college_search->groupby(array('college_id.cid','college_id.name'))
+					->orderby('college_id.rank')
+					->get();
+				foreach ($temp as $key => $value) {
+					if(isset($college[$value->cid]))
+						$college[$value->cid]->score+=$exam_weight;
+					else
+						$college[$value->cid]->score=$exam_weight;
+				}
+			}
+		}
+
 		if($filters['dept']!=NULL){
 			$dept_name=DB::table('departments')->where('key','=',$filters['dept'])->first();
 			if($dept_name!=NULL){
@@ -352,7 +377,9 @@ class SearchController extends BaseController {
 				$temp=DB::table('college_department')->where($filters['dept'],'=','1')->get();
 				foreach ($temp as $key => $value) {
 					if(isset($college[$value->cid]))
-					$college[$value->cid]->score+=$department_weigth;
+						$college[$value->cid]->score+=$department_weigth;
+					else
+						$college[$value->cid]->score=$department_weigth;
 				}
 			}
 		}

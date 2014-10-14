@@ -38,7 +38,7 @@
 									{{$p->content}}
 								</p>
 							</div>
-							<div class="post-meta"><span><i class="fa fa-calendar"></i>{{$p->date}}</span> <span><i class="fa fa-user"></i>By <a href="">{{$p->name}}</a></span> <span><i class="fa fa-comments"></i>With <a href="">89 comments</a></span></div>
+							<div class="post-meta"><span><i class="fa fa-calendar"></i>{{$p->date}}</span> <span><i class="fa fa-user"></i>By <a href="">{{$p->name}}</a></span></div>
 						</div>
 					</div>
 					<!-- end: Post -->

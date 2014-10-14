@@ -28,6 +28,7 @@ class BlogController extends BaseController {
 		$all=DB::table('blog_list')
 				->orderBy('blog_list.created_at', 'desc')
 				->join('users', 'users.id', '=', 'blog_list.user_id')
+				->select('user_id','name','blog_id','user_id','Title','link','content','img','blog_list.created_at','blog_list.updated_at')
 				->skip($page*5)->take(5)->get();
 		foreach ($all as $key => $value) {
 			$value->date=date('j M Y',strtotime($value->created_at));
@@ -52,6 +53,7 @@ class BlogController extends BaseController {
 		$value=DB::table('blog_list')
 				->join('users', 'users.id', '=', 'blog_list.user_id')
 				->where('blog_list.link','=',$link)
+				->select('user_id','name','blog_id','user_id','Title','link','content','img','blog_list.created_at','blog_list.updated_at')
 				->first();
 	
 		$value->date=date('j M Y',strtotime($value->created_at));
