@@ -374,7 +374,7 @@ input[type='range']::-moz-range-thumb {
                             <div class="form-group row">
                                 <label class="col-md-5" for="reco">Would you recommend college to friends over similar colleges</label>
                                 <div class="col-md-7">
-                                    <div class="col-md-6">
+                                    <div classe="col-md-6">
                                         <input type="radio" name="reco" value="yes" id="reco-yes">
                                         <label for="reco-yes">Yes</label>
                                     </div>
@@ -387,7 +387,7 @@ input[type='range']::-moz-range-thumb {
 
                         </div>
                     </div>
-                    
+
                     <div class="media">
                         <div class="media-body">
 

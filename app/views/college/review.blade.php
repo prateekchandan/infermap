@@ -182,6 +182,45 @@
         line-height: 25px;
         margin-left: 10px;
     }
+    .simple_with_animation{
+        border: 1px solid rgb(219, 203, 203);
+        min-height: 100px;
+    }
+    .simple_with_animation li{
+        padding:8px;
+        margin: 4px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        cursor: pointer;
+        box-shadow: 0px 0px 5px #eee;
+    }
+    .simple_with_animation label{
+        margin: 10px;
+        margin-top: 30px;
+    }
+    body.dragging, body.dragging * {
+      cursor: move !important;
+    }
+    .dragged {
+      position: absolute;
+      opacity: 0.5;
+      z-index: 2000;
+    }
+
+    li.placeholder {
+      position: relative;
+      padding: 0px;
+      border: 0px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      /** More li styles **/
+    }
+    li.placeholder:before {
+      position: absolute;
+      /** Define arrowhead **/
+    }
+
+
 </style>
 <div id="primary" class="content-area">
     <div id="content" class="site-content" role="main">
@@ -314,32 +353,24 @@
                             <br>
                             <input type="hidden" name="college_depts" id="college_depts" value='{}'>
                             <label>Rank the departments based on your experience of how good they are overall: </label>
-                            <label>The best department to be ranked 1</label>
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Sl No.</th>
-                                        <th>Department</th>
-                                        @foreach($review_depts as $r => $dept_rate)
-                                        <th>{{$r+1}}</th>
+                            <label>To rank them : </label>
+                            <div class="col-md-12">
+                                <div class="col-md-6">
+                                    <label>Drag from here</label>
+                                    <ul class="simple_with_animation" id="dept-initial">
+                                        <label style="display:none">Hurray! You have ranked all departments</label>
+                                        @foreach($review_depts as $key => $dept)
+                                            <li data-val="{{$dept->did}}">{{{$dept->department}}}</li>
                                         @endforeach
-                                    </tr>
-
-                                </thead>
-                                @foreach($review_depts as $key => $dept)
-                                <tr>
-                                    <td>{{$key+1}}</td>
-                                    <td>{{{$dept->department}}}</td>
-                                    @foreach($review_depts as $r => $dept_rate)
-                                    <td>
-                                        <input class="rate-radio" type="radio" data-waschecked="false" name="{{$dept->did}}" id="{{$dept->did}}-{{$r+1}}" value="{{$r+1}}">
-                                        <label for="{{$dept->did}}-{{$r+1}}"></label>
-                                    </td>
-                                    @endforeach
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </table>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>And drop here</label>
+                                    <ul class="simple_with_animation" id="dept-final">
+                                        <label>Drag and drop departments here</label>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     @endif
@@ -591,7 +622,63 @@
     </div>
 </div>
 
-<script src="{{ URL::asset('assets/js/jquery-1.9.1.min.js') }}"></script>
+<script src="{{ URL::asset('assets/js/jquery-sortable-min.js') }}"></script>
+<script type="text/javascript">
+    // Animation for sorting
+    var adjustment;
+
+    function toggle_dept_label(){
+        if($('#dept-final li').length>0)
+            $('#dept-final>label').css('display','none');
+        else
+            $('#dept-final>label').css('display','block');
+
+        if($('#dept-initial li').length>0)
+            $('#dept-initial>label').css('display','none');
+        else
+            $('#dept-initial>label').css('display','block');
+
+    }
+
+    $(".simple_with_animation").sortable({
+      group: 'simple_with_animation',
+      pullPlaceholder: false,
+      // animation on drop
+      onDrop: function  (item, targetContainer, _super) {
+        var clonedItem = $('<li/>').css({height: 0})
+        item.before(clonedItem)
+        clonedItem.animate({'height': item.height()})
+        
+        item.animate(clonedItem.position(), function  () {
+          clonedItem.detach()
+          _super(item)
+        })
+        toggle_dept_label();
+      },
+
+      // set item relative to cursor position
+      onDragStart: function ($item, container, _super) {
+        var offset = $item.offset(),
+        pointer = container.rootGroup.pointer
+
+        adjustment = {
+          left: pointer.left - offset.left,
+          top: pointer.top - offset.top
+        }
+
+        _super($item, container)
+
+        toggle_dept_label();
+      },
+      onDrag: function ($item, position) {
+        $item.css({
+          left: position.left - adjustment.left,
+          top: position.top - adjustment.top
+        })
+        toggle_dept_label();    
+      }
+    })
+</script>
 <script>
     var colors = ['#9f1923', '#CB202D', '#DE1D0F', '#FF7800', '#FFBA00', '#EDD614', '#9ACD32', '#5BA829', '#3F7E00', '#305D02']
     $('.rating').each(function(index) {
@@ -681,13 +768,12 @@
     })
     function validate(){
         var s={};
-        @foreach($review_depts as $key => $row)
-            var name={{$row->did}};
-            if($('[name='+name+']:checked').val()!==undefined){
-                var val=$('[name='+name+']:checked').val();
-                s[name]=val;
-            }
-        @endforeach
+        var rank=0;
+        $('#dept-final').find('li').each(function(){
+            var did = $(this).attr('data-val');
+            rank+=1;
+            s[did]=rank;
+        });
         $('#college_depts').val(JSON.stringify(s));
         return true;
     }
