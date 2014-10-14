@@ -107,7 +107,7 @@
 					            	</div>
 					            </li>
 					            <li>
-					            	<a href="#" class="side-filter" id="exam-search" data-search="exam">
+					            	<a href="#" class="side-filter {{$filters['exam-search']=='true'?'side-active':''}}" id="exam-search" data-search="exam">
 					            		Exam Search
 					            		<span class="pull-right">
 					            			<i class="fa fa-caret-right"></i>
@@ -119,7 +119,12 @@
 					            			<select class="form-control" id="exam-name" name="exam-name">
 					            				<option value=''>Select Exam</option>
 					            				@foreach(DB::select('select distinct fullform from exam where eid!=0') as $exam )
-					            					<option>{{$exam->fullform}}</option>
+					            					@if($filters['exam']==$exam->fullform)
+					            						<option  selected="selected">{{$exam->fullform}}</option>
+					            					@else
+					            						<option>{{$exam->fullform}}</option>
+					            					@endif
+
 					            				@endforeach
 					            			</select>
 					            		</div>

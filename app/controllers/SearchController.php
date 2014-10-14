@@ -4,6 +4,8 @@ class SearchController extends BaseController {
 
 	protected $pattern = '/[:,.-_ ()]/';
 
+	public $filter_query_inputs=array('state'=>'state','city'=>'city','exam'=>'exam-name','rank'=>'exam-rank','category'=>'exam-category','dept'=>'department','dept-search'=>"false",'location-search'=>"false",'exam-search'=>'false');
+
 	private function cleanStr($str)
 	{
 		$str=strtolower($str);
@@ -246,6 +248,9 @@ class SearchController extends BaseController {
 		if(!isset($input['searchvalue'])){
 			return $this->nocollege();
 		}
+		$this->filter_query_inputs['exam-search']="true";
+		$this->filter_query_inputs['exam']=$input['searchvalue'];
+
 		$exam=$input['searchvalue'];
 		
 		$eid=DB::table('exam')->where(DB::raw("concat(fullform,' (',name,')')"),'=',$exam)->get();
@@ -348,6 +353,8 @@ class SearchController extends BaseController {
 		if($filters['exam']!=NULL){
 			$eid=DB::table('exam')->where('fullform','=',$filters['exam'])->get();
 			if(sizeof($eid)>0){
+				$this->filter_query_inputs['exam-search']="true";
+				$this->filter_query_inputs['exam']=$filters['exam'];
 				$maxscore+=$exam_weight;
 				$college_search=DB::table('college_entrance_test')
 					->join('college_id','college_id.cid','=','college_entrance_test.cid')
@@ -364,8 +371,7 @@ class SearchController extends BaseController {
 				foreach ($temp as $key => $value) {
 					if(isset($college[$value->cid]))
 						$college[$value->cid]->score+=$exam_weight;
-					else
-						$college[$value->cid]->score=$exam_weight;
+					
 				}
 			}
 		}
@@ -378,8 +384,7 @@ class SearchController extends BaseController {
 				foreach ($temp as $key => $value) {
 					if(isset($college[$value->cid]))
 						$college[$value->cid]->score+=$department_weigth;
-					else
-						$college[$value->cid]->score=$department_weigth;
+					
 				}
 			}
 		}
@@ -486,6 +491,7 @@ class SearchController extends BaseController {
 		foreach(DB::select('select * from category') as $key => $cat ) {
 				$categories[$cat->id]=$cat->name;
 		}
+		View::share('filters',$this->filter_query_inputs);
 		View::share('cities',json_encode($states));
 		View::share('exam_categories',json_encode($exam_categories));
 		View::share('categories',json_encode($categories));
