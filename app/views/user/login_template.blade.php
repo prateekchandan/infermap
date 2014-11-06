@@ -1,9 +1,13 @@
 <div id="fb-root" style="position:absolute;top:-10000px"></div>
+{{--
 <meta name="google-signin-clientid" content="235925819824-h4s0il6tu6pq4rlnonjiit4dt1ucjt6u.apps.googleusercontent.com" />
 <meta name="google-signin-scope" content="https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/plus.profile.emails.read https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile" />
 <meta name="google-signin-requestvisibleactions" content="http://schema.org/AddAction" />
 <meta name="google-signin-cookiepolicy" content="single_host_origin" />
 <meta name="google-signin-callback" content="signinCallback" />
+--}}
+
+{{--
 <script type="text/javascript">
 
 (function() {
@@ -59,6 +63,7 @@ function signinCallback(authResult) {
 	}
 
 </script>
+--}}
 <script>
     window.fbAsyncInit = function() {
         FB.init({
@@ -120,14 +125,15 @@ function signinCallback(authResult) {
                 <div style="cursor:pointer" class="facebook_connect" onClick="fblogin();">
                     <div class="img"><i class="fa fa-facebook"></i>
                     </div>
-                    <div class="text">Connect with Facebook</div>
+                    <div class="text">Login with Facebook</div>
                 </div>
+                {{--
 	            <div id="google-plus-button" style="cursor:pointer" class="gplus_connect" onclick="google_login()">
 	                <div class="img"><i class="fa fa-google-plus"></i>
 	                </div>
 	                <div class="text">Signin with Google Plus</div>
 	            </div>
-              
+                --}}
 
                 <div class="page-title-small">
                     <hr class="thin-hr">

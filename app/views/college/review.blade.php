@@ -3,11 +3,19 @@
 @section ('college-content')
 
 @if($errors->has('feedback'))
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&appId=495182610616528&version=v2.0";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
     <br>
     <div class="alert alert-success alert-dismissable" style="" role="alert">
         <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <h3>THANK YOU</h3>
-        <h4>The review is greatly appreciated</h4>
+        <h3>The review is greatly appreciated. You will be recieving your coupon shortly on your email id "{{Auth::user()->email}}"</h3>
     </div>
     <form  method="post" action="{{ URL::route('review.feedback.save') }}">
     
@@ -20,7 +28,14 @@
         <a href="{{$errors->first('link')}}">{{$errors->first('link')}}</a>
         <br>
     </blockquote>
-        <center><b>Or share via social media</b></center>
+    <center>
+        <b>We are Bringing Lots of Cool Stuffs! <br>Like us On Facebook to keep getting regular updates</b>
+        <br>
+        <br>
+        <div class="fb-like-box" data-href="https://www.facebook.com/infermap" data-colorscheme="light" data-show-faces="true" data-header="false" data-stream="false" data-show-border="true"></div>
+        <br>
+        <b>Or share via social media</b>
+    </center>
         <br>
         <div class="col-md-10 col-md-offset-1">
         
@@ -40,24 +55,7 @@
         </div>
     </div>
     </div>
-    <!--div class="col-md-10 col-md-offset-1">
-        <br>
-        <div class="row">
-            <div class="form-group">
-                <label>Friend 1</label>
-                <input type="email" id="email1" name="email1" class="form-control" placeholder="email address">
-            </div>
-            <div class="form-group">
-                <label>Friend 2</label>
-                <input type="email" id="email2" name="email2" class="form-control"  placeholder="email address">
-            </div>
-            <div class="form-group">
-                <label>Friend 3</label>
-                <input type="email" id="email3" name="email3" class="form-control" placeholder="email address">
-            </div>
-
-        </div>
-    </div-->
+    
 
     <div class="col-md-10 col-md-offset-1">
     <br>
@@ -95,11 +93,21 @@
         background-color: white;
         padding: 3%;
         box-shadow: 1px 1px 2px rgba(0, 0, 0, .08);
+        display: none;
+    }
+    .media-active{
+        display: block;
     }
     .media-heading {
         text-align: center;
         color: white;
         line-height: 40px;
+        margin: 1px;
+        margin-bottom: 15px;
+        cursor: pointer;
+    }
+    .media-heading.col-xs-1{
+        width: 7.5%;
     }
     #our-story {
         text-align: center;
@@ -219,6 +227,9 @@
       position: absolute;
       /** Define arrowhead **/
     }
+    .next-btn{
+        float: right;
+    }
 
 
 </style>
@@ -232,7 +243,7 @@
                     @endif
                     <input type="hidden" name="college_id" value="{{$data['cid']}}">
                     @if(isset($prev_msg))
-                    <div class="media"> 
+                    <div class="media media-active"> 
                         <div class="media-body">
                             <blockquote>
                                 <h3>
@@ -244,12 +255,26 @@
                     @endif
 
                     <!-- ACADEMICS -->
-                    <div class="media"> 
-                        <div class="media-body">
-                            <h3 class="media-heading" style="background-color:#358EFB;">
-                                Academics
-                            </h3>
+                    <div class="media media-active" id="acad-media"> 
+                        <div class="media-body">   
+                            <div class="row">
+                                <h3 class="col-xs-6 media-heading acad-head" style="background-color:#358EFB;">
+                                    Academics
+                                </h3>
+                                <h3 class="col-xs-1 media-heading placement-head" style="background-color:#1ABC9C;"> &nbsp;</h3>
+                                <h3 class="col-xs-1 media-heading fee-head" style="background-color:rgb(248,208,47)"> &nbsp;</h3>
+                                <h3 class="col-xs-1 media-heading course-head" style="background-color:#53C054"> &nbsp;</h3>
+                                <h3 class="col-xs-1 media-heading campus-head" style="background-color:#E74C3C"> &nbsp;</h3>
+                                <h3 class="col-xs-1 media-heading review-head" style="background-color:#9B59B6"> &nbsp;</h3>
+                                <h3 class="col-xs-1 media-heading user-head" style="background-color:#34495E"> &nbsp;</h3>
+                            </div>
                             <br>
+
+                            <div class="alert alert-error alert-dismissable" id="acad-error" style="display:none" role="alert">
+                                <button type="button" class="close" onclick="$(this).parent().css('display','none')"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <div id="acad-error-msg"></div>
+                            </div>
+                            
                             <div class="form-group row">
                                 <label class="col-md-5" for="sports">How good are your faculty members ?</label>
                                 <div class="rating col-md-7" data-id="fac_teaching" data-max="5" data-descript="Very Dissatisfied#Dissatisfied#Neutral#Satisfied#Very Satisfied"></div>
@@ -258,69 +283,61 @@
                                 <label class="col-md-5" for="sports">How much your department focus on research and practical work?</label>
                                 <div class="rating col-md-7" data-id="research_work" data-max="5" data-descript="Low#Neutral#Good#High#Very High"></div>
                             </div>
+                            <button class="btn btn-primary next-btn" type="button" onclick="media_goto('placement')">Next &gt;</button>
                         </div>
                     </div>
                    
                     <!-- PLACEMENT -->
-                    <div class="media">
+                    <div class="media" id="placement-media">
                         <div class="media-body">
-                            <h3 class="media-heading" style="background-color:#1ABC9C">
-					            Placements
-					          </h3>
+                            <div class="row">
+                                <h3 class=" col-xs-1 media-heading acad-head" style="background-color:#358EFB;">&nbsp; </h3>
+                                <h3 class="col-xs-6 media-heading placement-head" style="background-color:#1ABC9C;"> Placements</h3>
+                                <h3 class="col-xs-1 media-heading fee-head" style="background-color:rgb(248,208,47)"> &nbsp;</h3>
+                                <h3 class="col-xs-1 media-heading course-head" style="background-color:#53C054"> &nbsp;</h3>
+                                <h3 class="col-xs-1 media-heading campus-head" style="background-color:#E74C3C"> &nbsp;</h3>
+                                <h3 class="col-xs-1 media-heading review-head" style="background-color:#9B59B6"> &nbsp;</h3>
+                                <h3 class="col-xs-1 media-heading user-head" style="background-color:#34495E"> &nbsp;</h3>
+                            </div>
                             <br>
+                            <div class="alert alert-error alert-dismissable" id="placement-error" style="display:none" role="alert">
+                                <button type="button" class="close" onclick="$(this).parent().css('display','none')"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <div id="placement-error-msg"></div>
+                            </div>
                             <div class="form-group row">
                                 <label class="col-md-5" for="plac">Approximate percentage (%) of students who get placed every year</label>
-                                <div class="col-md-7">
-                                    <select name="plac" class="form-control" id="pack">
-                                        <option value="">Select</option>
-                                        <option value="0-30">0-30</option>
-                                        <option value="30-50">30-50</option>
-                                        <option value="50-60">50-60</option>
-                                        <option value="60-70">60-70</option>
-                                        <option value="70-80">70-80</option>
-                                        <option value="80-100">80-100</option>
-                                    </select>
-                                </div>
+                                <div class="rating col-md-7" data-id="plac" data-max="6" data-descript="0% - 30%#30% - 50%#50% - 50%#60% - 70%#70% - 80%#80% - 100%"></div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-5" for="pack">Average Package offered (In Lacs per anum)</label>
-                                <div class="col-md-7">
-                                    <select name="pack" class="form-control" id="pack">
-                                        <option value="">Select</option>
-                                        <option value="0-3">0-3</option>
-                                        <option value="3-4">3-4</option>
-                                        <option value="4-5">4-5</option>
-                                        <option value="5-7">5-7</option>
-                                        <option value="7-9">7-9</option>
-                                        <option value="9+">9+</option>
-                                    </select>
-                                </div>
+                                <div class="rating col-md-7" data-id="pack" data-max="6" data-descript="0-3#3-4#4-5#5-7#7-9#9+"></div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-5" for="intern">Avg. % of 3rd year students securing internship/training</label>
-                                <div class="col-md-7">
-                                    <select name="intern" class="form-control" id="intern">
-                                        <option value="select">Select</option>
-                                        <option value="0-30">0-30</option>
-                                        <option value="30-50">30-50</option>
-                                        <option value="50-60">50-60</option>
-                                        <option value="60-70">60-70</option>
-                                        <option value="70-80">70-80</option>
-                                        <option value="80-100">80-100</option>
-                                    </select>
-                                </div>
+                                <div class="rating col-md-7" data-id="intern" data-max="6" data-descript="0% - 30%#30% - 50%#50% - 50%#60% - 70%#70% - 80%#80% - 100%"></div>
                             </div>
+                            <button class="btn btn-primary prev-btn" type="button" onclick="media_goto('acad')">&lt; Previous</button>
+                            <button class="btn btn-primary next-btn" type="button" onclick="media_goto('fee')">Next &gt;</button>
                         </div>
                     </div>
 
                     <!-- FEES -->
-                    <div class="media"> 
+                    <div class="media" id="fee-media"> 
                         <div class="media-body">
-                            <h3 class="media-heading" style="background-color:rgb(248,208,47)">
-					            Fees
-					          </h3>
+                            <div class="row">
+                                <h3 class=" col-xs-1 media-heading acad-head" style="background-color:#358EFB;">&nbsp; </h3>
+                                <h3 class="col-xs-1 media-heading placement-head" style="background-color:#1ABC9C;">&nbsp;</h3>
+                                <h3 class="col-xs-6 media-heading fee-head" style="background-color:rgb(248,208,47)"> Fees </h3>
+                                <h3 class="col-xs-1 media-heading course-head" style="background-color:#53C054"> &nbsp;</h3>
+                                <h3 class="col-xs-1 media-heading campus-head" style="background-color:#E74C3C"> &nbsp;</h3>
+                                <h3 class="col-xs-1 media-heading review-head" style="background-color:#9B59B6"> &nbsp;</h3>
+                                <h3 class="col-xs-1 media-heading user-head" style="background-color:#34495E"> &nbsp;</h3>
+                            </div>
                             <br>
-                           
+                            <div class="alert alert-error alert-dismissable" id="fee-error" style="display:none" role="alert">
+                                <button type="button" class="close" onclick="$(this).parent().css('display','none')"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <div id="fee-error-msg"></div>
+                            </div>
                             <div class="form-group row">
                                 <label class="col-md-5">Scholarships provided by college?</label>
                                 <div class="col-md-7">
@@ -340,59 +357,88 @@
                                     <input type="number" id="scholarship-amnt" name="scholarship-amount" class="form-control">
                                 </div>
                             </div>
+                            <button class="btn btn-primary prev-btn" type="button" onclick="media_goto('placement')">&lt; Previous</button>
+                            <button class="btn btn-primary next-btn" type="button" onclick="media_goto('course')">Next &gt;</button>
                         </div>
                     </div>
 
                     <!-- COURSES -->
-                    @if(sizeof($review_depts)>0)
-                    <div class="media"> 
+                    
+                    <div class="media" id="course-media"> 
                         <div class="media-body">
-                            <h3 class="media-heading" style="background-color:rgb(246, 41, 205);">
-                                Courses
-                              </h3>
+                            <div class="row">
+                                <h3 class=" col-xs-1 media-heading acad-head" style="background-color:#358EFB;">&nbsp; </h3>
+                                <h3 class="col-xs-1 media-heading placement-head" style="background-color:#1ABC9C;">&nbsp;</h3>
+                                <h3 class="col-xs-1 media-heading fee-head" style="background-color:rgb(248,208,47)"> &nbsp;</h3>
+                                <h3 class="col-xs-6 media-heading course-head" style="background-color:#53C054">Courses</h3>
+                                <h3 class="col-xs-1 media-heading campus-head" style="background-color:#E74C3C"> &nbsp;</h3>
+                                <h3 class="col-xs-1 media-heading review-head" style="background-color:#9B59B6"> &nbsp;</h3>
+                                <h3 class="col-xs-1 media-heading user-head" style="background-color:#34495E"> &nbsp;</h3>
+                            </div>
                             <br>
+                            <div class="alert alert-error alert-dismissable" id="course-error" style="display:none" role="alert">
+                                <button type="button" class="close" onclick="$(this).parent().css('display','none')"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <div id="course-error-msg"></div>
+                            </div>
+                            @if(sizeof($review_depts)>0)
                             <input type="hidden" name="college_depts" id="college_depts" value='{}'>
-                            <label>Rank the departments based on your experience of how good they are overall: </label>
-                            <label>To rank them : </label>
-                            <div class="col-md-12">
-                                <div class="col-md-6">
-                                    <label>Drag from here</label>
-                                    <ul class="simple_with_animation" id="dept-initial">
-                                        <label style="display:none">Hurray! You have ranked all departments</label>
-                                        @foreach($review_depts as $key => $dept)
-                                            <li data-val="{{$dept->did}}">{{{$dept->department}}}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                                <div class="col-md-6">
-                                    <label>And drop here</label>
-                                    <ul class="simple_with_animation" id="dept-final">
-                                        <label>Drag and drop departments here</label>
-                                    </ul>
+                            <div class="form-group">
+                                <label>Rank the departments based on your experience of how good they are overall: </label>
+                                <label>To rank them : </label>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="col-md-6">
+                                            <label>Drag from here</label>
+                                            <ul class="simple_with_animation" id="dept-initial">
+                                                <label style="display:none">Hurray! You have ranked all departments</label>
+                                                @foreach($review_depts as $key => $dept)
+                                                    <li data-val="{{$dept->did}}">{{{$dept->department}}}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>And drop here</label>
+                                            <ul class="simple_with_animation" id="dept-final">
+                                                <label>Drag and drop departments here</label>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+                             @endif
+                            <button class="btn btn-primary prev-btn" type="button" onclick="media_goto('fee')">&lt; Previous</button>
+                            <button class="btn btn-primary next-btn" type="button" onclick="media_goto('campus')">Next &gt;</button>
                         </div>
                     </div>
-                    @endif
+                   
 
                     <!-- FACILITIES AND CAMPUS LIFE -->
-                    <div class="media">
+                    <div class="media" id="campus-media">
                         <div class="media-body">
-
-                            <h3 class="media-heading" style="background-color:#E74C3C">
-					            Facilities &amp;  Campus Life
-					          </h3>
+                            <div class="row">
+                                <h3 class=" col-xs-1 media-heading acad-head" style="background-color:#358EFB;">&nbsp; </h3>
+                                <h3 class="col-xs-1 media-heading placement-head" style="background-color:#1ABC9C;">&nbsp;</h3>
+                                <h3 class="col-xs-1 media-heading fee-head" style="background-color:rgb(248,208,47)"> &nbsp;</h3>
+                                <h3 class="col-xs-1 media-heading course-head" style="background-color:#53C054"> &nbsp;</h3>
+                                <h3 class="col-xs-6 media-heading campus-head" style="background-color:#E74C3C"> Facilities &amp;  Campus Life</h3>
+                                <h3 class="col-xs-1 media-heading review-head" style="background-color:#9B59B6"> &nbsp;</h3>
+                                <h3 class="col-xs-1 media-heading user-head" style="background-color:#34495E"> &nbsp;</h3>
+                            </div>
                             <br>
+                            <div class="alert alert-error alert-dismissable" id="campus-error" style="display:none" role="alert">
+                                <button type="button" class="close" onclick="$(this).parent().css('display','none')"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <div id="campus-error-msg"></div>
+                            </div>
                             <div class="form-group">
                                 <div class="row">
                                     <label class="col-md-5">Hostel facilities provided by college?</label>
                                     <div class="col-md-7">
                                         <div class="col-md-6">
-                                            <input type="radio" name="mshs" id="mshs" checked="checked" value="1">
+                                            <input type="radio" name="mshs" id="mshs" class="mshs" checked="checked" value="1">
                                             Yes
                                         </div>
                                         <div class="col-md-6">
-                                            <input type="radio" name="mshs" id="mshs"  value="0">
+                                            <input type="radio" name="mshs" id="mshs"   class="mshs" value="0">
                                             No
                                         </div>
                                         
@@ -427,22 +473,32 @@
                                 <label class="col-md-5" for="ragging">Ragging Practiced in College?</label>
                                 <div class="rating col-md-7" data-id="ragging" data-max="5"  data-descript="Unbearable Ragging#Acceptable tasks are given#Just for Introduction#Very few Cases#Not at all"></div>
                             </div>
+                            <button class="btn btn-primary prev-btn" type="button" onclick="media_goto('course')">&lt; Previous</button>
+                            <button class="btn btn-primary next-btn" type="button" onclick="media_goto('review')">Next &gt;</button>
                         </div>
                     </div>
 
                     <!-- REVIEW -->
-                    <div class="media">
+                    <div class="media" id="review-media">
                         <div class="media-body">
-
-                            <h3 class="media-heading" style="background-color:#9B59B6">
-                                Overall College Review
-                			</h3>
+                            <div class="row">
+                                <h3 class=" col-xs-1 media-heading acad-head" style="background-color:#358EFB;">&nbsp; </h3>
+                                <h3 class="col-xs-1 media-heading placement-head" style="background-color:#1ABC9C;">&nbsp;</h3>
+                                <h3 class="col-xs-1 media-heading fee-head" style="background-color:rgb(248,208,47)"> &nbsp;</h3>
+                                <h3 class="col-xs-1 media-heading course-head" style="background-color:#53C054"> &nbsp;</h3>
+                                <h3 class="col-xs-1 media-heading campus-head" style="background-color:#E74C3C">&nbsp;</h3>
+                                <h3 class="col-xs-6 media-heading review-head" style="background-color:#9B59B6"> Overall College Review</h3>
+                                <h3 class="col-xs-1 media-heading user-head" style="background-color:#34495E"> &nbsp;</h3>
+                            </div>
                             <br>
-
+                            <div class="alert alert-error alert-dismissable" id="review-error" style="display:none" role="alert">
+                                <button type="button" class="close" onclick="$(this).parent().css('display','none')"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <div id="review-error-msg"></div>
+                            </div>
                            <div class="form-group row">
                                 <label class="col-md-12" for="ragging">Title</label>
                                 <div class="col-md-12">
-                                    <input class="form-control" name="review_title">
+                                    <input class="form-control" id="review_title" name="review_title">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -454,30 +510,13 @@
                             </div>
                              <div class="form-group row">
                                 <label class="col-md-3" for="label">Type of review</label>
-                                <div class="col-md-9">
-                                    <div class="col-md-3">
-                                        <input type="radio" name="label" value="Good" id="label-good">
-                                        <label for="label-good">Good</label>
-                                    </div>
-                                     <div class="col-md-3">
-                                        <input type="radio" name="label" value="Neutral" id="label-neutral">
-                                        <label for="label-neutral">Neutral</label>
-                                    </div>
-                                     <div class="col-md-3">
-                                        <input type="radio" name="label" value="Bad" id="label-bad">
-                                        <label for="label-bad">Bad</label>
-                                    </div>
-                                     <div class="col-md-3">
-                                        <input type="radio" name="label" value="Advice" id="label-advice">
-                                        <label for="label-advice">Advice</label>
-                                    </div>
-                                </div>
+                                <div class="rating col-md-9" data-id="label" data-max="5" data-descript="Bad#Neutral#Advice#Good#Very Good"></div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-5" for="reco">Would you recommend college to friends over similar colleges</label>
                                 <div class="col-md-7">
                                     <div class="col-md-6">
-                                        <input type="radio" name="reco" value="yes" id="reco-yes">
+                                        <input type="radio" name="reco" value="yes" checked="checked" id="reco-yes">
                                         <label for="reco-yes">Yes</label>
                                     </div>
                                     <div class="col-md-6">
@@ -486,17 +525,27 @@
                                     </div>
                                 </div>
                             </div>
-
+                            <button class="btn btn-primary prev-btn" type="button" onclick="media_goto('campus')">&lt; Previous</button>
+                            <button class="btn btn-primary next-btn" type="button" onclick="media_goto('user')">Next &gt;</button>
                         </div>
                     </div>
 
                     <!-- Tell Us About Yourself -->
-                    <div class="media">
+                    <div class="media" id="user-media">
                         <div class="media-body">
-
-                            <h3 class="media-heading" style="background-color:#34495E">
-							  Tell us about yourself
-							</h3>
+                            <div class="row">
+                                <h3 class=" col-xs-1 media-heading acad-head" style="background-color:#358EFB;">&nbsp; </h3>
+                                <h3 class="col-xs-1 media-heading placement-head" style="background-color:#1ABC9C;">&nbsp;</h3>
+                                <h3 class="col-xs-1 media-heading fee-head" style="background-color:rgb(248,208,47)"> &nbsp;</h3>
+                                <h3 class="col-xs-1 media-heading course-head" style="background-color:#53C054"> &nbsp;</h3>
+                                <h3 class="col-xs-1 media-heading campus-head" style="background-color:#E74C3C">&nbsp;</h3>
+                                <h3 class="col-xs-1 media-heading review-head" style="background-color:#9B59B6">&nbsp;</h3>
+                                <h3 class="col-xs-6 media-heading user-head" style="background-color:#34495E"> Tell us about yourself</h3>
+                            </div>
+                            <div class="alert alert-error alert-dismissable" id="user-error" style="display:none" role="alert">
+                                <button type="button" class="close" onclick="$(this).parent().css('display','none')"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <div id="user-error-msg"></div>
+                            </div>
                             <br>
                             <div class="form-group row">
                                 <label class="col-md-5" for="personal-year">Year of Graduation</label>
@@ -618,17 +667,18 @@
                                 <label for="anonymous">Include my credentials with this review</label>
                                 <br>
                             </div>
-                            <button class="btn btn-primary">Submit</button>
-
+                            <button class="btn btn-primary prev-btn" type="button" onclick="media_goto('review')">&lt; Previous</button>
+                            <button class="btn btn-primary next-btn">Submit</button>
+                        </div>
+                    </div>
                 </form>
-                </div>
-                </div>
             </div>
         </div>
     </div>
 </div>
 
 <script src="{{ URL::asset('assets/js/jquery-sortable-min.js') }}"></script>
+{{-- Script for Drag and Drop--}}
 <script type="text/javascript">
     // Animation for sorting
     var adjustment;
@@ -684,7 +734,12 @@
         toggle_dept_label();    
       }
     })
+    $(".simple_with_animation li").click(function(){
+       var cur=$(this).parent().attr('id');
+       console.log(cur);
+    })
 </script>
+{{-- Script for Ratings--}}
 <script>
     var colors = ['#9f1923', '#CB202D', '#DE1D0F', '#FF7800', '#FFBA00', '#EDD614', '#9ACD32', '#5BA829', '#3F7E00', '#305D02']
     $('.rating').each(function(index) {
@@ -736,8 +791,11 @@
         });
     });
 
-    $('#mshs').change(function() {
-        $('.hostel-row').toggle();
+    $('.mshs').click(function(){
+        if($('#mshs:checked').val()=="1")
+            $('.hostel-row').css('display','block');
+        else
+            $('.hostel-row').css('display','none');
     })
     $('.rate-radio').click(function(){
         if ($(this).data('waschecked') == true)
@@ -771,8 +829,53 @@
                 };
             }
         @endforeach
-    })
+    }) 
+</script>
+{{-- Script for Review validate--}}
+<script type="text/javascript">
+    var blocks=['acad','placement','fee','course','campus','review','user'];
+    var cur_block="acad";
     function validate(){
+        if(!validate_acad()){
+             $('#user-error').css('display','block');
+            $('#user-error-msg').html('Error : Not Completed Academics Review');
+            return false;
+        }
+        if(!validate_placement()){
+             $('#user-error').css('display','block');
+            $('#user-error-msg').html('Error : Not Completed Placement Review');
+            return false;
+        }
+        if(!validate_fees()){
+             $('#user-error').css('display','block');
+            $('#user-error-msg').html('Error : Not Completed Fees Review');
+            return false;
+        }
+        if(!validate_acad()){
+             $('#user-error').css('display','block');
+            $('#user-error-msg').html('Error : Not Completed Academics Review');
+            return false;
+        }
+        if(!validate_course()){
+             $('#user-error').css('display','block');
+            $('#user-error-msg').html('Error : Not Completed Courses Review');
+            return false;
+        }
+        if(!validate_campus()){
+             $('#user-error').css('display','block');
+            $('#user-error-msg').html('Error : Not Completed College Facilities Review');
+            return false;
+        }
+        if(!validate_review()){
+             $('#user-error').css('display','block');
+            $('#user-error-msg').html('Error : Not Completed OverAll Review');
+            return false;
+        }
+        if(!validate_user()){
+             $('#user-error').css('display','block');
+            $('#user-error-msg').html('Error : Please tell us about Yourself');
+            return false;
+        }
         var s={};
         var rank=0;
         $('#dept-final').find('li').each(function(){
@@ -781,8 +884,190 @@
             s[did]=rank;
         });
         $('#college_depts').val(JSON.stringify(s));
+
+        return validation[cur_block]();
+    }
+    $(document).ready(function(){
+        for (var i = blocks.length - 1; i >= 0; i--) {
+            $("."+blocks[i]+"-head").click(function(){
+                if(validation[cur_block]()){
+                    var cur=$(this).attr('class').trim().split(" ")[2].split("-")[0];
+                    $("#"+cur_block+"-media").removeClass('media-active');
+                    $("#"+cur+"-media").addClass('media-active');
+                    cur_block=cur;
+                }
+            })
+        };
+    })
+
+    function media_goto(cur){
+        if(validation[cur_block]()){
+            $("#"+cur_block+"-media").removeClass('media-active');
+            $("#"+cur+"-media").addClass('media-active');
+            cur_block=cur;
+        }
+    }
+
+    function validate_acad(){
+        $('.col-xs-1.acad-head').html('&nbsp;');
+        if($("#fac_teaching").val().trim()=="")
+        {
+            $('#acad-error').css('display','block');
+            $('#acad-error-msg').html('Error : Not rated faculty members    ');
+            return false;
+        }
+
+        if($("#research_work").val().trim()=="")
+        {
+            $('#acad-error').css('display','block');
+            $('#acad-error-msg').html('Error : Not rated Department research work');
+            return false;
+        }
+
+        $('.col-xs-1.acad-head').html('<i class="fa fa-check fa-lg"> </i>');
+        $('#acad-error').css('display','none');
         return true;
     }
+
+    function validate_placement(){
+        var name="placement";
+        $('.col-xs-1.'+name+'-head').html('&nbsp');
+        if($("#plac").val().trim()=="")
+        {
+            $('#'+name+'-error').css('display','block');
+            $('#'+name+'-error-msg').html('Error : Not Specified College Placement ');
+            return false;
+        }
+
+        if($("#pack").val().trim()=="")
+        {
+            $('#'+name+'-error').css('display','block');
+            $('#'+name+'-error-msg').html('Error : Not specified Packages');
+            return false;
+        }
+
+        if($("#intern").val().trim()=="")
+        {
+            $('#'+name+'-error').css('display','block');
+            $('#'+name+'-error-msg').html('Error :Not Specified 3rd year Interships');
+            return false;
+        }
+
+        $('.col-xs-1.'+name+'-head').html('<i class="fa fa-check fa-lg"> </i>');
+        $('#'+name+'-error').css('display','none');
+        return true;
+    }
+
+    function validate_fees(){
+        var name="fee";
+        $('.col-xs-1.'+name+'-head').html('<i class="fa fa-check fa-lg"> </i>');
+        $('#'+name+'-error').css('display','none');
+        return true;
+    }
+    function validate_course(){
+        var name="course";
+        $('.col-xs-1.'+name+'-head').html('<i class="fa fa-check fa-lg"> </i>');
+        $('#'+name+'-error').css('display','none');
+        return true;
+    }
+    function validate_campus(){
+        var name="campus";
+        $('.col-xs-1.'+name+'-head').html('&nbsp');
+
+        if($('#mshs:checked').val()=="1"){
+             if($("#hostel").val().trim()=="")
+            {
+                $('#'+name+'-error').css('display','block');
+                $('#'+name+'-error-msg').html('Error : Hostel Facilities Not Rated');
+                return false;
+            }
+
+             if($("#mess").val().trim()=="")
+            {
+                $('#'+name+'-error').css('display','block');
+                $('#'+name+'-error-msg').html('Error : Mess Facilities Not Rated');
+                return false;
+            }
+        }
+        if($("#sports").val().trim()=="")
+        {
+            $('#'+name+'-error').css('display','block');
+            $('#'+name+'-error-msg').html('Error : Sports Not Rated');
+            return false;
+        }
+
+        if($("#co-currics").val().trim()=="")
+        {
+            $('#'+name+'-error').css('display','block');
+            $('#'+name+'-error-msg').html('Error : Co-Currics Not Rated');
+            return false;
+        }
+
+        if($("#ragging").val().trim()=="")
+        {
+            $('#'+name+'-error').css('display','block');
+            $('#'+name+'-error-msg').html('Error : Ragging in College Not Rated');
+            return false;
+        }
+
+        $('.col-xs-1.'+name+'-head').html('<i class="fa fa-check fa-lg"> </i>');
+        $('#'+name+'-error').css('display','none');
+        return true;
+    }
+
+    function validate_review(){
+        var name="review";
+        if($("#review_title").val().trim()=="")
+        {
+            $('#'+name+'-error').css('display','block');
+            $('#'+name+'-error-msg').html('Error : Review Title can\'t be empty');
+            return false;
+        }
+        if($("#about_college").val().trim().split(" ").length < 20)
+        {
+            $('#'+name+'-error').css('display','block');
+            $('#'+name+'-error-msg').html('Error : The College Review can\'t be less than 20 words');
+            return false;
+        }
+        if($("#label").val().trim()=="")
+        {
+            $('#'+name+'-error').css('display','block');
+            $('#'+name+'-error-msg').html('Error : Please Tell What type of Review');
+            return false;
+        }
+        $('.col-xs-1.'+name+'-head').html('<i class="fa fa-check fa-lg"> </i>');
+        $('#'+name+'-error').css('display','none');
+        return true;
+    }
+
+    function validate_user(){
+        var name="user";
+        if($("#personal-year").val().trim()=="")
+        {
+            $('#'+name+'-error').css('display','block');
+            $('#'+name+'-error-msg').html('Error : Please tell us your year of study');
+            return false;
+        }
+        if($("#personal-dept").val().trim()=="")
+        {
+            $('#'+name+'-error').css('display','block');
+            $('#'+name+'-error-msg').html('Error : Please tell us your department');
+            return false;
+        }
+        $('.col-xs-1.'+name+'-head').html('<i class="fa fa-check fa-lg"> </i>');
+        $('#'+name+'-error').css('display','none');
+        return true;
+    }
+
+    var validation={
+        'acad' : validate_acad,
+        'placement':validate_placement,
+        'fee':validate_fees,
+        'course': validate_course,
+        'campus':validate_campus,
+        'review':validate_review,
+        'user':validate_user
+    };
 </script>
 @else
 <div class="col-md-8 col-md-offset-2">
