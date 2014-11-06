@@ -10,7 +10,7 @@
       js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&appId=495182610616528&version=v2.0";
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));</script>
-@if($errors->has('feedback') || 1)
+@if($errors->has('feedback'))
 	<div class="alert alert-success alert-dismissable" style="" role="alert">
 		<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 		<h3>THANK YOU</h3>
