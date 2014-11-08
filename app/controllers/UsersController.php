@@ -47,11 +47,12 @@ class UsersController extends \BaseController {
 		else
 			$gender=0;
 
+		$newUser=$user;
 		if(sizeof($users) == 0){
 			$user = new User;
 			$user->email = $email;
-			$user->name = $user->name;
-			$user->fbid = $user->id;
+			$user->name = $newUser->name;
+			$user->fbid = $newUser->id;
 			$user->gender = $gender;
 			$user->save();
 			Auth::login($user);
@@ -62,7 +63,7 @@ class UsersController extends \BaseController {
 		}
 		DB::table('users')
 				->where('id','=',$users[0]->id)
-				->update(array('fbid' => $user->id , 'gender' =>  $gender));
+				->update(array('fbid' => $newUser->id , 'gender' =>  $gender));
 		
 		$user = $users[0];
 		Auth::login($user);
