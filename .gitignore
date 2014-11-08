@@ -1,3 +1,4 @@
-
+/app/config/database.php
+/app/config/app.php
 /public/data
 log
