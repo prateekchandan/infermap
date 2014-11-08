@@ -32,7 +32,7 @@ class UsersController extends \BaseController {
        . $params['access_token'];
 
      	$user = json_decode(file_get_contents($graph_url));
-     	print_r($user);
+   
      	
      	$email = $user->email;
 		$users = User::where('email','=', $email)->get();
