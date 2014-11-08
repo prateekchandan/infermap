@@ -15,6 +15,7 @@
         
         FacebookSession::setDefaultApplication('495182610616528', 'bdf48bb2f3782cf7e81a40aaa067fc62');
         $helper = new FacebookRedirectLoginHelper($redirect_url);
+        $loginUrl=$helper->getLoginUrl(array('scope' => 'email'));
         if(!isset($nourl))
             Session::put('redirect_url',Request::url());
 
@@ -33,9 +34,15 @@
 
             <div id="login-form" class="">
 
+                @if ($errors->has('email.absent'))
+                    <div class="alert alert-error alert-dismissable" style="" role="alert">
+                        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                        </button>
+                        {{ $errors->first('email.absent') }}
+                    </div>
+                @endif
 
-
-                <a style="cursor:pointer" class="facebook_connect" href="{{$helper->getLoginUrl()}}">
+                <a style="cursor:pointer" class="facebook_connect" href="{{$loginUrl}}">
                     <div class="img"><i class="fa fa-facebook"></i>
                     </div>
                     <div class="text">Login with Facebook</div>

@@ -37,8 +37,15 @@ class UsersController extends \BaseController {
        . $params['access_token'];
 
      	$newUser = json_decode(file_get_contents($graph_url));
-   
-     	
+   			
+
+     	if(!isset($newUser->email)){
+     		$messageBag = new MessageBag;
+			$messageBag->add('email.absent', 'We are unable to fetch your email id. Go to <a href="https://www.facebook.com/settings?tab=applications"> Fb Setting </a> , search for app "Infermap" , remove the app and try login again ');
+     		return Redirect::back()->withInput()
+				->withErrors($messageBag);
+     	}
+
      	$email = $newUser->email;
 		$users = User::where('email','=', $email)->get();
 		
