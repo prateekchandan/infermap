@@ -36,18 +36,18 @@ class UsersController extends \BaseController {
      	$graph_url = "https://graph.facebook.com/me?access_token=" 
        . $params['access_token'];
 
-     	$user = json_decode(file_get_contents($graph_url));
+     	$newUser = json_decode(file_get_contents($graph_url));
    
      	
-     	$email = $user->email;
+     	$email = $newUser->email;
 		$users = User::where('email','=', $email)->get();
 		
-		if($user->gender=="male")
+		if($newUser->gender=="male")
 			$gender=1;
 		else
 			$gender=0;
 
-		$newUser=$user;
+
 		if(sizeof($users) == 0){
 			$user = new User;
 			$user->email = $email;

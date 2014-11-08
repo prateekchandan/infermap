@@ -50,10 +50,10 @@ App::error(function(Exception $exception, $code)
 {
 	Log::error($exception);
 
-	if(Request::server('SERVER_NAME')!='localhost'){
+	/*if(Request::server('SERVER_NAME')!='localhost'){
 		View::share('code',$code);
 		return View::make('error.all');
-	}
+	}*/
 });
 
 /*
