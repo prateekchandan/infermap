@@ -56,10 +56,7 @@ class UsersController extends \BaseController {
 			$user->gender = $gender;
 			$user->save();
 			Auth::login($user);
-			if($url!='' && $url !=null)
-				return Redirect::away($url);
-			else
-				return Redirect::back();
+			return Redirect::away(Session::get('redirect_url'));
 		}
 		DB::table('users')
 				->where('id','=',$users[0]->id)
