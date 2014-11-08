@@ -64,48 +64,28 @@ function signinCallback(authResult) {
 
 </script>
 --}}
-<script>
-    window.fbAsyncInit = function() {
-        FB.init({
-            appId: '495182610616528',
-            cookie: true,
-            xfbml: true,
-            oauth: true
-        });
-    };
 
+<?php
+    use Facebook\FacebookSession;
+    use Facebook\FacebookRequest;
+    use Facebook\GraphUser;
+    use Facebook\FacebookRequestException;
+    use Facebook\FacebookRedirectLoginHelper;
+    session_start(); 
+        $url= Input::get('url');
+        if($url!='' && $url !=null)
+            Session::put('redirect_url',$url);
+        else
+            Session::put('redirect_url',URL::to('/'));
 
-    (function() {
-        var e = document.createElement('script');
-        e.async = true;
-        e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
-        document.getElementById('fb-root').appendChild(e);
-    }());
-    var info;
+        $redirect_url=URL::to('/').'/fblogin';
+        
+        FacebookSession::setDefaultApplication('495182610616528', 'bdf48bb2f3782cf7e81a40aaa067fc62');
+        $helper = new FacebookRedirectLoginHelper($redirect_url);
+        if(!isset($nourl))
+            Session::put('redirect_url',Request::url());
 
-    function fblogin() {
-        FB.login(function(response) {
-            //console.log(response);
-            if(response.authResponse) {
-                FB.api('/me', function(response) {
-                    info = response;
-                    var url = '{{ URL::route("user.fblogin") }}';
-                    var form = $('<form action="' + url + '" method="post">' +
-                        '<input type="hidden" name="fbid" value="' + info.id + '" />' +
-                        '<input type="hidden" name="name" value="' + info.name + '" />' +
-                        '<input type="hidden" name="email" value="' + info.email + '" />' +
-                        '<input type="hidden" name="url" value="{{Input::get('url')}}" />' +
-                        '</form>');
-                    $(form).appendTo('body').submit();
-                });
-            } else {
-                alert('Authorization Failed');
-            }
-        }, {
-            scope: 'publish_stream, email'
-        });
-    }
-</script>
+?>
 
 <!--start: Row-->
 <div class="row-fluid">
@@ -122,11 +102,11 @@ function signinCallback(authResult) {
 
 
 
-                <div style="cursor:pointer" class="facebook_connect" onClick="fblogin();">
+                <a style="cursor:pointer" class="facebook_connect" href="{{$helper->getLoginUrl()}}">
                     <div class="img"><i class="fa fa-facebook"></i>
                     </div>
                     <div class="text">Login with Facebook</div>
-                </div>
+                </a>
                 {{--
 	            <div id="google-plus-button" style="cursor:pointer" class="gplus_connect" onclick="google_login()">
 	                <div class="img"><i class="fa fa-google-plus"></i>

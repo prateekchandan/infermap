@@ -1,5 +1,10 @@
 <?php
 use Illuminate\Support\MessageBag;
+use Facebook\FacebookSession;
+use Facebook\FacebookRequest;
+use Facebook\GraphUser;
+use Facebook\FacebookRequestException;
+use Facebook\FacebookRedirectLoginHelper;
 
 class UsersController extends \BaseController {
 
@@ -8,6 +13,58 @@ class UsersController extends \BaseController {
 	 *
 	 * @return Response
 	 */
+
+	public function fblogin()
+	{
+		$app_id='495182610616528';
+		
+		$redirect_url=URL::to('/').'/fblogin';
+		$app_secret='bdf48bb2f3782cf7e81a40aaa067fc62';
+		$code=Input::get('code');
+		$token_url = "https://graph.facebook.com/oauth/access_token?"
+       . "client_id=" . $app_id . "&redirect_uri=" . urlencode($redirect_url)
+       . "&client_secret=" . $app_secret . "&code=" . $code;
+    
+       $response = file_get_contents($token_url);
+       $params = null;
+     	parse_str($response, $params);
+     	$graph_url = "https://graph.facebook.com/me?access_token=" 
+       . $params['access_token'];
+
+     	$user = json_decode(file_get_contents($graph_url));
+     	print_r($user);
+     	
+     	$email = $user->email;
+		$users = User::where('email','=', $email)->get();
+		
+		if($user->gender=="male")
+			$gender=1;
+		else
+			$gender=0;
+
+		if(sizeof($users) == 0){
+			$user = new User;
+			$user->email = $email;
+			$user->name = $user->name;
+			$user->fbid = $user->id;
+			$user->gender = $gender;
+			$user->save();
+			Auth::login($user);
+			if($url!='' && $url !=null)
+				return Redirect::away($url);
+			else
+				return Redirect::back();
+		}
+		DB::table('users')
+				->where('id','=',$users[0]->id)
+				->update(array('fbid' => $user->id , 'gender' =>  $gender));
+		
+		$user = $users[0];
+		Auth::login($user);
+
+     	return Redirect::away(Session::get('redirect_url'));
+     	
+	}
 	public function profile()
 	{
 		if(!Auth::check()){
@@ -191,40 +248,17 @@ class UsersController extends \BaseController {
 		return Redirect::back();
 	}
 
-	public function fblogin(){
-		$url= Input::get('url');
-		$email = Input::get('email');
-		$users = User::where('email','=', $email)->get();
-		if(sizeof($users) == 0){
-			$user = new User;
-			$user->email = $email;
-			$user->name = Input::get('name');
-			$user->fbid = Input::get('fbid');
-			$user->save();
-			Auth::login($user);
-			if($url!='' && $url !=null)
-				return Redirect::away($url);
-			else
-				return Redirect::back();
-		}
-		DB::table('users')
-				->where('id','=',$users[0]->id)
-				->update(array('fbid' => Input::get('fbid')));
-		$user = $users[0];
-		Auth::login($user);
-		if($url!='' && $url !=null)
-			return Redirect::away($url);
-		else
-			return Redirect::back();
-	}
-
 	public function showlogin(){
-		$url=Session::get('url');
+		$url=Input::get('url');
 		if(Auth::check()){ 
 			if($url!='' && $url != null)
 				return Redirect::away($url);
 			else
 				return Redirect::to('/');
+		}
+		if($url!="" && $url!=null){
+			Session::put('redirect_url',$url);
+			View::share('nourl',1);
 		}
 		return View::make('user.login');
 	}

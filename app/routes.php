@@ -62,12 +62,12 @@ Route::get('/department/{link}/{page}',array('as'=>'department.page','uses'=>'De
 Route::post('/department/',array('before'=>'login','as'=>'department.savefile','uses'=>'DepartmentController@savefile'));
 
 // URLS's for register and login
-Route::get('/register', array('as'=>'user.create', 'uses'=>'UsersController@create'));
-Route::post('/register', array('as'=>'user.store', 'uses'=>'UsersController@store'));
+/*Route::get('/register', array('as'=>'user.create', 'uses'=>'UsersController@create'));
+Route::post('/register', array('as'=>'user.store', 'uses'=>'UsersController@store'));*/
 Route::get('/edit-profile', array('as'=>'user.edit', 'uses'=>'UsersController@edit'));
 Route::post('/edit-profile', array('as'=>'user.update', 'uses'=>'UsersController@update'));
-Route::post('/fblogin', array('as'=>'user.fblogin', 'uses'=>'UsersController@fblogin'));
-Route::post('/gpluslogin', array('as'=>'user.gpluslogin', 'uses'=>'UsersController@gpluslogin'));
+Route::get('/fblogin', array('as'=>'user.fblogin', 'uses'=>'UsersController@fblogin'));
+//Route::post('/gpluslogin', array('as'=>'user.gpluslogin', 'uses'=>'UsersController@gpluslogin'));
 Route::get('/login', array('as'=>'user.login.show', 'uses'=>'UsersController@showlogin'));
 Route::post('/login', array('as'=>'user.login', 'uses'=>'UsersController@login'));
 Route::get('/logout', array('as'=>'user.logout', 'uses'=>'UsersController@logout'));
