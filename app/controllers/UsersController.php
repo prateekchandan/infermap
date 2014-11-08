@@ -24,8 +24,13 @@ class UsersController extends \BaseController {
 		$token_url = "https://graph.facebook.com/oauth/access_token?"
        . "client_id=" . $app_id . "&redirect_uri=" . urlencode($redirect_url)
        . "&client_secret=" . $app_secret . "&code=" . $code;
-    
-       $response = file_get_contents($token_url);
+    	
+    	try{
+       	$response = file_get_contents($token_url);	
+       }
+       catch (Exception $e) {
+       		return Redirect::to('/');
+       }
        $params = null;
      	parse_str($response, $params);
      	$graph_url = "https://graph.facebook.com/me?access_token=" 
