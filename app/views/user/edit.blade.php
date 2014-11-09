@@ -43,7 +43,7 @@
                 <label for "password">Password</label>
             </div>
             <div class="col-md-9">
-                <input type="password" id="password" name="password" password="password" placeholder="New Password" class="form-control" {{ ($user->password == null ? 'required':'') }} >
+                <input type="password" id="password" name="password" password="password" placeholder="New Password" class="form-control" {{ ($user->password == null ? 'required':'') }} autocomplete="off">
             </div>
         </div>
         <div class="form-group row">
