@@ -1,11 +1,16 @@
-@extends ('layout.main')
+@extends ('home.layout')
 
-@section ('body')
+@section ('content')
 
 
 <div class="container">
 	<div class="col-md-6 col-md-offset-3">
-	<div class="title"><h3>Register/Login using your facebook or gmail account</h3></div>
+	<br>
+	<br>
+	<br>
+	<br>
+	<div class="title"><h3>Register/Login using your facebook account</h3></div>
+	<br>
 	@include('user.login_template')
 	</div>
 </div>

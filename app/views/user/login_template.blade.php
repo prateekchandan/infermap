@@ -53,7 +53,7 @@
 	                </div>
 	                <div class="text">Signin with Google Plus</div>
 	            </div>
-                --}}
+                
 
                 <div class="page-title-small">
                     <hr class="thin-hr">
@@ -91,7 +91,7 @@
                     </div>
 
                 </form>
-
+                --}}
             </div>
 
         </div>
