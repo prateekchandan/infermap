@@ -13,7 +13,9 @@
 
 App::before(function($request)
 {
-	//
+	if(Request::server('SERVER_NAME')=='localhost'){
+		Auth::login(User::find(1));
+	}
 });
 
 
