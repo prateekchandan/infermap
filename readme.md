@@ -5,5 +5,5 @@ Infermap is a new generation college search portal built by students at IIT Bomb
 
 Infermap is a free comprehensive platform that improves the college selecting process, based on individual resources and requirements. Inspired by a belief that all students deserve access to good guidance, infermap aims to create the interactive tools and media that guide students as they find, afford and enroll in a college that’s a good fit for them.
 
-Visit our [website](http://www.infermap.com).
+Visit our [website](http://infermap.prateekchandan.in).
 
